@@ -1,15 +1,15 @@
 export const SITE = {
   brand: "Hưng Thành Phát Door",
   tagline: "Giải Pháp Cửa Cao Cấp Cho Mọi Công Trình",
-  hotlines: ["0913 574 077", "0945 042 345"] as const,
+  hotlines: ["0945 042 345", "0913 574 077"] as const,
   email: "hungthanhphat6688@gmail.com",
-  address: "235 - 237 (201 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
+  address: "235 - 237 (281 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
   mapQuery:
     "Hưng Thành Phát Door, 235-237 Võ Văn Kiệt, Bình Thủy, Cần Thơ",
   mapCoords: { lat: 10.048473, lng: 105.7574147 },
   mapDirectionsUrl:
     "https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z/data=!3m1!4b1!4m6!3m5!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.048473!4d105.7574147!16s%2Fg%2F11lwgjdghy",
-  workingHours: "08:00 - 18:00 (Thứ 2 - Chủ Nhật)",
+  workingHours: "08:00 - 17:30 (Thứ 2 - Thứ 7)",
   foundedYear: 2008,
 } as const;
 
@@ -104,51 +104,51 @@ export const PRODUCT_CATEGORIES = [
 
 export const GALLERY_IMAGES = [
   {
-    label: "Lắp đặt cửa cuốn tôle tại mặt tiền thương mại",
+    label: "Lắp đặt cửa cuốn tôle tại mặt tiền thương mại ở Cần Thơ",
     image: "/products/Real cases/Cửa cuốn/3-1765895951.jpg",
   },
   {
-    label: "Hoàn thiện cửa kéo thép tại mặt tiền kinh doanh",
+    label: "Hoàn thiện cửa kéo thép tại mặt tiền kinh doanh Cần Thơ",
     image: "/products/Real cases/Cửa kéo/473695893_122139902930383303_6257649342661743951_n.jpg",
   },
   {
-    label: "Cửa nhôm vân gỗ cao cấp hoàn thiện tại biệt thự",
+    label: "Cửa nhôm kính vân gỗ cao cấp hoàn thiện tại biệt thự Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/5-1765895974.jpg",
   },
   {
-    label: "Hệ cửa đi nhôm 4 cánh lắp đặt tại nhà ở mới xây",
+    label: "Hệ cửa đi nhôm kính 4 cánh lắp đặt tại nhà ở mới xây Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/473672719_122139902384383303_5867355544384530872_n.jpg",
   },
   {
-    label: "Cửa nhôm 4 cánh kiểu Pháp hoàn thiện tại biệt thự",
+    label: "Cửa nhôm kính 4 cánh kiểu Pháp hoàn thiện tại biệt thự Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/473696933_122139902228383303_2083624855929093554_n.jpg",
   },
   {
-    label: "Cửa nhôm trang trí hoa văn vàng cổ điển tại biệt thự",
+    label: "Cửa nhôm kính trang trí hoa văn vàng cổ điển tại biệt thự Bình Thủy",
     image: "/products/Real cases/Cửa nhôm kính/473709611_122139902666383303_5356222783742316859_n.jpg",
   },
   {
-    label: "Bàn giao nhà phố — cửa cuốn & cửa nhôm đồng bộ",
+    label: "Bàn giao nhà phố Cần Thơ — cửa cuốn & cửa nhôm kính đồng bộ",
     image: "/products/Real cases/Cửa nhôm kính/473835164_122139902996383303_2565169139323727501_n.jpg",
   },
   {
-    label: "Hệ cửa gấp nhôm kính đồng bộ tại nhà phố mới xây",
+    label: "Hệ cửa gấp nhôm kính đồng bộ tại nhà phố mới xây Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/473755384_122139902672383303_419115667892905033_n.jpg",
   },
   {
-    label: "Lan can kính cầu thang nhôm vân gỗ tại nhà ở",
+    label: "Lan can kính cầu thang nhôm vân gỗ tại nhà ở Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/480700842_122143773704383303_3629582498489512503_n.jpg",
   },
   {
-    label: "Lắp đặt cửa sổ nhôm kính tại nhà xưởng công nghiệp",
+    label: "Lắp đặt cửa sổ nhôm kính tại nhà xưởng công nghiệp Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/9-1765896082.jpg",
   },
   {
-    label: "Đội kỹ thuật lắp đặt hệ cửa trượt nhôm tại nhà phố",
+    label: "Đội kỹ thuật lắp đặt hệ cửa trượt nhôm tại nhà phố Bình Thủy, Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/4-1765895963.jpg",
   },
   {
-    label: "Thi công hệ cửa nhôm kính tại nhà phố khu đô thị",
+    label: "Thi công hệ cửa nhôm kính tại nhà phố khu đô thị Cần Thơ",
     image: "/products/Real cases/Cửa nhôm kính/7-1765896007.jpg",
   },
 ] as const;

@@ -124,18 +124,14 @@ export function Contact() {
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Hotline 24/7
+                    Số điện thoại
                   </p>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                    {SITE.hotlines.map((h, i) => (
+                  <div className="flex flex-col gap-0.5">
+                    {SITE.hotlines.map((h) => (
                       <a
                         key={h}
                         href={`tel:${h.replace(/\s/g, "")}`}
-                        className={
-                          i === 0
-                            ? "text-lg font-semibold text-white hover:underline"
-                            : "text-base font-medium text-white/85 hover:text-white hover:underline"
-                        }
+                        className="text-lg font-semibold text-white hover:underline"
                       >
                         {h}
                       </a>
@@ -168,7 +164,7 @@ export function Contact() {
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Showroom
+                    Địa chỉ
                   </p>
                   <p className="text-base text-white/85">{SITE.address}</p>
                 </div>

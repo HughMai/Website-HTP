@@ -15,7 +15,7 @@ const fadeUp = {
 
 const trustChips = [
   { icon: ShieldCheck, label: "Bảo hành đến 10 năm" },
-  { icon: Hammer, label: "Thi công trọn gói 24/7" },
+  { icon: Hammer, label: "Thi công trọn gói" },
   { icon: BadgeCheck, label: "Vật liệu chính hãng" },
 ];
 

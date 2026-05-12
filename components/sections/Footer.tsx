@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ExternalLink, Facebook, Instagram, MapPin, Youtube } from "lucide-react";
+import { ExternalLink, Facebook, MapPin } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/site-data";
 
 export function Footer() {
@@ -41,8 +41,6 @@ export function Footer() {
           <div className="mt-5 flex items-center gap-2">
             {[
               { Icon: Facebook, label: "Facebook" },
-              { Icon: Instagram, label: "Instagram" },
-              { Icon: Youtube, label: "YouTube" },
             ].map(({ Icon, label }) => (
               <a
                 key={label}
