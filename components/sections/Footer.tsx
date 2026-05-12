@@ -39,18 +39,23 @@ export function Footer() {
             {SITE.foundedYear}.
           </p>
           <div className="mt-5 flex items-center gap-2">
-            {[
-              { Icon: Facebook, label: "Facebook" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={`Theo dõi chúng tôi trên ${label}`}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              aria-label="Theo dõi chúng tôi trên Facebook"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a
+              href="#"
+              aria-label="Liên hệ qua Zalo"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 1.5a8.5 8.5 0 1 1 0 17 8.5 8.5 0 0 1 0-17zm-3.5 5a.75.75 0 0 0-.75.75v5.5c0 .414.336.75.75.75h7a.75.75 0 0 0 .75-.75v-5.5a.75.75 0 0 0-.75-.75h-7zm.75 1.5h5.5v4H9.25v-4zm1 1v2h1.5v-2h-1.5zm2.5 0v2h1.5v-2H12.75z"/>
+              </svg>
+            </a>
           </div>
         </div>
 
