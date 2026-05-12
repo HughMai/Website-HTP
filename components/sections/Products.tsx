@@ -96,7 +96,7 @@ export function Products() {
                           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 50vw"
                           className={cn(
                             "transition-transform duration-500 group-hover:scale-[1.04]",
-                            (cat as any).contain ? "object-contain" : "object-cover"
+                            (cat as any).contain ? "object-contain" : "object-cover object-top"
                           )}
                         />
                       </div>
