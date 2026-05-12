@@ -73,9 +73,9 @@ export function Hero() {
             id="hero-heading"
             className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-6xl md:leading-[1.05]"
           >
-            Giải Pháp Cửa Cao Cấp —{" "}
+            Cửa Cuốn, Cửa Kéo & Nhôm Kính —{" "}
             <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-              Bảo Vệ Tổ Ấm Của Bạn.
+              Cao Cấp Tại Cần Thơ
             </span>
           </motion.h1>
 
