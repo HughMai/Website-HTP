@@ -1,0 +1,38 @@
+# ROLE: Lead Full-Stack Engineer & Conversion Copywriter
+# TASK: Build a Production-Ready Professional SPA for "Hưng Thành Phát Door"
+# STACK: Next.js 14 (App Router), TypeScript, Tailwind CSS, shadcn/ui, Framer Motion, Lucide React, React Hook Form, Zod.
+
+## 1. STRATEGIC CONTEXT
+- **Business:** Công ty Hưng Thành Phát Door. Specialized in high-end rolling doors, aluminum glass doors, and pull doors.
+- **Tone:** Professional, trustworthy, industrial-modern.
+- **Audience:** Both B2C (homeowners) and B2B (contractors/developers).
+- **Core Value Props:** 15+ Năm Kinh Nghiệm, 500+ Dự Án Hoàn Thành, 1000+ Khách Hàng Tin Dùng, 5–10 Năm Bảo Hành.
+
+## 2. DESIGN SPECIFICATIONS
+- **Color Palette:** Primary Color #0A2540 (Deep Industrial Blue). Use white and light gray for contrast.
+- **Typography:** Inter (Sans-serif). 
+- **Layout:** Single-page application with smooth-scroll navigation.
+- **Responsiveness:** Mobile-first design. Use a Slide-out Sheet (sidebar) for the mobile menu.
+
+## 3. PAGE STRUCTURE & COMPONENTS
+Generate a single concatenated block of code including:
+- **Navbar:** Sticky, glassmorphism effect. Includes "Active State" logic (links highlight when their section is in view).
+- **Hero Section:** Headline: "Giải Pháp Cửa Cao Cấp - Bảo Vệ Tổ Ấm Của Bạn." Professional Vietnamese copy highlighting modern technology and absolute quality.
+- **About Section:** Feature the 15+ years experience and project statistics in a grid.
+- **Products Grid:** Showcase 3 main categories using these exact image filenames:
+    1. Cửa Cuốn (image_f16476.jpg)
+    2. Cửa Nhôm Kính (image_f16453.jpg)
+    3. Cửa Kéo (image_f1641b.jpg)
+- **Activity Gallery:** A continuous, auto-scrolling infinite marquee of image placeholders.
+- **Contact Form:** Professional form with Zod validation (Name, Phone, Message). On submit, trigger a success Toast notification and console.log the data.
+
+## 4. TECHNICAL CONSTRAINTS
+- Use **Next.js 14 App Router** logic.
+- Use **Framer Motion** for entrance animations and the infinite marquee loop.
+- Use **shadcn/ui** patterns for the Sheet, Buttons, and Form inputs.
+- All text MUST be in professional, marketing-grade Vietnamese.
+- Ensure **WCAG AA accessibility** (proper contrast, aria-labels).
+- Deliver the output as a **single, comprehensive code block** (including components and the main page) that I can easily integrate.
+
+## 5. EXAMPLE VIBE
+The code should look like a Senior Developer wrote it: clean variable names, modular component logic, and optimized Framer Motion configurations. No "lorem ipsum" — generate real Vietnamese marketing copy based on the company description provided.
