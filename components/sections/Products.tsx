@@ -43,8 +43,7 @@ export function Products() {
             Hệ thống sản phẩm cửa cao cấp.
           </h2>
           <p className="mt-4 text-base text-brand/70">
-            Mỗi dòng cửa được phát triển thành nhiều phiên bản chuyên biệt — đáp
-            ứng đa dạng nhu cầu thẩm mỹ, an ninh và ngân sách của Quý khách.
+            Hưng Thành Phát Door cung cấp đa dạng hệ thống cửa cuốn, cửa kéo và cửa nhôm kính — trải rộng từ phân khúc phổ thông đến cao cấp — với cam kết về chất lượng bền vững, vận hành ổn định và thiết kế tinh tế, đáp ứng yêu cầu của từng công trình.
           </p>
         </div>
 
@@ -91,7 +90,7 @@ export function Products() {
                       <div className={cn("relative aspect-[340/300] w-full overflow-hidden", (cat as any).contain ? "bg-white p-4" : "bg-brand-50")}>
                         <Image
                           src={s.image}
-                          alt={s.name}
+                          alt={`${s.name} — lắp đặt tại Cần Thơ`}
                           fill
                           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 50vw"
                           className={cn(
