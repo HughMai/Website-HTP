@@ -1,0 +1,89 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
+import { SITE } from "@/lib/site-data";
+
+function PulseRings({ color }: { color: string }) {
+  return (
+    <>
+      {[0, 0.55, 1.1].map((delay, i) => (
+        <motion.span
+          key={i}
+          className={`pointer-events-none absolute inset-0 rounded-full ${color}`}
+          initial={{ scale: 1, opacity: 0.55 }}
+          animate={{ scale: 2.4, opacity: 0 }}
+          transition={{
+            duration: 2,
+            delay,
+            repeat: Infinity,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
+export function FloatingContact() {
+  const zaloHref = "#"; // replace with Zalo URL when available
+
+  return (
+    <div
+      className="fixed right-4 bottom-8 z-50 flex flex-col items-end gap-3 md:right-6 md:bottom-10"
+      aria-label="Liên hệ nhanh"
+    >
+      {/* Zalo */}
+      <div className="relative">
+        <PulseRings color="bg-blue-500/20" />
+        <motion.a
+          href={zaloHref}
+          whileHover={{ scale: 1.07 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 420, damping: 18 }}
+          className="relative flex items-center gap-3 rounded-full bg-[#0068FF] py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(0,104,255,0.45)]"
+          aria-label="Nhắn tin qua Zalo"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+              <path d="M3.5 2A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22H5l-1.5 2.5L7 22h13.5A1.5 1.5 0 0022 20.5V3.5A1.5 1.5 0 0020.5 2h-17zM8 8h8a1 1 0 010 2H8a1 1 0 010-2zm0 4h5a1 1 0 010 2H8a1 1 0 010-2z" />
+            </svg>
+          </span>
+          <div className="text-left">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+              Nhắn Tin
+            </p>
+            <p className="text-sm font-bold tracking-wide">Chat Zalo</p>
+          </div>
+        </motion.a>
+      </div>
+
+      {/* Hotline */}
+      <div className="relative">
+        <PulseRings color="bg-red-500/20" />
+        <motion.a
+          href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}
+          whileHover={{ scale: 1.07 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 420, damping: 18 }}
+          className="relative flex items-center gap-3 rounded-full bg-gradient-to-br from-red-500 to-rose-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(239,68,68,0.45)]"
+          aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
+        >
+          <motion.span
+            animate={{ rotate: [0, -14, 14, -9, 9, -4, 4, 0] }}
+            transition={{ duration: 0.65, repeat: Infinity, repeatDelay: 2.5 }}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20"
+          >
+            <Phone className="h-5 w-5" />
+          </motion.span>
+          <div className="text-left">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+              Số Điện Thoại
+            </p>
+            <p className="text-sm font-bold tracking-wide">{SITE.hotlines[0]}</p>
+          </div>
+        </motion.a>
+      </div>
+    </div>
+  );
+}
