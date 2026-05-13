@@ -53,8 +53,9 @@ export function Footer() {
               aria-label="Liên hệ qua Zalo"
               className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
             >
+              {/* Zalo logo — speech bubble with crescent opening bottom-left */}
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 1.5a8.5 8.5 0 1 1 0 17 8.5 8.5 0 0 1 0-17zm-3.5 5a.75.75 0 0 0-.75.75v5.5c0 .414.336.75.75.75h7a.75.75 0 0 0 .75-.75v-5.5a.75.75 0 0 0-.75-.75h-7zm.75 1.5h5.5v4H9.25v-4zm1 1v2h1.5v-2h-1.5zm2.5 0v2h1.5v-2H12.75z"/>
+                <path d="M3.5 2A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22H5l-1.5 2.5L7 22h13.5A1.5 1.5 0 0022 20.5V3.5A1.5 1.5 0 0020.5 2h-17zM8 8h8a1 1 0 010 2H8a1 1 0 010-2zm0 4h5a1 1 0 010 2H8a1 1 0 010-2z"/>
               </svg>
             </a>
           </div>

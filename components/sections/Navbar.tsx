@@ -166,6 +166,17 @@ export function Navbar() {
               </button>
             );
           })}
+          <Link
+            href="/sua-chua-cua-cuon-can-tho"
+            className={cn(
+              "relative rounded-md px-4 py-2 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-offset-2",
+              scrolled
+                ? "text-brand/70 hover:text-brand focus-visible:ring-brand"
+                : "text-white/75 hover:text-white focus-visible:ring-white focus-visible:ring-offset-brand"
+            )}
+          >
+            Sửa Chữa
+          </Link>
         </nav>
 
         {/* CTA */}
@@ -228,6 +239,14 @@ export function Navbar() {
                     </SheetClose>
                   );
                 })}
+                <SheetClose asChild>
+                  <Link
+                    href="/sua-chua-cua-cuon-can-tho"
+                    className="rounded-lg px-4 py-3 text-left text-base font-medium text-brand transition-colors hover:bg-brand-50"
+                  >
+                    Sửa Chữa
+                  </Link>
+                </SheetClose>
                 <div className="mt-4 grid gap-2">
                   {SITE.hotlines.map((h) => (
                     <a
