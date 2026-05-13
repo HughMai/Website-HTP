@@ -218,16 +218,16 @@ export async function POST(req: NextRequest) {
 
   const { name, phone, email, message, estimate } = parsed.data;
 
-  // Fire both in parallel — neither should block the customer's response.
-  Promise.allSettled([
+  // Await both — serverless functions are killed after response returns,
+  // so fire-and-forget drops the requests before they complete.
+  const results = await Promise.allSettled([
     notifyViaTelegram(name, phone, email, message, estimate),
     notifyViaEmail(name, phone, email, message, estimate),
-  ]).then((results) => {
-    for (const r of results) {
-      if (r.status === "rejected")
-        console.error("[contact] Notification thất bại:", r.reason);
-    }
-  });
+  ]);
+  for (const r of results) {
+    if (r.status === "rejected")
+      console.error("[contact] Notification thất bại:", r.reason);
+  }
 
   return NextResponse.json({ ok: true });
 }
