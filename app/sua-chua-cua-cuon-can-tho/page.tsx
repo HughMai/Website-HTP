@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Phone, Clock, MapPin } from "lucide-react";
+import Link from "next/link";
+import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
@@ -307,6 +308,29 @@ export default function SuaChuaCuaCuonCanTho() {
               * Giá chưa bao gồm phụ kiện thay thế nếu cần. Kỹ thuật viên báo giá đầy đủ trước
               khi tiến hành sửa chữa.
             </p>
+          </div>
+        </section>
+
+        {/* Related service */}
+        <section className="py-10 md:py-14">
+          <div className="container max-w-3xl">
+            <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border bg-brand/5 px-6 py-5 sm:flex-row">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">
+                  Cần cửa cuốn mới?
+                </p>
+                <p className="mt-1 font-semibold text-brand">
+                  Xem đầy đủ hệ thống cửa cuốn, cửa kéo & nhôm kính cao cấp
+                </p>
+              </div>
+              <Link
+                href="/#san-pham"
+                className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+              >
+                Xem Sản Phẩm
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </section>
 

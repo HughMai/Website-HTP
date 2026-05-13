@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/site-data";
 
@@ -67,13 +68,21 @@ export function Footer() {
             {NAV_LINKS.map((l) => (
               <li key={l.id}>
                 <a
-                  href={`#${l.id}`}
+                  href={`/#${l.id}`}
                   className="text-white/70 transition hover:text-white"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                href="/sua-chua-cua-cuon-can-tho"
+                className="text-white/70 transition hover:text-white"
+              >
+                Sửa Chữa Cửa Cuốn
+              </Link>
+            </li>
           </ul>
         </div>
 
