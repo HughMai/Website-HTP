@@ -10,7 +10,7 @@ export function Gallery() {
   return (
     <section
       id="du-an"
-      className="relative bg-white py-20 md:py-28"
+      className="relative bg-white py-14 md:py-20"
       aria-labelledby="gallery-heading"
     >
       <div className="container">

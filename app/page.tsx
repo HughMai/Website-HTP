@@ -2,8 +2,9 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Products } from "@/components/sections/Products";
+import { Process } from "@/components/sections/Process";
 import { Gallery } from "@/components/sections/Gallery";
-import { Contact } from "@/components/sections/Contact";
+import { QuoteAndContact } from "@/components/sections/QuoteAndContact";
 import { Footer } from "@/components/sections/Footer";
 
 export default function HomePage() {
@@ -14,8 +15,9 @@ export default function HomePage() {
         <Hero />
         <About />
         <Products />
+        <Process />
         <Gallery />
-        <Contact />
+        <QuoteAndContact />
       </main>
       <Footer />
     </>

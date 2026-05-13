@@ -219,7 +219,7 @@ export default function SuaChuaCuaCuonCanTho() {
                   className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand"
                 >
                   <Phone className="h-4 w-4" />
-                  {SITE.hotlines[1]}
+                  Gọi {SITE.hotlines[1]}
                 </Button>
               </a>
             </div>
@@ -377,7 +377,7 @@ export default function SuaChuaCuaCuonCanTho() {
                   className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand"
                 >
                   <Phone className="h-4 w-4" />
-                  {SITE.hotlines[1]}
+                  Gọi {SITE.hotlines[1]}
                 </Button>
               </a>
             </div>

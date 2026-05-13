@@ -27,7 +27,7 @@ export function Products() {
   return (
     <section
       id="san-pham"
-      className="relative bg-gray-50 py-20 md:py-28"
+      className="relative bg-gray-50 py-14 md:py-20"
       aria-labelledby="products-heading"
     >
       <div className="container">

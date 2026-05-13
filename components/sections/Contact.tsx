@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Clock, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Loader2, Phone, Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -91,7 +91,7 @@ export function Contact() {
   return (
     <section
       id="lien-he"
-      className="relative bg-brand py-20 text-white md:py-28"
+      className="relative bg-brand py-16 text-white md:py-20"
       aria-labelledby="contact-heading"
     >
       <div
@@ -111,90 +111,35 @@ export function Contact() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={fadeUp}
-          className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16"
+          className="mx-auto max-w-xl"
         >
-          {/* Info */}
-          <motion.div variants={fadeUp} custom={0}>
+          {/* Header */}
+          <div className="mb-6 text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
-              Tư Vấn — Báo Giá
+              Thông Tin Liên Hệ
             </span>
             <h2
               id="contact-heading"
-              className="mt-4 text-balance text-3xl font-semibold tracking-tight text-white md:text-4xl"
+              className="mt-3 text-balance text-2xl font-semibold tracking-tight text-white md:text-3xl"
             >
-              Liên hệ ngay để nhận khảo sát miễn phí trong 24 giờ.
+              Gọi ngay hoặc để lại thông tin.
             </h2>
-            <p className="mt-4 max-w-xl text-base text-white/75">
-              Đội ngũ chuyên viên của Hưng Thành Phát sẵn sàng đến tận công
-              trình, đo đạc và đề xuất giải pháp tối ưu — minh bạch về chi phí
-              và tiến độ.
-            </p>
 
-            <ul className="mt-8 space-y-5">
-              <li className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
-                  <Phone className="h-5 w-5" aria-hidden />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Số điện thoại
-                  </p>
-                  <div className="flex flex-col gap-0.5">
-                    {SITE.hotlines.map((h) => (
-                      <a
-                        key={h}
-                        href={`tel:${h.replace(/\s/g, "")}`}
-                        className="text-lg font-semibold text-white hover:underline"
-                      >
-                        {h}
-                      </a>
-                    ))}
-                  </div>
-                  <p className="text-sm text-white/65">
-                    Sẵn sàng tư vấn mọi lúc — kể cả ngoài giờ hành chính.
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
-                  <Mail className="h-5 w-5" aria-hidden />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="text-lg font-semibold text-white hover:underline"
-                  >
-                    {SITE.email}
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
-                  <MapPin className="h-5 w-5" aria-hidden />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Địa chỉ
-                  </p>
-                  <p className="text-base text-white/85">{SITE.address}</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white">
-                  <Clock className="h-5 w-5" aria-hidden />
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55">
-                    Giờ Làm Việc
-                  </p>
-                  <p className="text-base text-white/85">{SITE.workingHours}</p>
-                </div>
-              </li>
-            </ul>
-          </motion.div>
+            {/* Tap-to-call hotlines */}
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
+              {SITE.hotlines.map((h) => (
+                <a
+                  key={h}
+                  href={`tel:${h.replace(/\s/g, "")}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 active:scale-95"
+                >
+                  <Phone className="h-3.5 w-3.5" aria-hidden />
+                  {h}
+                </a>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-white/50">{SITE.workingHours}</p>
+          </div>
 
           {/* Form */}
           <motion.div variants={fadeUp} custom={1}>
@@ -206,16 +151,15 @@ export function Contact() {
             >
               <h3
                 id="contact-form-title"
-                className="text-xl font-semibold text-brand"
+                className="text-lg font-semibold text-brand"
               >
                 Yêu cầu báo giá miễn phí
               </h3>
               <p className="mt-1 text-sm text-brand/65">
-                Vui lòng điền thông tin — chuyên viên sẽ phản hồi trong 15
-                phút.
+                Chuyên viên sẽ phản hồi trong vòng 15 phút.
               </p>
 
-              <div className="mt-6 space-y-5">
+              <div className="mt-5 space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="name">
                     Họ và Tên <span className="text-destructive">*</span>
@@ -229,11 +173,7 @@ export function Contact() {
                     {...register("name")}
                   />
                   {errors.name && (
-                    <p
-                      id="name-error"
-                      role="alert"
-                      className="text-xs font-medium text-destructive"
-                    >
+                    <p id="name-error" role="alert" className="text-xs font-medium text-destructive">
                       {errors.name.message}
                     </p>
                   )}
@@ -250,17 +190,11 @@ export function Contact() {
                     autoComplete="tel"
                     maxLength={10}
                     aria-invalid={!!errors.phone}
-                    aria-describedby={
-                      errors.phone ? "phone-error" : undefined
-                    }
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                     {...register("phone")}
                   />
                   {errors.phone && (
-                    <p
-                      id="phone-error"
-                      role="alert"
-                      className="text-xs font-medium text-destructive"
-                    >
+                    <p id="phone-error" role="alert" className="text-xs font-medium text-destructive">
                       {errors.phone.message}
                     </p>
                   )}
@@ -269,7 +203,7 @@ export function Contact() {
                 <div className="space-y-1.5">
                   <Label htmlFor="email">
                     Email{" "}
-                    <span className="text-brand/45 font-normal">(Không bắt buộc)</span>
+                    <span className="font-normal text-brand/45">(Không bắt buộc)</span>
                   </Label>
                   <Input
                     id="email"
@@ -278,17 +212,11 @@ export function Contact() {
                     inputMode="email"
                     autoComplete="email"
                     aria-invalid={!!errors.email}
-                    aria-describedby={
-                      errors.email ? "email-error" : undefined
-                    }
+                    aria-describedby={errors.email ? "email-error" : undefined}
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p
-                      id="email-error"
-                      role="alert"
-                      className="text-xs font-medium text-destructive"
-                    >
+                    <p id="email-error" role="alert" className="text-xs font-medium text-destructive">
                       {errors.email.message}
                     </p>
                   )}
@@ -297,23 +225,17 @@ export function Contact() {
                 <div className="space-y-1.5">
                   <Label htmlFor="message">
                     Nhu Cầu / Lời Nhắn{" "}
-                    <span className="text-brand/45 font-normal">(Không bắt buộc)</span>
+                    <span className="font-normal text-brand/45">(Không bắt buộc)</span>
                   </Label>
                   <Textarea
                     id="message"
-                    placeholder="Ví dụ: Tôi cần báo giá cửa cuốn cho mặt tiền nhà phố 4m..."
+                    placeholder="Ví dụ: Cần báo giá cửa cuốn mặt tiền nhà phố 4m..."
                     aria-invalid={!!errors.message}
-                    aria-describedby={
-                      errors.message ? "message-error" : undefined
-                    }
+                    aria-describedby={errors.message ? "message-error" : undefined}
                     {...register("message")}
                   />
                   {errors.message && (
-                    <p
-                      id="message-error"
-                      role="alert"
-                      className="text-xs font-medium text-destructive"
-                    >
+                    <p id="message-error" role="alert" className="text-xs font-medium text-destructive">
                       {errors.message.message}
                     </p>
                   )}
@@ -339,7 +261,7 @@ export function Contact() {
                   )}
                 </Button>
 
-                <p className="text-center text-xs text-brand/55">
+                <p className="text-center text-xs text-brand/50">
                   Bằng việc gửi yêu cầu, Quý khách đồng ý cho Hưng Thành Phát
                   liên hệ qua số điện thoại đã cung cấp.
                 </p>

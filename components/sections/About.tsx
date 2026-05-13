@@ -42,7 +42,7 @@ export function About() {
   return (
     <section
       id="gioi-thieu"
-      className="relative bg-white py-20 md:py-28"
+      className="relative bg-white py-14 md:py-20"
       aria-labelledby="about-heading"
     >
       <div className="container">
