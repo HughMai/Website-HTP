@@ -49,7 +49,9 @@ export function Footer() {
               <Facebook className="h-4 w-4" />
             </a>
             <a
-              href="#"
+              href="https://zalo.me/0945042345"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Liên hệ qua Zalo"
               className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
             >

@@ -26,7 +26,7 @@ function PulseRings({ color }: { color: string }) {
 }
 
 export function FloatingContact() {
-  const zaloHref = "#"; // replace with Zalo URL when available
+  const zaloHref = "https://zalo.me/0945042345";
 
   return (
     <div
@@ -41,7 +41,7 @@ export function FloatingContact() {
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="relative flex items-center gap-3 rounded-full bg-[#0068FF] py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(0,104,255,0.45)]"
+          className="relative flex w-[200px] items-center gap-3 rounded-full bg-[#0068FF] py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(0,104,255,0.45)]"
           aria-label="Nhắn tin qua Zalo"
         >
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
@@ -66,7 +66,7 @@ export function FloatingContact() {
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="relative flex items-center gap-3 rounded-full bg-gradient-to-br from-red-500 to-rose-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(239,68,68,0.45)]"
+          className="relative flex w-[200px] items-center gap-3 rounded-full bg-gradient-to-br from-red-500 to-rose-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(239,68,68,0.45)]"
           aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
         >
           <motion.span
