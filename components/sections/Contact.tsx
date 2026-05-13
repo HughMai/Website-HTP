@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { SITE } from "@/lib/site-data";
 
-const VN_PHONE_RE = /^(0|\+84)(3|5|7|8|9)\d{8}$/;
+const VN_PHONE_RE = /^0(3|5|7|8|9)\d{8}$/;
 
 const contactSchema = z.object({
   name: z
@@ -26,14 +26,16 @@ const contactSchema = z.object({
     .string()
     .trim()
     .regex(VN_PHONE_RE, {
-      message:
-        "Số điện thoại không hợp lệ. Vui lòng nhập số di động Việt Nam.",
+      message: "Vui lòng nhập đúng 10 chữ số (ví dụ: 0901234567).",
     }),
-  message: z
-    .string()
-    .trim()
-    .min(10, { message: "Vui lòng mô tả nhu cầu tối thiểu 10 ký tự." })
-    .max(500, { message: "Nội dung quá dài (tối đa 500 ký tự)." }),
+  email: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.string().email({ message: "Email không hợp lệ." }).optional()
+  ),
+  message: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.string().trim().max(500, { message: "Nội dung quá dài (tối đa 500 ký tự)." }).optional()
+  ),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -57,15 +59,26 @@ export function Contact() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", phone: "", message: "" },
+    defaultValues: { name: "", phone: "", email: "", message: "" },
     mode: "onTouched",
   });
 
   const onSubmit = async (data: ContactFormValues) => {
-    // Simulate async submission to give realistic UX.
-    await new Promise((r) => setTimeout(r, 700));
-    // eslint-disable-next-line no-console
-    console.log("Contact form submitted:", data);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      toast({
+        title: "Gửi thất bại",
+        description:
+          "Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     toast({
       title: "Gửi yêu cầu thành công!",
@@ -232,9 +245,10 @@ export function Contact() {
                   </Label>
                   <Input
                     id="phone"
-                    placeholder="0901 234 567"
+                    placeholder="0901234567"
                     inputMode="tel"
                     autoComplete="tel"
+                    maxLength={10}
                     aria-invalid={!!errors.phone}
                     aria-describedby={
                       errors.phone ? "phone-error" : undefined
@@ -253,9 +267,37 @@ export function Contact() {
                 </div>
 
                 <div className="space-y-1.5">
+                  <Label htmlFor="email">
+                    Email{" "}
+                    <span className="text-brand/45 font-normal">(Không bắt buộc)</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@gmail.com"
+                    inputMode="email"
+                    autoComplete="email"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={
+                      errors.email ? "email-error" : undefined
+                    }
+                    {...register("email")}
+                  />
+                  {errors.email && (
+                    <p
+                      id="email-error"
+                      role="alert"
+                      className="text-xs font-medium text-destructive"
+                    >
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
                   <Label htmlFor="message">
                     Nhu Cầu / Lời Nhắn{" "}
-                    <span className="text-destructive">*</span>
+                    <span className="text-brand/45 font-normal">(Không bắt buộc)</span>
                   </Label>
                   <Textarea
                     id="message"
