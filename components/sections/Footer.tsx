@@ -87,6 +87,30 @@ export function Footer() {
                 Sửa Chữa Cửa Cuốn
               </Link>
             </li>
+            <li>
+              <Link
+                href="/bao-gia-cua-cuon-can-tho"
+                className="text-white/70 transition hover:text-white"
+              >
+                Bảng Giá Cửa Cuốn
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/bang-gia-cua-keo-can-tho"
+                className="text-white/70 transition hover:text-white"
+              >
+                Bảng Giá Cửa Kéo
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/bang-gia-cua-nhom-kinh-can-tho"
+                className="text-white/70 transition hover:text-white"
+              >
+                Bảng Giá Cửa Nhôm Kính
+              </Link>
+            </li>
           </ul>
         </div>
 

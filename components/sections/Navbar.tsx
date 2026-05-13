@@ -94,12 +94,7 @@ export function Navbar() {
           )}
           aria-label="Về trang chủ"
         >
-          <span
-            className={cn(
-              "inline-flex items-center rounded-md transition-all",
-              scrolled ? "" : "bg-white/95 px-2 py-1 shadow-sm"
-            )}
-          >
+          <span className="inline-flex items-center rounded-md bg-white/95 px-2 py-1 shadow-sm transition-all">
             <Image
               src="/logo.svg"
               alt={`${SITE.brand} — Logo`}
@@ -109,10 +104,10 @@ export function Navbar() {
               className="h-9 w-9 md:h-10 md:w-10"
             />
           </span>
-          <span className="hidden md:flex flex-col text-left leading-tight">
+          <span className="flex flex-col text-left leading-tight">
             <span
               className={cn(
-                "text-sm font-bold tracking-tight transition-colors",
+                "text-xs font-bold tracking-tight transition-colors md:text-sm",
                 scrolled ? "text-brand" : "text-white"
               )}
             >
@@ -120,7 +115,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                "text-[10px] font-medium uppercase tracking-[0.14em] transition-colors",
+                "hidden text-[10px] font-medium uppercase tracking-[0.14em] transition-colors md:block",
                 scrolled ? "text-brand/55" : "text-white/65"
               )}
             >

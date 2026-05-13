@@ -1,8 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site-data";
+
+function ZaloIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+      <path d="M3.5 2A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22H5l-1.5 2.5L7 22h13.5A1.5 1.5 0 0022 20.5V3.5A1.5 1.5 0 0020.5 2h-17zM8 8h8a1 1 0 010 2H8a1 1 0 010-2zm0 4h5a1 1 0 010 2H8a1 1 0 010-2z" />
+    </svg>
+  );
+}
 
 function PulseRings({ color }: { color: string }) {
   return (
@@ -13,12 +21,7 @@ function PulseRings({ color }: { color: string }) {
           className={`pointer-events-none absolute inset-0 rounded-full ${color}`}
           initial={{ scale: 1, opacity: 0.55 }}
           animate={{ scale: 2.4, opacity: 0 }}
-          transition={{
-            duration: 2,
-            delay,
-            repeat: Infinity,
-            ease: "easeOut",
-          }}
+          transition={{ duration: 2, delay, repeat: Infinity, ease: "easeOut" }}
         />
       ))}
     </>
@@ -27,14 +30,60 @@ function PulseRings({ color }: { color: string }) {
 
 export function FloatingContact() {
   const zaloHref = "https://zalo.me/0945042345";
+  const mapHref = SITE.mapDirectionsUrl;
+  const phoneHref = `tel:${SITE.hotlines[0].replace(/\s/g, "")}`;
 
   return (
     <div
-      className="fixed right-4 bottom-8 z-50 flex flex-col items-end gap-3 md:right-6 md:bottom-10"
+      className="fixed right-3 bottom-5 z-50 flex flex-col items-end gap-2 md:right-6 md:bottom-10 md:gap-3"
       aria-label="Liên hệ nhanh"
     >
-      {/* Zalo */}
-      <div className="relative">
+      {/* ── MAP ── */}
+      {/* Mobile: icon-only circle */}
+      <a
+        href={mapHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Xem bản đồ showroom"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/40 transition active:scale-95 md:hidden"
+      >
+        <MapPin className="h-5 w-5" />
+      </a>
+      {/* Desktop: pill with text */}
+      <motion.a
+        href={mapHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.07 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 420, damping: 18 }}
+        className="hidden w-[200px] items-center gap-3 rounded-full bg-emerald-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(16,185,129,0.45)] md:flex"
+        aria-label="Xem bản đồ showroom"
+      >
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
+          <MapPin className="h-5 w-5" />
+        </span>
+        <div className="text-left">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+            Showroom
+          </p>
+          <p className="text-sm font-bold tracking-wide">Xem Bản Đồ</p>
+        </div>
+      </motion.a>
+
+      {/* ── ZALO ── */}
+      {/* Mobile: icon-only circle */}
+      <a
+        href={zaloHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Nhắn tin qua Zalo"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-lg shadow-blue-500/40 transition active:scale-95 md:hidden"
+      >
+        <ZaloIcon />
+      </a>
+      {/* Desktop: pill with pulse */}
+      <div className="relative hidden md:block">
         <PulseRings color="bg-blue-500/20" />
         <motion.a
           href={zaloHref}
@@ -45,9 +94,7 @@ export function FloatingContact() {
           aria-label="Nhắn tin qua Zalo"
         >
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-              <path d="M3.5 2A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22H5l-1.5 2.5L7 22h13.5A1.5 1.5 0 0022 20.5V3.5A1.5 1.5 0 0020.5 2h-17zM8 8h8a1 1 0 010 2H8a1 1 0 010-2zm0 4h5a1 1 0 010 2H8a1 1 0 010-2z" />
-            </svg>
+            <ZaloIcon />
           </span>
           <div className="text-left">
             <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
@@ -58,11 +105,20 @@ export function FloatingContact() {
         </motion.a>
       </div>
 
-      {/* Hotline */}
-      <div className="relative">
+      {/* ── PHONE ── */}
+      {/* Mobile: icon-only circle */}
+      <a
+        href={phoneHref}
+        aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-rose-500 text-white shadow-lg shadow-red-500/40 transition active:scale-95 md:hidden"
+      >
+        <Phone className="h-5 w-5" />
+      </a>
+      {/* Desktop: pill with pulse */}
+      <div className="relative hidden md:block">
         <PulseRings color="bg-red-500/20" />
         <motion.a
-          href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}
+          href={phoneHref}
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 420, damping: 18 }}

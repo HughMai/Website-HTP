@@ -17,11 +17,11 @@ const siteUrl =
 export const metadata: Metadata = {
   title: {
     default:
-      "Hưng Thành Phát Door — Cửa Cuốn, Cửa Nhôm Kính, Cửa Kéo Cần Thơ",
-    template: "%s | Hưng Thành Phát Door Cần Thơ",
+      "Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ | Hưng Thành Phát Door",
+    template: "%s | Hưng Thành Phát Door",
   },
   description:
-    "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 15+ năm kinh nghiệm, 500+ dự án hoàn thành, bảo hành đến 10 năm. Gọi ngay: 0913 574 077.",
+    "Thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 15+ năm, 500+ dự án, bảo hành 10 năm. Gọi: 0945 042 345.",
   keywords: [
     "cửa cuốn Cần Thơ",
     "cửa nhôm kính Cần Thơ",
@@ -71,11 +71,16 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
+  "@id": siteUrl,
   name: SITE.brand,
   description:
     "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 15+ năm kinh nghiệm, bảo hành đến 10 năm.",
   url: siteUrl,
   logo: `${siteUrl}/logo.svg`,
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=100041851129169",
+    "https://zalo.me/0945042345",
+  ],
   telephone: SITE.hotlines[0].replace(/\s/g, ""),
   email: SITE.email,
   foundingDate: String(SITE.foundedYear),
@@ -96,6 +101,13 @@ const jsonLd = {
     { "@type": "City", name: "Cần Thơ" },
     { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
   ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "1",
+    bestRating: "5",
+    worstRating: "1",
+  },
   priceRange: "$$",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -161,6 +173,16 @@ const jsonLd = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: SITE.brand,
+  url: siteUrl,
+  inLanguage: "vi",
+  publisher: { "@id": siteUrl },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -172,6 +194,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">

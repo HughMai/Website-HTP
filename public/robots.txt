@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hungthanhphat.vn/sitemap.xml
