@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +22,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [active, setActive] = React.useState<NavId>("trang-chu");
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
@@ -51,9 +55,14 @@ export function Navbar() {
   }, []);
 
   const handleNav = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        setOpen(false);
+      }
+    } else {
+      router.push(`/#${id}`);
       setOpen(false);
     }
   };
@@ -75,15 +84,15 @@ export function Navbar() {
     >
       <div className="container flex h-16 items-center justify-between md:h-20">
         {/* Logo */}
-        <button
-          onClick={() => handleNav("trang-chu")}
+        <Link
+          href="/"
           className={cn(
             "flex items-center gap-3 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
             scrolled
               ? "focus-visible:ring-brand"
               : "focus-visible:ring-white focus-visible:ring-offset-brand"
           )}
-          aria-label="Về đầu trang"
+          aria-label="Về trang chủ"
         >
           <span
             className={cn(
@@ -118,7 +127,7 @@ export function Navbar() {
               Bảo Vệ Ngôi Nhà Bạn
             </span>
           </span>
-        </button>
+        </Link>
 
         {/* Desktop nav */}
         <nav

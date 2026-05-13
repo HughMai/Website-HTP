@@ -84,9 +84,10 @@ export function Hero() {
             custom={2}
             className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg"
           >
-            Hưng Thành Phát Door cung cấp hệ thống cửa cuốn, cửa nhôm kính và
-            cửa kéo công nghệ Đức — kết hợp chất lượng tuyệt đối, vận hành êm
-            ái và thiết kế tinh tế cho từng công trình.
+            Hưng Thành Phát Door cung cấp đa dạng hệ thống cửa cuốn, cửa kéo
+            và cửa nhôm kính — trải rộng từ phân khúc phổ thông đến cao cấp —
+            với cam kết về chất lượng bền vững, vận hành ổn định và thiết kế
+            tinh tế, đáp ứng yêu cầu của từng công trình.
           </motion.p>
 
           <motion.div

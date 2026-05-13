@@ -43,7 +43,9 @@ export function Products() {
             Hệ thống sản phẩm cửa cao cấp.
           </h2>
           <p className="mt-4 text-base text-brand/70">
-            Hưng Thành Phát Door cung cấp đa dạng hệ thống cửa cuốn, cửa kéo và cửa nhôm kính — trải rộng từ phân khúc phổ thông đến cao cấp — với cam kết về chất lượng bền vững, vận hành ổn định và thiết kế tinh tế, đáp ứng yêu cầu của từng công trình.
+            Từ cửa cuốn nhôm công nghệ Đức, cửa kéo thép inox đến hệ cửa nhôm
+            kính cao cấp — đầy đủ giải pháp cho mọi loại công trình tại Cần
+            Thơ, bảo hành đến 10 năm, thi công trọn gói.
           </p>
         </div>
 
