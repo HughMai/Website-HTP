@@ -200,10 +200,30 @@ export function QuoteAndContact() {
     });
 
   const onSubmit = async (data: ContactFormValues) => {
+    const payload: Record<string, unknown> = { ...data };
+
+    if (hasPrice) {
+      payload.estimate = {
+        doorType,
+        tech,
+        model,
+        width: w,
+        height: h,
+        area: parseFloat(area.toFixed(2)),
+        doorCost,
+        ...(motorCost > 0 && { motorLabel: motorUc ? "Úc" : mTier, motorCost }),
+        ...(lockCost > 0 && { lockLabel: lockUc ? "Úc" : "tole", lockCost }),
+        ...(batteryCost > 0 && { batteryCost }),
+        subtotal,
+        vat,
+        grandTotal,
+      };
+    }
+
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
       toast({ title: "Gửi thất bại", description: "Vui lòng thử lại hoặc gọi trực tiếp.", variant: "destructive" });

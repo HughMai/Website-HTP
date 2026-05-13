@@ -3,24 +3,90 @@ import { z } from "zod";
 
 const VN_PHONE_RE = /^0(3|5|7|8|9)\d{8}$/;
 
-const schema = z.object({
-  name: z.string().trim().min(2).max(80),
-  phone: z.string().trim().regex(VN_PHONE_RE),
-  email: z.preprocess(
-    (val) => (val === "" ? undefined : val),
-    z.string().email().optional()
-  ),
-  message: z.preprocess(
-    (val) => (val === "" ? undefined : val),
-    z.string().trim().max(500).optional()
-  ),
+const estimateSchema = z.object({
+  doorType:    z.string(),
+  tech:        z.string(),
+  model:       z.string(),
+  width:       z.number(),
+  height:      z.number(),
+  area:        z.number(),
+  doorCost:    z.number(),
+  motorLabel:  z.string().optional(),
+  motorCost:   z.number().optional(),
+  lockLabel:   z.string().optional(),
+  lockCost:    z.number().optional(),
+  batteryCost: z.number().optional(),
+  subtotal:    z.number(),
+  vat:         z.number(),
+  grandTotal:  z.number(),
 });
+
+type Estimate = z.infer<typeof estimateSchema>;
+
+const schema = z.object({
+  name:     z.string().trim().min(2).max(80),
+  phone:    z.string().trim().regex(VN_PHONE_RE),
+  email:    z.preprocess((val) => (val === "" ? undefined : val), z.string().email().optional()),
+  message:  z.preprocess((val) => (val === "" ? undefined : val), z.string().trim().max(500).optional()),
+  estimate: estimateSchema.optional(),
+});
+
+function fmtVND(n: number) {
+  return n.toLocaleString("vi-VN") + "đ";
+}
+
+function formatEstimateTelegram(e: Estimate): string {
+  const lines = [
+    `\n📋 <b>Ước tính giá:</b>`,
+    `• Loại cửa: ${e.doorType} — ${e.tech} — ${e.model}`,
+    `• Kích thước: ${e.width}m × ${e.height}m (${e.area} m²)`,
+    `• Cửa: ${fmtVND(e.doorCost)}`,
+  ];
+  if (e.motorCost && e.motorLabel) lines.push(`• Motor ${e.motorLabel}: ${fmtVND(e.motorCost)}`);
+  if (e.lockCost  && e.lockLabel)  lines.push(`• Khóa ngang (${e.lockLabel}): ${fmtVND(e.lockCost)}`);
+  if (e.batteryCost)               lines.push(`• Bình Tích Điện: ${fmtVND(e.batteryCost)}`);
+  lines.push(`• Tổng cộng: ${fmtVND(e.subtotal)}`);
+  lines.push(`• VAT (10%): ${fmtVND(e.vat)}`);
+  lines.push(`• 💰 <b>TỔNG TIỀN: ${fmtVND(e.grandTotal)}</b>`);
+  return lines.join("\n");
+}
+
+function formatEstimateEmail(e: Estimate): string {
+  const row = (label: string, value: string, bold = false) =>
+    `<tr style="border-top:1px solid #f3f4f6">
+      <td style="padding:10px 0;color:#6b7280;width:130px">${label}</td>
+      <td style="padding:10px 0;${bold ? "font-weight:700;" : ""}color:#111827">${value}</td>
+    </tr>`;
+
+  const accessoryRows = [
+    e.motorCost  && e.motorLabel ? row(`Motor ${e.motorLabel}`, fmtVND(e.motorCost)) : "",
+    e.lockCost   && e.lockLabel  ? row(`Khóa ngang (${e.lockLabel})`, fmtVND(e.lockCost)) : "",
+    e.batteryCost                ? row("Bình Tích Điện", fmtVND(e.batteryCost)) : "",
+  ].join("");
+
+  return `
+    <div style="margin-top:20px;padding-top:20px;border-top:2px solid #e5e7eb">
+      <p style="margin:0 0 12px;font-weight:700;color:#0A2540;font-size:14px">📋 Ước tính giá</p>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        ${row("Loại cửa", `${e.doorType}`)}
+        ${row("Công nghệ / Mẫu", `${e.tech} — ${e.model}`)}
+        ${row("Kích thước", `${e.width}m × ${e.height}m (${e.area} m²)`)}
+        ${row("Cửa", fmtVND(e.doorCost))}
+        ${accessoryRows}
+        ${row("Tổng cộng", fmtVND(e.subtotal))}
+        ${row("VAT (10%)", fmtVND(e.vat))}
+        ${row("💰 TỔNG TIỀN", fmtVND(e.grandTotal), true)}
+      </table>
+    </div>
+  `;
+}
 
 async function notifyViaTelegram(
   name: string,
   phone: string,
   email?: string,
-  message?: string
+  message?: string,
+  estimate?: Estimate,
 ) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -40,9 +106,10 @@ async function notifyViaTelegram(
     `🔔 <b>YÊU CẦU BÁO GIÁ MỚI</b>\n\n` +
     `👤 <b>Khách hàng:</b> ${name}\n` +
     `📞 <b>Điện thoại:</b> <code>${phone}</code>\n` +
-    (email ? `📧 <b>Email:</b> ${email}\n` : "") +
-    (message ? `💬 <b>Nhu cầu:</b> ${message}\n` : "") +
-    `\n🕐 ${now}`;
+    (email   ? `📧 <b>Email:</b> ${email}\n`       : "") +
+    (message ? `💬 <b>Nhu cầu:</b> ${message}\n`  : "") +
+    (estimate ? formatEstimateTelegram(estimate)    : "") +
+    `\n\n🕐 ${now}`;
 
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
@@ -60,7 +127,8 @@ async function notifyViaEmail(
   name: string,
   phone: string,
   email?: string,
-  message?: string
+  message?: string,
+  estimate?: Estimate,
 ) {
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.NOTIFY_EMAIL;
@@ -101,6 +169,7 @@ async function notifyViaEmail(
             <td style="padding:10px 0;color:#111827">${message}</td>
           </tr>` : ""}
         </table>
+        ${estimate ? formatEstimateEmail(estimate) : ""}
       </div>
       <div style="padding:14px 28px;background:#f9fafb;font-size:12px;color:#9ca3af">
         Email này được gửi tự động từ website hungthanhphat.vn
@@ -147,12 +216,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { name, phone, email, message } = parsed.data;
+  const { name, phone, email, message, estimate } = parsed.data;
 
   // Fire both in parallel — neither should block the customer's response.
   Promise.allSettled([
-    notifyViaTelegram(name, phone, email, message),
-    notifyViaEmail(name, phone, email, message),
+    notifyViaTelegram(name, phone, email, message, estimate),
+    notifyViaEmail(name, phone, email, message, estimate),
   ]).then((results) => {
     for (const r of results) {
       if (r.status === "rejected")
