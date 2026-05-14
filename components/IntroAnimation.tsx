@@ -2,14 +2,14 @@
 
 import { useEffect, useRef } from "react";
 
-const START      = 120;
-const TITLE_STEP = 40;
-const DOOR_STEP  = 52;
-const TAG_STEP   = 33;
-const CHAR_DUR   = 560;
-const FADE_DUR   = 640;
-const BEAT       = 350;
-const DOOR_DUR   = 1800;
+const START      = 60;
+const TITLE_STEP = 22;
+const DOOR_STEP  = 28;
+const TAG_STEP   = 18;
+const CHAR_DUR   = 340;
+const FADE_DUR   = 380;
+const BEAT       = 180;
+const DOOR_DUR   = 1100;
 
 const CARD_HTML = `
 <div class="i-wrap">
@@ -250,16 +250,16 @@ export function IntroAnimation() {
         door.querySelectorAll<HTMLElement>(sel)
           .forEach(el => { el.style.animationDelay = t + "ms"; t += step; });
 
-      fades(".i-rule");              t += 230;
-      chars(".i-title", TITLE_STEP); t += 130;
-      chars(".i-word",  DOOR_STEP);  t += 110;
-      fades(".i-divider");           t += 220;
-      chars(".i-tag",   TAG_STEP);   t += 150;
-      fades(".i-svc");               t += 170;
-      fades(".i-adr");               t += 230;
-      fades(".i-ticks");             t += 180;
-      fades(".i-stat", 120);         t += 60;
-      fades(".i-corner", 80);
+      fades(".i-rule");              t += 120;
+      chars(".i-title", TITLE_STEP); t += 70;
+      chars(".i-word",  DOOR_STEP);  t += 60;
+      fades(".i-divider");           t += 110;
+      chars(".i-tag",   TAG_STEP);   t += 80;
+      fades(".i-svc");               t += 90;
+      fades(".i-adr");               t += 110;
+      fades(".i-ticks");             t += 90;
+      fades(".i-stat", 70);          t += 30;
+      fades(".i-corner", 45);
 
       return t + Math.max(CHAR_DUR, FADE_DUR);
     }
