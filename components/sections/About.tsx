@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Award, Sparkles, Wrench } from "lucide-react";
-import { STATS } from "@/lib/site-data";
 
 const container = {
   hidden: {},
@@ -51,9 +50,8 @@ export function About() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
           variants={container}
-          className="grid items-start gap-12 lg:grid-cols-[1.05fr_1fr]"
+          className="mx-auto max-w-3xl"
         >
-          {/* Left: copy */}
           <motion.div variants={item}>
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
               Về Hưng Thành Phát Door
@@ -66,7 +64,7 @@ export function About() {
               <br className="hidden sm:block" />
               chưa một khách nào gọi lại vì sai vật liệu.
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-brand/75">
+            <p className="mt-5 text-base leading-relaxed text-brand/75">
               Năm 2008, Hưng Thành Phát bắt đầu từ một xưởng nhỏ ở Bình Thủy
               với một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay
               thế vật liệu rẻ hơn sau khi ký hợp đồng. Không làm tắt để tiết
@@ -93,43 +91,6 @@ export function About() {
                 </motion.li>
               ))}
             </ul>
-          </motion.div>
-
-          {/* Right: stats grid */}
-          <motion.div
-            variants={item}
-            className="grid grid-cols-2 gap-4 sm:gap-5"
-          >
-            {STATS.map((s, i) => (
-              <motion.div
-                key={s.label}
-                variants={item}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                className={
-                  "group relative overflow-hidden rounded-2xl border border-brand/10 bg-white p-6 shadow-[0_8px_30px_-12px_rgba(10,37,64,0.18)] " +
-                  (i % 3 === 0
-                    ? "sm:translate-y-4"
-                    : i % 3 === 2
-                    ? "sm:translate-y-4"
-                    : "")
-                }
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand/30 to-transparent"
-                />
-                <p className="text-3xl font-semibold tracking-tight text-brand md:text-4xl">
-                  {s.value}
-                </p>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-wider text-brand/70">
-                  {s.label}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-brand/65">
-                  {s.description}
-                </p>
-              </motion.div>
-            ))}
           </motion.div>
         </motion.div>
       </div>

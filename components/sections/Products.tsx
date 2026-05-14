@@ -78,15 +78,15 @@ export function Products() {
                   </button>
                 </div>
 
-                {/* Subtypes grid */}
-                <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                {/* Subtypes — horizontal scroll on mobile, grid on desktop */}
+                <div className="mt-5 -mx-4 flex gap-3 overflow-x-auto px-4 pb-3 snap-x snap-mandatory lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 lg:px-0">
                   {cat.subtypes.map((s) => (
                     <motion.article
                       key={s.name}
                       variants={card}
                       whileHover={{ y: -4 }}
                       transition={{ type: "spring", stiffness: 240, damping: 22 }}
-                      className="group cursor-pointer overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
+                      className="w-[44vw] max-w-[200px] shrink-0 snap-start lg:w-auto lg:max-w-none group cursor-pointer overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
                       onClick={scrollContact}
                     >
                       <div className={cn("relative aspect-[340/300] w-full overflow-hidden", (cat as any).contain ? "bg-white p-4" : "bg-brand-50")}>
