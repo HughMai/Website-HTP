@@ -60,32 +60,32 @@ const advantages = [
   {
     icon: "🔇",
     title: "Vận hành cực êm",
-    desc: "Lò xo cân bằng chính xác và ray nhôm đùn giảm tiếng ồn xuống dưới 45dB — êm hơn cửa thép 60%.",
+    desc: "Bấm remote lúc 11 giờ đêm — hàng xóm không nghe thấy gì. Lò xo cân bằng chính xác giảm tiếng ồn xuống dưới 45dB, êm hơn cửa thép 60%.",
   },
   {
     icon: "⚖️",
     title: "Nhẹ — motor bền lâu hơn",
-    desc: "Nhôm nhẹ hơn thép 60%, giảm tải cho motor — motor bền hơn 2–3 lần so với lắp cửa thép cùng kích thước.",
+    desc: "Nhôm nhẹ hơn thép 60% — motor không phải vật lộn mỗi lần mở. Cùng kích thước cửa, motor bền 2–3 lần so với lắp cửa thép.",
   },
   {
     icon: "🌧️",
-    title: "Chống oxy hóa vĩnh cửu",
-    desc: "Nhôm đùn anodize không gỉ, không bong sơn dù tiếp xúc mưa nắng nhiều năm liên tục.",
+    title: "Không gỉ — không cần sơn lại",
+    desc: "5 năm sau lắp, 10 năm sau lắp — nhôm đùn anodize vẫn sáng bóng như mới. Không gỉ, không bong sơn, không tốn tiền bảo trì ngoại thất.",
   },
   {
     icon: "🎨",
     title: "Đa dạng màu sắc",
-    desc: "Sơn tĩnh điện với hơn 20 màu chuẩn RAL — trắng, xám, nâu gỗ, đen — hoặc theo yêu cầu.",
+    desc: "Hơn 20 màu chuẩn RAL — trắng, xám, nâu gỗ, đen — hoặc theo màu mặt tiền nhà bạn. Màu sắc được giữ đồng đều suốt vòng đời sản phẩm.",
   },
   {
     icon: "🔒",
     title: "Khóa ngang tích hợp",
-    desc: "Tùy chọn lắp thêm khóa ngang chống cạy — bảo mật cao cho nhà phố và cửa hàng ban đêm.",
+    desc: "Ban đêm cần bảo mật thêm? Khóa ngang chống cạy lắp thêm là xong — không cần đặt thêm khóa phụ lộ thiên kém thẩm mỹ.",
   },
   {
     icon: "🛡️",
-    title: "Bảo hành chính hãng",
-    desc: "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — miễn phí sửa chữa tại nhà trong thời gian bảo hành.",
+    title: "Bảo hành — bồi thường 200% nếu sai vật liệu",
+    desc: "Bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất, sửa miễn phí tại nhà. Nếu dùng sai chủng loại so với cam kết — bồi thường 200% giá trị hợp đồng.",
   },
 ];
 
@@ -224,17 +224,17 @@ export default function CuaCuonNhomCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa cuốn nhôm — Công nghệ Đức
+              Cửa cuốn nhôm — Êm tuyệt đối, bền 20+ năm, không gỉ
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Cuốn Nhôm Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Công Nghệ Đức, Bảo Hành Chính Hãng
+                Bấm Remote Lúc 11 Giờ Đêm, Không Một Tiếng Động
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Nhôm đùn dày 0.8–1.2mm theo tiêu chuẩn Đức — vận hành êm, nhẹ, không gỉ bất kể
-              thời tiết. Lắp đặt trọn gói tại tất cả quận huyện Cần Thơ, báo giá miễn phí.
+              Nhôm đùn dày 0.8–1.2mm theo tiêu chuẩn Đức — êm hơn cửa thép 60%, không gỉ
+              dù mưa nắng nhiều năm. Lắp trọn gói tại Cần Thơ, lắp xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -411,10 +411,10 @@ export default function CuaCuonNhomCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Báo Giá Cửa Cuốn Nhôm Miễn Phí
+              Đừng Lắp Cửa Thép Rồi Hối Hận Sau 3 Năm
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát tận nơi — báo giá minh bạch — lắp xong mới thanh toán.
+              Cửa cuốn nhôm đắt hơn ban đầu — nhưng không gỉ, không ồn, motor bền gấp đôi. Khảo sát tại nhà miễn phí, lắp xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

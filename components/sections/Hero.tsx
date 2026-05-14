@@ -14,9 +14,9 @@ const fadeUp = {
 };
 
 const trustChips = [
-  { icon: ShieldCheck, label: "Bảo hành đến 10 năm" },
-  { icon: Hammer, label: "Thi công trọn gói" },
-  { icon: BadgeCheck, label: "Vật liệu chính hãng" },
+  { icon: ShieldCheck, label: "Bồi thường 200% nếu sai vật liệu" },
+  { icon: Hammer, label: "500+ công trình từ 2008" },
+  { icon: BadgeCheck, label: "Lắp xong mới thanh toán" },
 ];
 
 export function Hero() {
@@ -64,7 +64,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            Đối tác cửa số 1 cho công trình cao cấp
+            Phục vụ Cần Thơ từ 2008 — 500+ công trình bàn giao
           </motion.span>
 
           <motion.h1
@@ -84,10 +84,8 @@ export function Hero() {
             custom={2}
             className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg"
           >
-            Hưng Thành Phát Door cung cấp đa dạng hệ thống cửa cuốn, cửa kéo
-            và cửa nhôm kính — trải rộng từ phân khúc phổ thông đến cao cấp —
-            với cam kết về chất lượng bền vững, vận hành ổn định và thiết kế
-            tinh tế, đáp ứng yêu cầu của từng công trình.
+            Gọi sáng — lắp chiều. Báo giá trước khi làm, lắp xong mới thanh
+            toán. Bồi thường 200% nếu dùng sai vật liệu cam kết.
           </motion.p>
 
           <motion.div

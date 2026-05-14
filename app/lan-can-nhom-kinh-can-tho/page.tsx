@@ -51,33 +51,33 @@ const types = [
 const advantages = [
   {
     icon: "🛡️",
-    title: "Kính cường lực an toàn",
-    desc: "Kính cường lực 8–12mm chịu lực gấp 5 lần kính thường. Khi vỡ không tạo mảnh sắc nhọn, đảm bảo an toàn cho trẻ em và người cao tuổi.",
+    title: "Kính cường lực — con bạn leo cũng không lo",
+    desc: "Kính cường lực 8–12mm chịu lực gấp 5 lần kính thường. Khi vỡ (rất hiếm) không tạo mảnh sắc — an toàn tuyệt đối cho trẻ em và người cao tuổi.",
   },
   {
     icon: "✨",
-    title: "Thẩm mỹ sang trọng",
-    desc: "Kính trong suốt tạo cảm giác rộng thoáng, hiện đại — nâng tầm nội thất và ngoại thất công trình rõ rệt.",
+    title: "Cầu thang nhìn như biệt thự — từ 1.950.000đ/m",
+    desc: "Kính trong suốt mở rộng tầm nhìn, ánh sáng lan khắp cầu thang. Khách đến nhà ai cũng hỏi thợ đâu để lắp.",
   },
   {
     icon: "🌊",
-    title: "Không gỉ — chịu ẩm nhiệt đới",
-    desc: "Khung nhôm anod hóa và kính không gỉ sét, không bong tróc — phù hợp khí hậu nóng ẩm tại Cần Thơ.",
+    title: "Không gỉ — không sơn lại — không lo mùa mưa",
+    desc: "Nhôm anod hóa và kính không gỉ sét trong khí hậu nóng ẩm Cần Thơ. Trong khi hàng xóm sơn lại lan can sắt mỗi 2 năm, bạn chỉ cần lau kính.",
   },
   {
     icon: "🔧",
     title: "Bảo trì gần như bằng không",
-    desc: "Không cần sơn lại hay xử lý định kỳ như sắt. Chỉ cần lau kính sạch là luôn như mới.",
+    desc: "Không cần sơn lại, không cần xử lý định kỳ. Lau kính sạch là đủ — đơn giản như lau cửa sổ.",
   },
   {
     icon: "📐",
-    title: "Gia công theo kích thước thực tế",
-    desc: "Mỗi bộ lan can được gia công riêng theo số đo thực tế tại công trình — không có kích thước chuẩn, phù hợp mọi thiết kế.",
+    title: "Gia công theo số đo thực tế",
+    desc: "Mỗi bộ lan can được cắt và gia công theo số đo chính xác tại công trình — không có kích thước chuẩn ép buộc, phù hợp mọi thiết kế cầu thang.",
   },
   {
     icon: "💰",
-    title: "Chi phí hợp lý hơn inox",
-    desc: "Lan can nhôm kính đẹp không kém inox nhưng chi phí thấp hơn 20–30%. Tối ưu cho ngân sách xây dựng nhà phố.",
+    title: "Đẹp không kém inox — giá thấp hơn 20–30%",
+    desc: "Lan can nhôm kính có thẩm mỹ ngang inox nhưng chi phí thấp hơn đáng kể. Tối ưu cho nhà phố muốn đẹp mà ngân sách có hạn.",
   },
 ];
 
@@ -170,17 +170,17 @@ export default function LanCanNhomKinhCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Lan can nhôm kính — Cần Thơ
+              Lan can nhôm kính — Đẹp như biệt thự, không gỉ, không sơn lại
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Lan Can Nhôm Kính Cần Thơ —{" "}
+              Cầu Thang Nhà Bạn Có Thể Nhìn Như Biệt Thự —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Cầu Thang, Ban Công, Sân Thượng
+                Lan Can Nhôm Kính Cần Thơ, Không Gỉ, Không Sơn Lại
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Kính cường lực 8–12mm, khung nhôm cao cấp không gỉ sét — an toàn, thẩm mỹ, bền bỉ
-              trong khí hậu nhiệt đới Cần Thơ. Gia công theo kích thước thực tế, lắp đặt trọn gói.
+              Hàng xóm dùng sắt sơn — phải sơn lại mỗi 2 năm. Bạn lắp nhôm kính một lần —
+              20 năm sau vẫn sáng bóng, không gỉ, không cần sơn lại. Gia công theo số đo thực tế, lắp trọn gói.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -328,10 +328,11 @@ export default function LanCanNhomKinhCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Cần Làm Lan Can Nhôm Kính Tại Cần Thơ?
+              Cầu Thang Nhà Bạn Xứng Đáng Nhìn Khác Hơn
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — gia công theo kích thước thực tế — lắp đặt trọn gói.
+              Khảo sát miễn phí, gia công theo số đo thực tế, lắp xong mới thanh toán.
+              Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

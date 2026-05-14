@@ -23,18 +23,18 @@ const item = {
 const pillars = [
   {
     icon: Award,
-    title: "Chất lượng đạt chuẩn quốc tế",
-    body: "Toàn bộ vật tư đạt tiêu chuẩn JIS / EN, bảo chứng bằng chứng nhận xuất xứ rõ ràng cho từng công trình.",
+    title: "Đúng vật liệu cam kết — bồi thường 200% nếu sai",
+    body: "Mỗi bộ cửa đều có CO/CQ chứng nhận xuất xứ. Sai một chi tiết nhỏ — bồi thường gấp đôi giá trị hợp đồng. Không có ngoại lệ.",
   },
   {
     icon: Wrench,
-    title: "Đội ngũ kỹ thuật chuyên nghiệp",
-    body: "Khảo sát, thiết kế, lắp đặt và bảo trì khép kín — thi công đúng tiến độ, gọn gàng, an toàn lao động.",
+    title: "Gọi sáng — thợ đến chiều — lắp xong trong ngày",
+    body: "Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. 90% công trình hoàn thành ngay trong ngày gọi đầu tiên.",
   },
   {
     icon: Sparkles,
-    title: "Công nghệ vận hành thông minh",
-    body: "Tích hợp motor lưu điện, điều khiển từ xa và kết nối điện thoại — kiểm soát ngôi nhà mọi lúc, mọi nơi.",
+    title: "Lắp xong mới trả tiền — không lo bị ép",
+    body: "Chúng tôi không nhận trước toàn bộ. Chạy thử, kiểm tra hài lòng, ký nghiệm thu — rồi mới thanh toán. Đơn giản vậy thôi.",
   },
 ];
 
@@ -62,17 +62,16 @@ export function About() {
               id="about-heading"
               className="mt-4 text-balance text-3xl font-semibold tracking-tight text-brand md:text-4xl"
             >
-              15 năm dựng xây niềm tin —
+              17 năm, 500+ công trình —
               <br className="hidden sm:block" />
-              từng cánh cửa là một cam kết.
+              chưa một khách nào gọi lại vì sai vật liệu.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-brand/75">
-              Khởi đầu năm 2008 tại Cần Thơ, chúng tôi từng bước trở thành
-              đơn vị dẫn đầu trong lĩnh vực cung cấp và thi công cửa kỹ thuật
-              cao tại khu vực Đồng bằng sông Cửu Long và toàn miền Nam. Hơn
-              500 dự án nhà phố, biệt thự, văn phòng và nhà máy đã được Hưng
-              Thành Phát bàn giao với sự tỉ mỉ, tận tâm và bền vững theo thời
-              gian.
+              Năm 2008, Hưng Thành Phát bắt đầu từ một xưởng nhỏ ở Bình Thủy
+              với một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay
+              thế vật liệu rẻ hơn sau khi ký hợp đồng. Không làm tắt để tiết
+              kiệm thời gian. 17 năm sau, 500+ công trình từ nhà phố đến nhà
+              xưởng công nghiệp — cam kết đó vẫn còn nguyên.
             </p>
 
             <ul className="mt-8 space-y-5">

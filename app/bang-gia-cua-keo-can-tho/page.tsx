@@ -147,7 +147,7 @@ export default function BangGiaCuaKeoCanTho() {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Bảng Giá Cửa Kéo Cần Thơ 2025 —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Giá Theo m², Minh Bạch
+                Không Phụ Phí Ẩn, Có Lá & Không Lá, Từ 540.000đ/m²
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">

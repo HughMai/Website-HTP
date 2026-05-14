@@ -56,32 +56,32 @@ const advantages = [
   {
     icon: "🔇",
     title: "Cách âm vượt trội",
-    desc: "Kính hộp 2 lớp hoặc kính Low-E giảm tiếng ồn đường phố 30–40dB — phù hợp nhà mặt tiền đông xe cộ.",
+    desc: "Đường phố đông xe cộ trở thành tiếng thì thầm khi bạn đóng cửa. Kính hộp 2 lớp hoặc Low-E giảm tiếng ồn 30–40dB — giấc ngủ và sự tập trung trở lại.",
   },
   {
     icon: "🌡️",
     title: "Cách nhiệt — tiết kiệm điện",
-    desc: "Kính Low-E phản xạ tia hồng ngoại, giảm nhiệt bức xạ vào phòng 40–60% — tiết kiệm điều hòa đáng kể.",
+    desc: "Buổi chiều nóng nung người bên ngoài — bên trong phòng mát hơn 5–7°C nhờ kính Low-E phản xạ tia hồng ngoại. Hóa đơn điện lạnh giảm thấy rõ.",
   },
   {
     icon: "✨",
-    title: "Thẩm mỹ sang trọng",
-    desc: "Profile nhôm định hình mỏng, đường nét hiện đại — nâng tầm ngoại thất nhà phố và biệt thự.",
+    title: "Nhà phố nhìn khác hẳn",
+    desc: "Profile nhôm định hình mỏng, đường nét sắc nét — hàng xóm hỏi bạn vừa sửa nhà hay xây mới. Không cần đập tường, chỉ cần thay cửa.",
   },
   {
     icon: "🛡️",
-    title: "Bền — không gỉ sét",
-    desc: "Nhôm anod hóa hoặc sơn tĩnh điện cao cấp — không gỉ, không cong vênh, bền trên 20 năm trong điều kiện khí hậu nhiệt đới.",
+    title: "Bền 20 năm — không gỉ sét",
+    desc: "Hàng xóm dùng cửa sắt phải sơn lại mỗi 2–3 năm. Bạn lắp nhôm kính một lần, 20 năm sau vẫn nguyên màu, không gỉ, không cong vênh.",
   },
   {
     icon: "🔒",
     title: "Khóa đa điểm an toàn",
-    desc: "Hệ khóa chốt 3–5 điểm tích hợp vào profile nhôm — chống phá khóa và đột nhập hiệu quả hơn cửa gỗ truyền thống.",
+    desc: "Hệ khóa chốt 3–5 điểm tích hợp vào profile nhôm — chống phá khóa và đột nhập hiệu quả hơn cửa gỗ hay sắt truyền thống.",
   },
   {
     icon: "🏗️",
-    title: "Lắp đặt trọn gói",
-    desc: "Hưng Thành Phát thi công từ khảo sát, gia công đến lắp đặt hoàn thiện — không cần khách hàng lo từng bước.",
+    title: "Thi công trọn gói — lắp xong mới trả",
+    desc: "Từ khảo sát, gia công đến lắp đặt hoàn thiện — Hưng Thành Phát lo toàn bộ. Chạy thử hài lòng, ký nghiệm thu, rồi mới thanh toán.",
   },
 ];
 
@@ -182,17 +182,17 @@ export default function CuaNhomKinhCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa nhôm kính cao cấp — Cần Thơ
+              Nhôm kính — Cách âm, cách nhiệt, bền 20 năm không gỉ
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Cửa Nhôm Kính Cần Thơ —{" "}
+              Nhà Phố Của Bạn Nhìn Khác Hẳn Sau Khi Lắp Nhôm Kính —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Sang Trọng, Cách Âm, Bảo Hành 10 Năm
+                Cách Âm, Cách Nhiệt, Bền 20 Năm Không Lo Gỉ
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Hưng Thành Phát Door thi công hệ cửa nhôm kính — cửa đi, cửa sổ, mặt dựng, lan can
-              cầu thang tại Cần Thơ. 15+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng.
+              Đường phố ồn ào bên ngoài trở thành tiếng thì thầm khi đóng cửa nhôm kính. Kính
+              Low-E giảm nhiệt 40–60%, profile nhôm bền 20+ năm không gỉ. Thi công trọn gói tại Cần Thơ.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -355,10 +355,10 @@ export default function CuaNhomKinhCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Cần Thi Công Cửa Nhôm Kính Tại Cần Thơ?
+              Nhà Phố Của Bạn Xứng Đáng Được Bảo Vệ Tốt Hơn
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá tận nơi — thi công trọn gói, bảo hành 10 năm.
+              Khảo sát miễn phí — báo giá tận nơi — thi công trọn gói, lắp xong mới thanh toán. Bồi thường 200% nếu sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

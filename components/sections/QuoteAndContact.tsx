@@ -263,13 +263,13 @@ export function QuoteAndContact() {
           className="mb-8 text-center"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
-            Thông Tin Liên Hệ
+            Liên Hệ & Báo Giá
           </span>
           <h2
             id="contact-heading"
             className="mt-3 text-balance text-2xl font-semibold tracking-tight text-white md:text-3xl"
           >
-            Gọi ngay hoặc để lại thông tin.
+            Để lại số — chúng tôi gọi lại trong 15 phút.
           </h2>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             {SITE.hotlines.map((hotline) => (

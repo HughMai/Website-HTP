@@ -9,28 +9,28 @@ const steps = [
     icon: MessageSquare,
     title: "Tư Vấn",
     description:
-      "Liên hệ tư vấn và ước lượng quy mô sản phẩm phù hợp với công trình của Quý khách.",
+      "Gọi hoặc nhắn tin — kỹ thuật viên tư vấn sơ bộ ngay, đặt lịch khảo sát miễn phí tại nhà trong ngày.",
   },
   {
     number: "02",
     icon: PencilRuler,
     title: "Thiết Kế",
     description:
-      "Phác họa và tính toán chi tiết kích thước, vật liệu cho dự án sắp thực hiện.",
+      "Đo đạc thực tế, báo giá chi tiết từng hạng mục — vật tư, motor, nhân công — không phát sinh ẩn.",
   },
   {
     number: "03",
     icon: HardHat,
     title: "Thi Công Lắp Đặt",
     description:
-      "Đội ngũ thi công giàu kinh nghiệm, chuyên nghiệp, đúng tiến độ cam kết.",
+      "Thợ lắp đúng ngày hẹn, bảo vệ sàn và tường, dọn dẹp gọn gàng. Hoàn thành trong ngày với hầu hết công trình.",
   },
   {
     number: "04",
     icon: ShieldCheck,
     title: "Thanh Toán & Bảo Trì",
     description:
-      "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Sửa chữa miễn phí tại nơi lắp đặt trong thời gian bảo hành.",
+      "Chạy thử toàn hệ thống trước mặt bạn, ký nghiệm thu, rồi mới thanh toán. Bồi thường 200% nếu sai vật liệu cam kết.",
   },
 ];
 

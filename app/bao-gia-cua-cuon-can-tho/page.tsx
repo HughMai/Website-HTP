@@ -185,17 +185,17 @@ export default function BaoGiaCuaCuonCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Bảng giá chính hãng 2025
+              Giá thật — không phụ phí ẩn — 2025
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Báo Giá Cửa Cuốn Cần Thơ —{" "}
+              Bảng Giá Cửa Cuốn Cần Thơ 2025 —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Giá Theo m², Minh Bạch
+                Giá Thật, Không Phụ Phí Ẩn
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Bảng giá chính thức theo từng loại cửa cuốn — tole Đài Loan, công nghệ Đức, Inox, CN Úc.
-              Giá tính theo m², motor và phụ kiện tính riêng. Chưa bao gồm VAT.
+              Giá niêm yết rõ từng hạng mục — vật tư, motor, phụ kiện tính riêng, VAT ghi rõ.
+              Không có "giá bẫy" rồi cộng thêm sau khi ký hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -359,9 +359,9 @@ export default function BaoGiaCuaCuonCanTho() {
         {/* CTA */}
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
-            <h2 className="text-2xl font-semibold text-white md:text-3xl">Nhận Báo Giá Chính Xác Tại Nhà</h2>
+            <h2 className="text-2xl font-semibold text-white md:text-3xl">Nhận Báo Giá Trọn Gói — Không Phụ Phí Ẩn</h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Kỹ thuật viên đến đo đạc miễn phí — báo giá trọn gói trước khi thi công.
+              Kỹ thuật viên đến đo đạc tại nhà miễn phí, báo giá chi tiết từng hạng mục. Lắp xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

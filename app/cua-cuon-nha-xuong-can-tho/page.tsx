@@ -55,33 +55,33 @@ const products = [
 const features = [
   {
     icon: "📏",
-    title: "Khổ cửa từ 3–12m",
-    desc: "Sản xuất theo đặt hàng — không giới hạn khổ rộng. Lắp được cửa rộng 10–12m cho xe container ra vào.",
+    title: "Khổ cửa từ 3–12m — xe container ra vào thoải mái",
+    desc: "Sản xuất theo đặt hàng, không giới hạn khổ rộng. Cửa 10–12m cho xe container, forklift, hoặc thiết bị khổ lớn di chuyển qua ngày.",
   },
   {
     icon: "⚙️",
-    title: "Motor công nghiệp 500kg–1000kg",
-    desc: "Motor tải trọng cao cho cửa khổ lớn, nặng — đảm bảo vận hành trơn tru dù cửa mở cả trăm lần mỗi ngày.",
+    title: "Motor 500–1000kg — mở cả trăm lần vẫn trơn",
+    desc: "Motor tải trọng công nghiệp được chọn theo trọng lượng cửa thực tế — không quá tải, không hao mòn sớm, vận hành ổn định suốt ca sản xuất.",
   },
   {
     icon: "🔋",
-    title: "Bình lưu điện — không gián đoạn sản xuất",
-    desc: "Bình lưu điện tích hợp giúp cửa tiếp tục vận hành khi mất điện — quan trọng cho dây chuyền sản xuất liên tục.",
+    title: "Bình lưu điện — dây chuyền không dừng khi mất điện",
+    desc: "Mất điện lưới — bình lưu tự chuyển nguồn tức thì. Cửa tiếp tục vận hành, dây chuyền không gián đoạn, thiệt hại không tính theo giờ nữa.",
   },
   {
     icon: "🛡️",
-    title: "Chống gỉ — bền trong môi trường công nghiệp",
-    desc: "Sơn tĩnh điện epoxy chống hóa chất và độ ẩm cao — phù hợp nhà xưởng chế biến thực phẩm, hóa chất, đông lạnh.",
+    title: "Chống gỉ — bền trong môi trường hóa chất và ẩm",
+    desc: "Sơn tĩnh điện epoxy chịu hóa chất, độ ẩm cao và nước rửa công nghiệp — phù hợp xưởng chế biến thực phẩm, hóa chất, kho lạnh đông.",
   },
   {
     icon: "⚡",
-    title: "Lắp đặt ngoài giờ sản xuất",
-    desc: "Đội kỹ thuật thi công buổi tối hoặc cuối tuần để không ảnh hưởng đến hoạt động sản xuất của nhà xưởng.",
+    title: "Thi công cuối tuần — không gián đoạn sản xuất",
+    desc: "Đội kỹ thuật thi công tối thứ 7 hoặc chủ nhật theo yêu cầu — xưởng bạn tiếp tục hoạt động bình thường, thứ 2 mở cửa mới.",
   },
   {
     icon: "🔧",
-    title: "Bảo trì định kỳ theo hợp đồng",
-    desc: "Gói bảo trì định kỳ 6 tháng/lần — kiểm tra motor, dầu ray, cân bằng lò xo — kéo dài tuổi thọ cửa 2–3 lần.",
+    title: "Bảo trì hợp đồng 6 tháng/lần",
+    desc: "Gói bảo trì định kỳ — kiểm tra motor, tra dầu ray, cân bằng lò xo — phát hiện hỏng hóc trước khi xảy ra sự cố, kéo dài tuổi thọ 2–3 lần.",
   },
 ];
 
@@ -166,17 +166,17 @@ export default function CuaCuonNhaXuongCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa cuốn công nghiệp — Nhà xưởng, kho hàng
+              Cửa cuốn công nghiệp — Dây chuyền không dừng vì cửa hỏng
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Cửa Cuốn Nhà Xưởng Cần Thơ —{" "}
+              Dây Chuyền Sản Xuất Không Nên Dừng Vì Cửa Hỏng —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Khổ Lớn, Chịu Tải, Motor Công Nghiệp
+                Cửa Cuốn Nhà Xưởng Cần Thơ, Lắp Ngoài Giờ Sản Xuất
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Cửa cuốn công nghiệp cho nhà xưởng, kho hàng, kho lạnh tại Cần Thơ — khổ rộng 3–12m,
-              motor tải trọng cao 500–1000kg, bình lưu điện dự phòng, bảo hành chính hãng.
+              Cửa hỏng giờ cao điểm — dây chuyền dừng — thiệt hại tính theo giờ. Hưng Thành Phát
+              thi công ngoài giờ sản xuất, khổ 3–12m, motor 500–1000kg, bình lưu điện dự phòng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -301,10 +301,11 @@ export default function CuaCuonNhaXuongCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Cần Lắp Cửa Cuốn Nhà Xưởng Tại Cần Thơ?
+              Dây Chuyền Không Dừng — Lắp Ngoài Giờ Sản Xuất
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá trọn gói — thi công ngoài giờ sản xuất theo yêu cầu.
+              Khảo sát miễn phí, thi công cuối tuần hoặc ca đêm theo lịch nhà máy. Lắp xong
+              mới thanh toán — bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

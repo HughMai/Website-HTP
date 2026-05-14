@@ -50,32 +50,32 @@ const advantages = [
   {
     icon: "🛡️",
     title: "Chống đột nhập hiệu quả",
-    desc: "Nan thép hộp và cơ cấu khóa đa điểm — khó phá hơn cửa cuốn thông thường, phù hợp cửa hàng qua đêm.",
+    desc: "11 giờ đêm khóa cửa xong về ngủ — thanh thép hộp và khóa đa điểm không để kẻ trộm có cơ hội. Bền hơn cửa cuốn thông thường trong môi trường mặt tiền.",
   },
   {
     icon: "🌬️",
     title: "Thông thoáng khi đóng",
-    desc: "Khe hở giữa các nan cho phép thông gió và quan sát từ bên ngoài khi cửa đóng — lý tưởng cho cửa hàng.",
+    desc: "Cửa đóng mà khách vẫn thấy hàng qua nan — không mất doanh thu trưng bày, thông gió tự nhiên, không nóng bức trong cửa hàng.",
   },
   {
     icon: "📐",
     title: "Tiết kiệm không gian",
-    desc: "Cửa kéo gom sang một bên thay vì cuộn lên — phù hợp mặt tiền có chiều cao hạn chế.",
+    desc: "Trần thấp, máy lạnh gần cửa, rào cản cơ học — cửa kéo gom sang một bên, không chiếm mét vuông nào phía trên đầu.",
   },
   {
     icon: "🔧",
     title: "Bảo trì đơn giản",
-    desc: "Cơ cấu cơ học đơn giản — không cần motor, ít hỏng hóc, chi phí bảo trì gần như bằng 0.",
+    desc: "Không motor, không mạch điện phức tạp — hỏng thì sửa một buổi sáng. Không lo mất điện, không lo cập nhật phần mềm.",
   },
   {
     icon: "💰",
     title: "Chi phí hợp lý",
-    desc: "Giá thấp hơn cửa cuốn nhôm 20–30% với độ bảo mật tương đương — lựa chọn tối ưu chi phí.",
+    desc: "So với cửa cuốn nhôm cùng kích thước, tiết kiệm 20–30% — mà bảo mật không kém. Đúng cho chủ kinh doanh thực dụng.",
   },
   {
     icon: "🏪",
     title: "Phù hợp mặt tiền kinh doanh",
-    desc: "Hàng triệu cửa hàng tại Việt Nam dùng cửa kéo thép — bền, thực dụng, dễ thay thế phụ kiện.",
+    desc: "Hàng triệu mặt tiền tại Việt Nam dùng cửa kéo thép — phụ kiện phổ biến, dễ thay, thợ nào cũng biết sửa.",
   },
 ];
 
@@ -214,17 +214,17 @@ export default function CuaKeoThepCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa kéo thép — Công nghệ Đức
+              Cửa kéo thép — Bảo mật cao cho mặt tiền kinh doanh
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Kéo Thép Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Bền Bỉ, Chống Đột Nhập, Bảo Hành Chính Hãng
+                Đóng Cửa Về Đêm Mà Không Lo Ai Phá, Lắp Trong Ngày
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Cửa kéo thép hộp mạ kẽm công nghệ Đức — giải pháp bảo mật cao cho mặt tiền
-              kinh doanh tại Cần Thơ. Lắp đặt trọn gói trong ngày, báo giá miễn phí.
+              11 giờ đêm khóa cửa, 6 giờ sáng mở lại — thanh thép hộp mạ kẽm và khóa đa
+              điểm giữ mặt tiền của bạn an toàn suốt đêm. Lắp trong ngày, báo giá miễn phí.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -383,10 +383,10 @@ export default function CuaKeoThepCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Cần Lắp Cửa Kéo Thép Tại Cần Thơ?
+              Bảo Mật Mặt Tiền Kinh Doanh — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá tại nhà — lắp xong mới thanh toán.
+              Khảo sát tại nhà miễn phí — báo giá trong ngày — lắp xong mới thanh toán. Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

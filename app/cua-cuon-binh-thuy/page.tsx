@@ -51,23 +51,23 @@ const products = [
 const localHighlights = [
   {
     icon: "📍",
-    title: "Showroom tại Bình Thủy",
-    desc: "Hưng Thành Phát Door đặt tại 235–237 Võ Văn Kiệt, Bình Thủy — bạn có thể đến xem mẫu trực tiếp trước khi quyết định.",
+    title: "Showroom tại Bình Thủy — xem mẫu trước",
+    desc: "235–237 Võ Văn Kiệt, Bình Thủy — đến xem mẫu cửa thực tế, chạm tay vào vật liệu, so sánh trực tiếp trước khi quyết định. Không cần đặt hàng theo ảnh.",
   },
   {
     icon: "⚡",
-    title: "Lắp đặt trong ngày tại Bình Thủy",
-    desc: "Kỹ thuật viên có mặt trong vòng 2–4 giờ sau khi liên hệ, không tính phí đi lại nội thành Bình Thủy.",
+    title: "Gọi sáng — thợ đến trong 2 giờ",
+    desc: "Kỹ thuật viên có mặt tại Bình Thủy trong vòng 2 giờ sau khi gọi, không tính phí đi lại — kịp lắp xong trước bữa cơm trưa.",
   },
   {
     icon: "🔧",
-    title: "Sửa chữa khẩn cấp 24/7",
-    desc: "Cửa cuốn hỏng đột xuất? Đội kỹ thuật hỗ trợ khẩn cấp ngoài giờ tại khu vực Bình Thủy và lân cận.",
+    title: "Sửa chữa khẩn cấp ngoài giờ",
+    desc: "Cửa hỏng lúc 9 giờ tối? Đội kỹ thuật hỗ trợ khẩn cấp tại Bình Thủy và lân cận — vì cửa hỏng không chờ đến sáng.",
   },
   {
     icon: "🏆",
-    title: "15+ năm phục vụ Bình Thủy",
-    desc: "Từ năm 2008, Hưng Thành Phát đã lắp đặt và bảo trì hàng nghìn cửa cuốn cho khách hàng trên địa bàn Bình Thủy.",
+    title: "17 năm phục vụ Bình Thủy",
+    desc: "Từ năm 2008, chúng tôi đã trở thành cái tên quen thuộc ở Bình Thủy — hàng nghìn cửa cuốn được lắp và bảo trì. Hỏi hàng xóm ai đã từng dùng.",
   },
 ];
 
@@ -162,17 +162,17 @@ export default function CuaCuonBinhThuy() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Showroom tại Bình Thủy, Cần Thơ
+              Showroom ngay tại Bình Thủy — không phí đi lại
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Cửa Cuốn Bình Thủy —{" "}
+              Người Bình Thủy Gọi —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Lắp Tận Nơi, Bảo Hành 10 Năm
+                Chúng Tôi Đến Trong 2 Giờ, Showroom Ngay Tại Bình Thủy
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Hưng Thành Phát Door đặt tại Bình Thủy, Cần Thơ — lắp đặt cửa cuốn tận nơi trong ngày,
-              không phí đi lại, bảo hành chính hãng. Gọi ngay để được khảo sát miễn phí.
+              Showroom và xưởng đặt ngay tại Bình Thủy — kỹ thuật viên đến trong 2 giờ sau khi
+              gọi, không tính phí đi lại. Lắp xong trong ngày, bảo hành chính hãng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -297,7 +297,8 @@ export default function CuaCuonBinhThuy() {
               Lắp Cửa Cuốn Tại Bình Thủy — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá tại nhà — lắp trong ngày — bảo hành 10 năm.
+              Khảo sát miễn phí, có mặt trong 2 giờ, lắp xong mới thanh toán.
+              Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

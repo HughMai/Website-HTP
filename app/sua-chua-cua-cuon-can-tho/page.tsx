@@ -387,17 +387,17 @@ export default function SuaChuaCuaCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Dịch vụ sửa chữa — Cần Thơ
+              Cửa hỏng không chờ được — kỹ thuật viên đến trong ngày
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Sửa Chữa Cửa Cuốn, Cửa Kéo &amp; Nhôm Kính{" "}
+              Cửa Hỏng Không Chờ Được —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Cần Thơ — Đến Tận Nơi
+                Kỹ Thuật Viên Có Mặt Trong Ngày, Sửa Xong Mới Thanh Toán
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Motor cháy, lệch ray, kính vỡ, bản lề lỏng, thấm dột — Hưng Thành Phát Door có
-              mặt trong ngày tại Cần Thơ. Báo giá minh bạch trước khi sửa, bảo hành sau sửa.
+              Motor cháy lúc 8 giờ tối, cửa kẹt buổi sáng không mở được, kính vỡ cần thay gấp
+              — Hưng Thành Phát có mặt trong ngày. Báo giá trước khi sửa, sửa xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

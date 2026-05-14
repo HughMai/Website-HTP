@@ -177,17 +177,17 @@ export default function CuaKeoCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa kéo — Bảo mật cao
+              Cửa kéo — Tư vấn đúng loại, không upsell
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Thép, Nhôm, Inox — Lắp Trong Ngày
+                Chọn Đúng Chất Liệu Theo Ngân Sách — Lắp Trong Ngày, Bồi Thường 200% Nếu Sai Vật Liệu
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Hưng Thành Phát Door cung cấp và lắp đặt cửa kéo thép, nhôm, inox tại Cần Thơ.
-              Bảo mật cao, tiết kiệm không gian, phù hợp mặt tiền kinh doanh. Lắp trọn gói trong ngày.
+              Thép hộp mạ kẽm giá thấp hơn 20–30% so với nhôm, bảo mật tương đương — phần lớn
+              chủ kinh doanh Cần Thơ chọn thép. Tư vấn thật, không upsell loại đắt hơn nếu không cần thiết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -347,10 +347,11 @@ export default function CuaKeoCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Cần Lắp Cửa Kéo Tại Cần Thơ?
+              Lắp Đúng Loại, Đúng Vật Liệu — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá tận nơi — lắp xong mới thanh toán.
+              Khảo sát miễn phí, báo giá tận nơi, lắp xong mới thanh toán.
+              Bồi thường 200% nếu dùng sai chất liệu đã cam kết trong hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

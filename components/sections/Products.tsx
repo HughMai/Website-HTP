@@ -40,12 +40,12 @@ export function Products() {
             id="products-heading"
             className="mt-4 text-balance text-3xl font-semibold tracking-tight text-brand md:text-4xl"
           >
-            Hệ thống sản phẩm cửa cao cấp.
+            Cửa nào phù hợp công trình của bạn?
           </h2>
           <p className="mt-4 text-base text-brand/70">
-            Từ cửa cuốn nhôm công nghệ Đức, cửa kéo thép inox đến hệ cửa nhôm
-            kính cao cấp — đầy đủ giải pháp cho mọi loại công trình tại Cần
-            Thơ, bảo hành đến 10 năm, thi công trọn gói.
+            Chúng tôi tư vấn loại cửa phù hợp theo ngân sách và mục đích —
+            không upsell loại đắt hơn nếu không cần thiết. Bảo hành chính
+            hãng, thi công trọn gói tại Cần Thơ.
           </p>
         </div>
 
