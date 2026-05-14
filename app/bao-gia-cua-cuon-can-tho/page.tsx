@@ -49,7 +49,7 @@ const faqSchema = {
       name: "Cửa cuốn công nghệ Đức và Đài Loan khác nhau như thế nào?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Công nghệ Đức dùng thanh nhôm đùn cao cấp, vận hành êm, độ bền cao, bảo hành đến 10 năm — phù hợp nhà phố, biệt thự, văn phòng. Công nghệ Đài Loan dùng tole thép sơn tĩnh điện, giá thấp hơn, phù hợp kho xưởng hoặc dùng tạm.",
+        text: "Công nghệ Đức dùng thanh nhôm đùn cao cấp, vận hành êm, độ bền cao, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — phù hợp nhà phố, biệt thự, văn phòng. Công nghệ Đài Loan dùng tole thép sơn tĩnh điện, giá thấp hơn, phù hợp kho xưởng hoặc dùng tạm.",
       },
     },
     {

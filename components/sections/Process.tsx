@@ -30,7 +30,7 @@ const steps = [
     icon: ShieldCheck,
     title: "Thanh Toán & Bảo Trì",
     description:
-      "Bảo trì theo kỳ hạn tiêu chuẩn của nhà sản xuất. Bảo hành sản phẩm 5–10 năm.",
+      "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Sửa chữa miễn phí tại nơi lắp đặt trong thời gian bảo hành.",
   },
 ];
 

@@ -50,7 +50,7 @@ const faqSchema = {
       name: "Sau khi lắp đặt có bảo hành không?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Có. Sản phẩm được bảo hành 5–10 năm tùy loại theo tiêu chuẩn nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
+        text: "Có. Sản phẩm được bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
       },
     },
     {

@@ -354,7 +354,7 @@ const faqSchema = {
       name: "Sau khi sửa có được bảo hành không?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Có. Linh kiện thay thế chính hãng được bảo hành theo tiêu chuẩn nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
+        text: "Có. Linh kiện thay thế chính hãng được bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
       },
     },
     {

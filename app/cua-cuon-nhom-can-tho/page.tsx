@@ -178,7 +178,7 @@ const faqSchema = {
       name: "Cửa cuốn nhôm công nghệ Đức có ưu điểm gì so với cửa cuốn thường?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Cửa cuốn nhôm công nghệ Đức dùng thanh nhôm đùn cao cấp dày 0.8–1.2mm, vận hành êm tuyệt đối, chống ăn mòn và không gỉ sét. Bảo hành đến 10 năm, phù hợp nhà phố, biệt thự, văn phòng cao cấp. Giá cao hơn cửa tole nhưng độ bền và thẩm mỹ vượt trội.",
+        text: "Cửa cuốn nhôm công nghệ Đức dùng thanh nhôm đùn cao cấp dày 0.8–1.2mm, vận hành êm tuyệt đối, chống ăn mòn và không gỉ sét. Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất, phù hợp nhà phố, biệt thự, văn phòng cao cấp. Giá cao hơn cửa tole nhưng độ bền và thẩm mỹ vượt trội.",
       },
     },
     {
@@ -202,7 +202,7 @@ const faqSchema = {
       name: "Bảo hành cửa cuốn nhôm bao lâu?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Hưng Thành Phát bảo hành sản phẩm 5–10 năm theo tiêu chuẩn nhà sản xuất. Cam kết bồi thường 200% giá trị hợp đồng nếu dùng sai chủng loại hoặc thương hiệu đã cam kết.",
+        text: "Hưng Thành Phát bảo hành sản phẩm theo kỳ hạn tiêu chuẩn của nhà sản xuất. Cam kết bồi thường 200% giá trị hợp đồng nếu dùng sai chủng loại hoặc thương hiệu đã cam kết.",
       },
     },
   ],
