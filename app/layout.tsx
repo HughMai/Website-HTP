@@ -71,15 +71,25 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  "@id": siteUrl,
+  // /#organization distinguishes the business entity from the website URL —
+  // required for Google to merge this with the GBP Knowledge Panel
+  "@id": `${siteUrl}/#organization`,
   name: SITE.brand,
   description:
     "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 15+ năm kinh nghiệm, bảo hành đến 10 năm.",
   url: siteUrl,
-  logo: `${siteUrl}/logo.svg`,
+  logo: {
+    "@type": "ImageObject",
+    "@id": `${siteUrl}/#logo`,
+    url: `${siteUrl}/logo.svg`,
+    contentUrl: `${siteUrl}/logo.svg`,
+  },
+  image: `${siteUrl}/og-image.png`,
   sameAs: [
     "https://www.facebook.com/profile.php?id=100041851129169",
     "https://zalo.me/0945042345",
+    // Google Maps listing — links website entity to GBP Knowledge Panel
+    "https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z/data=!3m1!4b1!4m6!3m5!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.048473!4d105.7574147!16s%2Fg%2F11lwgjdghy",
   ],
   telephone: SITE.hotlines[0].replace(/\s/g, ""),
   email: SITE.email,
@@ -89,6 +99,7 @@ const jsonLd = {
     streetAddress: "235-237 Võ Văn Kiệt",
     addressLocality: "Bình Thủy",
     addressRegion: "Cần Thơ",
+    postalCode: "94000",
     addressCountry: "VN",
   },
   geo: {
@@ -180,7 +191,7 @@ const websiteSchema = {
   name: SITE.brand,
   url: siteUrl,
   inLanguage: "vi",
-  publisher: { "@id": siteUrl },
+  publisher: { "@id": `${siteUrl}/#organization` },
 };
 
 export default function RootLayout({
