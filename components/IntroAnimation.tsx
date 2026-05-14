@@ -137,14 +137,14 @@ const CSS = `
   overflow: hidden;
   padding: 1vh 0;
 }
-/* title: allow wrapping on mobile so letters don't overflow */
+/* title: explicit width forces wrapping in a centered flex column */
 .i-title {
   font-family: 'Playfair Display', serif; font-weight: 800;
-  font-size: clamp(22px, 7vw, 92px);
-  letter-spacing: clamp(0.04em, 0.10em, 0.10em);
-  line-height: 1.08; color: #f3ead6;
-  word-break: break-word; margin: 0;
-  max-width: 88vw;
+  font-size: clamp(22px, 6vw, 76px);
+  letter-spacing: clamp(0.03em, 0.08em, 0.08em);
+  line-height: 1.12; color: #f3ead6;
+  width: 86vw; text-align: center; margin: 0;
+  word-break: keep-all; overflow-wrap: break-word;
 }
 .i-word {
   font-size: clamp(9px,1vw,12px); letter-spacing: 0.7em;
