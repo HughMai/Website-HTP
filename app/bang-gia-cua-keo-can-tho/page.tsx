@@ -9,15 +9,15 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Bảng Giá Cửa Kéo Cần Thơ 2025 — Giá Theo m²",
+  title: "Bảng Giá Cửa Kéo Cần Thơ 2026 — Giá Theo m²",
   description:
-    "Bảng giá cửa kéo Cần Thơ 2025 — cửa có lá và không lá, từ U 6 zem đến U 1.4 ly. Giá tính theo m², chưa VAT. Báo giá miễn phí: 0945 042 345.",
+    "Bảng giá cửa kéo Cần Thơ 2026 — cửa có lá và không lá, từ U 6 zem đến U 1.4 ly. Giá tính theo m², chưa VAT. Báo giá miễn phí: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/bang-gia-cua-keo-can-tho` },
   openGraph: {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/bang-gia-cua-keo-can-tho`,
-    title: "Bảng Giá Cửa Kéo Cần Thơ 2025 — Giá Theo m²",
+    title: "Bảng Giá Cửa Kéo Cần Thơ 2026 — Giá Theo m²",
     description: "Giá cửa kéo tính theo m² tại Cần Thơ. Chưa VAT. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
