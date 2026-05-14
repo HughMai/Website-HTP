@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site-data";
 function ZaloIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
-      <path d="M3.5 2A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22H5l-1.5 2.5L7 22h13.5A1.5 1.5 0 0022 20.5V3.5A1.5 1.5 0 0020.5 2h-17zM8 8h8a1 1 0 010 2H8a1 1 0 010-2zm0 4h5a1 1 0 010 2H8a1 1 0 010-2z" />
+      <path d="M8.25 8.5v1.5h4.5l-4.75 5.5V17H16v-1.5h-4.75l4.75-5.5V8.5H8.25z" />
     </svg>
   );
 }
@@ -49,27 +49,30 @@ export function FloatingContact() {
       >
         <MapPin className="h-5 w-5" />
       </a>
-      {/* Desktop: pill with text */}
-      <motion.a
-        href={mapHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.07 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 420, damping: 18 }}
-        className="hidden w-[200px] items-center gap-3 rounded-full bg-emerald-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(16,185,129,0.45)] md:flex"
-        aria-label="Xem bản đồ showroom"
-      >
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
-          <MapPin className="h-5 w-5" />
-        </span>
-        <div className="text-left">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
-            Showroom
-          </p>
-          <p className="text-sm font-bold tracking-wide">Xem Bản Đồ</p>
-        </div>
-      </motion.a>
+      {/* Desktop: pill with pulse */}
+      <div className="relative hidden md:block">
+        <PulseRings color="bg-emerald-500/20" />
+        <motion.a
+          href={mapHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.07 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 420, damping: 18 }}
+          className="relative flex w-[200px] items-center gap-3 rounded-full bg-emerald-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(16,185,129,0.45)]"
+          aria-label="Xem bản đồ showroom"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
+            <MapPin className="h-5 w-5" />
+          </span>
+          <div className="text-left">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+              Showroom
+            </p>
+            <p className="text-sm font-bold tracking-wide">Xem Bản Đồ</p>
+          </div>
+        </motion.a>
+      </div>
 
       {/* ── ZALO ── */}
       {/* Mobile: icon-only circle */}
