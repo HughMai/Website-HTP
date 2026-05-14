@@ -5,76 +5,52 @@ import { Star } from "lucide-react";
 
 const reviews = [
   {
-    name: "Anh Minh Tuấn",
-    initial: "M",
-    color: "bg-blue-600",
-    location: "Ninh Kiều, Cần Thơ",
-    date: "2 tuần trước",
-    stars: 5,
-    body: "Đội kỹ thuật đến đúng giờ, lắp đặt gọn gàng, không để lại bụi bẩn. Cửa vận hành cực êm so với cửa cuốn thép cũ trước đây. Rất hài lòng.",
-  },
-  {
-    name: "Chị Lan Phương",
-    initial: "L",
-    color: "bg-pink-500",
-    location: "Bình Thủy, Cần Thơ",
-    date: "1 tháng trước",
-    stars: 5,
-    body: "Báo giá rõ ràng từ đầu, không phát sinh thêm. Thi công nhanh trong một buổi sáng. Đã dùng được 2 năm không có vấn đề gì.",
-  },
-  {
-    name: "Anh Quốc Hùng",
-    initial: "Q",
-    color: "bg-emerald-600",
-    location: "Cái Răng, Cần Thơ",
-    date: "3 tuần trước",
-    stars: 5,
-    body: "Cần lắp gấp trước ngày khai trương, Hưng Thành Phát sắp xếp đội thi công trong 2 ngày. Chất lượng nhôm kính rất tốt, cách âm hiệu quả.",
-  },
-  {
-    name: "Chị Thu Hà",
-    initial: "T",
-    color: "bg-rose-500",
-    location: "Ô Môn, Cần Thơ",
-    date: "2 tháng trước",
-    stars: 5,
-    body: "Gọi lúc 8 giờ sáng, kỹ thuật viên có mặt trước 10 giờ. Chẩn đoán đúng lỗi bo mạch, sửa xong trong buổi. Giá minh bạch như báo từ đầu.",
-  },
-  {
-    name: "Anh Thanh Nam",
+    name: "Nhiên Nguyễn",
     initial: "N",
-    color: "bg-amber-500",
-    location: "Thốt Nốt, Cần Thơ",
-    date: "1 tháng trước",
+    color: "bg-pink-500",
+    date: "Tháng 5/2026",
     stars: 5,
-    body: "Đã làm 2 cửa cuốn và 1 cửa nhôm kính, đều ưng ý. Vật liệu đúng như cam kết, không bị đổi hàng. Tin tưởng thương hiệu này rồi.",
+    body: "Cửa hàng buôn bán rất uy tín, chất lượng. Cửa sử dụng bền, đẹp lắm mọi người ơi. Đặt biệt là vợ chồng chị chủ rất nhiệt tình, tư vấn kỹ, giá lại rẻ nữa. Bạn mình dọ giá ở các nơi khác rất nhiều. Đặt mua tại Hưng Thành Phát vận chuyển về Sóc Trăng mà vẫn rẻ hơn chỗ khác gần 1 triệu luôn.",
   },
   {
-    name: "Anh Hoàng Phúc",
-    initial: "P",
-    color: "bg-cyan-600",
-    location: "Phong Điền, Cần Thơ",
-    date: "3 tháng trước",
-    stars: 5,
-    body: "Tư vấn tận tình, đo đạc kỹ càng, báo giá rõ ràng từng hạng mục. Không phát sinh thêm gì cả so với báo giá ban đầu.",
-  },
-  {
-    name: "Chị Thu Mai",
-    initial: "M",
-    color: "bg-violet-500",
-    location: "Vĩnh Thạnh, Cần Thơ",
-    date: "2 tuần trước",
-    stars: 5,
-    body: "Cửa cuốn lắp xong chạy rất êm, remote bắt sóng nhanh. Đội thi công đúng giờ, làm việc cẩn thận. Rất hài lòng, sẽ giới thiệu bạn bè!",
-  },
-  {
-    name: "Anh Văn Tài",
+    name: "Thắng Võ Minh",
     initial: "T",
-    color: "bg-indigo-500",
-    location: "Ninh Kiều, Cần Thơ",
-    date: "1 tháng trước",
+    color: "bg-blue-600",
+    date: "Tháng 5/2026",
     stars: 5,
-    body: "Bảo hành rõ ràng, có vấn đề gọi là ra sửa liền không nói khó. Giá cả minh bạch, thợ thân thiện và chuyên nghiệp.",
+    body: "Biết đến Hưng Thành Phát Door qua người quen giới thiệu. Cửa hàng có tiếng ở Cần Thơ về cửa cuốn và cửa nhôm kính, làm việc uy tín và bảo hành rõ ràng. Đáng tin cậy cho ai đang tìm nơi lắp đặt cửa chất lượng tại khu vực!",
+  },
+  {
+    name: "Cương Trương Kim",
+    initial: "C",
+    color: "bg-emerald-600",
+    date: "Tháng 5/2026",
+    stars: 5,
+    body: "Mình đã lắp cửa cuốn tại Hưng Thành Phát Door và rất hài lòng với chất lượng dịch vụ. Đội ngũ thi công chuyên nghiệp, đúng tiến độ, dọn dẹp sạch sẽ sau khi hoàn thành. Sản phẩm chắc chắn, vận hành êm. Chủ cửa hàng tư vấn thật tâm, không ép mua. Sẽ quay lại khi có nhu cầu.",
+  },
+  {
+    name: "Tien My Vo",
+    initial: "T",
+    color: "bg-amber-500",
+    date: "Tháng 5/2026",
+    stars: 5,
+    body: "Năm ngoái mình đặt cửa ở đây, sài bền tới nay, nhân viên hỗ trợ nhiệt tình, cần sửa chữa cũng nhanh chóng.",
+  },
+  {
+    name: "Phan Thị Hồng Nhung",
+    initial: "P",
+    color: "bg-violet-500",
+    date: "Tháng 5/2026",
+    stars: 5,
+    body: "Gia đình mình đã lắp cửa cuốn tại Hưng Thành Phát Door và rất hài lòng. Đội ngũ thi công chuyên nghiệp, đúng tiến độ, dọn dẹp sạch sẽ. Sản phẩm chắc chắn, vận hành êm và sử dụng được rất lâu dài. Chủ cửa hàng tư vấn tận tâm và chân thật.",
+  },
+  {
+    name: "Mai Hugh",
+    initial: "M",
+    color: "bg-rose-500",
+    date: "Tháng 5/2026",
+    stars: 5,
+    body: "Cửa hàng uy tín, sản phẩm chất lượng tốt, lắp đặt nhanh gọn và đúng hẹn. Nhân viên tư vấn nhiệt tình, giá cả hợp lý. Rất hài lòng.",
   },
 ];
 
@@ -101,7 +77,7 @@ function GoogleIcon() {
   );
 }
 
-function ReviewCard({ name, initial, color, location, date, stars, body }: (typeof reviews)[number]) {
+function ReviewCard({ name, initial, color, date, stars, body }: (typeof reviews)[number]) {
   return (
     <div className="mx-3 flex w-72 shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.07)] ring-1 ring-black/5">
       {/* Header */}
@@ -114,7 +90,7 @@ function ReviewCard({ name, initial, color, location, date, stars, body }: (type
           </div>
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-slate-800">{name}</p>
-            <p className="truncate text-xs text-slate-400">{location} · {date}</p>
+            <p className="truncate text-xs text-slate-400">{date}</p>
           </div>
         </div>
         <GoogleIcon />
@@ -215,7 +191,7 @@ export function Testimonials() {
       >
         Xem thêm đánh giá trên{" "}
         <a
-          href="https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z"
+          href="https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0485097,105.7548479,17z/data=!4m8!3m7!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.0485044!4d105.7574228!9m1!1b1!16s%2Fg%2F11lwgjdghy?entry=ttu"
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium text-brand underline underline-offset-2 hover:text-brand/70"
