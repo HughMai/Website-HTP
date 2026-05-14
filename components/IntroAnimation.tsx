@@ -54,13 +54,12 @@ const CSS = `
   transform-style: preserve-3d;
   opacity: 0;
 }
+/* fade in the overlay (reveals the brand card) */
 .htp-stage.play .i-overlay {
-  animation: i-introFade 400ms ease forwards,
-             i-introDone 1ms linear forwards;
-  animation-delay: 0ms, calc(var(--fill-dur) + ${BEAT}ms + ${DOOR_DUR}ms);
+  animation: i-introFade 400ms ease forwards;
+  animation-delay: 0ms;
 }
 @keyframes i-introFade { to { opacity: 1; } }
-@keyframes i-introDone { to { visibility: hidden; pointer-events: none; } }
 
 .i-door {
   position: absolute; top: 0; width: 50%; height: 100%;
@@ -77,12 +76,12 @@ const CSS = `
   animation-delay: calc(var(--fill-dur) + ${BEAT}ms);
 }
 @keyframes i-swingL {
-  from { transform: rotateY(0);      filter: brightness(1); }
+  from { transform: rotateY(0);       filter: brightness(1);    }
   to   { transform: rotateY(-115deg); filter: brightness(0.32); }
 }
 @keyframes i-swingR {
-  from { transform: rotateY(0);      filter: brightness(1); }
-  to   { transform: rotateY(115deg);  filter: brightness(0.32); }
+  from { transform: rotateY(0);      filter: brightness(1);    }
+  to   { transform: rotateY(115deg); filter: brightness(0.32); }
 }
 
 .i-seam {
@@ -120,10 +119,11 @@ const CSS = `
     linear-gradient(160deg, #141a32, #080b16 60%);
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #f3ead6;
+  overflow: hidden;
 }
 .i-row { display: flex; justify-content: space-between; align-items: center; }
 .i-corner {
-  font-size: clamp(8px,0.9vw,11px); letter-spacing: 0.34em;
+  font-size: clamp(8px,0.9vw,11px); letter-spacing: 0.28em;
   color: #6f7690; text-transform: uppercase;
 }
 .i-rule {
@@ -132,16 +132,23 @@ const CSS = `
 }
 .i-mid {
   flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center; gap: 1.1vh;
+  align-items: center; justify-content: center; text-align: center;
+  gap: clamp(4px, 1.1vh, 14px);
+  overflow: hidden;
+  padding: 1vh 0;
 }
+/* title: allow wrapping on mobile so letters don't overflow */
 .i-title {
   font-family: 'Playfair Display', serif; font-weight: 800;
-  font-size: clamp(28px,6.6vw,92px); letter-spacing: 0.10em;
-  line-height: 1.04; color: #f3ead6; white-space: nowrap; margin: 0;
+  font-size: clamp(22px, 7vw, 92px);
+  letter-spacing: clamp(0.04em, 0.10em, 0.10em);
+  line-height: 1.08; color: #f3ead6;
+  word-break: break-word; margin: 0;
+  max-width: 88vw;
 }
 .i-word {
   font-size: clamp(9px,1vw,12px); letter-spacing: 0.7em;
-  color: #c9a44c; margin: 0.4vh 0 1.2vh; padding-left: 0.7em;
+  color: #c9a44c; margin: 0; padding-left: 0.7em;
 }
 .i-divider {
   display: flex; align-items: center; justify-content: center;
@@ -154,34 +161,34 @@ const CSS = `
 .i-divider span { font-size: 9px; transform: rotate(45deg); display: inline-block; }
 .i-tag {
   font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
-  font-size: clamp(16px,2.9vw,34px); color: #e6c878; margin: 0;
+  font-size: clamp(14px,2.9vw,34px); color: #e6c878; margin: 0;
 }
 .i-svc {
-  font-size: clamp(8px,0.95vw,11px); letter-spacing: 0.24em;
-  color: #6f7690; text-transform: uppercase; margin: 0.6vh 0 0;
+  font-size: clamp(7px,0.95vw,11px); letter-spacing: 0.2em;
+  color: #6f7690; text-transform: uppercase; margin: 0;
 }
 .i-adr {
-  font-size: clamp(8px,0.95vw,11px); letter-spacing: 0.2em;
-  color: #c9a44c; margin: 1.8vh 0 0;
+  font-size: clamp(7px,0.95vw,11px); letter-spacing: 0.16em;
+  color: #c9a44c; margin: 0;
 }
-.i-bot { display: flex; flex-direction: column; gap: 2.6vh; }
+.i-bot { display: flex; flex-direction: column; gap: clamp(8px,2.6vh,28px); }
 .i-ticks {
-  height: 22px;
+  height: 18px;
   background: repeating-linear-gradient(90deg, rgba(201,164,76,0.55) 0 1px, transparent 1px 15px);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   opacity: 0.6;
 }
 .i-stats { display: flex; border: 1px solid rgba(201,164,76,0.22); }
-.i-stat { flex: 1; text-align: center; padding: 2.4vh 1vw; }
+.i-stat { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
 .i-n {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(20px,3vw,40px); color: #e6c878;
+  font-size: clamp(18px,3vw,40px); color: #e6c878;
 }
 .i-l {
-  font-size: clamp(7px,0.8vw,10px); letter-spacing: 0.2em;
-  color: #6f7690; text-transform: uppercase; margin-top: 5px;
+  font-size: clamp(7px,0.8vw,10px); letter-spacing: 0.18em;
+  color: #6f7690; text-transform: uppercase; margin-top: 4px;
 }
 
 /* per-character reveal */
@@ -264,11 +271,44 @@ export function IntroAnimation() {
     buildDoor(rightDoor);
     stage.style.setProperty("--fill-dur", fillDur + "ms");
 
-    // hide after all animations finish
-    const totalMs = fillDur + BEAT + DOOR_DUR + 200;
-    const timer = setTimeout(() => {
+    // Page element to zoom forward as doors open
+    const pageRoot = document.getElementById("page-root") as HTMLElement | null;
+
+    // Pre-scale the page (it's hidden behind the navy overlay, so no flash)
+    if (pageRoot) {
+      pageRoot.style.transformOrigin = "50% 42%";
+      pageRoot.style.transform = "scale(0.88)";
+    }
+
+    // When doors start opening: zoom the page forward
+    const zoomAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.28);
+    const zoomTimer = setTimeout(() => {
+      if (pageRoot) {
+        pageRoot.style.transition = `transform ${Math.round(DOOR_DUR * 0.9)}ms cubic-bezier(0.22,0.61,0.36,1)`;
+        pageRoot.style.transform = "scale(1)";
+      }
+    }, zoomAt);
+
+    // Fade the overlay itself out as doors are mid-swing (reveals zooming page underneath)
+    const fadeAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.50);
+    const fadeTimer = setTimeout(() => {
+      if (stage) {
+        stage.style.transition = `opacity ${Math.round(DOOR_DUR * 0.65)}ms ease`;
+        stage.style.opacity = "0";
+        stage.style.pointerEvents = "none";
+      }
+    }, fadeAt);
+
+    // Final cleanup
+    const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
+    const cleanupTimer = setTimeout(() => {
       if (stageRef.current) stageRef.current.style.display = "none";
-    }, totalMs);
+      if (pageRoot) {
+        pageRoot.style.transform = "";
+        pageRoot.style.transformOrigin = "";
+        pageRoot.style.transition = "";
+      }
+    }, cleanupAt);
 
     function play() {
       if (!stage) return;
@@ -283,7 +323,11 @@ export function IntroAnimation() {
       window.addEventListener("load", play);
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(zoomTimer);
+      clearTimeout(fadeTimer);
+      clearTimeout(cleanupTimer);
+    };
   }, []);
 
   return (

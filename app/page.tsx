@@ -21,6 +21,7 @@ export default function HomePage() {
   return (
     <>
       <IntroAnimation />
+      <div id="page-root">
       <Navbar />
       <main id="main">
         <Hero />
@@ -31,6 +32,7 @@ export default function HomePage() {
         <QuoteAndContact />
       </main>
       <Footer />
+      </div>
     </>
   );
 }
