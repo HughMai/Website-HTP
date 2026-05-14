@@ -23,7 +23,7 @@ const steps = [
     icon: HardHat,
     title: "Thi Công Lắp Đặt",
     description:
-      "Thợ lắp đúng ngày hẹn, bảo vệ sàn và tường, dọn dẹp gọn gàng. Hoàn thành trong ngày với hầu hết công trình.",
+      "Thợ lắp đúng ngày hẹn, bảo vệ sàn và tường, dọn dẹp gọn gàng. Hầu hết công trình nhà phố tiêu chuẩn hoàn thành trong 1 ngày làm việc.",
   },
   {
     number: "04",

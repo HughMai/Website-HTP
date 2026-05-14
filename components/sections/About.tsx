@@ -28,8 +28,8 @@ const pillars = [
   },
   {
     icon: Wrench,
-    title: "Gọi sáng — thợ đến chiều — lắp xong trong ngày",
-    body: "Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. 90% công trình hoàn thành ngay trong ngày gọi đầu tiên.",
+    title: "Đặt lịch hôm nay — có mặt trong ngày, lắp đúng tiến độ cam kết",
+    body: "Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. Đặt lịch hôm nay — chúng tôi có mặt trong ngày để khảo sát, và lắp đúng ngày hẹn đã cam kết.",
   },
   {
     icon: Sparkles,
