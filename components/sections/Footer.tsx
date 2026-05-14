@@ -17,9 +17,9 @@ export function Footer() {
       className="border-t border-white/10 bg-brand-700 text-white/80"
       aria-labelledby="footer-heading"
     >
-      <h2 id="footer-heading" className="sr-only">
+      <span id="footer-heading" className="sr-only">
         Chân trang
-      </h2>
+      </span>
       <div className="container grid gap-10 py-12 md:grid-cols-2 md:py-16 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-3">
