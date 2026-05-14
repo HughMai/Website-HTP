@@ -194,12 +194,12 @@ const CSS = `
 /* per-character reveal */
 .i-char {
   display: inline-block; opacity: 0;
-  transform: translateY(0.42em); filter: blur(7px);
+  filter: blur(6px);
 }
 .htp-stage.play .i-char {
   animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0.2,0.7,0.2,1) both;
 }
-@keyframes i-charIn { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes i-charIn { to { opacity: 1; filter: blur(0); } }
 
 .i-fade { opacity: 0; transform: translateY(13px); }
 .htp-stage.play .i-fade {
