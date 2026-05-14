@@ -271,6 +271,7 @@ export function IntroAnimation() {
     }, totalMs);
 
     function play() {
+      if (!stage) return;
       stage.classList.remove("play");
       void stage.offsetWidth;
       stage.classList.add("play");
