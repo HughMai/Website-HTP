@@ -5,9 +5,9 @@ import { ArrowRight, BadgeCheck, Hammer, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  // Only animate Y (no opacity:0) so H1 is visible in HTML immediately → good LCP
+  hidden: { y: 24 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     y: 0,
     transition: { duration: 0.6, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] },
   }),

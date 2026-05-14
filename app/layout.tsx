@@ -14,14 +14,22 @@ const inter = Inter({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
+const ogImage = {
+  url: `${siteUrl}/opengraph-image`,
+  width: 1200,
+  height: 630,
+  alt: "Hưng Thành Phát Door — Cửa Cuốn, Cửa Nhôm Kính, Cửa Kéo Cần Thơ",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default:
       "Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ | Hưng Thành Phát Door",
     template: "%s | Hưng Thành Phát Door",
   },
   description:
-    "Thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 15+ năm, 500+ dự án, bảo hành 10 năm. Gọi: 0945 042 345.",
+    "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 15+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
   keywords: [
     "cửa cuốn Cần Thơ",
     "cửa nhôm kính Cần Thơ",
@@ -51,6 +59,7 @@ export const metadata: Metadata = {
     description:
       "Bảo vệ tổ ấm của bạn với hệ thống cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ — bảo hành đến 10 năm. Hotline: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
@@ -58,6 +67,7 @@ export const metadata: Metadata = {
       "Hưng Thành Phát Door — Cửa Cuốn, Cửa Nhôm Kính, Cửa Kéo Cần Thơ",
     description:
       "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. Bảo hành 10 năm. Hotline: 0913 574 077.",
+    images: [ogImage.url],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -104,7 +114,7 @@ const jsonLd = {
     streetAddress: "235-237 Võ Văn Kiệt",
     addressLocality: "Bình Thủy",
     addressRegion: "Cần Thơ",
-    postalCode: "900000",
+    postalCode: "90000",
     addressCountry: "VN",
   },
   geo: {
