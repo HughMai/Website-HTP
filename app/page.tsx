@@ -2,6 +2,11 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 
+const IntroAnimation = dynamic(
+  () => import("@/components/IntroAnimation").then((m) => m.IntroAnimation),
+  { ssr: false }
+);
+
 // Dynamically import below-fold sections to split JS bundle and speed up initial load
 const About = dynamic(() => import("@/components/sections/About").then((m) => m.About));
 const Products = dynamic(() => import("@/components/sections/Products").then((m) => m.Products));
@@ -15,6 +20,7 @@ const Footer = dynamic(() => import("@/components/sections/Footer").then((m) => 
 export default function HomePage() {
   return (
     <>
+      <IntroAnimation />
       <Navbar />
       <main id="main">
         <Hero />
