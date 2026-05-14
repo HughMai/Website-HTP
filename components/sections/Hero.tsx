@@ -84,7 +84,7 @@ export function Hero() {
             custom={2}
             className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg"
           >
-            Gọi sáng — lắp chiều. Báo giá trước khi làm, lắp xong mới thanh
+            Báo giá trước khi làm, lắp đúng ngày hẹn, lắp xong mới thanh
             toán. Bồi thường 200% nếu dùng sai vật liệu cam kết.
           </motion.p>
 
