@@ -85,3 +85,9 @@
     animation-play-state: paused;
   }
 }
+
+/* Hide page content while the intro animation is pending (removed by IntroAnimation on mount) */
+[data-htp-intro] #page-root {
+  opacity: 0;
+  pointer-events: none;
+}

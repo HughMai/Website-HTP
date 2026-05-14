@@ -140,11 +140,11 @@ const CSS = `
 /* title: explicit width forces wrapping in a centered flex column */
 .i-title {
   font-family: 'Playfair Display', serif; font-weight: 800;
-  font-size: clamp(22px, 6vw, 76px);
-  letter-spacing: clamp(0.03em, 0.08em, 0.08em);
+  font-size: clamp(16px, 4.8vw, 68px);
+  letter-spacing: 0.06em;
   line-height: 1.12; color: #f3ead6;
-  width: 86vw; text-align: center; margin: 0;
-  word-break: keep-all; overflow-wrap: break-word;
+  width: 86vw; max-width: 86vw; text-align: center; margin: 0;
+  white-space: nowrap; overflow: hidden;
 }
 .i-word {
   font-size: clamp(9px,1vw,12px); letter-spacing: 0.7em;
@@ -216,6 +216,9 @@ export function IntroAnimation() {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Always lift the pre-hide on mount so the page is never permanently invisible
+    document.documentElement.removeAttribute("data-htp-intro");
+
     if (sessionStorage.getItem("htp-intro-seen")) {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
@@ -229,10 +232,10 @@ export function IntroAnimation() {
       const text = el.textContent ?? "";
       el.textContent = "";
       for (const ch of Array.from(text)) {
-        if (ch === " ") { el.appendChild(document.createTextNode(" ")); continue; }
         const s = document.createElement("span");
         s.className = "i-char";
-        s.textContent = ch;
+        // Use non-breaking space so adjacent i-char spans have no word-break opportunity
+        s.textContent = ch === " " ? " " : ch;
         el.appendChild(s);
       }
       return el.querySelectorAll<HTMLElement>(".i-char");

@@ -224,6 +224,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        {/* Synchronously hide page content before first paint if the intro will play */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(!sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-intro','1');}catch(e){}` }} />
         {children}
         <FloatingContact />
         <Toaster />
