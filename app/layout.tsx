@@ -60,6 +60,11 @@ export const metadata: Metadata = {
       "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. Bảo hành 10 năm. Hotline: 0913 574 077.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export const viewport: Viewport = {
@@ -99,7 +104,7 @@ const jsonLd = {
     streetAddress: "235-237 Võ Văn Kiệt",
     addressLocality: "Bình Thủy",
     addressRegion: "Cần Thơ",
-    postalCode: "94000",
+    postalCode: "900000",
     addressCountry: "VN",
   },
   geo: {
