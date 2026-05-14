@@ -117,13 +117,6 @@ const jsonLd = {
     { "@type": "City", name: "Cần Thơ" },
     { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "1",
-    bestRating: "5",
-    worstRating: "1",
-  },
   priceRange: "$$",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",

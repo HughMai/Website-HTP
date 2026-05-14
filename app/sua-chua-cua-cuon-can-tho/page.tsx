@@ -320,9 +320,60 @@ const jsonLd = {
   ],
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Chi phí sửa chữa cửa cuốn tại Cần Thơ là bao nhiêu?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Chi phí phụ thuộc vào loại hỏng hóc. Thay tụ điện hoặc điều chỉnh lại ray dao động 200.000–500.000đ. Thay motor mới từ 1.500.000–4.500.000đ tùy loại. Hưng Thành Phát báo giá minh bạch trước khi thi công, không phát sinh chi phí ẩn.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Sửa cửa cuốn có đến tận nơi không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Có. Đội ngũ kỹ thuật của Hưng Thành Phát đến tận công trình tại Cần Thơ và khu vực Đồng Bằng Sông Cửu Long. Liên hệ hotline 0945 042 345 để đặt lịch, thường có mặt trong ngày.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Cửa cuốn bị hỏng motor có sửa được không hay phải thay mới?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Tùy mức độ hư hỏng. Motor cháy cuộn dây hoặc lỗi bo mạch thường phải thay mới. Tụ điện yếu, remote mất lập trình, hoặc cơ cấu cơ học bị lệch có thể sửa chữa tiết kiệm hơn. Kỹ thuật viên sẽ kiểm tra và tư vấn phương án tối ưu.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Sau khi sửa có được bảo hành không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Có. Linh kiện thay thế chính hãng được bảo hành theo tiêu chuẩn nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Cửa cuốn bị lệch ray có nguy hiểm không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Có thể gây nguy hiểm nếu không xử lý kịp thời — cửa có thể rơi hoặc kẹt bất ngờ. Nên ngừng sử dụng và liên hệ sửa chữa ngay. Đội kỹ thuật Hưng Thành Phát hỗ trợ khẩn cấp trong ngày.",
+      },
+    },
+  ],
+};
+
 export default function SuaChuaCuaCanTho() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar />
       <main>
         <script

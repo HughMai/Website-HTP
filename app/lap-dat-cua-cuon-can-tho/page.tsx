@@ -24,6 +24,53 @@ export const metadata: Metadata = {
   },
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Lắp đặt cửa cuốn tại Cần Thơ mất bao lâu?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Thông thường hoàn thành trong 1 ngày làm việc cho 1–2 bộ cửa. Công trình lớn hơn hoặc cần đục tường, làm khung sẽ mất 2–3 ngày. Hưng Thành Phát cam kết đúng tiến độ đã thỏa thuận trong hợp đồng.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Có khảo sát và báo giá miễn phí không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Có. Gọi 0945 042 345, kỹ thuật viên sẽ đến tận nơi đo đạc và tư vấn loại cửa phù hợp, sau đó báo giá chi tiết miễn phí — không phát sinh chi phí ẩn.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Sau khi lắp đặt có bảo hành không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Có. Sản phẩm được bảo hành 5–10 năm tùy loại theo tiêu chuẩn nhà sản xuất. Hưng Thành Phát cam kết bồi thường 200% giá trị hợp đồng nếu sử dụng sai chủng loại hoặc thương hiệu đã cam kết.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Cần chuẩn bị gì trước khi lắp đặt cửa cuốn?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Cần có sẵn ổ điện 220V gần vị trí lắp motor, và khoang tường/dầm đủ để gắn trục cuốn. Đội thi công sẽ hướng dẫn chi tiết sau khi khảo sát. Không cần chuẩn bị vật liệu — Hưng Thành Phát cung cấp trọn gói.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Lắp cửa cuốn có cần đục tường không?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Tùy cấu trúc công trình. Nhà đang xây mới thường đã chừa lỗ sẵn. Nhà cũ thay cửa có thể cần đục tường một phần để gắn khung và trục. Kỹ thuật viên sẽ đánh giá cụ thể khi khảo sát.",
+      },
+    },
+  ],
+};
+
 const doorTypes = [
   {
     icon: "🏗️",
@@ -191,6 +238,10 @@ const jsonLd = {
 export default function LapDatCuaCuonCanTho() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar />
       <main>
         <script
