@@ -47,7 +47,7 @@ export function Process() {
   return (
     <section
       id="quy-trinh"
-      className="relative overflow-hidden bg-brand py-14 text-white md:py-20"
+      className="relative overflow-hidden bg-brand py-10 text-white md:py-20"
       aria-labelledby="process-heading"
     >
       {/* Subtle grid background */}
@@ -77,25 +77,25 @@ export function Process() {
           </span>
           <h2
             id="process-heading"
-            className="mt-4 text-balance text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            className="mt-3 text-balance text-2xl font-semibold tracking-tight text-white md:mt-4 md:text-4xl"
           >
             4 bước đơn giản — từ tư vấn đến bàn giao.
           </h2>
-          <p className="mt-3 text-sm font-medium text-amber-300">
+          <p className="mt-2 text-xs font-medium text-amber-300 md:mt-3 md:text-sm">
             Bồi thường 200% tổng giá trị hợp đồng nếu sử dụng không đúng chủng
             loại, thương hiệu đã cam kết.
           </p>
         </motion.div>
 
         {/* Steps */}
-        <div className="relative mt-16">
+        <div className="relative mt-8 md:mt-16">
           {/* Dashed connector line (desktop only) */}
           <div
             aria-hidden
-            className="absolute left-[12.5%] right-[12.5%] top-10 hidden border-t-2 border-dashed border-white/20 lg:block"
+            className="absolute left-[12.5%] right-[12.5%] top-7 hidden border-t-2 border-dashed border-white/20 lg:block"
           />
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-8 lg:grid-cols-4">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
@@ -109,18 +109,18 @@ export function Process() {
                   className="flex flex-col items-center text-center"
                 >
                   {/* Circle icon */}
-                  <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/20 bg-brand shadow-lg ring-4 ring-brand">
-                    <Icon className="h-8 w-8 text-amber-300" aria-hidden />
+                  <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/20 bg-brand shadow-lg ring-4 ring-brand md:h-20 md:w-20">
+                    <Icon className="h-6 w-6 text-amber-300 md:h-8 md:w-8" aria-hidden />
                     {/* Step number badge */}
-                    <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-amber-400 text-[10px] font-bold text-brand">
+                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-400 text-[9px] font-bold text-brand md:h-6 md:w-6 md:text-[10px]">
                       {step.number}
                     </span>
                   </div>
 
-                  <h3 className="mt-5 text-base font-semibold text-white">
+                  <h3 className="mt-3 text-sm font-semibold text-white md:mt-5 md:text-base">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/65">
+                  <p className="mt-1.5 text-xs leading-relaxed text-white/65 md:mt-2 md:text-sm">
                     {step.description}
                   </p>
                 </motion.div>
