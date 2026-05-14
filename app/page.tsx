@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
+
+export const metadata: Metadata = {
+  alternates: { canonical: siteUrl },
+};
 
 const IntroAnimation = dynamic(
   () => import("@/components/IntroAnimation").then((m) => m.IntroAnimation),

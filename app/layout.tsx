@@ -47,9 +47,6 @@ export const metadata: Metadata = {
     "cửa cao cấp Cần Thơ",
   ],
   authors: [{ name: "Hưng Thành Phát Door" }],
-  alternates: {
-    canonical: siteUrl,
-  },
   openGraph: {
     type: "website",
     locale: "vi_VN",
