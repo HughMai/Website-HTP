@@ -11,6 +11,9 @@ const IntroAnimation = dynamic(
 const About = dynamic(() => import("@/components/sections/About").then((m) => m.About));
 const Products = dynamic(() => import("@/components/sections/Products").then((m) => m.Products));
 const Process = dynamic(() => import("@/components/sections/Process").then((m) => m.Process));
+const Testimonials = dynamic(() =>
+  import("@/components/sections/Testimonials").then((m) => m.Testimonials)
+);
 const Gallery = dynamic(() => import("@/components/sections/Gallery").then((m) => m.Gallery));
 const QuoteAndContact = dynamic(() =>
   import("@/components/sections/QuoteAndContact").then((m) => m.QuoteAndContact)
@@ -28,6 +31,7 @@ export default function HomePage() {
         <About />
         <Products />
         <Process />
+        <Testimonials />
         <Gallery />
         <QuoteAndContact />
       </main>
