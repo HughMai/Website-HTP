@@ -21,7 +21,7 @@ const CARD_HTML = `
     <div class="i-rule i-fade"></div>
     <div class="i-mid">
       <h2 class="i-title" data-split>HƯNG THÀNH PHÁT</h2>
-      <p class="i-word" data-split>DOOR</p>
+      <p class="i-word i-fade">DOOR</p>
       <div class="i-divider i-fade"><span>◆</span></div>
       <p class="i-tag" data-split>Cửa đẹp · nhà sang</p>
       <p class="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
@@ -183,8 +183,10 @@ const CSS = `
 .i-stat { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
 .i-n {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
+  font-variant-numeric: lining-nums;
 }
 .i-l {
   font-size: clamp(7px,0.8vw,10px); letter-spacing: 0.18em;
@@ -257,7 +259,7 @@ export function IntroAnimation() {
 
       fades(".i-rule");              t += 120;
       chars(".i-title", TITLE_STEP); t += 70;
-      chars(".i-word",  DOOR_STEP);  t += 60;
+      fades(".i-word");              t += 60;
       fades(".i-divider");           t += 110;
       chars(".i-tag",   TAG_STEP);   t += 80;
       fades(".i-svc");               t += 90;

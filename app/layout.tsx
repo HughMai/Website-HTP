@@ -215,7 +215,7 @@ export default function RootLayout({
       <head>
         {/* Always hide #page-root — browser paints streaming HTML before any script can run.
             JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits. */}
-        <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:0}[data-htp-ready] #page-root{opacity:1}` }} />
+        <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0}[data-htp-ready] #page-root{opacity:1}` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
