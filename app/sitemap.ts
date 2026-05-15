@@ -101,5 +101,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    {
+      url: `${siteUrl}/blog/motor-cua-cuon-tot-nhat`,
+      lastModified: new Date("2026-05-15"),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${siteUrl}/cua-cuon-ninh-kieu`,
+      lastModified: new Date("2026-05-15"),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${siteUrl}/cua-cuon-cai-rang`,
+      lastModified: new Date("2026-05-15"),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${siteUrl}/cua-cuon-o-mon`,
+      lastModified: new Date("2026-05-15"),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${siteUrl}/cua-cuon-thot-not`,
+      lastModified: new Date("2026-05-15"),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
   ];
 }
