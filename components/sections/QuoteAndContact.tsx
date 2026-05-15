@@ -547,7 +547,7 @@ export function QuoteAndContact() {
                 </Button>
 
                 <p className="text-center text-xs text-brand/45">
-                  Bằng việc gửi yêu cầu, Quý khách đồng ý cho Hưng Thành Phát liên hệ qua số điện thoại đã cung cấp.
+                  Bằng việc gửi yêu cầu, bạn đồng ý để Hưng Thành Phát liên hệ qua số điện thoại đã cung cấp.
                 </p>
               </form>
             </div>

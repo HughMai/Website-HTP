@@ -14,7 +14,7 @@ const steps = [
   {
     number: "02",
     icon: PencilRuler,
-    title: "Thiết Kế",
+    title: "Khảo Sát & Báo Giá",
     description:
       "Đo đạc thực tế, báo giá chi tiết từng hạng mục — vật tư, motor, nhân công — không phát sinh ẩn.",
   },
@@ -28,7 +28,7 @@ const steps = [
   {
     number: "04",
     icon: ShieldCheck,
-    title: "Thanh Toán & Bảo Trì",
+    title: "Nghiệm Thu — Rồi Mới Thanh Toán",
     description:
       "Chạy thử toàn hệ thống trước mặt bạn, ký nghiệm thu, rồi mới thanh toán. Bồi thường 200% nếu sai vật liệu cam kết.",
   },

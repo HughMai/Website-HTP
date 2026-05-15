@@ -27,8 +27,8 @@ const pillars = [
   },
   {
     icon: Wrench,
-    title: "Đặt lịch hôm nay — có mặt trong ngày, lắp đúng tiến độ cam kết",
-    body: "Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. Đặt lịch hôm nay — chúng tôi có mặt trong ngày để khảo sát, và lắp đúng ngày hẹn đã cam kết.",
+    title: "Có mặt trong ngày khảo sát — lắp đúng ngày hẹn",
+    body: "Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. Có mặt trong ngày để khảo sát — lắp đúng ngày hẹn đã cam kết.",
   },
   {
     icon: Sparkles,
