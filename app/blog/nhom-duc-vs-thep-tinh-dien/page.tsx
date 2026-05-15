@@ -134,7 +134,7 @@ export default function NhomDucVsThepTinhDien() {
               </span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-white/75 text-sm md:text-base">
-              Câu hỏi phổ biến nhất khi chọn cửa cuốn — phân tích thực tế từ 15+ năm thi công tại Cần Thơ.
+              Câu hỏi phổ biến nhất khi chọn cửa cuốn — phân tích thực tế từ 21+ năm thi công tại Cần Thơ.
             </p>
           </div>
         </section>

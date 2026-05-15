@@ -60,16 +60,18 @@ export function About() {
               id="about-heading"
               className="mt-4 text-balance text-3xl font-semibold tracking-tight text-brand md:text-4xl"
             >
-              17 năm, 500+ công trình —
+              21 năm, 500+ công trình —
               <br className="hidden sm:block" />
               chưa một khách nào gọi lại vì sai vật liệu.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-brand/75">
-              Năm 2008, Hưng Thành Phát bắt đầu từ một xưởng nhỏ ở Bình Thủy
-              với một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay
-              thế vật liệu rẻ hơn sau khi ký hợp đồng. Không làm tắt để tiết
-              kiệm thời gian. 17 năm sau, 500+ công trình từ nhà phố đến nhà
-              xưởng công nghiệp — cam kết đó vẫn còn nguyên.
+              Năm 2005, Hưng Thành Phát là đơn vị đầu tiên sản xuất và lắp
+              đặt cửa cuốn tại Cần Thơ — khởi nghiệp tại 105 Đường 3/2 với
+              một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay thế
+              vật liệu rẻ hơn sau khi ký hợp đồng. Không làm tắt để tiết kiệm
+              thời gian. Năm 2022 chuyển về showroom hiện tại 235–237 Võ Văn
+              Kiệt, Bình Thủy — 21 năm sau, 500+ công trình từ nhà phố đến nhà
+              xưởng công nghiệp, cam kết đó vẫn còn nguyên.
             </p>
 
             <ul className="mt-8 space-y-5">

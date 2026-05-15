@@ -10,7 +10,7 @@ export const SITE = {
   mapDirectionsUrl:
     "https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z/data=!3m1!4b1!4m6!3m5!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.048473!4d105.7574147!16s%2Fg%2F11lwgjdghy",
   workingHours: "08:00 - 17:30 (Thứ 2 - Thứ 7)",
-  foundedYear: 2008,
+  foundedYear: 2005,
 } as const;
 
 export const NAV_LINKS = [
@@ -25,7 +25,7 @@ export type NavId = (typeof NAV_LINKS)[number]["id"];
 
 export const STATS = [
   {
-    value: "15+",
+    value: "21+",
     label: "Năm Kinh Nghiệm",
     description: "Tích lũy chuyên môn vững vàng trong ngành cửa kỹ thuật cao.",
   },

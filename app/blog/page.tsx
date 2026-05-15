@@ -60,7 +60,7 @@ export default function BlogIndex() {
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-white/80">
-              Kiến thức thực tế từ 15+ năm thi công cửa cuốn, nhôm kính và cửa kéo tại Cần Thơ.
+              Kiến thức thực tế từ 21+ năm thi công cửa cuốn, nhôm kính và cửa kéo tại Cần Thơ.
             </p>
           </div>
         </section>

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Hưng Thành Phát Door",
   },
   description:
-    "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 15+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
+    "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 21+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
   keywords: [
     "cửa cuốn Cần Thơ",
     "cửa nhôm kính Cần Thơ",
@@ -93,7 +93,7 @@ const jsonLd = {
   "@id": `${siteUrl}/#organization`,
   name: SITE.brand,
   description:
-    "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 15+ năm kinh nghiệm, bảo hành đến 10 năm.",
+    "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 21+ năm kinh nghiệm, bảo hành đến 10 năm.",
   url: siteUrl,
   logo: {
     "@type": "ImageObject",

@@ -15,7 +15,7 @@ const fadeUp = {
 
 const trustChips = [
   { icon: ShieldCheck, label: "Bồi thường 200% nếu sai vật liệu" },
-  { icon: Hammer, label: "500+ công trình từ 2008" },
+  { icon: Hammer, label: "500+ công trình từ 2005" },
   { icon: BadgeCheck, label: "Lắp xong mới thanh toán" },
 ];
 
@@ -64,7 +64,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            Phục vụ Cần Thơ từ 2008 — 500+ công trình bàn giao
+            Phục vụ Cần Thơ từ 2005 — 500+ công trình bàn giao
           </motion.span>
 
           <motion.h1

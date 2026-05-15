@@ -30,13 +30,13 @@ const CARD_HTML = `
     <div class="i-bot">
       <div class="i-ticks i-fade"></div>
       <div class="i-stats">
-        <div class="i-stat i-fade"><div class="i-n">2008</div><div class="i-l">Thành lập</div></div>
-        <div class="i-stat i-fade"><div class="i-n">15+</div><div class="i-l">Năm kinh nghiệm</div></div>
+        <div class="i-stat i-fade"><div class="i-n">2005</div><div class="i-l">Thành lập</div></div>
+        <div class="i-stat i-fade"><div class="i-n">21+</div><div class="i-l">Năm kinh nghiệm</div></div>
         <div class="i-stat i-fade"><div class="i-n">500+</div><div class="i-l">Công trình</div></div>
       </div>
       <div class="i-row">
         <span class="i-corner i-fade">— Cửa kỹ thuật cao</span>
-        <span class="i-corner i-fade">Est. MMVIII —</span>
+        <span class="i-corner i-fade">Est. MMV —</span>
       </div>
     </div>
   </div>
@@ -224,7 +224,8 @@ export function IntroAnimation() {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
-    sessionStorage.setItem("htp-intro-seen", "1");
+    // setItem is deferred to the cleanup timer so React StrictMode's second
+    // effect invocation doesn't see the key and prematurely hide the stage.
 
     const stage = stageRef.current;
     if (!stage) return;
@@ -306,6 +307,7 @@ export function IntroAnimation() {
     // Final cleanup
     const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
     const cleanupTimer = setTimeout(() => {
+      sessionStorage.setItem("htp-intro-seen", "1");
       if (stageRef.current) stageRef.current.style.display = "none";
       if (pageRoot) {
         pageRoot.style.transform = "";
@@ -331,6 +333,7 @@ export function IntroAnimation() {
       clearTimeout(zoomTimer);
       clearTimeout(fadeTimer);
       clearTimeout(cleanupTimer);
+      window.removeEventListener("load", play);
     };
   }, []);
 

@@ -66,8 +66,8 @@ const localHighlights = [
   },
   {
     icon: "🏆",
-    title: "17 năm phục vụ Bình Thủy",
-    desc: "Từ năm 2008, chúng tôi đã trở thành cái tên quen thuộc ở Bình Thủy — hàng nghìn cửa cuốn được lắp và bảo trì. Hỏi hàng xóm ai đã từng dùng.",
+    title: "21 năm phục vụ Bình Thủy",
+    desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Hàng nghìn cửa cuốn được lắp và bảo trì tại Bình Thủy. Hỏi hàng xóm ai đã từng dùng.",
   },
 ];
 
