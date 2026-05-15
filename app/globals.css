@@ -99,7 +99,7 @@
 }
 
 .about-zone-top    { grid-area: top; }
-.about-zone-photo  { grid-area: photo; }
+.about-zone-photo  { grid-area: photo; min-height: 260px; }
 .about-zone-bottom { grid-area: bottom; }
 
 @media (min-width: 768px) {
