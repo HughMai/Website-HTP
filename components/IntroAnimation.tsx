@@ -201,11 +201,11 @@ const CSS = `
 }
 @keyframes i-charIn { to { opacity: 1; filter: blur(0); } }
 
-.i-fade { opacity: 0; transform: translateY(13px); }
+.i-fade { opacity: 0; }
 .htp-stage.play .i-fade {
   animation: i-fadeUp ${FADE_DUR}ms ease both;
 }
-@keyframes i-fadeUp { to { opacity: 1; transform: none; } }
+@keyframes i-fadeUp { to { opacity: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
   .htp-stage { display: none !important; }
