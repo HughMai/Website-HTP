@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Sửa Chữa Cửa Cuốn, Cửa Kéo & Nhôm Kính Cần Thơ",
+  title: "Sửa Chữa Cửa Cuốn & Nhôm Kính Cần Thơ",
   description:
     "Sửa chữa cửa cuốn, cửa kéo, cửa nhôm kính tại Cần Thơ — motor cháy, lệch ray, kính vỡ, bản lề lỏng. Đến tận nơi trong ngày, báo giá minh bạch. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/sua-chua-cua-cuon-can-tho` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/sua-chua-cua-cuon-can-tho`,
-    title: "Sửa Chữa Cửa Cuốn, Cửa Kéo & Nhôm Kính Cần Thơ",
+    title: "Sửa Chữa Cửa Cuốn & Nhôm Kính Cần Thơ",
     description:
       "Sửa cửa cuốn, cửa kéo, nhôm kính tại Cần Thơ. Đến tận nơi trong ngày. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",

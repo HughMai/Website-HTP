@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Bảng Giá Cửa Nhôm Kính Cần Thơ 2026 — Giá Theo m²",
+  title: "Bảng Giá Cửa Nhôm Kính Cần Thơ 2026",
   description:
     "Bảng giá cửa nhôm kính Cần Thơ 2026 — nhôm Việt, nhôm nhập, Maxpro hệ 55/65/83, cửa kính bản lề sàn, lan can cầu thang. Chưa VAT. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/bang-gia-cua-nhom-kinh-can-tho` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/bang-gia-cua-nhom-kinh-can-tho`,
-    title: "Bảng Giá Cửa Nhôm Kính Cần Thơ 2026 — Giá Theo m²",
+    title: "Bảng Giá Cửa Nhôm Kính Cần Thơ 2026",
     description: "Giá cửa nhôm kính Cần Thơ — nhôm Việt, nhập, Maxpro. Chưa VAT. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],

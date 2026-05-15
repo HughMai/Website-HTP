@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox — Hưng Thành Phát Door",
+  title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
   description:
     "Cửa kéo Cần Thơ — thép công nghệ Đức, nhôm cao cấp, inox SUS 304. Phù hợp mặt tiền kinh doanh, chống đột nhập hiệu quả. Lắp đặt trong ngày, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-keo-can-tho` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-keo-can-tho`,
-    title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox — Hưng Thành Phát Door",
+    title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
     description:
       "Cửa kéo thép, nhôm, inox tại Cần Thơ. Chống đột nhập, bền bỉ. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",

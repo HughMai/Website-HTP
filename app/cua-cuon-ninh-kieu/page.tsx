@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt Trung Tâm Thành Phố, Bảo Hành 10 Năm",
+  title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt",
   description:
     "Cửa cuốn Ninh Kiều Cần Thơ — lắp đặt nhà phố, mặt tiền kinh doanh, căn hộ trung tâm. Khảo sát miễn phí, lắp xong trong ngày, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-ninh-kieu` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-cuon-ninh-kieu`,
-    title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt Trung Tâm Thành Phố, Bảo Hành 10 Năm",
+    title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt",
     description:
       "Cửa cuốn Ninh Kiều — lắp nhà phố mặt tiền, khảo sát miễn phí, bảo hành 10 năm. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",

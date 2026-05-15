@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt Tại Nhà, Bảo Hành 10 Năm",
+  title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt",
   description:
     "Cửa cuốn Bình Thủy Cần Thơ — showroom tại 235 Võ Văn Kiệt, Bình Thủy. Lắp đặt trong ngày, khảo sát miễn phí, bảo hành chính hãng 10 năm. Gọi ngay: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-binh-thuy` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-cuon-binh-thuy`,
-    title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt Tại Nhà, Bảo Hành 10 Năm",
+    title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt",
     description:
       "Cửa cuốn Bình Thủy — showroom tại chỗ, lắp trong ngày, bảo hành 10 năm. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",

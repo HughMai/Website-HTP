@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Nhôm Kính Cần Thơ — Lắp Đặt Chính Hãng, Bảo Hành 10 Năm",
+  title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành 10 Năm",
   description:
     "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang. Nhôm cao cấp, kính cách âm cách nhiệt. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-nhom-kinh-can-tho` },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-nhom-kinh-can-tho`,
-    title: "Cửa Nhôm Kính Cần Thơ — Lắp Đặt Chính Hãng, Bảo Hành 10 Năm",
+    title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành 10 Năm",
     description:
       "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can. Bảo hành 10 năm. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
