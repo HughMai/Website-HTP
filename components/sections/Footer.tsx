@@ -23,13 +23,13 @@ export function Footer() {
       <div className="container grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:gap-10 md:py-16 lg:grid-cols-4">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-12 w-auto items-center justify-center rounded-md bg-white px-2 py-1.5">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand p-1">
               <Image
                 src="/logo.svg"
                 alt={`${SITE.brand} — Logo`}
-                width={40}
-                height={40}
-                className="h-9 w-9"
+                width={44}
+                height={44}
+                className="h-10 w-10"
               />
             </span>
             <p className="text-base font-semibold text-white">{SITE.brand}</p>

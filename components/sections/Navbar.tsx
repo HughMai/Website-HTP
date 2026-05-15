@@ -94,14 +94,14 @@ export function Navbar() {
           )}
           aria-label="Về trang chủ"
         >
-          <span className="inline-flex items-center rounded-md bg-white/95 px-2 py-1 shadow-sm transition-all">
+          <span className="inline-flex items-center rounded-full bg-brand p-1 shadow-sm transition-all">
             <Image
               src="/logo.svg"
               alt={`${SITE.brand} — Logo`}
-              width={40}
-              height={40}
+              width={44}
+              height={44}
               priority
-              className="h-9 w-9 md:h-10 md:w-10"
+              className="h-10 w-10 md:h-11 md:w-11"
             />
           </span>
           <span className="flex flex-col text-left leading-tight">
