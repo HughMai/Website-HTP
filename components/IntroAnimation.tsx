@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 
 // ── Timing (ms) ──────────────────────────────────────────────────────────────
-const START      = 40;
-const TITLE_STEP = 15;
-const TAG_STEP   = 11;
-const CHAR_DUR   = 220;
-const FADE_DUR   = 260;
-const BEAT       = 100;
-const DOOR_DUR   = 800;
+const START      = 60;
+const TITLE_STEP = 22;
+const TAG_STEP   = 18;
+const CHAR_DUR   = 300;
+const FADE_DUR   = 360;
+const BEAT       = 180;
+const DOOR_DUR   = 1000;
 
 const CSS = `
 .htp-stage {
@@ -180,6 +180,11 @@ const CSS = `
 }
 @keyframes i-fadeUp { to { opacity: 1; transform: none; } }
 
+/* Mobile: hide overlay so LCP content is visible immediately */
+@media (max-width: 767px) {
+  .htp-stage { display: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .htp-stage { display: none !important; }
 }
@@ -198,6 +203,9 @@ export function IntroAnimation() {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
+
+    // Skip animation on mobile — avoids full-screen overlay blocking LCP
+    if (window.innerWidth < 768) return;
 
     const stage     = stageRef.current;
     const cardLayer = cardLayerRef.current;
