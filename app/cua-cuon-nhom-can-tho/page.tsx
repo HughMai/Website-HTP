@@ -169,52 +169,9 @@ const jsonLd = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Cửa cuốn nhôm công nghệ Đức có ưu điểm gì so với cửa cuốn thường?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Cửa cuốn nhôm công nghệ Đức dùng thanh nhôm đùn cao cấp dày 0.8–1.2mm, vận hành êm tuyệt đối, chống ăn mòn và không gỉ sét. Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất, phù hợp nhà phố, biệt thự, văn phòng cao cấp. Giá cao hơn cửa tole nhưng độ bền và thẩm mỹ vượt trội.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa cuốn nhôm Đức có mấy loại và giá bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Có 6 mẫu: KV 380 (1.450.000đ/m²), KV 422R (1.750.000đ/m²), KV 432R (1.950.000đ/m²), KV 468R (2.150.000đ/m²), CT 5222R (2.200.000đ/m²), MT 5222R (2.300.000đ/m²). Giá chưa bao gồm motor và VAT 10%.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa cuốn nhôm có cần motor không?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Không bắt buộc nhưng rất nên có. Motor giúp đóng mở tự động bằng remote, tiện lợi và giảm hao mòn cơ học. Motor tiêu chuẩn từ 3.300.000–4.000.000đ tùy diện tích cửa, motor công nghệ Úc 4.500.000đ.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Bảo hành cửa cuốn nhôm bao lâu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Hưng Thành Phát bảo hành sản phẩm theo kỳ hạn tiêu chuẩn của nhà sản xuất. Cam kết bồi thường 200% giá trị hợp đồng nếu dùng sai chủng loại hoặc thương hiệu đã cam kết.",
-      },
-    },
-  ],
-};
-
 export default function CuaCuonNhomCanTho() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Navbar />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

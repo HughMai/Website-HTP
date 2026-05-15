@@ -95,44 +95,9 @@ const jsonLd = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Bảng giá cửa kéo Cần Thơ năm 2025 là bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Giá cửa kéo tính theo m²: Có lá từ 640.000đ/m² (U6zem) đến 900.000đ/m² (U1.4ly). Không lá từ 540.000đ/m² (U6zem) đến 800.000đ/m² (U1.4ly). Giá chưa bao gồm VAT 10% và phụ kiện lắp đặt.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa kéo U6zem và U1.4ly khác nhau như thế nào?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Số zem và ly chỉ độ dày của lá thép. U6zem (khoảng 0.6mm) là loại phổ thông, giá rẻ, phù hợp dùng tạm hoặc kho bãi. U1.4ly (1.4mm) dày hơn nhiều, chắc chắn hơn, chống đột nhập tốt hơn, phù hợp mặt tiền cửa hàng lâu dài.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Giá đã bao gồm công lắp đặt chưa?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Chưa. Bảng giá thể hiện đơn giá vật liệu theo m². Chi phí thi công tùy thuộc vào điều kiện công trình. Gọi 0945 042 345 để được báo giá trọn gói bao gồm vật tư và lắp đặt.",
-      },
-    },
-  ],
-};
-
 export default function BangGiaCuaKeoCanTho() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Navbar />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

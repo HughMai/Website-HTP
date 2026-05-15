@@ -24,52 +24,6 @@ export const metadata: Metadata = {
   },
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Giá cửa cuốn tại Cần Thơ hiện nay là bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Giá cửa cuốn tính theo m² tùy loại: Cửa cuốn tole Đài Loan từ 500.000–780.000đ/m², công nghệ Đức từ 1.450.000–2.300.000đ/m², Inox từ 1.700.000–1.900.000đ/m², công nghệ Úc từ 700.000–900.000đ/m². Chưa bao gồm VAT 10% và phụ kiện (motor, khóa).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Chi phí lắp motor cửa cuốn là bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Motor tiêu chuẩn: 300kg — 3.300.000đ, 400kg — 3.500.000đ, 500kg — 4.000.000đ. Motor công nghệ Úc: 4.500.000đ. Loại motor phù hợp phụ thuộc vào diện tích cửa.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa cuốn công nghệ Đức và Đài Loan khác nhau như thế nào?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Công nghệ Đức dùng thanh nhôm đùn cao cấp, vận hành êm, độ bền cao, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — phù hợp nhà phố, biệt thự, văn phòng. Công nghệ Đài Loan dùng tole thép sơn tĩnh điện, giá thấp hơn, phù hợp kho xưởng hoặc dùng tạm.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Báo giá có miễn phí không?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Hoàn toàn miễn phí. Gọi 0945 042 345, kỹ thuật viên sẽ đến khảo sát tận nơi, đo đạc và báo giá chi tiết không phát sinh chi phí ẩn.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Giá trong bảng đã bao gồm VAT chưa?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Chưa bao gồm VAT 10%. Giá cuối cùng = (giá cửa × diện tích + phụ kiện) × 1.1. Bảng giá cũng chưa bao gồm chi phí vận chuyển và thi công — liên hệ để được báo giá trọn gói.",
-      },
-    },
-  ],
-};
 
 const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất";
 
@@ -172,10 +126,6 @@ const jsonLd = {
 export default function BaoGiaCuaCuonCanTho() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Navbar />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

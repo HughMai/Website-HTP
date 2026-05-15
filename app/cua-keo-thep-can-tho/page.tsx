@@ -159,52 +159,9 @@ const jsonLd = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Cửa kéo thép có an toàn chống đột nhập không?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Có. Cửa kéo thép có cấu trúc lá thép đan chéo chắc chắn, kết hợp khóa ngang, chống cắt và phá khóa hiệu quả. Phù hợp mặt tiền cửa hàng, nhà kho, cổng rào cần bảo mật cao.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa kéo thép có lá và không lá khác nhau như thế nào?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Cửa có lá: lá thép đan kín hơn, thẩm mỹ tốt hơn, thường dùng cho mặt tiền nhà ở và cửa hàng. Cửa không lá: khung thép rỗng thoáng hơn, giá thấp hơn, phù hợp cổng rào, bãi xe, kho xưởng.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Giá cửa kéo thép tại Cần Thơ bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Giá tính theo m²: cửa có lá từ 640.000–900.000đ/m², cửa không lá từ 540.000–800.000đ/m² tùy độ dày từ 6zem đến 1.4ly. Chưa bao gồm VAT 10%. Liên hệ 0945 042 345 để được báo giá trọn gói.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa kéo thép có bền không, bảo hành bao lâu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Cửa kéo thép sơn tĩnh điện chống gỉ sét, bền 10–15 năm nếu bảo trì định kỳ. Hưng Thành Phát bảo hành theo tiêu chuẩn nhà sản xuất và cam kết bồi thường 200% nếu dùng sai vật liệu cam kết.",
-      },
-    },
-  ],
-};
-
 export default function CuaKeoThepCanTho() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Navbar />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

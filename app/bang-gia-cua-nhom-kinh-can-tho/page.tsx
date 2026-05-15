@@ -162,52 +162,9 @@ const jsonLd = {
   ],
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Giá cửa nhôm kính tại Cần Thơ năm 2025 bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Giá tính theo m²: Nhôm Việt từ 1.400.000–2.600.000đ/m², Nhôm Nhập từ 1.700.000–2.800.000đ/m², Nhôm Maxpro Hệ 55 từ 4.000.000đ/m², Hệ 65 từ 4.600.000đ/m², Hệ 83 từ 5.800.000đ/m². Chưa bao gồm VAT 10%.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Nhôm Việt, nhôm nhập và nhôm Maxpro khác nhau như thế nào?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Nhôm Việt: giá phải chăng, phù hợp nhà ở phổ thông. Nhôm Nhập: độ dày và độ cứng cao hơn, chịu lực tốt hơn, dùng cho công trình đòi hỏi cao hơn. Nhôm Maxpro (hệ 55/65/83): cao cấp nhất, dùng cho mặt dựng tòa nhà, văn phòng, biệt thự — cách âm và cách nhiệt vượt trội.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Cửa nhôm kính có bảo hành không?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Có. Hưng Thành Phát bảo hành 5–10 năm theo tiêu chuẩn nhà sản xuất. Cam kết bồi thường 200% giá trị hợp đồng nếu dùng sai chủng loại hoặc thương hiệu đã cam kết.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Lan can cầu thang nhôm kính giá bao nhiêu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Tay gỗ từ 1.950.000đ/m², tay nhôm 3D 2×2 từ 2.050.000đ/m², 3×3 từ 2.300.000đ/m², 4×4 từ 2.600.000đ/m², máng cover từ 5.800.000đ/m². Chưa bao gồm VAT và thi công.",
-      },
-    },
-  ],
-};
-
 export default function BangGiaCuaNhomKinhCanTho() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Navbar />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
