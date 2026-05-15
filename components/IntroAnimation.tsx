@@ -192,7 +192,7 @@ export function IntroAnimation() {
   useEffect(() => {
     document.documentElement.setAttribute("data-htp-ready", "1");
 
-    if (sessionStorage.getItem("htp-intro-seen")) {
+    if (sessionStorage.getItem("htp-intro-seen") || window.innerWidth < 768) {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
