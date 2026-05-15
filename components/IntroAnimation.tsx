@@ -192,7 +192,9 @@ export function IntroAnimation() {
   useEffect(() => {
     document.documentElement.setAttribute("data-htp-ready", "1");
 
-    if (sessionStorage.getItem("htp-intro-seen") || window.innerWidth < 768) {
+    let seen = false;
+    try { seen = !!sessionStorage.getItem("htp-intro-seen"); } catch { /* Safari private mode */ }
+    if (seen) {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
@@ -279,7 +281,7 @@ export function IntroAnimation() {
 
     const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
     const cleanupTimer = setTimeout(() => {
-      sessionStorage.setItem("htp-intro-seen", "1");
+      try { sessionStorage.setItem("htp-intro-seen", "1"); } catch { /* Safari private mode */ }
       if (stageRef.current) stageRef.current.style.display = "none";
       if (pageRoot) {
         pageRoot.style.transform = "";
@@ -299,10 +301,18 @@ export function IntroAnimation() {
       stage.classList.add("play");
     }
 
+    let played = false;
+    function playOnce() { if (!played) { played = true; play(); } }
+
+    // Hard fallback: fire after 1.5 s if fonts never resolve
+    const fontFallbackTimer = setTimeout(playOnce, 1500);
+
     if (document.fonts?.ready) {
-      document.fonts.ready.then(play);
+      document.fonts.ready.then(playOnce);
+    } else if (document.readyState === "complete") {
+      playOnce();
     } else {
-      window.addEventListener("load", play);
+      window.addEventListener("load", playOnce);
     }
 
     return () => {
@@ -310,7 +320,8 @@ export function IntroAnimation() {
       clearTimeout(zoomTimer);
       clearTimeout(fadeTimer);
       clearTimeout(cleanupTimer);
-      window.removeEventListener("load", play);
+      clearTimeout(fontFallbackTimer);
+      window.removeEventListener("load", playOnce);
     };
   }, []);
 
