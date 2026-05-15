@@ -2,14 +2,14 @@
 
 import { useEffect, useRef } from "react";
 
+// ── Timing (ms) ──────────────────────────────────────────────────────────────
 const START      = 60;
-const TITLE_STEP = 22;
-const DOOR_STEP  = 28;
-const TAG_STEP   = 18;
-const CHAR_DUR   = 340;
-const FADE_DUR   = 380;
-const BEAT       = 180;
-const DOOR_DUR   = 1100;
+const TITLE_STEP = 22;   // stagger between title characters
+const TAG_STEP   = 18;   // stagger between tagline characters
+const CHAR_DUR   = 300;  // single character animation duration
+const FADE_DUR   = 360;  // block fade-up duration
+const BEAT       = 180;  // pause after text fill, before doors open
+const DOOR_DUR   = 1000; // doors swing duration
 
 const CARD_HTML = `
 <div class="i-wrap">
@@ -20,10 +20,10 @@ const CARD_HTML = `
     </div>
     <div class="i-rule i-fade"></div>
     <div class="i-mid">
-      <h2 class="i-title" data-split>HƯNG THÀNH PHÁT</h2>
+      <h2 class="i-title" data-chars>HƯNG THÀNH PHÁT</h2>
       <p class="i-word i-fade">DOOR</p>
       <div class="i-divider i-fade"><span>◆</span></div>
-      <p class="i-tag" data-split>Cửa đẹp · nhà sang</p>
+      <p class="i-tag" data-chars>Cửa đẹp · nhà sang</p>
       <p class="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
       <p class="i-adr i-fade">235–237 Võ Văn Kiệt · Bình Thủy · Cần Thơ</p>
     </div>
@@ -49,24 +49,26 @@ const CSS = `
   perspective: 1700px; perspective-origin: 50% 45%;
   background: #080b16; overflow: hidden;
 }
+
+/* overlay fades in immediately when .play fires (reveals the brand card) */
 .i-overlay {
   position: absolute; inset: 0;
   transform-style: preserve-3d;
   opacity: 0;
 }
-/* fade in the overlay (reveals the brand card) */
 .htp-stage.play .i-overlay {
   animation: i-introFade 400ms ease forwards;
-  animation-delay: 0ms;
 }
 @keyframes i-introFade { to { opacity: 1; } }
 
+/* doors */
 .i-door {
   position: absolute; top: 0; width: 50%; height: 100%;
   overflow: hidden; backface-visibility: hidden;
 }
 .i-door-l { left: 0; transform-origin: left center; width: calc(50% + 1px); }
 .i-door-r { left: 50%; transform-origin: right center; }
+
 .htp-stage.play .i-door-l {
   animation: i-swingL ${DOOR_DUR}ms cubic-bezier(0.55,0.06,0.32,1) forwards;
   animation-delay: calc(var(--fill-dur) + ${BEAT}ms);
@@ -84,6 +86,7 @@ const CSS = `
   to   { transform: rotateY(115deg); filter: brightness(0.32); }
 }
 
+/* warm seam glow as doors part */
 .i-seam {
   position: absolute; top: 0; left: 50%;
   width: 3px; height: 100%; transform: translateX(-50%);
@@ -101,7 +104,7 @@ const CSS = `
   100% { opacity: 0;   width: 90px; }
 }
 
-/* card wrap — full viewport wide, clipped by parent door */
+/* card is full-viewport inside each door; each door clips to its half */
 .i-wrap {
   position: absolute; top: 0; width: 100vw; height: 100%;
   backface-visibility: hidden;
@@ -113,15 +116,16 @@ const CSS = `
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 4.5vh 6vw;
+  overflow: hidden;
   background:
     radial-gradient(1100px 620px at 50% 30%, rgba(201,164,76,0.10), transparent 70%),
     repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
     linear-gradient(160deg, #141a32, #080b16 60%);
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #f3ead6;
-  overflow: hidden;
 }
-.i-row { display: flex; justify-content: space-between; align-items: center; }
+
+.i-row   { display: flex; justify-content: space-between; align-items: center; }
 .i-corner {
   font-size: clamp(8px,0.9vw,11px); letter-spacing: 0.28em;
   color: #6f7690; text-transform: uppercase;
@@ -134,17 +138,13 @@ const CSS = `
   flex: 1; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center;
   gap: clamp(4px, 1.1vh, 14px);
-  overflow: hidden;
   padding: 1vh 0;
 }
-/* title: explicit width forces wrapping in a centered flex column */
 .i-title {
   font-family: 'Playfair Display', serif; font-weight: 800;
-  font-size: clamp(16px, 4.8vw, 68px);
-  letter-spacing: 0.06em;
-  line-height: 1.12; color: #f3ead6;
-  width: 86vw; max-width: 86vw; text-align: center; margin: 0;
-  white-space: nowrap; overflow: hidden;
+  font-size: clamp(22px, 5.2vw, 72px);
+  letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
+  white-space: nowrap; margin: 0;
 }
 .i-word {
   font-size: clamp(9px,1vw,12px); letter-spacing: 0.7em;
@@ -161,7 +161,7 @@ const CSS = `
 .i-divider span { font-size: 9px; transform: rotate(45deg); display: inline-block; }
 .i-tag {
   font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
-  font-size: clamp(14px,2.9vw,34px); color: #e6c878; margin: 0;
+  font-size: clamp(14px,2.9vw,36px); color: #e6c878; margin: 0;
 }
 .i-svc {
   font-size: clamp(7px,0.95vw,11px); letter-spacing: 0.2em;
@@ -180,11 +180,10 @@ const CSS = `
   opacity: 0.6;
 }
 .i-stats { display: flex; border: 1px solid rgba(201,164,76,0.22); }
-.i-stat { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
+.i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
 .i-n {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-weight: 600;
+  font-family: 'Be Vietnam Pro', sans-serif; font-weight: 600;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
   font-variant-numeric: lining-nums;
 }
@@ -193,21 +192,25 @@ const CSS = `
   color: #6f7690; text-transform: uppercase; margin-top: 4px;
 }
 
-/* per-character reveal via clip-path — cannot bleed outside element bounds */
+/* ── per-character reveal: blur + rise (no clip-path partial-letter issues) ── */
 .i-char {
   display: inline-block;
-  clip-path: inset(0 110% 0 0);
+  opacity: 0;
+  transform: translateY(0.38em);
+  filter: blur(6px);
 }
 .htp-stage.play .i-char {
-  animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0,0,0.2,1) both;
+  animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0.2,0.7,0.2,1) both;
 }
-@keyframes i-charIn { to { clip-path: inset(0 0% 0 0); } }
+@keyframes i-charIn {
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
 
-.i-fade { opacity: 0; }
+.i-fade { opacity: 0; transform: translateY(12px); }
 .htp-stage.play .i-fade {
   animation: i-fadeUp ${FADE_DUR}ms ease both;
 }
-@keyframes i-fadeUp { to { opacity: 1; } }
+@keyframes i-fadeUp { to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   .htp-stage { display: none !important; }
@@ -218,28 +221,32 @@ export function IntroAnimation() {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Reveal the page — stage overlay (z-index 9999) covers it, so no flash for first visits.
-    // For returning visitors the beforeInteractive script already did this.
+    // Reveal page immediately — stage (z-index 9999) covers it on first visits.
+    // Returning visitors: beforeInteractive script already set this before hydration.
     document.documentElement.setAttribute("data-htp-ready", "1");
 
     if (sessionStorage.getItem("htp-intro-seen")) {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
-    // setItem is deferred to the cleanup timer so React StrictMode's second
-    // effect invocation doesn't see the key and prematurely hide the stage.
+    // sessionStorage.setItem is deferred to cleanupTimer so React StrictMode's
+    // second effect invocation doesn't see the key and skip the animation.
 
     const stage = stageRef.current;
     if (!stage) return;
 
+    // Spaces become real text nodes so word gaps look natural, not animated.
     function splitChars(el: Element) {
       const text = el.textContent ?? "";
       el.textContent = "";
       for (const ch of Array.from(text)) {
+        if (ch === " ") {
+          el.appendChild(document.createTextNode(" "));
+          continue;
+        }
         const s = document.createElement("span");
         s.className = "i-char";
-        // Use non-breaking space so adjacent i-char spans have no word-break opportunity
-        s.textContent = ch === " " ? " " : ch;
+        s.textContent = ch;
         el.appendChild(s);
       }
       return el.querySelectorAll<HTMLElement>(".i-char");
@@ -257,7 +264,7 @@ export function IntroAnimation() {
         door.querySelectorAll<HTMLElement>(sel)
           .forEach(el => { el.style.animationDelay = t + "ms"; t += step; });
 
-      fades(".i-rule");              t += 120;
+      fades(".i-rule");              t += 130;
       chars(".i-title", TITLE_STEP); t += 70;
       fades(".i-word");              t += 60;
       fades(".i-divider");           t += 110;
@@ -278,16 +285,14 @@ export function IntroAnimation() {
     buildDoor(rightDoor);
     stage.style.setProperty("--fill-dur", fillDur + "ms");
 
-    // Page element to zoom forward as doors open
+    // #page-root zooms forward as the doors swing open
     const pageRoot = document.getElementById("page-root") as HTMLElement | null;
-
-    // Pre-scale the page (it's hidden behind the navy overlay, so no flash)
     if (pageRoot) {
       pageRoot.style.transformOrigin = "50% 42%";
       pageRoot.style.transform = "scale(0.88)";
     }
 
-    // When doors start opening: zoom the page forward
+    // Start zoom when doors are ~28% open
     const zoomAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.28);
     const zoomTimer = setTimeout(() => {
       if (pageRoot) {
@@ -296,7 +301,7 @@ export function IntroAnimation() {
       }
     }, zoomAt);
 
-    // Fade the overlay itself out as doors are mid-swing (reveals zooming page underneath)
+    // Fade stage out as doors are mid-swing (~50%)
     const fadeAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.50);
     const fadeTimer = setTimeout(() => {
       if (stage) {
@@ -306,7 +311,7 @@ export function IntroAnimation() {
       }
     }, fadeAt);
 
-    // Final cleanup
+    // Full cleanup after animation completes
     const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
     const cleanupTimer = setTimeout(() => {
       sessionStorage.setItem("htp-intro-seen", "1");
@@ -321,7 +326,7 @@ export function IntroAnimation() {
     function play() {
       if (!stage) return;
       stage.classList.remove("play");
-      void stage.offsetWidth;
+      void stage.offsetWidth; // force reflow so CSS animations restart cleanly
       stage.classList.add("play");
     }
 

@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "motor-cua-cuon-tot-nhat",
+    title: "Motor Cửa Cuốn Nào Tốt Nhất 2026? So Sánh 5 Thương Hiệu Phổ Biến",
+    excerpt:
+      "Somfy, CAME, Nice, B&D hay motor Đài Loan? So sánh 5 thương hiệu motor cửa cuốn phổ biến nhất — độ bền, độ ồn, giá thành và phù hợp với từng loại công trình.",
+    readTime: "7 phút",
+    category: "So sánh & tư vấn",
+  },
+  {
     slug: "nhom-duc-vs-thep-tinh-dien",
     title: "Cửa Cuốn Nhôm Đức Hay Thép Tĩnh Điện? So Sánh Chi Tiết 2026",
     excerpt:
