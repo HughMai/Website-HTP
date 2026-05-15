@@ -136,7 +136,6 @@ const CSS = `
   gap: clamp(4px, 1.1vh, 14px);
   overflow: hidden;
   padding: 1vh 0;
-  -webkit-transform: translateZ(0); transform: translateZ(0);
 }
 /* title: explicit width forces wrapping in a centered flex column */
 .i-title {
@@ -192,15 +191,15 @@ const CSS = `
   color: #6f7690; text-transform: uppercase; margin-top: 4px;
 }
 
-/* per-character reveal */
+/* per-character reveal via clip-path — cannot bleed outside element bounds */
 .i-char {
-  display: inline-block; opacity: 0;
-  filter: blur(3px);
+  display: inline-block;
+  clip-path: inset(0 110% 0 0);
 }
 .htp-stage.play .i-char {
-  animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0.2,0.7,0.2,1) both;
+  animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0,0,0.2,1) both;
 }
-@keyframes i-charIn { to { opacity: 1; filter: blur(0); } }
+@keyframes i-charIn { to { clip-path: inset(0 0% 0 0); } }
 
 .i-fade { opacity: 0; }
 .htp-stage.play .i-fade {
