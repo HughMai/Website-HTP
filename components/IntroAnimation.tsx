@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 
 // ── Timing (ms) ──────────────────────────────────────────────────────────────
-const START      = 60;
-const TITLE_STEP = 22;
-const TAG_STEP   = 18;
-const CHAR_DUR   = 300;
-const FADE_DUR   = 360;
-const BEAT       = 180;
-const DOOR_DUR   = 1000;
+const START      = 40;
+const TITLE_STEP = 15;
+const TAG_STEP   = 11;
+const CHAR_DUR   = 220;
+const FADE_DUR   = 260;
+const BEAT       = 100;
+const DOOR_DUR   = 800;
 
 const CSS = `
 .htp-stage {
@@ -88,7 +88,7 @@ const CSS = `
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 4.5vh 6vw;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: var(--font-be-vietnam), sans-serif;
   color: #f3ead6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -111,7 +111,7 @@ const CSS = `
   padding: 1vh 0;
 }
 .i-title {
-  font-family: 'Playfair Display', serif; font-weight: 800;
+  font-family: var(--font-playfair), serif; font-weight: 800;
   font-size: clamp(18px, 5.2vw, 72px);
   letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
   white-space: nowrap; margin: 0;
@@ -126,7 +126,7 @@ const CSS = `
 }
 .i-divider span { font-size: 11px; transform: rotate(45deg); display: inline-block; }
 .i-tag {
-  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
+  font-family: var(--font-playfair), serif; font-style: italic; font-weight: 500;
   font-size: clamp(14px,2.9vw,36px); color: #e6c878; margin: 0;
 }
 .i-svc {
@@ -149,7 +149,7 @@ const CSS = `
 .i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
 .i-n {
-  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
   font-weight: 700; font-style: normal;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
   font-variant-numeric: tabular-nums;

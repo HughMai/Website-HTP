@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
 import { SITE } from "@/lib/site-data";
 
 function ZaloIcon() {
@@ -33,6 +34,15 @@ export function FloatingContact() {
   const mapHref = SITE.mapDirectionsUrl;
   const phoneHref = `tel:${SITE.hotlines[0].replace(/\s/g, "")}`;
 
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   return (
     <div
       className="fixed right-3 bottom-5 z-50 flex flex-col items-end gap-2 md:right-6 md:bottom-10 md:gap-3"
@@ -51,7 +61,7 @@ export function FloatingContact() {
       </a>
       {/* Desktop: pill with pulse */}
       <div className="relative hidden md:block">
-        <PulseRings color="bg-emerald-500/20" />
+        {isDesktop && <PulseRings color="bg-emerald-500/20" />}
         <motion.a
           href={mapHref}
           target="_blank"
@@ -87,7 +97,7 @@ export function FloatingContact() {
       </a>
       {/* Desktop: pill with pulse */}
       <div className="relative hidden md:block">
-        <PulseRings color="bg-blue-500/20" />
+        {isDesktop && <PulseRings color="bg-blue-500/20" />}
         <motion.a
           href={zaloHref}
           whileHover={{ scale: 1.07 }}
@@ -119,7 +129,7 @@ export function FloatingContact() {
       </a>
       {/* Desktop: pill with pulse */}
       <div className="relative hidden md:block">
-        <PulseRings color="bg-red-500/20" />
+        {isDesktop && <PulseRings color="bg-red-500/20" />}
         <motion.a
           href={phoneHref}
           whileHover={{ scale: 1.07 }}
@@ -129,7 +139,7 @@ export function FloatingContact() {
           aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
         >
           <motion.span
-            animate={{ rotate: [0, -14, 14, -9, 9, -4, 4, 0] }}
+            animate={isDesktop ? { rotate: [0, -14, 14, -9, 9, -4, 4, 0] } : false}
             transition={{ duration: 0.65, repeat: Infinity, repeatDelay: 2.5 }}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20"
           >
