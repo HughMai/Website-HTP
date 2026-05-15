@@ -123,6 +123,9 @@ const CSS = `
     linear-gradient(160deg, #141a32, #080b16 60%);
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #f3ead6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .i-row   { display: flex; justify-content: space-between; align-items: center; }
@@ -147,8 +150,9 @@ const CSS = `
   white-space: nowrap; margin: 0;
 }
 .i-word {
-  font-size: clamp(9px,1vw,12px); letter-spacing: 0.7em;
-  color: #c9a44c; margin: 0; padding-left: 0.7em;
+  font-size: clamp(10px,1vw,13px); letter-spacing: 0.3em;
+  color: #c9a44c; margin: 0; padding-left: 0.3em;
+  transform: translateZ(0);
 }
 .i-divider {
   display: flex; align-items: center; justify-content: center;
@@ -158,7 +162,7 @@ const CSS = `
   content: ""; height: 1px; flex: 1;
   background: linear-gradient(90deg, transparent, rgba(201,164,76,0.55), transparent);
 }
-.i-divider span { font-size: 9px; transform: rotate(45deg); display: inline-block; }
+.i-divider span { font-size: 11px; transform: rotate(45deg); display: inline-block; }
 .i-tag {
   font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
   font-size: clamp(14px,2.9vw,36px); color: #e6c878; margin: 0;
@@ -183,9 +187,10 @@ const CSS = `
 .i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
 .i-n {
-  font-family: 'Be Vietnam Pro', sans-serif; font-weight: 600;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif; font-weight: 700;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
   font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
 }
 .i-l {
   font-size: clamp(7px,0.8vw,10px); letter-spacing: 0.18em;
@@ -346,11 +351,6 @@ export function IntroAnimation() {
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
-        rel="stylesheet"
-      />
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div ref={stageRef} className="htp-stage" aria-hidden="true">
         <div className="i-overlay">

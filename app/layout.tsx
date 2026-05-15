@@ -216,6 +216,12 @@ export default function RootLayout({
         {/* Always hide #page-root — browser paints streaming HTML before any script can run.
             JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits. */}
         <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0}[data-htp-ready] #page-root{opacity:1}` }} />
+        {/* Preload intro animation fonts before any component mounts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
