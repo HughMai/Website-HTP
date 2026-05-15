@@ -246,7 +246,7 @@ export default function RootLayout({
           id="htp-intro-guard"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('htp-intro-seen')||screen.width<768)document.documentElement.setAttribute('data-htp-ready','1');}catch(e){document.documentElement.setAttribute('data-htp-ready','1');}`,
+            __html: `try{if(sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-ready','1');}catch(e){document.documentElement.setAttribute('data-htp-ready','1');}`,
           }}
         />
         {children}

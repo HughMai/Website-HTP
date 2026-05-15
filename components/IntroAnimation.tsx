@@ -180,9 +180,13 @@ const CSS = `
 }
 @keyframes i-fadeUp { to { opacity: 1; transform: none; } }
 
-/* Mobile: hide overlay so LCP content is visible immediately */
+/* Mobile: simpler door backgrounds + faster swing */
 @media (max-width: 767px) {
-  .htp-stage { display: none !important; }
+  .i-door-l { background: linear-gradient(160deg, #141a32, #080b16 60%); }
+  .i-door-r { background: linear-gradient(160deg, #141a32, #080b16 60%); }
+  .htp-stage.play .i-door-l,
+  .htp-stage.play .i-door-r { animation-duration: 600ms; animation-delay: calc(var(--fill-dur) + 80ms); }
+  .htp-stage.play .i-seam   { animation-duration: 600ms; animation-delay: calc(var(--fill-dur) + 80ms); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -204,12 +208,13 @@ export function IntroAnimation() {
       return;
     }
 
-    // Skip animation on mobile — avoids full-screen overlay blocking LCP
-    if (window.innerWidth < 768) return;
-
     const stage     = stageRef.current;
     const cardLayer = cardLayerRef.current;
     if (!stage || !cardLayer) return;
+
+    const isMobile      = window.innerWidth < 768;
+    const effectiveBeat = isMobile ? 80   : BEAT;
+    const effectiveDoor = isMobile ? 600  : DOOR_DUR;
 
     function splitChars(el: Element) {
       const text = el.textContent ?? "";
@@ -239,15 +244,26 @@ export function IntroAnimation() {
 
     setDelay(q(".i-rule")); t += 130;
 
-    splitChars(q(".i-title")!)
-      .forEach(c => { c.style.animationDelay = t + "ms"; t += TITLE_STEP; });
-    t += 70;
+    if (isMobile) {
+      // Single fade-in — skips per-char DOM splits and blur compositing layers
+      const titleEl = q(".i-title");
+      if (titleEl) { titleEl.classList.add("i-fade"); titleEl.style.animationDelay = t + "ms"; t += 170; }
+    } else {
+      splitChars(q(".i-title")!)
+        .forEach(c => { c.style.animationDelay = t + "ms"; t += TITLE_STEP; });
+      t += 70;
+    }
 
     setDelay(q(".i-divider")); t += 110;
 
-    splitChars(q(".i-tag")!)
-      .forEach(c => { c.style.animationDelay = t + "ms"; t += TAG_STEP; });
-    t += 80;
+    if (isMobile) {
+      const tagEl = q(".i-tag");
+      if (tagEl) { tagEl.classList.add("i-fade"); tagEl.style.animationDelay = t + "ms"; t += 150; }
+    } else {
+      splitChars(q(".i-tag")!)
+        .forEach(c => { c.style.animationDelay = t + "ms"; t += TAG_STEP; });
+      t += 80;
+    }
 
     setDelay(q(".i-svc"));   t += 90;
     setDelay(q(".i-adr"));   t += 110;
@@ -266,28 +282,28 @@ export function IntroAnimation() {
 
     // Fade card layer out as doors begin to swing
     const cardFadeTimer = setTimeout(() => {
-      cardLayer.style.transition = `opacity ${Math.round(DOOR_DUR * 0.55)}ms ease`;
+      cardLayer.style.transition = `opacity ${Math.round(effectiveDoor * 0.55)}ms ease`;
       cardLayer.style.opacity = "0";
-    }, fillDur + BEAT);
+    }, fillDur + effectiveBeat);
 
     // Zoom page forward at ~28% into the door swing
-    const zoomAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.28);
+    const zoomAt = fillDur + effectiveBeat + Math.round(effectiveDoor * 0.28);
     const zoomTimer = setTimeout(() => {
       if (pageRoot) {
-        pageRoot.style.transition = `transform ${Math.round(DOOR_DUR * 0.9)}ms cubic-bezier(0.22,0.61,0.36,1)`;
+        pageRoot.style.transition = `transform ${Math.round(effectiveDoor * 0.9)}ms cubic-bezier(0.22,0.61,0.36,1)`;
         pageRoot.style.transform = "scale(1)";
       }
     }, zoomAt);
 
     // Fade stage at ~50% into the door swing
-    const fadeAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.50);
+    const fadeAt = fillDur + effectiveBeat + Math.round(effectiveDoor * 0.50);
     const fadeTimer = setTimeout(() => {
-      stage.style.transition = `opacity ${Math.round(DOOR_DUR * 0.65)}ms ease`;
+      stage.style.transition = `opacity ${Math.round(effectiveDoor * 0.65)}ms ease`;
       stage.style.opacity = "0";
       stage.style.pointerEvents = "none";
     }, fadeAt);
 
-    const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
+    const cleanupAt = fillDur + effectiveBeat + effectiveDoor + 400;
     const cleanupTimer = setTimeout(() => {
       try { sessionStorage.setItem("htp-intro-seen", "1"); } catch { /* Safari private mode */ }
       if (stageRef.current) stageRef.current.style.display = "none";
