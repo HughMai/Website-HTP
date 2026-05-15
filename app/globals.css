@@ -89,3 +89,28 @@
 /* Fallback for the inline head style — always hide until ready signal */
 #page-root { opacity: 0; }
 [data-htp-ready] #page-root { opacity: 1; }
+
+/* About section — 3-zone responsive grid */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "top" "photo" "bottom";
+  gap: 1.5rem;
+}
+
+.about-zone-top    { grid-area: top; }
+.about-zone-photo  { grid-area: photo; }
+.about-zone-bottom { grid-area: bottom; }
+
+@media (min-width: 768px) {
+  .about-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "top photo" "bottom photo";
+    column-gap: 3.5rem;
+    row-gap: 0;
+  }
+  .about-zone-top    { align-self: end;   padding-bottom: 1.25rem; }
+  .about-zone-bottom { align-self: start; }
+  .about-zone-photo  { min-height: 480px; }
+}

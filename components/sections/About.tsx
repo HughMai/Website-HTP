@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Sparkles, Wrench } from "lucide-react";
+import { Award, MapPin, Sparkles, Wrench } from "lucide-react";
+import Image from "next/image";
 
 const container = {
   hidden: {},
@@ -48,11 +49,12 @@ export function About() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.15 }}
           variants={container}
-          className="mx-auto max-w-3xl"
+          className="about-layout"
         >
-          <motion.div variants={item}>
+          {/* Zone 1: badge + heading */}
+          <motion.div variants={item} className="about-zone-top">
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
               Về Hưng Thành Phát Door
             </span>
@@ -64,7 +66,28 @@ export function About() {
               <br className="hidden sm:block" />
               chưa một khách nào gọi lại vì sai vật liệu.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-brand/75">
+          </motion.div>
+
+          {/* Zone 2: showroom photo — between heading and body on mobile */}
+          <motion.div variants={item} className="about-zone-photo relative overflow-hidden rounded-2xl shadow-lg">
+            <Image
+              src="/showroom.jpg"
+              alt="Showroom Hưng Thành Phát Door tại 235-237 Võ Văn Kiệt, Bình Thủy, Cần Thơ"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 767px) 100vw, 50vw"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand/70 to-transparent px-5 pb-4 pt-10">
+              <p className="flex items-center gap-1.5 text-xs font-medium text-white/90">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-white/70" aria-hidden />
+                235–237 Võ Văn Kiệt, Bình Thủy, Cần Thơ
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Zone 3: body paragraph + pillars */}
+          <motion.div variants={item} className="about-zone-bottom">
+            <p className="text-base leading-relaxed text-brand/75">
               Năm 2005, Hưng Thành Phát là đơn vị đầu tiên sản xuất và lắp
               đặt cửa cuốn tại Cần Thơ — khởi nghiệp tại 105 Đường 3/2 với
               một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay thế
