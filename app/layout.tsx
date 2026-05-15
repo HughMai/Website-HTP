@@ -212,9 +212,9 @@ export default function RootLayout({
   return (
     <html lang="vi" className={inter.variable}>
       <head>
-        {/* Inline style must be in <head> — globals.css is a separate network request
-            and can arrive late on mobile, causing a flash before the rule applies. */}
-        <style dangerouslySetInnerHTML={{ __html: `[data-htp-intro] #page-root{opacity:0;pointer-events:none}` }} />
+        {/* Always hide #page-root — browser paints streaming HTML before any script can run.
+            JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits. */}
+        <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:0}[data-htp-ready] #page-root{opacity:1}` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -230,7 +230,7 @@ export default function RootLayout({
           id="htp-intro-guard"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `try{if(!sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-intro','1');}catch(e){}`,
+            __html: `try{if(sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-ready','1');}catch(e){document.documentElement.setAttribute('data-htp-ready','1');}`,
           }}
         />
         {children}

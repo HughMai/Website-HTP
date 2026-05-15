@@ -217,8 +217,9 @@ export function IntroAnimation() {
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Always lift the pre-hide on mount so the page is never permanently invisible
-    document.documentElement.removeAttribute("data-htp-intro");
+    // Reveal the page — stage overlay (z-index 9999) covers it, so no flash for first visits.
+    // For returning visitors the beforeInteractive script already did this.
+    document.documentElement.setAttribute("data-htp-ready", "1");
 
     if (sessionStorage.getItem("htp-intro-seen")) {
       if (stageRef.current) stageRef.current.style.display = "none";

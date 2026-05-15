@@ -86,8 +86,6 @@
   }
 }
 
-/* Hide page content while the intro animation is pending (removed by IntroAnimation on mount) */
-[data-htp-intro] #page-root {
-  opacity: 0;
-  pointer-events: none;
-}
+/* Fallback for the inline head style — always hide until ready signal */
+#page-root { opacity: 0; }
+[data-htp-ready] #page-root { opacity: 1; }
