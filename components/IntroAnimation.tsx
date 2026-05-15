@@ -21,7 +21,6 @@ const CARD_HTML = `
     <div class="i-rule i-fade"></div>
     <div class="i-mid">
       <h2 class="i-title" data-chars>HƯNG THÀNH PHÁT</h2>
-      <p class="i-word i-fade">DOOR</p>
       <div class="i-divider i-fade"><span>◆</span></div>
       <p class="i-tag" data-chars>Cửa đẹp · nhà sang</p>
       <p class="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
@@ -145,7 +144,7 @@ const CSS = `
 }
 .i-title {
   font-family: 'Playfair Display', serif; font-weight: 800;
-  font-size: clamp(22px, 5.2vw, 72px);
+  font-size: clamp(18px, 5.2vw, 72px);
   letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
   white-space: nowrap; margin: 0;
 }
@@ -169,11 +168,11 @@ const CSS = `
   font-size: clamp(14px,2.9vw,36px); color: #e6c878; margin: 0;
 }
 .i-svc {
-  font-size: clamp(7px,0.95vw,11px); letter-spacing: 0.2em;
+  font-size: clamp(9px,0.95vw,11px); letter-spacing: 0.2em;
   color: #6f7690; text-transform: uppercase; margin: 0;
 }
 .i-adr {
-  font-size: clamp(7px,0.95vw,11px); letter-spacing: 0.16em;
+  font-size: clamp(9px,0.95vw,11px); letter-spacing: 0.16em;
   color: #c9a44c; margin: 0;
 }
 .i-bot { display: flex; flex-direction: column; gap: clamp(8px,2.6vh,28px); }
@@ -190,7 +189,7 @@ const CSS = `
 /* Fix: "2l+" digit — force 'Be Vietnam Pro' by name (loaded via <link> in layout.tsx),
    add font-style: normal to prevent serif italic inheritance, use larger weight. */
 .i-n {
-  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
   font-weight: 700; font-style: normal;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
   font-variant-numeric: tabular-nums;
@@ -275,7 +274,6 @@ export function IntroAnimation() {
 
       fades(".i-rule");              t += 130;
       chars(".i-title", TITLE_STEP); t += 70;
-      fades(".i-word");              t += 60;
       fades(".i-divider");           t += 110;
       chars(".i-tag",   TAG_STEP);   t += 80;
       fades(".i-svc");               t += 90;
