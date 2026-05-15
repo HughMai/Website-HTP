@@ -149,10 +149,11 @@ const CSS = `
   letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
   white-space: nowrap; margin: 0;
 }
+/* Fix: "D(OR" glyph-clip — bump size so partial O at door seam stays recognisably round,
+   and pull letter-spacing back so glyphs sit away from the 50 % cut point. */
 .i-word {
-  font-size: clamp(10px,1vw,13px); letter-spacing: 0.3em;
-  color: #c9a44c; margin: 0; padding-left: 0.3em;
-  transform: translateZ(0);
+  font-size: clamp(13px, 1.4vw, 18px); letter-spacing: 0.55em;
+  color: #c9a44c; margin: 0; padding-left: 0.55em;
 }
 .i-divider {
   display: flex; align-items: center; justify-content: center;
@@ -186,10 +187,13 @@ const CSS = `
 .i-stats { display: flex; border: 1px solid rgba(201,164,76,0.22); }
 .i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
+/* Fix: "2l+" digit — force 'Be Vietnam Pro' by name (loaded via <link> in layout.tsx),
+   add font-style: normal to prevent serif italic inheritance, use larger weight. */
 .i-n {
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif; font-weight: 700;
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 700; font-style: normal;
   font-size: clamp(18px,3vw,40px); color: #e6c878;
-  font-variant-numeric: lining-nums;
+  font-variant-numeric: tabular-nums;
   font-feature-settings: 'lnum' 1, 'tnum' 1;
 }
 .i-l {
