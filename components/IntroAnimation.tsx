@@ -4,43 +4,12 @@ import { useEffect, useRef } from "react";
 
 // ── Timing (ms) ──────────────────────────────────────────────────────────────
 const START      = 60;
-const TITLE_STEP = 22;   // stagger between title characters
-const TAG_STEP   = 18;   // stagger between tagline characters
-const CHAR_DUR   = 300;  // single character animation duration
-const FADE_DUR   = 360;  // block fade-up duration
-const BEAT       = 180;  // pause after text fill, before doors open
-const DOOR_DUR   = 1000; // doors swing duration
-
-const CARD_HTML = `
-<div class="i-wrap">
-  <div class="i-card">
-    <div class="i-row">
-      <span class="i-corner i-fade">— Brand Identity</span>
-      <span class="i-corner i-fade">Cần Thơ · Việt Nam —</span>
-    </div>
-    <div class="i-rule i-fade"></div>
-    <div class="i-mid">
-      <h2 class="i-title" data-chars>HƯNG THÀNH PHÁT</h2>
-      <div class="i-divider i-fade"><span>◆</span></div>
-      <p class="i-tag" data-chars>Cửa đẹp · nhà sang</p>
-      <p class="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
-      <p class="i-adr i-fade">235–237 Võ Văn Kiệt · Bình Thủy · Cần Thơ</p>
-    </div>
-    <div class="i-bot">
-      <div class="i-ticks i-fade"></div>
-      <div class="i-stats">
-        <div class="i-stat i-fade"><div class="i-n">2005</div><div class="i-l">Thành lập</div></div>
-        <div class="i-stat i-fade"><div class="i-n">21+</div><div class="i-l">Năm kinh nghiệm</div></div>
-        <div class="i-stat i-fade"><div class="i-n">500+</div><div class="i-l">Công trình</div></div>
-      </div>
-      <div class="i-row">
-        <span class="i-corner i-fade">— Cửa kỹ thuật cao</span>
-        <span class="i-corner i-fade">Est. MMV —</span>
-      </div>
-    </div>
-  </div>
-</div>
-`;
+const TITLE_STEP = 22;
+const TAG_STEP   = 18;
+const CHAR_DUR   = 300;
+const FADE_DUR   = 360;
+const BEAT       = 180;
+const DOOR_DUR   = 1000;
 
 const CSS = `
 .htp-stage {
@@ -49,24 +18,29 @@ const CSS = `
   background: #080b16; overflow: hidden;
 }
 
-/* overlay fades in immediately when .play fires (reveals the brand card) */
-.i-overlay {
-  position: absolute; inset: 0;
-  transform-style: preserve-3d;
-  opacity: 0;
-}
-.htp-stage.play .i-overlay {
-  animation: i-introFade 400ms ease forwards;
-}
-@keyframes i-introFade { to { opacity: 1; } }
-
-/* doors */
+/* Door panels — decorative halves only, NO text content inside.
+   Radial gradient anchored to the inner edge so the glow aligns to
+   the center seam, matching a single full-width element at 50%. */
 .i-door {
-  position: absolute; top: 0; width: 50%; height: 100%;
-  overflow: hidden; backface-visibility: hidden;
+  position: absolute; top: 0; height: 100%;
+  backface-visibility: hidden;
 }
-.i-door-l { left: 0; transform-origin: left center; width: calc(50% + 1px); }
-.i-door-r { left: 50%; transform-origin: right center; }
+.i-door-l {
+  left: 0; width: calc(50% + 1px);
+  transform-origin: left center;
+  background:
+    radial-gradient(1100px 620px at 100% 30%, rgba(201,164,76,0.10), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
+    linear-gradient(160deg, #141a32, #080b16 60%);
+}
+.i-door-r {
+  left: 50%; width: 50%;
+  transform-origin: right center;
+  background:
+    radial-gradient(1100px 620px at 0%   30%, rgba(201,164,76,0.10), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
+    linear-gradient(160deg, #141a32, #080b16 60%);
+}
 
 .htp-stage.play .i-door-l {
   animation: i-swingL ${DOOR_DUR}ms cubic-bezier(0.55,0.06,0.32,1) forwards;
@@ -90,7 +64,7 @@ const CSS = `
   position: absolute; top: 0; left: 50%;
   width: 3px; height: 100%; transform: translateX(-50%);
   background: linear-gradient(to bottom, transparent, #e6c878, #c9a44c, #e6c878, transparent);
-  opacity: 0; filter: blur(2px);
+  opacity: 0; filter: blur(2px); z-index: 5;
 }
 .htp-stage.play .i-seam {
   animation: i-seamFlash ${DOOR_DUR}ms ease-out forwards;
@@ -103,23 +77,17 @@ const CSS = `
   100% { opacity: 0;   width: 90px; }
 }
 
-/* card is full-viewport inside each door; each door clips to its half */
-.i-wrap {
-  position: absolute; top: 0; width: 100vw; height: 100%;
-  backface-visibility: hidden;
+/* Card layer — sits ABOVE the door panels at its own z-index.
+   Never inside overflow:hidden or a 3D-clipped container. */
+.i-card-layer {
+  position: absolute; inset: 0; z-index: 10;
+  opacity: 0; pointer-events: none;
 }
-.i-door-l .i-wrap { left: 0; }
-.i-door-r .i-wrap { left: -50vw; }
 
 .i-card {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 4.5vh 6vw;
-  overflow: hidden;
-  background:
-    radial-gradient(1100px 620px at 50% 30%, rgba(201,164,76,0.10), transparent 70%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
-    linear-gradient(160deg, #141a32, #080b16 60%);
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #f3ead6;
   -webkit-font-smoothing: antialiased;
@@ -147,12 +115,6 @@ const CSS = `
   font-size: clamp(18px, 5.2vw, 72px);
   letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
   white-space: nowrap; margin: 0;
-}
-/* Fix: "D(OR" glyph-clip — bump size so partial O at door seam stays recognisably round,
-   and pull letter-spacing back so glyphs sit away from the 50 % cut point. */
-.i-word {
-  font-size: clamp(13px, 1.4vw, 18px); letter-spacing: 0.55em;
-  color: #c9a44c; margin: 0; padding-left: 0.55em;
 }
 .i-divider {
   display: flex; align-items: center; justify-content: center;
@@ -186,8 +148,6 @@ const CSS = `
 .i-stats { display: flex; border: 1px solid rgba(201,164,76,0.22); }
 .i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
 .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
-/* Fix: "2l+" digit — force 'Be Vietnam Pro' by name (loaded via <link> in layout.tsx),
-   add font-style: normal to prevent serif italic inheritance, use larger weight. */
 .i-n {
   font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
   font-weight: 700; font-style: normal;
@@ -200,7 +160,7 @@ const CSS = `
   color: #6f7690; text-transform: uppercase; margin-top: 4px;
 }
 
-/* ── per-character reveal: blur + rise (no clip-path partial-letter issues) ── */
+/* per-character reveal: blur + rise */
 .i-char {
   display: inline-block;
   opacity: 0;
@@ -226,24 +186,21 @@ const CSS = `
 `;
 
 export function IntroAnimation() {
-  const stageRef = useRef<HTMLDivElement>(null);
+  const stageRef     = useRef<HTMLDivElement>(null);
+  const cardLayerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Reveal page immediately — stage (z-index 9999) covers it on first visits.
-    // Returning visitors: beforeInteractive script already set this before hydration.
     document.documentElement.setAttribute("data-htp-ready", "1");
 
     if (sessionStorage.getItem("htp-intro-seen")) {
       if (stageRef.current) stageRef.current.style.display = "none";
       return;
     }
-    // sessionStorage.setItem is deferred to cleanupTimer so React StrictMode's
-    // second effect invocation doesn't see the key and skip the animation.
 
-    const stage = stageRef.current;
-    if (!stage) return;
+    const stage     = stageRef.current;
+    const cardLayer = cardLayerRef.current;
+    if (!stage || !cardLayer) return;
 
-    // Spaces become real text nodes so word gaps look natural, not animated.
     function splitChars(el: Element) {
       const text = el.textContent ?? "";
       el.textContent = "";
@@ -260,46 +217,50 @@ export function IntroAnimation() {
       return el.querySelectorAll<HTMLElement>(".i-char");
     }
 
-    function buildDoor(door: Element) {
-      door.innerHTML = CARD_HTML;
-      let t = START;
+    // Set animation delays on the single card layer
+    let t = START;
 
-      const chars = (sel: string, step: number) =>
-        splitChars(door.querySelector(sel)!)
-          .forEach(c => { c.style.animationDelay = t + "ms"; t += step; });
+    const q  = (sel: string) => cardLayer.querySelector<HTMLElement>(sel);
+    const qa = (sel: string) => cardLayer.querySelectorAll<HTMLElement>(sel);
 
-      const fades = (sel: string, step = 0) =>
-        door.querySelectorAll<HTMLElement>(sel)
-          .forEach(el => { el.style.animationDelay = t + "ms"; t += step; });
+    const setDelay  = (el: HTMLElement | null) => { if (el) el.style.animationDelay = t + "ms"; };
+    const fadeBlock = (sel: string, step = 0) =>
+      qa(sel).forEach(el => { el.style.animationDelay = t + "ms"; t += step; });
 
-      fades(".i-rule");              t += 130;
-      chars(".i-title", TITLE_STEP); t += 70;
-      fades(".i-divider");           t += 110;
-      chars(".i-tag",   TAG_STEP);   t += 80;
-      fades(".i-svc");               t += 90;
-      fades(".i-adr");               t += 110;
-      fades(".i-ticks");             t += 90;
-      fades(".i-stat", 70);          t += 30;
-      fades(".i-corner", 45);
+    setDelay(q(".i-rule")); t += 130;
 
-      return t + Math.max(CHAR_DUR, FADE_DUR);
-    }
+    splitChars(q(".i-title")!)
+      .forEach(c => { c.style.animationDelay = t + "ms"; t += TITLE_STEP; });
+    t += 70;
 
-    const leftDoor  = stage.querySelector(".i-door-l")!;
-    const rightDoor = stage.querySelector(".i-door-r")!;
+    setDelay(q(".i-divider")); t += 110;
 
-    const fillDur = buildDoor(leftDoor);
-    buildDoor(rightDoor);
+    splitChars(q(".i-tag")!)
+      .forEach(c => { c.style.animationDelay = t + "ms"; t += TAG_STEP; });
+    t += 80;
+
+    setDelay(q(".i-svc"));   t += 90;
+    setDelay(q(".i-adr"));   t += 110;
+    setDelay(q(".i-ticks")); t += 90;
+    fadeBlock(".i-stat", 70); t += 30;
+    fadeBlock(".i-corner", 45);
+
+    const fillDur = t + Math.max(CHAR_DUR, FADE_DUR);
     stage.style.setProperty("--fill-dur", fillDur + "ms");
 
-    // #page-root zooms forward as the doors swing open
     const pageRoot = document.getElementById("page-root") as HTMLElement | null;
     if (pageRoot) {
       pageRoot.style.transformOrigin = "50% 42%";
       pageRoot.style.transform = "scale(0.88)";
     }
 
-    // Start zoom when doors are ~28% open
+    // Fade card layer out as doors begin to swing
+    const cardFadeTimer = setTimeout(() => {
+      cardLayer.style.transition = `opacity ${Math.round(DOOR_DUR * 0.55)}ms ease`;
+      cardLayer.style.opacity = "0";
+    }, fillDur + BEAT);
+
+    // Zoom page forward at ~28% into the door swing
     const zoomAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.28);
     const zoomTimer = setTimeout(() => {
       if (pageRoot) {
@@ -308,17 +269,14 @@ export function IntroAnimation() {
       }
     }, zoomAt);
 
-    // Fade stage out as doors are mid-swing (~50%)
+    // Fade stage at ~50% into the door swing
     const fadeAt = fillDur + BEAT + Math.round(DOOR_DUR * 0.50);
     const fadeTimer = setTimeout(() => {
-      if (stage) {
-        stage.style.transition = `opacity ${Math.round(DOOR_DUR * 0.65)}ms ease`;
-        stage.style.opacity = "0";
-        stage.style.pointerEvents = "none";
-      }
+      stage.style.transition = `opacity ${Math.round(DOOR_DUR * 0.65)}ms ease`;
+      stage.style.opacity = "0";
+      stage.style.pointerEvents = "none";
     }, fadeAt);
 
-    // Full cleanup after animation completes
     const cleanupAt = fillDur + BEAT + DOOR_DUR + 400;
     const cleanupTimer = setTimeout(() => {
       sessionStorage.setItem("htp-intro-seen", "1");
@@ -331,9 +289,13 @@ export function IntroAnimation() {
     }, cleanupAt);
 
     function play() {
-      if (!stage) return;
+      if (!stage || !cardLayer) return;
+      // Fade card layer in via JS so there's no CSS animation conflict on fade-out
+      cardLayer.style.transition = "opacity 380ms ease";
+      cardLayer.style.opacity = "1";
+      // Trigger .i-char and .i-fade CSS animations
       stage.classList.remove("play");
-      void stage.offsetWidth; // force reflow so CSS animations restart cleanly
+      void stage.offsetWidth;
       stage.classList.add("play");
     }
 
@@ -344,6 +306,7 @@ export function IntroAnimation() {
     }
 
     return () => {
+      clearTimeout(cardFadeTimer);
       clearTimeout(zoomTimer);
       clearTimeout(fadeTimer);
       clearTimeout(cleanupTimer);
@@ -355,11 +318,42 @@ export function IntroAnimation() {
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div ref={stageRef} className="htp-stage" aria-hidden="true">
-        <div className="i-overlay">
-          <div className="i-door i-door-l" />
-          <div className="i-door i-door-r" />
-          <div className="i-seam" />
+
+        {/* Door panels: empty visual halves — no text, no overflow:hidden */}
+        <div className="i-door i-door-l" />
+        <div className="i-door i-door-r" />
+        <div className="i-seam" />
+
+        {/* Card layer: above the doors, never clipped by any 3D container */}
+        <div ref={cardLayerRef} className="i-card-layer">
+          <div className="i-card">
+            <div className="i-row">
+              <span className="i-corner i-fade">— Brand Identity</span>
+              <span className="i-corner i-fade">Cần Thơ · Việt Nam —</span>
+            </div>
+            <div className="i-rule i-fade" />
+            <div className="i-mid">
+              <h2 className="i-title">HƯNG THÀNH PHÁT</h2>
+              <div className="i-divider i-fade"><span>◆</span></div>
+              <p className="i-tag">Cửa đẹp · nhà sang</p>
+              <p className="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
+              <p className="i-adr i-fade">235–237 Võ Văn Kiệt · Bình Thủy · Cần Thơ</p>
+            </div>
+            <div className="i-bot">
+              <div className="i-ticks i-fade" />
+              <div className="i-stats">
+                <div className="i-stat i-fade"><div className="i-n">2005</div><div className="i-l">Thành lập</div></div>
+                <div className="i-stat i-fade"><div className="i-n">21+</div><div className="i-l">Năm kinh nghiệm</div></div>
+                <div className="i-stat i-fade"><div className="i-n">500+</div><div className="i-l">Công trình</div></div>
+              </div>
+              <div className="i-row">
+                <span className="i-corner i-fade">— Cửa kỹ thuật cao</span>
+                <span className="i-corner i-fade">Est. MMV —</span>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </>
   );
