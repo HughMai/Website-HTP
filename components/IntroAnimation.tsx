@@ -136,6 +136,7 @@ const CSS = `
   gap: clamp(4px, 1.1vh, 14px);
   overflow: hidden;
   padding: 1vh 0;
+  -webkit-transform: translateZ(0); transform: translateZ(0);
 }
 /* title: explicit width forces wrapping in a centered flex column */
 .i-title {
@@ -194,7 +195,7 @@ const CSS = `
 /* per-character reveal */
 .i-char {
   display: inline-block; opacity: 0;
-  filter: blur(6px);
+  filter: blur(3px);
 }
 .htp-stage.play .i-char {
   animation: i-charIn ${CHAR_DUR}ms cubic-bezier(0.2,0.7,0.2,1) both;

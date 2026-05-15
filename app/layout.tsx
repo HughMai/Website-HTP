@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { Toaster } from "@/components/ui/toaster";
 import { FloatingContact } from "@/components/FloatingContact";
 import { SITE } from "@/lib/site-data";
@@ -211,11 +212,9 @@ export default function RootLayout({
   return (
     <html lang="vi" className={inter.variable}>
       <head>
-        {/* Inline style + script must be in <head> so they apply before any content renders.
-            globals.css is a separate download and can arrive late on mobile — inlining here
-            guarantees the rule is parsed before the first paint on all connections. */}
+        {/* Inline style must be in <head> — globals.css is a separate network request
+            and can arrive late on mobile, causing a flash before the rule applies. */}
         <style dangerouslySetInnerHTML={{ __html: `[data-htp-intro] #page-root{opacity:0;pointer-events:none}` }} />
-        <script dangerouslySetInnerHTML={{ __html: `try{if(!sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-intro','1');}catch(e){}` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -226,6 +225,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        {/* beforeInteractive = injected into <head> as a blocking script before any hydration */}
+        <Script
+          id="htp-intro-guard"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-intro','1');}catch(e){}`,
+          }}
+        />
         {children}
         <FloatingContact />
         <Toaster />
