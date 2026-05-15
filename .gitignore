@@ -6,3 +6,11 @@ out
 *.log
 .vscode
 .screenshots
+
+# Design exports & raw assets (local only)
+_design/
+_assets/
+tsconfig.tsbuildinfo
+
+# Sensitive pricing documents
+public/products/official price/

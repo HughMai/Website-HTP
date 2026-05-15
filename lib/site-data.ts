@@ -56,14 +56,14 @@ export const PRODUCT_CATEGORIES = [
     name: "Cửa Cuốn",
     tagline: "Vận hành êm – Bảo mật cao – Tiết kiệm không gian",
     subtypes: [
-      { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "/products/cua-cuon/nhom-duc.jpg" },
-      { name: "Cửa Cuốn Thép Sơn Tĩnh Điện", image: "/products/cua-cuon/thep-tinh-dien.jpg" },
-      { name: "Cửa Cuốn Tấm Liền", image: "/products/cua-cuon/tam-lien.jpg" },
-      { name: "Cửa Cuốn Song Ngang, Mắt Võng", image: "/products/cua-cuon/song-ngang-mat-vong.jpg" },
-      { name: "Cửa Cuốn Inox SUS 304", image: "/products/cua-cuon/inox-sus-304.jpg" },
-      { name: "Cửa Cuốn Tole Công Nghệ Đài Loan", image: "/products/cua-cuon/tole-dai-loan.jpg" },
-      { name: "Cửa Trượt Trần", image: "/products/cua-cuon/truot-tran.jpg" },
-      { name: "Cửa Cuốn Đóng Đặc Biệt", image: "/products/cua-cuon/dong-dac-biet.jpg" },
+      { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "/products/cua-cuon/nhom-duc.webp" },
+      { name: "Cửa Cuốn Thép Sơn Tĩnh Điện", image: "/products/cua-cuon/thep-tinh-dien.webp" },
+      { name: "Cửa Cuốn Tấm Liền", image: "/products/cua-cuon/tam-lien.webp" },
+      { name: "Cửa Cuốn Song Ngang, Mắt Võng", image: "/products/cua-cuon/song-ngang-mat-vong.webp" },
+      { name: "Cửa Cuốn Inox SUS 304", image: "/products/cua-cuon/inox-sus-304.webp" },
+      { name: "Cửa Cuốn Tole Công Nghệ Đài Loan", image: "/products/cua-cuon/tole-dai-loan.webp" },
+      { name: "Cửa Trượt Trần", image: "/products/cua-cuon/truot-tran.webp" },
+      { name: "Cửa Cuốn Đóng Đặc Biệt", image: "/products/cua-cuon/dong-dac-biet.webp" },
     ],
   },
   {
@@ -71,10 +71,10 @@ export const PRODUCT_CATEGORIES = [
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
     subtypes: [
-      { name: "Hệ Cửa Đi", image: "/products/cua-nhom-kinh/he-cua-di.jpg" },
-      { name: "Hệ Cửa Sổ", image: "/products/cua-nhom-kinh/he-cua-so.jpg" },
-      { name: "Hệ Mặt Dựng", image: "/products/cua-nhom-kinh/he-mat-dung.jpg" },
-      { name: "Hệ Lan Can – Cầu Thang Nhôm Kính", image: "/products/cua-nhom-kinh/lan-can-cau-thang.jpg" },
+      { name: "Hệ Cửa Đi", image: "/products/cua-nhom-kinh/he-cua-di.webp" },
+      { name: "Hệ Cửa Sổ", image: "/products/cua-nhom-kinh/he-cua-so.webp" },
+      { name: "Hệ Mặt Dựng", image: "/products/cua-nhom-kinh/he-mat-dung.webp" },
+      { name: "Hệ Lan Can – Cầu Thang Nhôm Kính", image: "/products/cua-nhom-kinh/lan-can-cau-thang.webp" },
     ],
   },
   {
@@ -82,10 +82,10 @@ export const PRODUCT_CATEGORIES = [
     name: "Cửa Kéo",
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
     subtypes: [
-      { name: "Cửa Kéo Thép Công Nghệ Đức", image: "/products/cua-keo/thep-duc.jpg" },
-      { name: "Cửa Kéo Nhôm Công Nghệ Đức", image: "/products/cua-keo/nhom-duc.jpg" },
-      { name: "Cửa Kéo Hoa Văn Cổ S9", image: "/products/cua-keo/hoa-van-co.jpg" },
-      { name: "Cửa Kéo Inox", image: "/products/cua-keo/inox.jpg" },
+      { name: "Cửa Kéo Thép Công Nghệ Đức", image: "/products/cua-keo/thep-duc.webp" },
+      { name: "Cửa Kéo Nhôm Công Nghệ Đức", image: "/products/cua-keo/nhom-duc.webp" },
+      { name: "Cửa Kéo Hoa Văn Cổ S9", image: "/products/cua-keo/hoa-van-co.webp" },
+      { name: "Cửa Kéo Inox", image: "/products/cua-keo/inox.webp" },
     ],
   },
   {
@@ -94,10 +94,10 @@ export const PRODUCT_CATEGORIES = [
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
     contain: true,
     subtypes: [
-      { name: "Motor Cửa Cuốn Nhập Khẩu Chính Hãng", image: "/products/motor-binh-luu-dien/motor-cua-cuon.jpg" },
-      { name: "Bình Lưu Điện Cửa Cuốn", image: "/products/motor-binh-luu-dien/binh-luu-dien.jpg" },
-      { name: "Remote Cửa Cuốn", image: "/products/motor-binh-luu-dien/remote-cua-cuon.jpg" },
-      { name: "Hệ Thống Dừng & Còi Báo Động", image: "/products/motor-binh-luu-dien/he-thong-bao-dong.jpg" },
+      { name: "Motor Cửa Cuốn Nhập Khẩu Chính Hãng", image: "/products/motor-binh-luu-dien/motor-cua-cuon.webp" },
+      { name: "Bình Lưu Điện Cửa Cuốn", image: "/products/motor-binh-luu-dien/binh-luu-dien.webp" },
+      { name: "Remote Cửa Cuốn", image: "/products/motor-binh-luu-dien/remote-cua-cuon.webp" },
+      { name: "Hệ Thống Dừng & Còi Báo Động", image: "/products/motor-binh-luu-dien/he-thong-bao-dong.webp" },
     ],
   },
 ] as const;
@@ -105,50 +105,50 @@ export const PRODUCT_CATEGORIES = [
 export const GALLERY_IMAGES = [
   {
     label: "Lắp đặt cửa cuốn tôle tại mặt tiền thương mại ở Cần Thơ",
-    image: "/products/Real cases/Cửa cuốn/3-1765895951.jpg",
+    image: "/products/Real cases/Cửa cuốn/3-1765895951.webp",
   },
   {
     label: "Hoàn thiện cửa kéo thép tại mặt tiền kinh doanh Cần Thơ",
-    image: "/products/Real cases/Cửa kéo/473695893_122139902930383303_6257649342661743951_n.jpg",
+    image: "/products/Real cases/Cửa kéo/473695893_122139902930383303_6257649342661743951_n.webp",
   },
   {
     label: "Cửa nhôm kính vân gỗ cao cấp hoàn thiện tại biệt thự Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/5-1765895974.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/5-1765895974.webp",
   },
   {
     label: "Hệ cửa đi nhôm kính 4 cánh lắp đặt tại nhà ở mới xây Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/473672719_122139902384383303_5867355544384530872_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/473672719_122139902384383303_5867355544384530872_n.webp",
   },
   {
     label: "Cửa nhôm kính 4 cánh kiểu Pháp hoàn thiện tại biệt thự Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/473696933_122139902228383303_2083624855929093554_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/473696933_122139902228383303_2083624855929093554_n.webp",
   },
   {
     label: "Cửa nhôm kính trang trí hoa văn vàng cổ điển tại biệt thự Bình Thủy",
-    image: "/products/Real cases/Cửa nhôm kính/473709611_122139902666383303_5356222783742316859_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/473709611_122139902666383303_5356222783742316859_n.webp",
   },
   {
     label: "Bàn giao nhà phố Cần Thơ — cửa cuốn & cửa nhôm kính đồng bộ",
-    image: "/products/Real cases/Cửa nhôm kính/473835164_122139902996383303_2565169139323727501_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/473835164_122139902996383303_2565169139323727501_n.webp",
   },
   {
     label: "Hệ cửa gấp nhôm kính đồng bộ tại nhà phố mới xây Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/473755384_122139902672383303_419115667892905033_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/473755384_122139902672383303_419115667892905033_n.webp",
   },
   {
     label: "Lan can kính cầu thang nhôm vân gỗ tại nhà ở Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/480700842_122143773704383303_3629582498489512503_n.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/480700842_122143773704383303_3629582498489512503_n.webp",
   },
   {
     label: "Lắp đặt cửa sổ nhôm kính tại nhà xưởng công nghiệp Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/9-1765896082.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/9-1765896082.webp",
   },
   {
     label: "Đội kỹ thuật lắp đặt hệ cửa trượt nhôm tại nhà phố Bình Thủy, Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/4-1765895963.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/4-1765895963.webp",
   },
   {
     label: "Thi công hệ cửa nhôm kính tại nhà phố khu đô thị Cần Thơ",
-    image: "/products/Real cases/Cửa nhôm kính/7-1765896007.jpg",
+    image: "/products/Real cases/Cửa nhôm kính/7-1765896007.webp",
   },
 ] as const;
