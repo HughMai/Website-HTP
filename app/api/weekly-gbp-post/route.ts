@@ -61,10 +61,9 @@ QUY TẮC VIẾT:
 - 1 đoạn nội dung chính (3–5 câu) — đưa giá trị / thông tin thật, không quảng cáo lộ liễu.
 - 1 dòng CTA cuối + link đầy đủ (${opts.link.fullUrl}).
 - QUY TẮC BẢO HÀNH (TUYỆT ĐỐI KHÔNG VI PHẠM):
-  * Nếu nhắc đến bảo hành, CHỈ ĐƯỢC dùng duy nhất cụm từ: "bảo hành 5–10 năm" (với dấu gạch ngang en-dash) HOẶC "bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất".
-  * CẤM TUYỆT ĐỐI viết: "bảo hành 10 năm", "bảo hành 7 năm", "bảo hành 5 năm", "bảo hành 5-7 năm", "bảo hành 3 năm", hoặc bất kỳ con số đơn lẻ nào khác.
-  * CẤM TUYỆT ĐỐI: "trọn đời", "vĩnh viễn", "trọn gói bảo hành".
-  * Bảo hành KHÁC NHAU theo dòng sản phẩm — nên không được khẳng định một con số cụ thể cho riêng nhôm hay thép.
+  * Nếu nhắc đến bảo hành, CHỈ ĐƯỢC dùng DUY NHẤT cụm từ: "bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất".
+  * CẤM TUYỆT ĐỐI mọi con số năm: "10 năm", "7 năm", "5 năm", "5-10 năm", "5-7 năm", "3 năm", v.v.
+  * CẤM TUYỆT ĐỐI: "trọn đời", "vĩnh viễn", "trọn gói bảo hành", "bảo hành dài hạn".
   * Nếu không chắc, hãy bỏ qua phần bảo hành — không bắt buộc phải nhắc.
 - Giọng văn: chuyên nghiệp, gần gũi, có chuyên môn — KHÔNG sến, KHÔNG hô hào.
 - KHÔNG dùng dấu "—" (em dash) — thay bằng dấu phẩy hoặc dấu hai chấm.
