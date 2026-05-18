@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/weekly-gbp-post",
+      "schedule": "0 1 * * 1"
+    }
+  ]
+}
