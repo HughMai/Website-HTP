@@ -7,7 +7,7 @@ _Auto-loaded by skills. Max 80 lines / 25KB. Last updated: 2026-05-15_
 
 - **[VETO-1]** Founding year = **2005** (not 2008, not 2017). Source: owner confirmed.
 - **[VETO-2]** Experience = **21+ năm** (2026). Update to 22+ in 2027.
-- **[VETO-3]** Warranty = `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"` or `"5–10 năm"`. Never "trọn đời".
+- **[VETO-3]** Warranty = `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"` ONLY. NEVER quote year counts ("5 năm", "10 năm", "5–10 năm"), NEVER "trọn đời".
 - **[VETO-4]** All brand data (phone, address, year) must come from `lib/site-data.ts` — never hardcode.
 
 ---

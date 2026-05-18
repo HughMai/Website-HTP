@@ -115,7 +115,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhà xưởng bảo hành bao lâu?",
     answer:
-      "Bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất — tối thiểu 5 năm cho cửa và motor nhập khẩu. Khuyến nghị ký hợp đồng bảo trì định kỳ 6 tháng/lần để kéo dài tuổi thọ thiết bị.",
+      "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất cho cửa và motor nhập khẩu. Khuyến nghị ký hợp đồng bảo trì định kỳ 6 tháng/lần để kéo dài tuổi thọ thiết bị.",
   },
 ];
 

@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành 10 Năm",
+  title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành Chính Hãng",
   description:
     "Cửa cuốn Cái Răng Cần Thơ — lắp đặt nhà phố, kho hàng, nhà xưởng khu vực Cái Răng. Khảo sát miễn phí, lắp trong ngày, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-cai-rang` },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-cuon-cai-rang`,
-    title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành 10 Năm",
+    title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành Chính Hãng",
     description:
-      "Cửa cuốn Cái Răng — nhà phố, kho xưởng, khảo sát miễn phí, bảo hành 10 năm. Gọi: 0945 042 345.",
+      "Cửa cuốn Cái Răng — nhà phố, kho xưởng, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -172,7 +172,7 @@ export default function CuaCuonCaiRang() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Chuyên lắp cửa cuốn nhà phố, kho hàng và nhà xưởng tại Cái Răng — khảo sát miễn phí,
-              tư vấn đúng loại, bảo hành chính hãng 5–10 năm.
+              tư vấn đúng loại, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -297,7 +297,7 @@ export default function CuaCuonCaiRang() {
               Lắp Cửa Cuốn Tại Cái Răng — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, tư vấn đúng loại cho nhu cầu của bạn, bảo hành chính hãng 5–10 năm.
+              Khảo sát miễn phí, tư vấn đúng loại cho nhu cầu của bạn, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

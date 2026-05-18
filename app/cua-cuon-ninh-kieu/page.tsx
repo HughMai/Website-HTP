@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-ninh-kieu`,
     title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt",
     description:
-      "Cửa cuốn Ninh Kiều — lắp nhà phố mặt tiền, khảo sát miễn phí, bảo hành 10 năm. Gọi: 0945 042 345.",
+      "Cửa cuốn Ninh Kiều — lắp nhà phố mặt tiền, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -173,7 +173,7 @@ export default function CuaCuonNinhKieu() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Chuyên lắp cửa cuốn nhà phố, mặt tiền kinh doanh và căn hộ tại Ninh Kiều — khảo sát miễn phí,
-              tư vấn tại chỗ, bảo hành chính hãng 5–10 năm.
+              tư vấn tại chỗ, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -298,7 +298,7 @@ export default function CuaCuonNinhKieu() {
               Lắp Cửa Cuốn Tại Ninh Kiều — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, tư vấn tại chỗ, lắp xong mới thanh toán. Bảo hành chính hãng 5–10 năm.
+              Khảo sát miễn phí, tư vấn tại chỗ, lắp xong mới thanh toán. Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

@@ -36,7 +36,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 | Experience | **21+ năm** (as of 2026) |
 | Projects | 500+ công trình |
 | Customers | 1000+ khách hàng |
-| Warranty | **Bảo hành 5–10 năm** (locked, use consistently everywhere) |
+| Warranty | **Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất** (ONLY phrasing — never quote year counts) |
 | Hotlines | 0945 042 345 · 0913 574 077 |
 | Email | hungthanhphatdoor@gmail.com |
 
@@ -46,7 +46,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 
 ## Locked Decisions (do not change without user approval)
 
-1. **Warranty phrasing**: always `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"` or `"bảo hành 5–10 năm"` — never "trọn đời", never omit.
+1. **Warranty phrasing (HARD RULE — NEVER VIOLATE)**: the ONLY allowed phrase is `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. **NEVER** write "5–10 năm", "5-10 năm", "10 năm", "5 năm", "trọn đời", or any other specific year count. **NEVER** invent a number. If a year is required (e.g., schema fields), ask the user — do not guess. Applies to: website copy, JSON-LD schema, GBP descriptions, ads, social posts, emails — everywhere.
 2. **Founding year**: `2005` everywhere — never 2008, never 2017.
 3. **Experience count**: `21+ năm` (2026) — update annually.
 4. **Roman numeral**: `Est. MMV` in IntroAnimation (not MMVIII).
@@ -181,7 +181,7 @@ All brand constants live in `lib/site-data.ts` — `SITE.brand`, `SITE.hotlines`
 | nên chọn cửa cuốn nhôm hay thép | `/blog/nhom-duc-vs-thep-tinh-dien` ✓ |
 | cách bảo trì cửa cuốn | `/blog/cach-bao-tri-cua-cuon` ✓ |
 | motor cửa cuốn nào tốt | `/blog/motor-cua-cuon-tot-nhat` ✓ |
-| bảo hành cửa cuốn bao lâu | FAQ on product pages — add `5–10 năm` answer |
+| bảo hành cửa cuốn bao lâu | FAQ on product pages — answer with manufacturer-standard phrasing (NEVER year counts) |
 | cửa cuốn tấm liền là gì | Definition block needed |
 
 ---

@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title:
       "Hưng Thành Phát Door — Cửa Cuốn, Cửa Nhôm Kính, Cửa Kéo Cần Thơ",
     description:
-      "Bảo vệ tổ ấm của bạn với hệ thống cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ — bảo hành đến 10 năm. Hotline: 0913 574 077.",
+      "Bảo vệ tổ ấm của bạn với hệ thống cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ — bảo hành chính hãng. Hotline: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [ogImage],
   },
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title:
       "Hưng Thành Phát Door — Cửa Cuốn, Cửa Nhôm Kính, Cửa Kéo Cần Thơ",
     description:
-      "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. Bảo hành 10 năm. Hotline: 0913 574 077.",
+      "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. Bảo hành chính hãng. Hotline: 0913 574 077.",
     images: [ogImage.url],
   },
   robots: { index: true, follow: true },
@@ -109,7 +109,7 @@ const jsonLd = {
   "@id": `${siteUrl}/#organization`,
   name: SITE.brand,
   description:
-    "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 21+ năm kinh nghiệm, bảo hành đến 10 năm.",
+    "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 21+ năm kinh nghiệm, bảo hành chính hãng.",
   url: siteUrl,
   logo: {
     "@type": "ImageObject",

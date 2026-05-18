@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành 10 Năm",
+  title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành Chính Hãng",
   description:
     "Cửa cuốn Thốt Nốt Cần Thơ — lắp đặt nhà phố, kho xưởng tại Thốt Nốt và các xã lân cận. Đến tận nơi, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-thot-not` },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-cuon-thot-not`,
-    title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành 10 Năm",
+    title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành Chính Hãng",
     description:
-      "Cửa cuốn Thốt Nốt — đến tận nơi, khảo sát miễn phí, bảo hành 10 năm. Gọi: 0945 042 345.",
+      "Cửa cuốn Thốt Nốt — đến tận nơi, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0945 042 345.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -172,7 +172,7 @@ export default function CuaCuonThotNot() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Phục vụ khách hàng tại Thốt Nốt — đặt lịch trước, kỹ thuật viên đến đúng giờ,
-              lắp xong trong ngày, bảo hành chính hãng 5–10 năm.
+              lắp xong trong ngày, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -297,7 +297,7 @@ export default function CuaCuonThotNot() {
               Lắp Cửa Cuốn Tại Thốt Nốt — Gọi Đặt Lịch Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Đặt lịch trước, kỹ thuật viên đến đúng giờ. Bảo hành chính hãng 5–10 năm, hỗ trợ tận nơi.
+              Đặt lịch trước, kỹ thuật viên đến đúng giờ. Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất, hỗ trợ tận nơi.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
