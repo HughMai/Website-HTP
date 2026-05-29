@@ -1,0 +1,321 @@
+[
+  {
+    "url": "https://website-htp.vercel.app/",
+    "label": "Homepage",
+    "statusCode": 200,
+    "title": "Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ | Hưng Thành Phát Door",
+    "metaDescription": "Thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 15+ năm, 500+ dự án, bảo hành 10 năm. Gọi: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Cửa Cuốn, Cửa Kéo & Nhôm Kính — Cao Cấp Tại Cần Thơ"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 4416,
+    "cls": null,
+    "fcp": 3968,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": true,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Meta description too short (112 chars)"
+    ],
+    "suggestions": [
+      "LCP 4416ms is above 2500ms threshold (Good < 2500ms)"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/cua-cuon-nhom-can-tho",
+    "label": "Cửa Cuốn Nhôm",
+    "statusCode": 200,
+    "title": "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức, Bảo Hành Chính Hãng | Hưng Thành Phát Door",
+    "metaDescription": "Cửa cuốn nhôm tại Cần Thơ — công nghệ Đức, nhôm đùn dày 0.8–1.2mm, vận hành êm tuyệt đối. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức, Bảo Hành Chính Hãng"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 784,
+    "cls": null,
+    "fcp": 784,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/cua-cuon-nhom-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (81 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/cua-keo-thep-can-tho",
+    "label": "Cửa Kéo Thép",
+    "statusCode": 200,
+    "title": "Cửa Kéo Thép Cần Thơ — Bền Bỉ, Chống Đột Nhập, Bảo Hành Chính Hãng | Hưng Thành Phát Door",
+    "metaDescription": "Cửa kéo thép tại Cần Thơ — công nghệ Đức, chống đột nhập cao, phù hợp mặt tiền kinh doanh. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Cửa Kéo Thép Cần Thơ — Bền Bỉ, Chống Đột Nhập, Bảo Hành Chính Hãng"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 708,
+    "cls": null,
+    "fcp": 708,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/cua-keo-thep-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (89 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/lap-dat-cua-cuon-can-tho",
+    "label": "Lắp Đặt Cửa Cuốn",
+    "statusCode": 200,
+    "title": "Lắp Đặt Cửa Cuốn Cần Thơ — Thi Công Trọn Gói, Bảo Hành Chính Hãng | Hưng Thành Phát Door",
+    "metaDescription": "Lắp đặt cửa cuốn tại Cần Thơ — nhôm Đức, thép tĩnh điện, inox, tôle. Thi công trọn gói, bảo hành chính hãng, có mặt trong ngày. Báo giá miễn phí: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Lắp Đặt Cửa Cuốn Cần Thơ — Thi Công Trọn Gói, Bảo Hành Chính Hãng"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 96,
+    "cls": null,
+    "fcp": 96,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/lap-dat-cua-cuon-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (88 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/sua-chua-cua-cuon-can-tho",
+    "label": "Sửa Chữa Cửa Cuốn",
+    "statusCode": 200,
+    "title": "Sửa Chữa Cửa Cuốn, Cửa Kéo & Nhôm Kính Cần Thơ — Đến Tận Nơi | Hưng Thành Phát Door",
+    "metaDescription": "Sửa chữa cửa cuốn, cửa kéo, cửa nhôm kính tại Cần Thơ — motor cháy, lệch ray, kính vỡ, bản lề lỏng. Đến tận nơi trong ngày, báo giá minh bạch. Gọi: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Sửa Chữa Cửa Cuốn, Cửa Kéo & Nhôm Kính Cần Thơ — Đến Tận Nơi"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 128,
+    "cls": null,
+    "fcp": 128,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/sua-chua-cua-cuon-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (83 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/bao-gia-cua-cuon-can-tho",
+    "label": "Báo Giá Cửa Cuốn",
+    "statusCode": 200,
+    "title": "Báo Giá Cửa Cuốn Cần Thơ 2025 — Bảng Giá Chính Hãng Theo Loại | Hưng Thành Phát Door",
+    "metaDescription": "Bảng giá cửa cuốn Cần Thơ 2025 — tole Đài Loan, công nghệ Đức, Inox, CN Úc. Giá tính theo m², motor và phụ kiện riêng. Chưa bao gồm VAT. Gọi báo giá: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Báo Giá Cửa Cuốn Cần Thơ — Giá Theo m², Minh Bạch"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 96,
+    "cls": null,
+    "fcp": 96,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/bao-gia-cua-cuon-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (84 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/bang-gia-cua-keo-can-tho",
+    "label": "Bảng Giá Cửa Kéo",
+    "statusCode": 200,
+    "title": "Bảng Giá Cửa Kéo Cần Thơ 2025 — Giá Theo m², Có Lá & Không Lá | Hưng Thành Phát Door",
+    "metaDescription": "Bảng giá cửa kéo Cần Thơ 2025 — cửa có lá và không lá, từ U 6 zem đến U 1.4 ly. Giá tính theo m², chưa VAT. Báo giá miễn phí: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Bảng Giá Cửa Kéo Cần Thơ 2025 — Giá Theo m², Minh Bạch"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 220,
+    "cls": null,
+    "fcp": 220,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/bang-gia-cua-keo-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (84 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  },
+  {
+    "url": "https://website-htp.vercel.app/bang-gia-cua-nhom-kinh-can-tho",
+    "label": "Bảng Giá Cửa Nhôm Kính",
+    "statusCode": 200,
+    "title": "Bảng Giá Cửa Nhôm Kính Cần Thơ 2025 — Nhôm Việt, Nhập, Maxpro | Hưng Thành Phát Door",
+    "metaDescription": "Bảng giá cửa nhôm kính Cần Thơ 2025 — nhôm Việt, nhôm nhập, Maxpro hệ 55/65/83, cửa kính bản lề sàn, lan can cầu thang. Chưa VAT. Gọi: 0945 042 345.",
+    "h1Count": 1,
+    "h1Text": [
+      "Bảng Giá Cửa Nhôm Kính Cần Thơ 2025 — Nhôm Việt, Nhập, Maxpro"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "brokenImages": [],
+    "brokenLinks": [],
+    "missingAltImages": [],
+    "lcp": 68,
+    "cls": null,
+    "fcp": 68,
+    "hasCanonical": true,
+    "canonicalUrl": "https://hungthanhphat.vn/bang-gia-cua-nhom-kinh-can-tho",
+    "hasOgTitle": true,
+    "hasOgDescription": true,
+    "hasOgImage": false,
+    "hasSchema": true,
+    "schemaTypes": [
+      "HomeAndConstructionBusiness",
+      "WebSite",
+      "FAQPage"
+    ],
+    "mobileIssues": [
+      "Oversized fixed element: 375px wide",
+      "Oversized fixed element: 375px wide"
+    ],
+    "issues": [
+      "Title too long (84 chars)"
+    ],
+    "suggestions": [
+      "Add og:image meta tag"
+    ]
+  }
+]

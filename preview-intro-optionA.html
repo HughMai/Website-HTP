@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTP Intro — Option A Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #f5f0e8; min-height: 100vh; font-family: 'Be Vietnam Pro', sans-serif; }
+
+    /* ── Fake page behind the animation ─────────────────────────── */
+    #page-root {
+      padding: 6rem 2rem; text-align: center;
+      opacity: 0; /* hidden until animation ends */
+    }
+    #page-root h1 { font-size: 2.5rem; color: #141a32; margin-bottom: 1rem; }
+    #page-root p  { color: #6b7280; font-size: 1.1rem; margin-bottom: 2rem; }
+    #replay-btn {
+      display: inline-block; padding: 0.6rem 1.6rem;
+      background: #141a32; color: #e6c878;
+      border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;
+    }
+
+    /* ── Stage ───────────────────────────────────────────────────── */
+    #stage {
+      position: fixed; inset: 0; z-index: 9999;
+      perspective: 1700px; perspective-origin: 50% 45%;
+      background: #080b16; overflow: hidden;
+    }
+
+    /* ── Door panels — decorative halves, NO text content ────────── */
+    /* Radial gradient anchored to the inner edge of each panel so the
+       glow aligns to the center seam, identical to a full-width card.  */
+    .i-door {
+      position: absolute; top: 0; height: 100%;
+      backface-visibility: hidden;
+    }
+    .i-door-l {
+      left: 0; width: calc(50% + 1px);
+      transform-origin: left center;
+      background:
+        radial-gradient(1100px 620px at 100% 30%, rgba(201,164,76,0.10), transparent 70%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
+        linear-gradient(160deg, #141a32, #080b16 60%);
+    }
+    .i-door-r {
+      left: 50%; width: 50%;
+      transform-origin: right center;
+      background:
+        radial-gradient(1100px 620px at 0%   30%, rgba(201,164,76,0.10), transparent 70%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 46px),
+        linear-gradient(160deg, #141a32, #080b16 60%);
+    }
+
+    #stage.play .i-door-l {
+      animation: i-swingL 1000ms cubic-bezier(0.55,0.06,0.32,1) forwards;
+      animation-delay: calc(var(--fill-dur) + 180ms);
+    }
+    #stage.play .i-door-r {
+      animation: i-swingR 1000ms cubic-bezier(0.55,0.06,0.32,1) forwards;
+      animation-delay: calc(var(--fill-dur) + 180ms);
+    }
+    @keyframes i-swingL {
+      from { transform: rotateY(0);       filter: brightness(1);    }
+      to   { transform: rotateY(-115deg); filter: brightness(0.32); }
+    }
+    @keyframes i-swingR {
+      from { transform: rotateY(0);      filter: brightness(1);    }
+      to   { transform: rotateY(115deg); filter: brightness(0.32); }
+    }
+
+    /* ── Seam glow ────────────────────────────────────────────────── */
+    .i-seam {
+      position: absolute; top: 0; left: 50%;
+      width: 3px; height: 100%; transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent, #e6c878, #c9a44c, #e6c878, transparent);
+      opacity: 0; filter: blur(2px); z-index: 5;
+    }
+    #stage.play .i-seam {
+      animation: i-seamFlash 1000ms ease-out forwards;
+      animation-delay: calc(var(--fill-dur) + 180ms);
+    }
+    @keyframes i-seamFlash {
+      0%   { opacity: 0;   width: 3px;  }
+      15%  { opacity: 0.9; width: 5px;  }
+      55%  { opacity: 0.5; width: 30px; }
+      100% { opacity: 0;   width: 90px; }
+    }
+
+    /* ── Card layer — ABOVE the doors, no overflow:hidden, no 3D ─── */
+    .i-card-layer {
+      position: absolute; inset: 0; z-index: 10;
+      opacity: 0; pointer-events: none;
+    }
+
+    /* ── Card ─────────────────────────────────────────────────────── */
+    .i-card {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 4.5vh 6vw;
+      font-family: 'Be Vietnam Pro', sans-serif; color: #f3ead6;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+
+    .i-row   { display: flex; justify-content: space-between; align-items: center; }
+    .i-corner {
+      font-size: clamp(8px,0.9vw,11px); letter-spacing: 0.28em;
+      color: #6f7690; text-transform: uppercase;
+    }
+    .i-rule {
+      width: min(440px,62vw); height: 1px; margin: 2.4vh auto 0;
+      background: linear-gradient(90deg, transparent, #c9a44c, transparent);
+    }
+    .i-mid {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      gap: clamp(4px, 1.1vh, 14px); padding: 1vh 0;
+    }
+    .i-title {
+      font-family: 'Playfair Display', serif; font-weight: 800;
+      font-size: clamp(18px, 5.2vw, 72px);
+      letter-spacing: 0.07em; line-height: 1.1; color: #f3ead6;
+      white-space: nowrap; margin: 0;
+    }
+    .i-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; width: min(320px,50vw); color: #c9a44c;
+    }
+    .i-divider::before, .i-divider::after {
+      content: ""; height: 1px; flex: 1;
+      background: linear-gradient(90deg, transparent, rgba(201,164,76,0.55), transparent);
+    }
+    .i-divider span { font-size: 11px; transform: rotate(45deg); display: inline-block; }
+    .i-tag {
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
+      font-size: clamp(14px,2.9vw,36px); color: #e6c878; margin: 0;
+    }
+    .i-svc {
+      font-size: clamp(9px,0.95vw,11px); letter-spacing: 0.2em;
+      color: #6f7690; text-transform: uppercase; margin: 0;
+    }
+    .i-adr {
+      font-size: clamp(9px,0.95vw,11px); letter-spacing: 0.16em;
+      color: #c9a44c; margin: 0;
+    }
+    .i-bot { display: flex; flex-direction: column; gap: clamp(8px,2.6vh,28px); }
+    .i-ticks {
+      height: 18px;
+      background: repeating-linear-gradient(90deg, rgba(201,164,76,0.55) 0 1px, transparent 1px 15px);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      opacity: 0.6;
+    }
+    .i-stats { display: flex; border: 1px solid rgba(201,164,76,0.22); }
+    .i-stat  { flex: 1; text-align: center; padding: clamp(8px,2.4vh,24px) 1vw; }
+    .i-stat + .i-stat { border-left: 1px solid rgba(201,164,76,0.22); }
+    .i-n {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      font-weight: 700; font-style: normal;
+      font-size: clamp(18px,3vw,40px); color: #e6c878;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
+    }
+    .i-l {
+      font-size: clamp(7px,0.8vw,10px); letter-spacing: 0.18em;
+      color: #6f7690; text-transform: uppercase; margin-top: 4px;
+    }
+
+    /* ── Character reveal: blur + rise ───────────────────────────── */
+    .i-char {
+      display: inline-block;
+      opacity: 0; transform: translateY(0.38em); filter: blur(6px);
+    }
+    #stage.play .i-char {
+      animation: i-charIn 300ms cubic-bezier(0.2,0.7,0.2,1) both;
+    }
+    @keyframes i-charIn {
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .i-fade { opacity: 0; transform: translateY(12px); }
+    #stage.play .i-fade {
+      animation: i-fadeUp 360ms ease both;
+    }
+    @keyframes i-fadeUp { to { opacity: 1; transform: none; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      #stage { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page that gets revealed when animation ends -->
+  <div id="page-root">
+    <h1>Hưng Thành Phát Door</h1>
+    <p>Cửa cuốn · Cửa nhôm kính · Cửa kéo — Cần Thơ</p>
+    <button id="replay-btn" onclick="location.reload()">▶ Replay</button>
+  </div>
+
+  <!-- Intro stage -->
+  <div id="stage" aria-hidden="true">
+
+    <!-- Door panels: pure visual, empty, never clip any text -->
+    <div class="i-door i-door-l"></div>
+    <div class="i-door i-door-r"></div>
+    <div class="i-seam"></div>
+
+    <!-- Brand card: lives ABOVE the doors on its own z-index layer -->
+    <div class="i-card-layer" id="card-layer">
+      <div class="i-card">
+
+        <div class="i-row">
+          <span class="i-corner i-fade">— Brand Identity</span>
+          <span class="i-corner i-fade">Cần Thơ · Việt Nam —</span>
+        </div>
+
+        <div class="i-rule i-fade"></div>
+
+        <div class="i-mid">
+          <h2 class="i-title" id="js-title">HƯNG THÀNH PHÁT</h2>
+          <div class="i-divider i-fade"><span>◆</span></div>
+          <p  class="i-tag"  id="js-tag">Cửa đẹp · nhà sang</p>
+          <p  class="i-svc i-fade">Cửa cuốn · Cửa nhôm kính · Cửa kéo</p>
+          <p  class="i-adr i-fade">235–237 Võ Văn Kiệt · Bình Thủy · Cần Thơ</p>
+        </div>
+
+        <div class="i-bot">
+          <div class="i-ticks i-fade"></div>
+          <div class="i-stats">
+            <div class="i-stat i-fade"><div class="i-n">2005</div><div class="i-l">Thành lập</div></div>
+            <div class="i-stat i-fade"><div class="i-n">21+</div><div class="i-l">Năm kinh nghiệm</div></div>
+            <div class="i-stat i-fade"><div class="i-n">500+</div><div class="i-l">Công trình</div></div>
+          </div>
+          <div class="i-row">
+            <span class="i-corner i-fade">— Cửa kỹ thuật cao</span>
+            <span class="i-corner i-fade">Est. MMV —</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TITLE_STEP = 22, TAG_STEP = 18;
+    const CHAR_DUR = 300, FADE_DUR = 360, BEAT = 180, DOOR_DUR = 1000;
+    const START = 60;
+
+    const stage     = document.getElementById('stage');
+    const cardLayer = document.getElementById('card-layer');
+    const pageRoot  = document.getElementById('page-root');
+
+    // ── Split element text into animated .i-char spans ────────────
+    function splitChars(el) {
+      const text = el.textContent || '';
+      el.textContent = '';
+      for (const ch of [...text]) {
+        if (ch === ' ') { el.appendChild(document.createTextNode(' ')); continue; }
+        const s = document.createElement('span');
+        s.className = 'i-char';
+        s.textContent = ch;
+        el.appendChild(s);
+      }
+      return el.querySelectorAll('.i-char');
+    }
+
+    // ── Assign staggered animation-delay values ───────────────────
+    let t = START;
+    const setDelay  = el  => { el.style.animationDelay = t + 'ms'; };
+    const fadeBlock = (sel, step = 0) => {
+      document.querySelectorAll(sel).forEach(el => { setDelay(el); t += step; });
+    };
+
+    setDelay(document.querySelector('.i-rule')); t += 130;
+
+    splitChars(document.getElementById('js-title'))
+      .forEach(c => { setDelay(c); t += TITLE_STEP; });
+    t += 70;
+
+    setDelay(document.querySelector('.i-divider')); t += 110;
+
+    splitChars(document.getElementById('js-tag'))
+      .forEach(c => { setDelay(c); t += TAG_STEP; });
+    t += 80;
+
+    setDelay(document.querySelector('.i-svc'));  t += 90;
+    setDelay(document.querySelector('.i-adr'));  t += 110;
+    setDelay(document.querySelector('.i-ticks')); t += 90;
+    fadeBlock('.i-stat', 70); t += 30;
+    fadeBlock('.i-corner', 45);
+
+    const fillDur = t + Math.max(CHAR_DUR, FADE_DUR);
+    stage.style.setProperty('--fill-dur', fillDur + 'ms');
+
+    // ── Page zoom: start scaled down, zoom to 1 as doors open ─────
+    pageRoot.style.transformOrigin = '50% 42%';
+    pageRoot.style.transform       = 'scale(0.88)';
+
+    // ── Timers ────────────────────────────────────────────────────
+    // Fade card out exactly as doors begin to swing
+    setTimeout(() => {
+      cardLayer.style.transition = `opacity ${Math.round(DOOR_DUR * 0.55)}ms ease`;
+      cardLayer.style.opacity    = '0';
+    }, fillDur + BEAT);
+
+    // Zoom page forward at ~28% into the door swing
+    setTimeout(() => {
+      pageRoot.style.transition = `transform ${Math.round(DOOR_DUR * 0.9)}ms cubic-bezier(0.22,0.61,0.36,1), opacity 200ms ease`;
+      pageRoot.style.transform  = 'scale(1)';
+      pageRoot.style.opacity    = '1';
+    }, fillDur + BEAT + Math.round(DOOR_DUR * 0.28));
+
+    // Fade the whole stage at ~50% into the door swing
+    setTimeout(() => {
+      stage.style.transition    = `opacity ${Math.round(DOOR_DUR * 0.65)}ms ease`;
+      stage.style.opacity       = '0';
+      stage.style.pointerEvents = 'none';
+    }, fillDur + BEAT + Math.round(DOOR_DUR * 0.5));
+
+    // Full cleanup
+    setTimeout(() => {
+      stage.style.display      = 'none';
+      pageRoot.style.transform = '';
+      pageRoot.style.transformOrigin = '';
+      pageRoot.style.transition = '';
+    }, fillDur + BEAT + DOOR_DUR + 400);
+
+    // ── Play when fonts are ready ─────────────────────────────────
+    function play() {
+      // Fade card layer in (no CSS animation conflict — pure JS opacity)
+      cardLayer.style.transition = 'opacity 380ms ease';
+      cardLayer.style.opacity    = '1';
+      // Trigger all .i-char and .i-fade animations
+      stage.classList.add('play');
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(play);
+    } else {
+      window.addEventListener('load', play);
+    }
+  </script>
+</body>
+</html>

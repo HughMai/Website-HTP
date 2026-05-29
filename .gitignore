@@ -14,3 +14,12 @@ tsconfig.tsbuildinfo
 
 # Sensitive pricing documents
 public/products/official price/
+
+# Customer quotes & pricing forms (contain customer PII — local only)
+customer_form/
+
+# Claude Code config & local skill tree
+.claude/
+
+# Audit screenshots (large, generated)
+scripts/screenshots/

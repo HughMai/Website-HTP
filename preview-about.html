@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview — About Section with Showroom Photo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #0A2540;
+      --brand-50: #E6EBF1;
+      --brand-75: rgba(10,37,64,0.75);
+      --brand-70: rgba(10,37,64,0.70);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .about-section {
+      background: #fff;
+      padding: 3.5rem 0;
+      border-radius: 12px;
+    }
+
+    /* ── Grid: 3 named areas ─────────────────────────────
+       Desktop: [ top    | photo ]
+                [ bottom | photo ]
+       Mobile:  [ top    ]
+                [ photo  ]
+                [ bottom ]
+    ──────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "top   photo"
+        "bottom photo";
+      column-gap: 3.5rem;
+      row-gap: 0;
+    }
+
+    .about-top    { grid-area: top;    align-self: end;   padding-bottom: 1.25rem; }
+    .about-bottom { grid-area: bottom; align-self: start; }
+    .photo-wrapper { grid-area: photo; }
+
+    /* ── Badge ── */
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--brand-50);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--brand);
+    }
+
+    /* ── Heading ── */
+    .about-heading {
+      margin-top: 1rem;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--brand);
+      line-height: 1.25;
+    }
+
+    /* ── Body ── */
+    .about-body {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--brand-75);
+    }
+
+    /* ── Pillars ── */
+    .pillars {
+      margin-top: 2rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .pillar { display: flex; gap: 1rem; }
+
+    .pillar-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.5rem;
+      background: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pillar-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pillar-title {
+      font-weight: 600;
+      color: var(--brand);
+      font-size: 0.9375rem;
+      line-height: 1.4;
+    }
+
+    .pillar-body {
+      margin-top: 0.2rem;
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--brand-70);
+    }
+
+    /* ── Photo ── */
+    .photo-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(10,37,64,0.14);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1.25rem 1rem;
+      background: linear-gradient(to top, rgba(10,37,64,0.72) 0%, rgba(10,37,64,0) 100%);
+    }
+
+    .photo-address {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.92);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .photo-address svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      stroke: rgba(255,255,255,0.75);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ── Mobile ─────────────────────────────────────────
+       Order: badge+heading → photo → body+pillars
+    ──────────────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .about-section { padding: 3rem 0; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "top"
+          "photo"
+          "bottom";
+        gap: 1.5rem;
+      }
+
+      .about-top    { padding-bottom: 0; }
+
+      .photo-wrapper {
+        aspect-ratio: 16/9;
+        border-radius: 12px;
+      }
+
+      .about-body { margin-top: 0; }
+    }
+
+    /* Desktop: photo fills full left-column height */
+    @media (min-width: 768px) {
+      .photo-wrapper {
+        min-height: 480px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem 0.5rem; }
+    }
+
+    /* ── Preview banner ── */
+    .preview-banner {
+      background: #FFFBEB;
+      border: 1px solid #FCD34D;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      font-size: 0.8rem;
+      color: #92400E;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">
+    Preview — F12 → Ctrl+Shift+M to toggle mobile view
+  </div>
+
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Zone 1: badge + heading -->
+        <div class="about-top">
+          <span class="about-badge">Về Hưng Thành Phát Door</span>
+          <h2 class="about-heading">
+            21 năm, 500+ công trình —<br>
+            chưa một khách nào gọi lại vì sai vật liệu.
+          </h2>
+        </div>
+
+        <!-- Zone 2: showroom photo (between heading and body on mobile) -->
+        <div class="photo-wrapper">
+          <img
+            src="file:///C:/Users/Hugh%20Mai/Downloads/utility%20image/cua%20nha.jpg"
+            alt="Showroom Hưng Thành Phát Door — 235-237 Võ Văn Kiệt, Bình Thủy, Cần Thơ"
+          />
+          <div class="photo-caption">
+            <p class="photo-address">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              235–237 Võ Văn Kiệt, Bình Thủy, Cần Thơ
+            </p>
+          </div>
+        </div>
+
+        <!-- Zone 3: body paragraph + pillars -->
+        <div class="about-bottom">
+          <p class="about-body">
+            Năm 2005, Hưng Thành Phát là đơn vị đầu tiên sản xuất và lắp
+            đặt cửa cuốn tại Cần Thơ — khởi nghiệp tại 105 Đường 3/2 với
+            một cam kết duy nhất: lắp đúng thứ đã báo giá. Không thay thế
+            vật liệu rẻ hơn sau khi ký hợp đồng. Không làm tắt để tiết kiệm
+            thời gian. Năm 2022 chuyển về showroom hiện tại 235–237 Võ Văn
+            Kiệt, Bình Thủy — 21 năm sau, 500+ công trình từ nhà phố đến nhà
+            xưởng công nghiệp, cam kết đó vẫn còn nguyên.
+          </p>
+
+          <ul class="pillars">
+            <li class="pillar">
+              <span class="pillar-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </span>
+              <div>
+                <p class="pillar-title">Đúng vật liệu cam kết — bồi thường 200% nếu sai</p>
+                <p class="pillar-body">Mỗi bộ cửa đều có CO/CQ chứng nhận xuất xứ. Sai một chi tiết nhỏ — bồi thường gấp đôi giá trị hợp đồng. Không có ngoại lệ.</p>
+              </div>
+            </li>
+            <li class="pillar">
+              <span class="pillar-icon">
+                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </span>
+              <div>
+                <p class="pillar-title">Có mặt trong ngày khảo sát — lắp đúng ngày hẹn</p>
+                <p class="pillar-body">Đội kỹ thuật thường trực tại Cần Thơ, không tính phí đi lại nội thành. Có mặt trong ngày để khảo sát — lắp đúng ngày hẹn đã cam kết.</p>
+              </div>
+            </li>
+            <li class="pillar">
+              <span class="pillar-icon">
+                <svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+              </span>
+              <div>
+                <p class="pillar-title">Lắp xong mới trả tiền — không lo bị ép</p>
+                <p class="pillar-body">Chúng tôi không nhận trước toàn bộ. Chạy thử, kiểm tra hài lòng, ký nghiệm thu — rồi mới thanh toán. Đơn giản vậy thôi.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
