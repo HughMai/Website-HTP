@@ -197,6 +197,48 @@ async function notifyViaEmail(
   }
 }
 
+async function notifyViaCRM(
+  name: string,
+  phone: string,
+  email?: string,
+  message?: string,
+  estimate?: Estimate,
+) {
+  const token = process.env.CRM_WEBHOOK_TOKEN;
+  const url =
+    process.env.CRM_WEBHOOK_URL || "https://crm.hungthanhphat.vn/api/yeu-cau";
+
+  if (!token) {
+    console.warn("[contact] CRM webhook chưa cấu hình — bỏ qua chuyển tiếp.");
+    return;
+  }
+
+  const noteParts = [
+    message,
+    email,
+    estimate ? `Ước tính web: ${fmtVND(estimate.grandTotal)}` : "",
+  ].filter(Boolean);
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Web-Token": token },
+    body: JSON.stringify({
+      name,
+      phone,
+      need: estimate
+        ? `${estimate.doorType} — ${estimate.tech} — ${estimate.model}`
+        : "",
+      size: estimate ? `${estimate.width}m x ${estimate.height}m` : "",
+      note: noteParts.join(" | "),
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`CRM webhook lỗi: ${err}`);
+  }
+}
+
 export async function POST(req: NextRequest) {
   let body: unknown;
   try {
@@ -223,6 +265,7 @@ export async function POST(req: NextRequest) {
   const results = await Promise.allSettled([
     notifyViaTelegram(name, phone, email, message, estimate),
     notifyViaEmail(name, phone, email, message, estimate),
+    notifyViaCRM(name, phone, email, message, estimate),
   ]);
   for (const r of results) {
     if (r.status === "rejected")
