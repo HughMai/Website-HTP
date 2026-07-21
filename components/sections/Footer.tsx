@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
 import { FOOTER_LINK_GROUPS, NAV_LINKS, SITE } from "@/lib/site-data";
 
+const sitemapLinks = FOOTER_LINK_GROUPS.flatMap((g) => [...g.links]);
+
 export function Footer() {
   const year = new Date().getFullYear();
   const mapEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(
@@ -160,31 +162,24 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Sitemap block — gives every landing page an internal link on all 21 pages */}
+      {/* Sitemap links — compact inline row. Keeps every landing page internally
+          linked (see FOOTER_LINK_GROUPS) without a full-height link grid. */}
       <div className="border-t border-white/10">
-        <nav
-          aria-label="Sơ đồ trang"
-          className="container grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:grid-cols-4 md:gap-10 md:py-10"
-        >
-          {FOOTER_LINK_GROUPS.map((group) => (
-            <div key={group.title}>
-              <p className="text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">
-                {group.title}
-              </p>
-              <ul className="mt-3 space-y-1.5 text-xs sm:text-sm">
-                {group.links.map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="text-white/70 transition hover:text-white"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <nav aria-label="Sơ đồ trang" className="container py-4 md:py-5">
+          <ul className="flex flex-wrap gap-x-2 gap-y-1 text-xs leading-relaxed text-white/60">
+            {sitemapLinks.map((l, i) => (
+              <li key={l.href} className="flex items-center gap-2">
+                <Link href={l.href} className="transition hover:text-white">
+                  {l.label}
+                </Link>
+                {i < sitemapLinks.length - 1 && (
+                  <span aria-hidden className="text-white/25">
+                    ·
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
 
