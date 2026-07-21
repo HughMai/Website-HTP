@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
-import { NAV_LINKS, SITE } from "@/lib/site-data";
+import { FOOTER_LINK_GROUPS, NAV_LINKS, SITE } from "@/lib/site-data";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -79,38 +79,6 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            <li>
-              <Link
-                href="/sua-chua-cua-cuon-can-tho"
-                className="text-white/70 transition hover:text-white"
-              >
-                Sửa Chữa Cửa Cuốn
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/bao-gia-cua-cuon-can-tho"
-                className="text-white/70 transition hover:text-white"
-              >
-                Bảng Giá Cửa Cuốn
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/bang-gia-cua-keo-can-tho"
-                className="text-white/70 transition hover:text-white"
-              >
-                Bảng Giá Cửa Kéo
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/bang-gia-cua-nhom-kinh-can-tho"
-                className="text-white/70 transition hover:text-white"
-              >
-                Bảng Giá Cửa Nhôm Kính
-              </Link>
-            </li>
           </ul>
         </div>
 
@@ -190,6 +158,34 @@ export function Footer() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Sitemap block — gives every landing page an internal link on all 21 pages */}
+      <div className="border-t border-white/10">
+        <nav
+          aria-label="Sơ đồ trang"
+          className="container grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:grid-cols-4 md:gap-10 md:py-10"
+        >
+          {FOOTER_LINK_GROUPS.map((group) => (
+            <div key={group.title}>
+              <p className="text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">
+                {group.title}
+              </p>
+              <ul className="mt-3 space-y-1.5 text-xs sm:text-sm">
+                {group.links.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="text-white/70 transition hover:text-white"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
       </div>
 
       <div className="border-t border-white/10">

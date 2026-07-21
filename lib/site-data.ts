@@ -23,6 +23,50 @@ export const NAV_LINKS = [
 
 export type NavId = (typeof NAV_LINKS)[number]["id"];
 
+// Internal-link clusters rendered in the Footer on every page. Landing pages that
+// are only reachable from sitemap.xml get deprioritised by crawlers ("Discovered —
+// currently not indexed"); these links are what make them crawlable.
+// The 3 blog posts are reached via the /blog index, which links them itself.
+export const FOOTER_LINK_GROUPS = [
+  {
+    title: "Sản Phẩm",
+    links: [
+      { href: "/cua-cuon-nhom-can-tho", label: "Cửa Cuốn Nhôm" },
+      { href: "/cua-nhom-kinh-can-tho", label: "Cửa Nhôm Kính" },
+      { href: "/cua-keo-can-tho", label: "Cửa Kéo" },
+      { href: "/cua-keo-thep-can-tho", label: "Cửa Kéo Thép" },
+      { href: "/lan-can-nhom-kinh-can-tho", label: "Lan Can Nhôm Kính" },
+    ],
+  },
+  {
+    title: "Dịch Vụ",
+    links: [
+      { href: "/lap-dat-cua-cuon-can-tho", label: "Lắp Đặt Cửa Cuốn" },
+      { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa Cửa Cuốn" },
+      { href: "/cua-cuon-nha-xuong-can-tho", label: "Cửa Cuốn Nhà Xưởng" },
+      { href: "/blog", label: "Kinh Nghiệm & Tư Vấn" },
+    ],
+  },
+  {
+    title: "Bảng Giá",
+    links: [
+      { href: "/bao-gia-cua-cuon-can-tho", label: "Báo Giá Cửa Cuốn" },
+      { href: "/bang-gia-cua-keo-can-tho", label: "Bảng Giá Cửa Kéo" },
+      { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Bảng Giá Nhôm Kính" },
+    ],
+  },
+  {
+    title: "Khu Vực Phục Vụ",
+    links: [
+      { href: "/cua-cuon-ninh-kieu", label: "Cửa Cuốn Ninh Kiều" },
+      { href: "/cua-cuon-binh-thuy", label: "Cửa Cuốn Bình Thủy" },
+      { href: "/cua-cuon-cai-rang", label: "Cửa Cuốn Cái Răng" },
+      { href: "/cua-cuon-o-mon", label: "Cửa Cuốn Ô Môn" },
+      { href: "/cua-cuon-thot-not", label: "Cửa Cuốn Thốt Nốt" },
+    ],
+  },
+] as const;
+
 export const STATS = [
   {
     value: "21+",
