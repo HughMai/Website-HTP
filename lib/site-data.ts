@@ -1,7 +1,13 @@
 export const SITE = {
   brand: "Hưng Thành Phát Door",
+  // Registered name as it appears on the Võ Văn Kiệt storefront signage. Emitted as
+  // schema legalName so Google can tell this entity apart from the unrelated
+  // "Công ty Nhôm Kính Hưng Thành Phát Door" (hungthanhphatdoor.com).
+  legalName: "Công ty TNHH SX - TM - DV Hưng Thành Phát",
   tagline: "Giải Pháp Cửa Cao Cấp Cho Mọi Công Trình",
   hotlines: ["0945 042 345", "0913 574 077"] as const,
+  // Landline on the storefront sign — a fixed-line number is a strong local NAP signal.
+  landline: "02923 730 081",
   email: "hungthanhphat6688@gmail.com",
   address: "235 - 237 (281 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
   mapQuery:

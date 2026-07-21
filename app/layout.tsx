@@ -108,6 +108,10 @@ const jsonLd = {
   // required for Google to merge this with the GBP Knowledge Panel
   "@id": `${siteUrl}/#organization`,
   name: SITE.brand,
+  legalName: SITE.legalName,
+  // The storefront sign reads "HƯNG THÀNH PHÁT" without "Door"; customers and
+  // directories use both. Listing them disambiguates the entity for search + LLMs.
+  alternateName: ["Hưng Thành Phát", "Cửa Cuốn Hưng Thành Phát"],
   description:
     "Chuyên thi công cửa cuốn, cửa nhôm kính và cửa kéo cao cấp tại Cần Thơ. 21+ năm kinh nghiệm, bảo hành chính hãng.",
   url: siteUrl,
@@ -129,7 +133,7 @@ const jsonLd = {
   foundingDate: String(SITE.foundedYear),
   address: {
     "@type": "PostalAddress",
-    streetAddress: "235-237 Võ Văn Kiệt",
+    streetAddress: "235-237 Võ Văn Kiệt, Phường An Thới",
     addressLocality: "Bình Thủy",
     addressRegion: "Cần Thơ",
     postalCode: "90000",
@@ -170,6 +174,13 @@ const jsonLd = {
     {
       "@type": "ContactPoint",
       telephone: SITE.hotlines[1].replace(/\s/g, ""),
+      contactType: "customer service",
+      availableLanguage: "Vietnamese",
+      areaServed: "VN",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: SITE.landline.replace(/\s/g, ""),
       contactType: "customer service",
       availableLanguage: "Vietnamese",
       areaServed: "VN",
