@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -70,12 +71,12 @@ export function Products() {
                     </h3>
                     <p className="mt-1 text-sm text-brand/65">{cat.tagline}</p>
                   </div>
-                  <button
-                    onClick={scrollContact}
+                  <Link
+                    href={cat.pageLink.href}
                     className="inline-flex items-center gap-1 text-sm font-medium text-brand/70 transition hover:text-brand"
                   >
-                    Xem tất cả <ArrowRight className="h-4 w-4" />
-                  </button>
+                    {cat.pageLink.label} <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
 
                 {/* Subtypes — horizontal scroll on mobile, grid on desktop */}

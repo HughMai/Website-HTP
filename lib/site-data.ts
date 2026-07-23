@@ -99,12 +99,15 @@ export const STATS = [
   },
 ] as const;
 
-// Product categories with subtypes — each subtype has its own photo + label
+// Product categories with subtypes — each subtype has its own photo + label.
+// pageLink: the pillar page this category links to from the homepage — a body-level
+// keyword-anchored link from the homepage to each money page (SEO Rules: topic clusters).
 export const PRODUCT_CATEGORIES = [
   {
     id: "cua-cuon",
     name: "Cửa Cuốn",
     tagline: "Vận hành êm – Bảo mật cao – Tiết kiệm không gian",
+    pageLink: { href: "/cua-cuon-nhom-can-tho", label: "Xem Cửa Cuốn Cần Thơ" },
     subtypes: [
       { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "/products/cua-cuon/nhom-duc.webp" },
       { name: "Cửa Cuốn Thép Sơn Tĩnh Điện", image: "/products/cua-cuon/thep-tinh-dien.webp" },
@@ -120,6 +123,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-nhom-kinh",
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
+    pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
     subtypes: [
       { name: "Hệ Cửa Đi", image: "/products/cua-nhom-kinh/he-cua-di.webp" },
       { name: "Hệ Cửa Sổ", image: "/products/cua-nhom-kinh/he-cua-so.webp" },
@@ -131,6 +135,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-keo",
     name: "Cửa Kéo",
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
+    pageLink: { href: "/cua-keo-can-tho", label: "Xem Cửa Kéo Cần Thơ" },
     subtypes: [
       { name: "Cửa Kéo Thép Công Nghệ Đức", image: "/products/cua-keo/thep-duc.webp" },
       { name: "Cửa Kéo Nhôm Công Nghệ Đức", image: "/products/cua-keo/nhom-duc.webp" },
@@ -143,6 +148,7 @@ export const PRODUCT_CATEGORIES = [
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
     contain: true,
+    pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
     subtypes: [
       { name: "Motor Cửa Cuốn Nhập Khẩu Chính Hãng", image: "/products/motor-binh-luu-dien/motor-cua-cuon.webp" },
       { name: "Bình Lưu Điện Cửa Cuốn", image: "/products/motor-binh-luu-dien/binh-luu-dien.webp" },
