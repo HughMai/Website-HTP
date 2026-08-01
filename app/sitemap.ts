@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${siteUrl}/cua-cuon-can-tho`,
+      lastModified: new Date("2026-07-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${siteUrl}/sua-chua-cua-cuon-can-tho`,
       lastModified: new Date("2026-05-14"),
       changeFrequency: "monthly",
