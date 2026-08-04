@@ -74,10 +74,10 @@ export default function SanPhamPage() {
               Sản phẩm cửa Hưng Thành Phát
             </h1>
             <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">
-              Bốn dòng chính, sản xuất và lắp đặt tại Cần Thơ từ{" "}
-              {SITE.foundedYear}. Giá bên dưới là giá tham khảo theo m² — số
-              cuối cùng phụ thuộc khổ cửa và vật tư bạn chọn, luôn báo trước khi
-              làm.
+              {PRODUCT_CATEGORIES.length} dòng chính, sản xuất và lắp đặt tại
+              Cần Thơ từ {SITE.foundedYear}. Giá bên dưới là giá tham khảo theo
+              m² — số cuối cùng phụ thuộc khổ cửa và vật tư bạn chọn, luôn báo
+              trước khi làm.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button

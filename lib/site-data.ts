@@ -259,13 +259,15 @@ export const PRODUCT_CATEGORIES = [
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
     priceFrom: "từ 3.300.000đ/bộ",
-    contain: true,
     pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
+    // No photos: there is no "công trình" for a remote control, and the supplier
+    // shots that used to sit here were a competitor's catalogue images. Renders
+    // as tiles until the xưởng photographs the units it actually stocks.
     subtypes: [
-      { name: "Motor Cửa Cuốn Nhập Khẩu Chính Hãng", image: "/products/motor-binh-luu-dien/motor-cua-cuon.webp" },
-      { name: "Bình Lưu Điện Cửa Cuốn", image: "/products/motor-binh-luu-dien/binh-luu-dien.webp" },
-      { name: "Remote Cửa Cuốn", image: "/products/motor-binh-luu-dien/remote-cua-cuon.webp" },
-      { name: "Hệ Thống Dừng & Còi Báo Động", image: "/products/motor-binh-luu-dien/he-thong-bao-dong.webp" },
+      { name: "Motor Cửa Cuốn Nhập Khẩu Chính Hãng", image: "" },
+      { name: "Bình Lưu Điện Cửa Cuốn", image: "" },
+      { name: "Remote Cửa Cuốn", image: "" },
+      { name: "Hệ Thống Dừng & Còi Báo Động", image: "" },
     ],
   },
 ] as const;

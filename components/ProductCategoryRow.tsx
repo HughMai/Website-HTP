@@ -93,6 +93,7 @@ export function ProductCategoryRow({
       </div>
 
       {/* Cards — horizontal scroll on mobile, grid from lg */}
+      {cards.length > 0 && (
       <ul className="mt-5 -mx-4 flex gap-3 overflow-x-auto px-4 pb-3 snap-x snap-mandatory lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0">
         {cards.map((card) => (
           <li
@@ -141,21 +142,51 @@ export function ProductCategoryRow({
           </li>
         ))}
       </ul>
+      )}
 
-      {/* Subtype chips — keeps the product taxonomy (and its keywords) on the
-          page without needing a studio photo for every single variant. */}
-      <ul className="mt-4 flex flex-wrap gap-2">
-        {category.subtypes.map((s) => (
-          <li key={s.name}>
-            <Link
-              href={category.pageLink.href}
-              className="inline-block rounded-full border border-brand/15 bg-white px-3 py-1.5 text-xs font-medium text-brand/75 transition hover:border-amber-400 hover:bg-amber-50 hover:text-brand"
-            >
-              {s.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {/* Subtype list — keeps the product taxonomy (and its keywords) on the
+          page without needing a studio photo for every single variant. When a
+          category has no photos at all it carries the block on its own, so it
+          renders as tiles rather than a thin strip of chips. */}
+      {cards.length > 0 ? (
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {category.subtypes.map((s) => (
+            <li key={s.name}>
+              <Link
+                href={category.pageLink.href}
+                className="inline-block rounded-full border border-brand/15 bg-white px-3 py-1.5 text-xs font-medium text-brand/75 transition hover:border-amber-400 hover:bg-amber-50 hover:text-brand"
+              >
+                {s.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {category.subtypes.map((s) => (
+            <li key={s.name}>
+              <Link
+                href={category.pageLink.href}
+                className="group flex h-full items-start gap-3 rounded-xl border border-brand/10 bg-white p-4 transition hover:border-amber-400 hover:shadow-md"
+              >
+                <span
+                  className="mt-1 h-2 w-2 shrink-0 rounded-full bg-amber-400"
+                  aria-hidden
+                />
+                <span>
+                  <span className="block text-sm font-semibold text-brand transition-colors group-hover:text-amber-600">
+                    {s.name}
+                  </span>
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-amber-600">
+                    Hỏi giá &amp; tình trạng hàng
+                    <ArrowRight className="h-3 w-3" aria-hidden />
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
