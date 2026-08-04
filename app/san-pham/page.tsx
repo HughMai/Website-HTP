@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ProductCategoryRow } from "@/components/ProductCategoryRow";
 import { Button } from "@/components/ui/button";
 import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
@@ -105,65 +105,7 @@ export default function SanPhamPage() {
         <section className="bg-white py-14 md:py-20">
           <div className="container space-y-14">
             {PRODUCT_CATEGORIES.map((cat) => (
-              <div key={cat.id}>
-                <div className="flex flex-wrap items-end justify-between gap-3 border-b border-brand/15 pb-3">
-                  <div>
-                    <div className="h-0.5 w-12 rounded-full bg-amber-400" />
-                    <h2 className="mt-2 text-xl font-extrabold uppercase tracking-wider text-brand md:text-2xl">
-                      {cat.name}
-                    </h2>
-                    <p className="mt-1 text-sm text-brand/65">{cat.tagline}</p>
-                    <p className="mt-1 text-sm font-bold text-amber-600">
-                      {cat.priceFrom}
-                    </p>
-                  </div>
-                  <Link
-                    href={cat.pageLink.href}
-                    className="inline-flex items-center gap-1 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-600"
-                  >
-                    {cat.pageLink.label}
-                    <ArrowRight className="h-4 w-4" aria-hidden />
-                  </Link>
-                </div>
-
-                <ul className="mt-5 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
-                  {cat.subtypes.map((s) => (
-                    <li key={s.name}>
-                      <Link
-                        href={cat.pageLink.href}
-                        className="group block overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
-                      >
-                        <div
-                          className={
-                            "relative aspect-[340/300] w-full overflow-hidden " +
-                            ((cat as { contain?: boolean }).contain
-                              ? "bg-white p-4"
-                              : "bg-brand-50")
-                          }
-                        >
-                          <Image
-                            src={s.image}
-                            alt={`${s.name} — lắp đặt tại Cần Thơ`}
-                            fill
-                            sizes="(min-width: 1024px) 22vw, 45vw"
-                            className={
-                              "transition-transform duration-500 group-hover:scale-[1.04] " +
-                              ((cat as { contain?: boolean }).contain
-                                ? "object-contain"
-                                : "object-cover object-top")
-                            }
-                          />
-                        </div>
-                        <div className="border-t border-brand/10 bg-gray-50 px-3 py-3">
-                          <p className="min-h-[2.4em] text-[11px] font-bold uppercase leading-snug tracking-wider text-brand transition-colors group-hover:text-amber-600 md:text-xs">
-                            {s.name}
-                          </p>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ProductCategoryRow key={cat.id} category={cat} headingLevel="h2" />
             ))}
           </div>
         </section>

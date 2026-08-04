@@ -104,9 +104,11 @@ export function Footer() {
             ))}
             <li>
               <span className="text-white/55">Email: </span>
+              {/* break-all: the address is one unbreakable token and was
+                  pushing the 2-col mobile footer wider than the viewport. */}
               <a
                 href={`mailto:${SITE.email}`}
-                className="hover:text-white"
+                className="break-all hover:text-white"
               >
                 {SITE.email}
               </a>

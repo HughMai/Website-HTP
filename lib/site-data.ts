@@ -171,15 +171,28 @@ export const PRODUCT_CATEGORIES = [
     // self-qualify before calling. Same source as QuoteAndContact's PRICE_PER_SQM.
     priceFrom: "từ 500.000đ/m²",
     pageLink: { href: "/cua-cuon-nhom-can-tho", label: "Xem Cửa Cuốn Cần Thơ" },
+    // Real installs from the công trình library, hand-picked per category.
+    // `label` describes only what the photo actually shows — colour, form and
+    // setting. It never claims a material or brand that can't be seen, so the
+    // "ảnh thực tế, không phải ảnh mẫu" promise holds everywhere on the site.
+    showcase: [
+      { slug: "p01-cc-nan-bac", label: "Cửa cuốn nan nhôm bạc" },
+      { slug: "p24-cc-xam-duc-lo", label: "Cửa cuốn khe thoáng xám" },
+      { slug: "p07-cc-kem-san-gach", label: "Cửa cuốn kem nhà phố" },
+      { slug: "p31-xuong-cc-xanh", label: "Cửa cuốn nhà xưởng khổ lớn" },
+    ],
+    // `image: ""` = render as a text chip, not a card. The supplier catalogue
+    // photos that used to sit here carried a competitor's watermark; the cards
+    // above come from `showcase` (real HTP installs) instead.
     subtypes: [
-      { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "/products/cua-cuon/nhom-duc.webp" },
-      { name: "Cửa Cuốn Thép Sơn Tĩnh Điện", image: "/products/cua-cuon/thep-tinh-dien.webp" },
-      { name: "Cửa Cuốn Tấm Liền", image: "/products/cua-cuon/tam-lien.webp" },
-      { name: "Cửa Cuốn Song Ngang, Mắt Võng", image: "/products/cua-cuon/song-ngang-mat-vong.webp" },
-      { name: "Cửa Cuốn Inox SUS 304", image: "/products/cua-cuon/inox-sus-304.webp" },
-      { name: "Cửa Cuốn Tole Công Nghệ Đài Loan", image: "/products/cua-cuon/tole-dai-loan.webp" },
-      { name: "Cửa Trượt Trần", image: "/products/cua-cuon/truot-tran.webp" },
-      { name: "Cửa Cuốn Đóng Đặc Biệt", image: "/products/cua-cuon/dong-dac-biet.webp" },
+      { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "" },
+      { name: "Cửa Cuốn Thép Sơn Tĩnh Điện", image: "" },
+      { name: "Cửa Cuốn Tấm Liền", image: "" },
+      { name: "Cửa Cuốn Song Ngang, Mắt Võng", image: "" },
+      { name: "Cửa Cuốn Inox SUS 304", image: "" },
+      { name: "Cửa Cuốn Tole Công Nghệ Đài Loan", image: "" },
+      { name: "Cửa Trượt Trần", image: "" },
+      { name: "Cửa Cuốn Đóng Đặc Biệt", image: "" },
     ],
   },
   {
@@ -188,11 +201,38 @@ export const PRODUCT_CATEGORIES = [
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
     priceFrom: "từ 1.400.000đ/m²",
     pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
+    showcase: [
+      { slug: "nk23-cua-nhom-kinh-doi-xam", label: "Cửa đi nhôm kính 2 cánh" },
+      { slug: "nk38-cua-nhom-4-canh-xam", label: "Cửa đi nhôm kính 4 cánh" },
+      { slug: "nk42-cua-so-nhom-can", label: "Cửa sổ nhôm kính" },
+      { slug: "nk27-nha-kinh-be-nuoc", label: "Mặt dựng kính nhà phố" },
+    ],
     subtypes: [
-      { name: "Hệ Cửa Đi", image: "/products/cua-nhom-kinh/he-cua-di.webp" },
-      { name: "Hệ Cửa Sổ", image: "/products/cua-nhom-kinh/he-cua-so.webp" },
-      { name: "Hệ Mặt Dựng", image: "/products/cua-nhom-kinh/he-mat-dung.webp" },
-      { name: "Hệ Lan Can – Cầu Thang Nhôm Kính", image: "/products/cua-nhom-kinh/lan-can-cau-thang.webp" },
+      { name: "Hệ Cửa Đi", image: "" },
+      { name: "Hệ Cửa Sổ", image: "" },
+      { name: "Hệ Mặt Dựng", image: "" },
+    ],
+  },
+  {
+    id: "lan-can-cau-thang",
+    name: "Lan Can – Cầu Thang Kính",
+    tagline: "Kính cường lực – Tay vịn gỗ hoặc nhôm – Thoáng và an toàn",
+    priceFrom: "từ 1.950.000đ/m²",
+    pageLink: {
+      href: "/lan-can-nhom-kinh-can-tho",
+      label: "Xem Lan Can Nhôm Kính Cần Thơ",
+    },
+    showcase: [
+      { slug: "nk36-lan-can-ban-cong-go", label: "Lan can kính ban công" },
+      { slug: "nk47-lan-can-thang-kinh", label: "Lan can kính cầu thang" },
+      { slug: "nk10-369-nguyen-van-cu-thang-kinh", label: "Cầu thang kính cong" },
+      { slug: "nk21-lan-can-cong-decor-vang", label: "Lan can kính cong" },
+    ],
+    subtypes: [
+      { name: "Lan Can Kính Ban Công", image: "" },
+      { name: "Lan Can – Cầu Thang Kính", image: "" },
+      { name: "Tay Vịn Gỗ / Nhôm 3D", image: "" },
+      { name: "Vách Kính Cường Lực", image: "" },
     ],
   },
   {
@@ -201,11 +241,17 @@ export const PRODUCT_CATEGORIES = [
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
     priceFrom: "từ 540.000đ/m²",
     pageLink: { href: "/cua-keo-can-tho", label: "Xem Cửa Kéo Cần Thơ" },
+    showcase: [
+      { slug: "p23-keo-xanh-vlxd-linh", label: "Cửa kéo xanh mặt tiền" },
+      { slug: "p55-keo-trang-chau-cay", label: "Cửa kéo trắng nhà phố" },
+      { slug: "p39-shop-keo-kem-oto", label: "Cửa kéo kem mặt tiền shop" },
+      { slug: "p69-day-keo-xanh-xuong", label: "Dãy cửa kéo nhà xưởng" },
+    ],
     subtypes: [
-      { name: "Cửa Kéo Thép Công Nghệ Đức", image: "/products/cua-keo/thep-duc.webp" },
-      { name: "Cửa Kéo Nhôm Công Nghệ Đức", image: "/products/cua-keo/nhom-duc.webp" },
-      { name: "Cửa Kéo Hoa Văn Cổ S9", image: "/products/cua-keo/hoa-van-co.webp" },
-      { name: "Cửa Kéo Inox", image: "/products/cua-keo/inox.webp" },
+      { name: "Cửa Kéo Thép Công Nghệ Đức", image: "" },
+      { name: "Cửa Kéo Nhôm Công Nghệ Đức", image: "" },
+      { name: "Cửa Kéo Hoa Văn Cổ S9", image: "" },
+      { name: "Cửa Kéo Inox", image: "" },
     ],
   },
   {

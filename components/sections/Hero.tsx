@@ -23,15 +23,17 @@ const trustChips = [
   { icon: BadgeCheck, label: "Lắp xong mới thanh toán" },
 ];
 
-// Real installs, not catalog renders — the arch frames echo a door opening.
+// Real installs from the công trình library — the arch frames echo a door
+// opening. These must never be catalogue stock: the supplier photos that used
+// to sit here carried a competitor's watermark.
 const heroShots = [
   {
-    src: "/products/cua-cuon/nhom-duc.webp",
-    alt: "Cửa cuốn nhôm công nghệ Đức lắp tại nhà phố Cần Thơ",
+    src: "/cong-trinh/p01-cc-nan-bac/01.jpg",
+    alt: "Cửa cuốn nan nhôm do Hưng Thành Phát lắp tại Cần Thơ",
   },
   {
-    src: "/products/cua-nhom-kinh/he-cua-di.webp",
-    alt: "Hệ cửa đi nhôm kính lắp tại nhà ở Cần Thơ",
+    src: "/cong-trinh/nk38-cua-nhom-4-canh-xam/01.jpg",
+    alt: "Cửa đi nhôm kính 4 cánh do Hưng Thành Phát lắp tại Cần Thơ",
   },
 ];
 
