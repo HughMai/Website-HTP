@@ -197,3 +197,45 @@ All brand constants live in `lib/site-data.ts` — `SITE.brand`, `SITE.hotlines`
 
 - `memory/research/keyword-research/2026-05-14-htp-door.md` — full keyword data
 - `memory/hot-cache.md` — live SEO decisions and veto items (auto-loaded by skills)
+
+---
+
+## Skill routing
+
+When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
+
+Key routing rules:
+- Product ideas/brainstorming → invoke /office-hours
+- Strategy/scope → invoke /plan-ceo-review
+- Architecture → invoke /plan-eng-review
+- Design system/plan review → invoke /design-consultation or /plan-design-review
+- Full review pipeline → invoke /autoplan
+- Bugs/errors → invoke /investigate
+- QA/testing site behavior → invoke /qa or /qa-only
+- Code review/diff check → invoke /review
+- Visual polish → invoke /design-review
+- Ship/deploy/PR → invoke /ship or /land-and-deploy
+- Save progress → invoke /context-save
+- Resume context → invoke /context-restore
+- Author a backlog-ready spec/issue → invoke /spec
+
+### Browser targets
+
+Browser-driven skills (`/browse`, `/design-review`, `/landing-report`, `/benchmark`, `/canary`, `/qa`) default to:
+
+| Target | URL |
+|---|---|
+| Production | https://hungthanhphat.vn |
+| Staging | https://website-htp.vercel.app |
+| Local dev | http://localhost:3000 (`npm run dev` first) |
+
+Priority pages for visual/SEO passes, in order: `/` (homepage), `/cua-cuon-nhom-can-tho` (pillar), `/bao-gia-cua-cuon-can-tho` (conversion), `/cua-cuon-binh-thuy` (district template — represents 5 near-identical pages).
+
+Always check **390×844** alongside desktop — mobile is the majority of this site's traffic and Footer/Products have mobile-only layouts (see Mobile Patterns).
+
+### Skill guardrails for this repo
+
+- **Warranty phrasing is a HARD RULE** (Locked Decisions #1). Any skill that writes or rewrites copy — `/design-review` fix loops, `/design-html`, content skills — must never emit a year count. If a fix would touch warranty text, stop and ask.
+- **Brand constants come from `lib/site-data.ts`.** Skills that patch components must read from `SITE.*`, never hardcode.
+- `/design-review` operates on the rendered site, not source. Calibrate findings against `DESIGN.md` in this repo root.
+- `/ship` pushes `main`, which auto-deploys to Vercel production. There is no manual gate — treat every ship as a live deploy.
