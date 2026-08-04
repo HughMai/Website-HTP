@@ -1,7 +1,17 @@
 import { MetadataRoute } from "next";
+import { CONG_TRINH } from "@/lib/cong-trinh-data";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
+
+// One entry per công trình detail page. Generated rather than hand-listed so
+// adding installs to cong-trinh-data.ts keeps the sitemap correct on its own.
+const congTrinhEntries: MetadataRoute.Sitemap = CONG_TRINH.map((p) => ({
+  url: `${siteUrl}/cong-trinh/${p.slug}`,
+  lastModified: new Date("2026-08-04"),
+  changeFrequency: "yearly" as const,
+  priority: 0.4,
+}));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -10,6 +20,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-05-14"),
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: `${siteUrl}/san-pham`,
+      lastModified: new Date("2026-08-04"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/cong-trinh`,
+      lastModified: new Date("2026-08-04"),
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${siteUrl}/cua-cuon-can-tho`,
@@ -137,5 +159,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.65,
     },
+    ...congTrinhEntries,
   ];
 }

@@ -29,6 +29,66 @@ export const NAV_LINKS = [
 
 export type NavId = (typeof NAV_LINKS)[number]["id"];
 
+// Zalo chat target — the number customers already message the shop on.
+export const ZALO_URL = "https://zalo.me/0945042345";
+
+// Hotlines split by what the caller wants, so they reach the right person first
+// try instead of being passed around. Rendered in the Footer and the /lien-he block.
+export const HOTLINE_ROLES = [
+  { role: "Báo giá & tư vấn", number: SITE.hotlines[0] },
+  { role: "Kỹ thuật & bảo hành", number: SITE.hotlines[1] },
+  { role: "Văn phòng (cố định)", number: SITE.landline },
+] as const;
+
+// Route-based navigation. `children` render as a dropdown on desktop and an
+// expanded group in the mobile sheet. Every href is a real page — the old
+// anchor-only nav could not reach the 21 landing pages at all.
+export const MAIN_NAV = [
+  { href: "/", label: "Trang Chủ" },
+  {
+    href: "/san-pham",
+    label: "Sản Phẩm",
+    children: [
+      { href: "/cua-cuon-nhom-can-tho", label: "Cửa Cuốn Nhôm" },
+      { href: "/cua-nhom-kinh-can-tho", label: "Cửa Nhôm Kính" },
+      { href: "/cua-keo-can-tho", label: "Cửa Kéo" },
+      { href: "/cua-keo-thep-can-tho", label: "Cửa Kéo Thép" },
+      { href: "/lan-can-nhom-kinh-can-tho", label: "Lan Can Nhôm Kính" },
+      { href: "/cua-cuon-nha-xuong-can-tho", label: "Cửa Cuốn Nhà Xưởng" },
+    ],
+  },
+  { href: "/cong-trinh", label: "Công Trình" },
+  {
+    href: "/bao-gia-cua-cuon-can-tho",
+    label: "Bảng Giá",
+    children: [
+      { href: "/bao-gia-cua-cuon-can-tho", label: "Báo Giá Cửa Cuốn" },
+      { href: "/bang-gia-cua-keo-can-tho", label: "Bảng Giá Cửa Kéo" },
+      { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Bảng Giá Nhôm Kính" },
+    ],
+  },
+  {
+    href: "/lap-dat-cua-cuon-can-tho",
+    label: "Dịch Vụ",
+    children: [
+      { href: "/lap-dat-cua-cuon-can-tho", label: "Lắp Đặt Cửa Cuốn" },
+      { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa Cửa Cuốn" },
+      { href: "/blog", label: "Kinh Nghiệm & Tư Vấn" },
+    ],
+  },
+  { href: "/#lien-he", label: "Liên Hệ" },
+] as const;
+
+// Districts HTP installs in — doubles as the internal-link block for the five
+// district landing pages.
+export const SERVICE_AREAS = [
+  { href: "/cua-cuon-ninh-kieu", label: "Ninh Kiều" },
+  { href: "/cua-cuon-binh-thuy", label: "Bình Thủy" },
+  { href: "/cua-cuon-cai-rang", label: "Cái Răng" },
+  { href: "/cua-cuon-o-mon", label: "Ô Môn" },
+  { href: "/cua-cuon-thot-not", label: "Thốt Nốt" },
+] as const;
+
 // Internal-link clusters rendered in the Footer on every page. Landing pages that
 // are only reachable from sitemap.xml get deprioritised by crawlers ("Discovered —
 // currently not indexed"); these links are what make them crawlable.
@@ -92,10 +152,10 @@ export const STATS = [
       "Đối tác lâu dài cùng chủ đầu tư, nhà thầu và gia chủ trên toàn quốc.",
   },
   {
-    value: "5–10",
-    label: "Năm Bảo Hành",
+    value: "24/7",
+    label: "Bảo Hành & Bảo Trì",
     description:
-      "Cam kết bảo hành dài hạn cùng dịch vụ bảo trì tận nơi 24/7.",
+      "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất, bảo trì tận nơi khi cần.",
   },
 ] as const;
 
@@ -107,6 +167,9 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-cuon",
     name: "Cửa Cuốn",
     tagline: "Vận hành êm – Bảo mật cao – Tiết kiệm không gian",
+    // Lowest per-m² rate in the quote engine below — shown so a visitor can
+    // self-qualify before calling. Same source as QuoteAndContact's PRICE_PER_SQM.
+    priceFrom: "từ 500.000đ/m²",
     pageLink: { href: "/cua-cuon-nhom-can-tho", label: "Xem Cửa Cuốn Cần Thơ" },
     subtypes: [
       { name: "Cửa Cuốn Nhôm Công Nghệ Đức", image: "/products/cua-cuon/nhom-duc.webp" },
@@ -123,6 +186,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-nhom-kinh",
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
+    priceFrom: "từ 1.400.000đ/m²",
     pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
     subtypes: [
       { name: "Hệ Cửa Đi", image: "/products/cua-nhom-kinh/he-cua-di.webp" },
@@ -135,6 +199,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-keo",
     name: "Cửa Kéo",
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
+    priceFrom: "từ 540.000đ/m²",
     pageLink: { href: "/cua-keo-can-tho", label: "Xem Cửa Kéo Cần Thơ" },
     subtypes: [
       { name: "Cửa Kéo Thép Công Nghệ Đức", image: "/products/cua-keo/thep-duc.webp" },
@@ -147,6 +212,7 @@ export const PRODUCT_CATEGORIES = [
     id: "motor-binh-luu-dien",
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
+    priceFrom: "từ 3.300.000đ/bộ",
     contain: true,
     pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
     subtypes: [

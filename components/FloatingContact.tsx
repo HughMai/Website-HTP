@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
-import { SITE } from "@/lib/site-data";
+import { SITE, ZALO_URL } from "@/lib/site-data";
 
 function ZaloIcon() {
   return (
@@ -29,8 +29,65 @@ function PulseRings({ color }: { color: string }) {
   );
 }
 
+/**
+ * One rail item: a 52px circle that slides its label out on hover. Circles keep
+ * the rail out of the way of page content — the previous 200px pills sat on top
+ * of the bottom-right of every section, covering "Xem tất cả" links.
+ */
+function RailButton({
+  href,
+  label,
+  sublabel,
+  color,
+  shadow,
+  pulse,
+  showPulse,
+  external,
+  children,
+}: {
+  href: string;
+  label: string;
+  sublabel: string;
+  color: string;
+  shadow: string;
+  pulse: string;
+  showPulse: boolean;
+  external?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="group relative">
+      {showPulse && <PulseRings color={pulse} />}
+      <motion.a
+        href={href}
+        {...(external
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 420, damping: 18 }}
+        className={`relative flex h-[52px] items-center gap-3 overflow-hidden rounded-full ${color} ${shadow} pl-[10px] pr-[10px] text-white transition-[padding] duration-300 group-hover:pr-5`}
+        aria-label={`${sublabel} — ${label}`}
+      >
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20">
+          {children}
+        </span>
+        {/* Label expands on hover only — collapsed by default so the rail is
+            just three circles, like the reference site's. */}
+        <span className="grid max-w-0 grid-rows-[auto_auto] overflow-hidden text-left transition-[max-width] duration-300 group-hover:max-w-[160px]">
+          <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+            {sublabel}
+          </span>
+          <span className="whitespace-nowrap text-sm font-bold tracking-wide">
+            {label}
+          </span>
+        </span>
+      </motion.a>
+    </div>
+  );
+}
+
 export function FloatingContact() {
-  const zaloHref = "https://zalo.me/0945042345";
   const mapHref = SITE.mapDirectionsUrl;
   const phoneHref = `tel:${SITE.hotlines[0].replace(/\s/g, "")}`;
 
@@ -44,115 +101,55 @@ export function FloatingContact() {
   }, []);
 
   return (
+    // Desktop only — on mobile the same three actions live in StickyCallBar,
+    // which sits in the thumb zone instead of over the content.
     <div
-      className="fixed right-3 bottom-5 z-50 flex flex-col items-end gap-2 md:right-6 md:bottom-10 md:gap-3"
+      className="fixed bottom-10 right-6 z-50 hidden flex-col items-end gap-3 md:flex"
       aria-label="Liên hệ nhanh"
     >
-      {/* ── MAP ── */}
-      {/* Mobile: icon-only circle */}
-      <a
+      <RailButton
         href={mapHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Xem bản đồ showroom"
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/40 transition active:scale-95 md:hidden"
+        external
+        label="Xem Bản Đồ"
+        sublabel="Showroom"
+        color="bg-emerald-500"
+        shadow="shadow-[0_8px_28px_rgba(16,185,129,0.45)]"
+        pulse="bg-emerald-500/20"
+        showPulse={isDesktop}
       >
         <MapPin className="h-5 w-5" />
-      </a>
-      {/* Desktop: pill with pulse */}
-      <div className="relative hidden md:block">
-        {isDesktop && <PulseRings color="bg-emerald-500/20" />}
-        <motion.a
-          href={mapHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="relative flex w-[200px] items-center gap-3 rounded-full bg-emerald-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(16,185,129,0.45)]"
-          aria-label="Xem bản đồ showroom"
-        >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
-            <MapPin className="h-5 w-5" />
-          </span>
-          <div className="text-left">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
-              Showroom
-            </p>
-            <p className="text-sm font-bold tracking-wide">Xem Bản Đồ</p>
-          </div>
-        </motion.a>
-      </div>
+      </RailButton>
 
-      {/* ── ZALO ── */}
-      {/* Mobile: icon-only circle */}
-      <a
-        href={zaloHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Nhắn tin qua Zalo"
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-lg shadow-blue-500/40 transition active:scale-95 md:hidden"
+      <RailButton
+        href={ZALO_URL}
+        external
+        label="Chat Zalo"
+        sublabel="Nhắn Tin"
+        color="bg-[#0068FF]"
+        shadow="shadow-[0_8px_28px_rgba(0,104,255,0.45)]"
+        pulse="bg-blue-500/20"
+        showPulse={isDesktop}
       >
         <ZaloIcon />
-      </a>
-      {/* Desktop: pill with pulse */}
-      <div className="relative hidden md:block">
-        {isDesktop && <PulseRings color="bg-blue-500/20" />}
-        <motion.a
-          href={zaloHref}
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="relative flex w-[200px] items-center gap-3 rounded-full bg-[#0068FF] py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(0,104,255,0.45)]"
-          aria-label="Nhắn tin qua Zalo"
-        >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20">
-            <ZaloIcon />
-          </span>
-          <div className="text-left">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
-              Nhắn Tin
-            </p>
-            <p className="text-sm font-bold tracking-wide">Chat Zalo</p>
-          </div>
-        </motion.a>
-      </div>
+      </RailButton>
 
-      {/* ── PHONE ── */}
-      {/* Mobile: icon-only circle */}
-      <a
+      <RailButton
         href={phoneHref}
-        aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-rose-500 text-white shadow-lg shadow-red-500/40 transition active:scale-95 md:hidden"
+        label={SITE.hotlines[0]}
+        sublabel="Số Điện Thoại"
+        color="bg-gradient-to-br from-red-500 to-rose-500"
+        shadow="shadow-[0_8px_28px_rgba(239,68,68,0.45)]"
+        pulse="bg-red-500/20"
+        showPulse={isDesktop}
       >
-        <Phone className="h-5 w-5" />
-      </a>
-      {/* Desktop: pill with pulse */}
-      <div className="relative hidden md:block">
-        {isDesktop && <PulseRings color="bg-red-500/20" />}
-        <motion.a
-          href={phoneHref}
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 420, damping: 18 }}
-          className="relative flex w-[200px] items-center gap-3 rounded-full bg-gradient-to-br from-red-500 to-rose-500 py-3 pl-3 pr-5 text-white shadow-[0_8px_28px_rgba(239,68,68,0.45)]"
-          aria-label={`Gọi hotline ${SITE.hotlines[0]}`}
+        <motion.span
+          animate={isDesktop ? { rotate: [0, -14, 14, -9, 9, -4, 4, 0] } : false}
+          transition={{ duration: 0.65, repeat: Infinity, repeatDelay: 2.5 }}
+          className="flex items-center justify-center"
         >
-          <motion.span
-            animate={isDesktop ? { rotate: [0, -14, 14, -9, 9, -4, 4, 0] } : false}
-            transition={{ duration: 0.65, repeat: Infinity, repeatDelay: 2.5 }}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20"
-          >
-            <Phone className="h-5 w-5" />
-          </motion.span>
-          <div className="text-left">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
-              Số Điện Thoại
-            </p>
-            <p className="text-sm font-bold tracking-wide">{SITE.hotlines[0]}</p>
-          </div>
-        </motion.a>
-      </div>
+          <Phone className="h-5 w-5" />
+        </motion.span>
+      </RailButton>
     </div>
   );
 }

@@ -22,6 +22,13 @@ const Testimonials = dynamic(() =>
   import("@/components/sections/Testimonials").then((m) => m.Testimonials)
 );
 const Gallery = dynamic(() => import("@/components/sections/Gallery").then((m) => m.Gallery));
+const CongTrinhShowcase = dynamic(() =>
+  import("@/components/sections/CongTrinhShowcase").then((m) => m.CongTrinhShowcase)
+);
+const CtaBand = dynamic(() => import("@/components/sections/CtaBand").then((m) => m.CtaBand));
+const ServiceAreas = dynamic(() =>
+  import("@/components/sections/ServiceAreas").then((m) => m.ServiceAreas)
+);
 const QuoteAndContact = dynamic(() =>
   import("@/components/sections/QuoteAndContact").then((m) => m.QuoteAndContact)
 );
@@ -37,9 +44,17 @@ export default function HomePage() {
         <Hero />
         <About />
         <Products />
+        <CtaBand source="Sau mục sản phẩm" />
+        <CongTrinhShowcase />
         <Process />
-        <Testimonials />
         <Gallery />
+        <Testimonials />
+        <CtaBand
+          title="Xem xong rồi — giờ cần con số cụ thể?"
+          subtitle="Nhập kích thước để tự ước tính, hoặc để lại số để thợ báo giá chính xác theo công trình."
+          source="Trước mục báo giá"
+        />
+        <ServiceAreas />
         <QuoteAndContact />
       </main>
       <Footer />

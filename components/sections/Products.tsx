@@ -22,9 +22,6 @@ const card = {
 };
 
 export function Products() {
-  const scrollContact = () =>
-    document.getElementById("lien-he")?.scrollIntoView({ behavior: "smooth" });
-
   return (
     <section
       id="san-pham"
@@ -70,6 +67,10 @@ export function Products() {
                       {upper}
                     </h3>
                     <p className="mt-1 text-sm text-brand/65">{cat.tagline}</p>
+                    {/* Price anchor so a visitor can self-qualify before calling */}
+                    <p className="mt-1 text-sm font-bold text-amber-600">
+                      {cat.priceFrom}
+                    </p>
                   </div>
                   <Link
                     href={cat.pageLink.href}
@@ -87,26 +88,29 @@ export function Products() {
                       variants={card}
                       whileHover={{ y: -4 }}
                       transition={{ type: "spring", stiffness: 240, damping: 22 }}
-                      className="w-[44vw] max-w-[200px] shrink-0 snap-start lg:w-auto lg:max-w-none group cursor-pointer overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
-                      onClick={scrollContact}
+                      className="w-[44vw] max-w-[200px] shrink-0 snap-start lg:w-auto lg:max-w-none group overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
                     >
-                      <div className={cn("relative aspect-[340/300] w-full overflow-hidden", (cat as any).contain ? "bg-white p-4" : "bg-brand-50")}>
-                        <Image
-                          src={s.image}
-                          alt={`${s.name} — lắp đặt tại Cần Thơ`}
-                          fill
-                          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 50vw"
-                          className={cn(
-                            "transition-transform duration-500 group-hover:scale-[1.04]",
-                            (cat as any).contain ? "object-contain" : "object-cover object-top"
-                          )}
-                        />
-                      </div>
-                      <div className="border-t border-brand/10 bg-gray-50 px-3 py-3 text-left">
-                        <p className="min-h-[2.4em] text-[11px] font-bold uppercase leading-snug tracking-wider text-brand md:text-xs">
-                          {s.name}
-                        </p>
-                      </div>
+                      {/* A real link to the pillar page — the old scroll-to-contact
+                          click left these cards invisible to crawlers. */}
+                      <Link href={cat.pageLink.href} className="block">
+                        <div className={cn("relative aspect-[340/300] w-full overflow-hidden", (cat as any).contain ? "bg-white p-4" : "bg-brand-50")}>
+                          <Image
+                            src={s.image}
+                            alt={`${s.name} — lắp đặt tại Cần Thơ`}
+                            fill
+                            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 50vw"
+                            className={cn(
+                              "transition-transform duration-500 group-hover:scale-[1.04]",
+                              (cat as any).contain ? "object-contain" : "object-cover object-top"
+                            )}
+                          />
+                        </div>
+                        <div className="border-t border-brand/10 bg-gray-50 px-3 py-3 text-left">
+                          <p className="min-h-[2.4em] text-[11px] font-bold uppercase leading-snug tracking-wider text-brand transition-colors group-hover:text-amber-600 md:text-xs">
+                            {s.name}
+                          </p>
+                        </div>
+                      </Link>
                     </motion.article>
                   ))}
                 </div>

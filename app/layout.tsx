@@ -3,6 +3,7 @@ import { Be_Vietnam_Pro, Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/toaster";
 import { FloatingContact } from "@/components/FloatingContact";
+import { StickyCallBar } from "@/components/StickyCallBar";
 import { SITE } from "@/lib/site-data";
 import "./globals.css";
 
@@ -262,6 +263,7 @@ export default function RootLayout({
         />
         {children}
         <FloatingContact />
+        <StickyCallBar />
         <Toaster />
       </body>
     </html>

@@ -23,3 +23,6 @@ customer_form/
 
 # Audit screenshots (large, generated)
 scripts/screenshots/
+
+# playwright-cli session logs & snapshots
+.playwright-cli/

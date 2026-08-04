@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
-import { FOOTER_LINK_GROUPS, NAV_LINKS, SITE } from "@/lib/site-data";
+import { FOOTER_LINK_GROUPS, HOTLINE_ROLES, MAIN_NAV, SITE } from "@/lib/site-data";
 
 const sitemapLinks = FOOTER_LINK_GROUPS.flatMap((g) => [...g.links]);
 
@@ -71,14 +71,14 @@ export function Footer() {
             Liên Kết Nhanh
           </p>
           <ul className="mt-3 space-y-1.5 text-xs sm:text-sm">
-            {NAV_LINKS.map((l) => (
-              <li key={l.id}>
-                <a
-                  href={`/#${l.id}`}
+            {MAIN_NAV.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
                   className="text-white/70 transition hover:text-white"
                 >
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -89,20 +89,19 @@ export function Footer() {
             Thông Tin Liên Hệ
           </p>
           <ul className="mt-3 space-y-1.5 text-xs text-white/75 sm:text-sm">
-            <li>
-              <span className="text-white/55">Hotline: </span>
-              <div className="mt-1 flex flex-col">
-                {SITE.hotlines.map((h) => (
-                  <a
-                    key={h}
-                    href={`tel:${h.replace(/\s/g, "")}`}
-                    className="hover:text-white"
-                  >
-                    {h}
-                  </a>
-                ))}
-              </div>
-            </li>
+            {/* Split by what the caller wants so they reach the right person
+                on the first try instead of being passed around. */}
+            {HOTLINE_ROLES.map((r) => (
+              <li key={r.number}>
+                <span className="text-white/55">{r.role}: </span>
+                <a
+                  href={`tel:${r.number.replace(/\s/g, "")}`}
+                  className="font-semibold text-white hover:text-amber-300"
+                >
+                  {r.number}
+                </a>
+              </li>
+            ))}
             <li>
               <span className="text-white/55">Email: </span>
               <a
