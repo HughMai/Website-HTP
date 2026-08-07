@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Inter, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import { Toaster } from "@/components/ui/toaster";
 import { FloatingContact } from "@/components/FloatingContact";
 import { StickyCallBar } from "@/components/StickyCallBar";
@@ -240,18 +239,13 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${inter.variable} ${playfair.variable} ${beVietnam.variable}`}>
       <head>
-        {/* Always hide #page-root — browser paints streaming HTML before any script can run.
-            JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits.
-            htp-page-reveal is the failsafe: data-htp-ready is set from a useEffect, so if hydration
-            never lands (blocked/failed/timed-out JS) the homepage would stay blank forever. The
-            keyframe reveals it at 8s instead; data-htp-ready cancels the keyframe when JS is alive. */}
-        <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0;animation:htp-page-reveal 1ms linear 8s forwards}@keyframes htp-page-reveal{to{opacity:1}}[data-htp-ready] #page-root{opacity:1;animation:none}` }} />
-        {/* JS off entirely — no need to make them wait out the 8s failsafe.
-            The section rules undo framer-motion's SSR'd hidden state: those
-            sections animate in on scroll, so without JS their content is real,
-            present in the DOM, and permanently invisible. */}
+        {/* Dark background so the first paint never flashes white behind the navy hero. */}
+        <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}` }} />
+        {/* Undo framer-motion's SSR'd hidden state: About/Process/Testimonials/Liên hệ
+            animate in on scroll, so without JS their content is real, present in the
+            DOM, and permanently invisible. */}
         <noscript>
-          <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:1;animation:none}#gioi-thieu *,#quy-trinh *,#danh-gia *,#lien-he *{opacity:1!important;transform:none!important}` }} />
+          <style dangerouslySetInnerHTML={{ __html: `#gioi-thieu *,#quy-trinh *,#danh-gia *,#lien-he *{opacity:1!important;transform:none!important}` }} />
         </noscript>
         <script
           type="application/ld+json"
@@ -263,14 +257,6 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
-        {/* beforeInteractive = injected into <head> as a blocking script before any hydration */}
-        <Script
-          id="htp-intro-guard"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('htp-intro-seen'))document.documentElement.setAttribute('data-htp-ready','1');}catch(e){document.documentElement.setAttribute('data-htp-ready','1');}`,
-          }}
-        />
         {children}
         <FloatingContact />
         <StickyCallBar />

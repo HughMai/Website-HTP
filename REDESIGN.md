@@ -96,5 +96,5 @@ The catalog links *into* them rather than competing with them (no keyword cannib
 1. Warranty phrasing is ONLY *"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"* — no year counts
    anywhere. (Mitadoor writes "Bảo hành 5 năm" on its product pages; HTP must not copy that.)
 2. Brand constants come from `lib/site-data.ts`.
-3. `id="page-root"` stays on the homepage root.
+3. `id="page-root"` is an inert wrapper — never gate its opacity (the intro animation is gone).
 4. Founded 2005 · 21+ năm.

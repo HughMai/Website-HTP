@@ -54,11 +54,7 @@ Amber on navy is the signature pairing. Do not introduce a third brand hue.
 
 Size frequency: 16px (577) ≫ 14px (172) ≫ 12px (125) ≫ 36px (6) ≫ 20px (4) ≫ 60px (2). **Six sizes carry the whole site** — a new size is a smell.
 
-h1 uses `text-balance` and `tracking-tight`. Headings are `font-semibold` (600), not bold — the one exception is the intro splash (below).
-
-### Intro splash is exempt
-
-`components/IntroAnimation.tsx` renders an h2 (`.i-title` inside `.i-mid`) at **72px / weight 800** — larger and heavier than the h1. This is intentional: it's a full-screen overlay shown once per session, never on-page alongside the h1. **Do not report this as an inverted heading hierarchy.**
+h1 uses `text-balance` and `tracking-tight`. Headings are `font-semibold` (600), not bold.
 
 ---
 
@@ -97,7 +93,7 @@ Always review 390×844 alongside desktop.
 - `marquee` — 40s linear infinite, `translateX(-50%)` on a doubled array (Testimonials). Pauses on hover.
 - `accordion-down` / `accordion-up` — 0.2s ease-out.
 - Framer Motion for section reveals; below-fold sections are `dynamic()` imported.
-- Intro animation: once per session via `sessionStorage['htp-intro-seen']`.
+- No pre-hero overlay: the intro animation was removed so the hero paints immediately.
 
 Motion is restrained and functional. No decorative parallax, no scroll-jacking.
 
@@ -114,5 +110,5 @@ Motion is restrained and functional. No decorative parallax, no scroll-jacking.
 
 1. **Warranty phrasing.** Only `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. Never a year count, anywhere — including any copy a design fix touches. If a fix needs warranty text, stop and ask.
 2. **Brand constants** come from `lib/site-data.ts` (`SITE.*`). Never hardcode brand, hotlines, address, email, founding year in a component.
-3. **`id="page-root"`** must stay on the homepage root — `IntroAnimation` reads it for the zoom effect.
+3. **`id="page-root"`** is now an inert wrapper on the homepage root. Nothing reads it — never gate its opacity or visibility.
 4. Founding year is **2005**; experience is **21+ năm** (2026).

@@ -49,7 +49,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 1. **Warranty phrasing (HARD RULE — NEVER VIOLATE)**: the ONLY allowed phrase is `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. **NEVER** write "5–10 năm", "5-10 năm", "10 năm", "5 năm", "trọn đời", or any other specific year count. **NEVER** invent a number. If a year is required (e.g., schema fields), ask the user — do not guess. Applies to: website copy, JSON-LD schema, GBP descriptions, ads, social posts, emails — everywhere.
 2. **Founding year**: `2005` everywhere — never 2008, never 2017.
 3. **Experience count**: `21+ năm` (2026) — update annually.
-4. **Roman numeral**: `Est. MMV` in IntroAnimation (not MMVIII).
+4. **Roman numeral**: `Est. MMV` (= 2005) if ever used again — the intro animation that carried it is deleted.
 5. **Origin story**: always mention "đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ" in About/history contexts.
 
 ---
@@ -90,7 +90,6 @@ components/sections/Testimonials.tsx  ← Infinite marquee reviews
 components/sections/Process.tsx       ← How we work
 components/sections/Footer.tsx        ← 2-col mobile, map hidden mobile
 components/sections/Navbar.tsx        ← Navigation
-components/IntroAnimation.tsx         ← First-visit door animation
 components/FloatingContact.tsx        ← Floating contact widgets
 lib/site-data.ts                      ← SINGLE SOURCE OF TRUTH for brand data
 ```
@@ -133,11 +132,14 @@ All brand constants live in `lib/site-data.ts` — `SITE.brand`, `SITE.hotlines`
 
 ## Technical Notes
 
-### Intro Animation (`components/IntroAnimation.tsx`)
-- Runs once per session (controlled via `sessionStorage['htp-intro-seen']`)
-- `#page-root` starts `opacity:0`; revealed either by intro cleanup or `data-htp-ready` attribute
-- `beforeInteractive` script sets `data-htp-ready` for returning visitors (no flash)
-- Stats in animation: `2005` (Thành lập) · `21+` (Năm kinh nghiệm) · `500+` (Công trình) · `Est. MMV`
+### Intro Animation — REMOVED
+The first-visit door animation is gone, along with `sessionStorage['htp-intro-seen']`,
+the `data-htp-ready` attribute, the `beforeInteractive` guard script and the
+`#page-root { opacity: 0 }` gate. It delayed the hero by ~2–3s on a first visit, and
+above the fold is where the conversion happens. The homepage now paints immediately.
+
+Do not reintroduce a full-screen overlay before the hero without a deliberate decision:
+it puts a fixed time cost in front of the only section every visitor sees.
 
 ### Mobile Patterns
 - Footer: 2-col grid on mobile (`grid-cols-2`), map hidden (`hidden md:block`)
@@ -151,7 +153,7 @@ All brand constants live in `lib/site-data.ts` — `SITE.brand`, `SITE.hotlines`
 - Hover pauses animation (`animation-play-state: paused`)
 
 ### Gotchas
-- **`id="page-root"`**: The homepage root element MUST keep this ID. IntroAnimation reads it for the zoom effect — removing or renaming it silently breaks the animation.
+- **`id="page-root"`**: still on the homepage root as a plain wrapper. Nothing reads it any more (the intro animation that did is deleted), so it carries no behaviour — do not add opacity/visibility gating back onto it.
 - **External images**: any new image hostname needs a `remotePatterns` entry in `next.config.mjs`, otherwise Next.js throws at build time.
 - **`@/` alias**: resolves to the project root via `tsconfig.json` `paths` — use for all imports.
 - **Dynamic imports**: homepage uses `dynamic(() => import(...))` for all sections below the fold. New sections added to `app/page.tsx` should follow the same pattern.
