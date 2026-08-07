@@ -57,7 +57,7 @@ const advantages = [
   },
   {
     icon: "✨",
-    title: "Cầu thang nhìn như biệt thự — gọi để tư vấn, báo giá",
+    title: "Cầu thang nhìn như biệt thự — từ 1.950.000đ/m",
     desc: "Kính trong suốt mở rộng tầm nhìn, ánh sáng lan khắp cầu thang. Khách đến nhà ai cũng hỏi thợ đâu để lắp.",
   },
   {
@@ -83,11 +83,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { item: "Lan can cầu thang nhôm kính (m dài)", range: "Gọi để tư vấn, báo giá" },
-  { item: "Lan can ban công nhôm kính (m dài)", range: "Gọi để tư vấn, báo giá" },
-  { item: "Lan can sân thượng (m dài)", range: "Gọi để tư vấn, báo giá" },
-  { item: "Vách kính phân cách nội thất (m²)", range: "Gọi để tư vấn, báo giá" },
-  { item: "Tay vịn nhôm đơn (không kính)", range: "Gọi để tư vấn, báo giá" },
+  { item: "Lan can cầu thang nhôm kính (m dài)", range: "1.800.000 – 3.500.000 đ/m" },
+  { item: "Lan can ban công nhôm kính (m dài)", range: "1.500.000 – 2.800.000 đ/m" },
+  { item: "Lan can sân thượng (m dài)", range: "1.600.000 – 3.000.000 đ/m" },
+  { item: "Vách kính phân cách nội thất (m²)", range: "1.200.000 – 2.200.000 đ/m²" },
+  { item: "Tay vịn nhôm đơn (không kính)", range: "600.000 – 1.200.000 đ/m" },
 ];
 
 const districts = [
@@ -99,7 +99,7 @@ const faqItems = [
   {
     question: "Lan can nhôm kính Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá lan can nhôm kính tại Cần Thơ tính theo mét dài, tùy loại (cầu thang, ban công, sân thượng) và độ dày kính. Gọi để tư vấn, báo giá sau khảo sát thực tế.",
+      "Giá lan can nhôm kính tại Cần Thơ từ 1.500.000 đến 3.500.000 đồng mỗi mét dài, tùy loại (cầu thang, ban công, sân thượng) và độ dày kính. Chưa bao gồm VAT. Liên hệ để được báo giá sau khảo sát thực tế.",
   },
   {
     question: "Kính lan can có an toàn không khi bị va đập mạnh?",

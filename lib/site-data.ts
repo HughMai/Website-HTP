@@ -168,9 +168,8 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-cuon",
     name: "Cửa Cuốn",
     tagline: "Vận hành êm – Bảo mật cao – Tiết kiệm không gian",
-    // No public prices anywhere on the site: quotes are given on the phone or
-    // after a survey. Keep this a call-to-action, never a figure.
-    priceFrom: "Gọi để tư vấn, báo giá",
+    // Lowest per-m² rate, shown so a visitor can self-qualify before calling.
+    priceFrom: "từ 500.000đ/m²",
     // "Xem Cửa Cuốn Cần Thơ" is head-term anchor text, so it has to point at the
     // head-term hub. It used to point at the nhôm variant, which taught Google
     // that the variant was the cửa cuốn page and left the hub with no links.
@@ -203,7 +202,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-nhom-kinh",
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
-    priceFrom: "Gọi để tư vấn, báo giá",
+    priceFrom: "từ 1.400.000đ/m²",
     pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
     showcase: [
       { slug: "nk23-cua-nhom-kinh-doi-xam", label: "Cửa đi nhôm kính 2 cánh" },
@@ -221,7 +220,7 @@ export const PRODUCT_CATEGORIES = [
     id: "lan-can-cau-thang",
     name: "Lan Can – Cầu Thang Kính",
     tagline: "Kính cường lực – Tay vịn gỗ hoặc nhôm – Thoáng và an toàn",
-    priceFrom: "Gọi để tư vấn, báo giá",
+    priceFrom: "từ 1.950.000đ/m²",
     pageLink: {
       href: "/lan-can-nhom-kinh-can-tho",
       label: "Xem Lan Can Nhôm Kính Cần Thơ",
@@ -243,7 +242,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-keo",
     name: "Cửa Kéo",
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
-    priceFrom: "Gọi để tư vấn, báo giá",
+    priceFrom: "từ 540.000đ/m²",
     pageLink: { href: "/cua-keo-can-tho", label: "Xem Cửa Kéo Cần Thơ" },
     showcase: [
       { slug: "p23-keo-xanh-vlxd-linh", label: "Cửa kéo xanh mặt tiền" },
@@ -262,7 +261,7 @@ export const PRODUCT_CATEGORIES = [
     id: "motor-binh-luu-dien",
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
-    priceFrom: "Gọi để tư vấn, báo giá",
+    priceFrom: "từ 3.300.000đ/bộ",
     pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
     // No photos: there is no "công trình" for a remote control, and the supplier
     // shots that used to sit here were a competitor's catalogue images. Renders

@@ -30,7 +30,7 @@ const motors = [
   {
     brand: "Somfy",
     origin: "Pháp",
-    priceRange: "Gọi để tư vấn, báo giá",
+    priceRange: "3.500.000 – 8.000.000đ",
     noiseLevel: "Cực kỳ êm",
     durability: "15–20 năm",
     warranty: "3–5 năm",
@@ -42,7 +42,7 @@ const motors = [
   {
     brand: "CAME",
     origin: "Ý",
-    priceRange: "Gọi để tư vấn, báo giá",
+    priceRange: "2.800.000 – 6.000.000đ",
     noiseLevel: "Rất êm",
     durability: "12–18 năm",
     warranty: "2–3 năm",
@@ -54,7 +54,7 @@ const motors = [
   {
     brand: "Nice",
     origin: "Ý",
-    priceRange: "Gọi để tư vấn, báo giá",
+    priceRange: "1.800.000 – 4.500.000đ",
     noiseLevel: "Êm",
     durability: "10–15 năm",
     warranty: "2 năm",
@@ -66,7 +66,7 @@ const motors = [
   {
     brand: "B&D (Công Nghệ Úc)",
     origin: "Úc",
-    priceRange: "Gọi để tư vấn, báo giá",
+    priceRange: "2.200.000 – 5.000.000đ",
     noiseLevel: "Rất êm",
     durability: "12–15 năm",
     warranty: "3 năm",
@@ -78,7 +78,7 @@ const motors = [
   {
     brand: "Motor Đài Loan",
     origin: "Đài Loan",
-    priceRange: "Gọi để tư vấn, báo giá",
+    priceRange: "600.000 – 1.500.000đ",
     noiseLevel: "Có tiếng ồn nhẹ",
     durability: "5–8 năm",
     warranty: "1 năm",
@@ -129,7 +129,7 @@ const faqSchema = {
       name: "Motor cửa cuốn bao nhiêu tiền?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Giá motor cửa cuốn tùy thương hiệu, tải trọng và khổ cửa — chênh lệch giữa dòng phổ thông và dòng cao cấp là rất lớn. Gọi để tư vấn, báo giá đúng motor cho cửa nhà bạn.",
+        text: "Motor cửa cuốn có giá từ 600.000đ (Đài Loan) đến 8.000.000đ (Somfy cao cấp). Motor Nice phổ biến nhất trong khoảng 1.800.000–3.000.000đ. Giá chưa bao gồm công lắp đặt và phụ kiện.",
       },
     },
     {
@@ -313,7 +313,7 @@ export default function MotorCuaCuonTotNhat() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><span className="font-semibold text-foreground">Công suất phải phù hợp với diện tích cửa:</span> Cửa rộng trên 4m hoặc cao trên 3m cần motor công suất lớn hơn (≥800W). Motor yếu kéo cửa nặng sẽ chết sớm.</li>
                 <li><span className="font-semibold text-foreground">Mua kèm bình lưu điện:</span> Bình lưu điện (UPS) đảm bảo cửa vẫn hoạt động khi mất điện — đặc biệt quan trọng với nhà ở và cửa hàng.</li>
-                <li><span className="font-semibold text-foreground">Không nên mua motor rẻ cho cửa đắt:</span> Lắp motor dòng rẻ nhất cho một bộ cửa cuốn nhôm cao cấp là lãng phí — motor kém hỏng kéo theo hỏng cả hệ thống.</li>
+                <li><span className="font-semibold text-foreground">Không nên mua motor rẻ cho cửa đắt:</span> Cửa cuốn nhôm đức 30 triệu lắp motor 600.000đ là lãng phí — motor rẻ hỏng kéo theo hỏng cả hệ thống.</li>
                 <li><span className="font-semibold text-foreground">Chọn thương hiệu có thợ sửa tại địa phương:</span> Motor Somfy đẹp nhưng nếu vùng bạn không có thợ chính hãng, lúc hỏng rất khó xử lý. Nice và motor Đài Loan phổ biến hơn ở tỉnh.</li>
               </ul>
             </div>

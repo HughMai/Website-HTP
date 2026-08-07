@@ -31,56 +31,56 @@ const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xu�
 const cuaCuonTables = [
   {
     title: "Cửa Cuốn Tole Màu",
-    unit: "tính theo m² (cửa từ 8m² trở lên)",
+    unit: "đ/m² (cửa từ 8m² trở lên)",
     rows: [
-      { spec: "Tole 6 zem", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Tole 8 zem", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Tole 1 ly",  price: "Gọi để tư vấn, báo giá" },
+      { spec: "Tole 6 zem", price: "500.000" },
+      { spec: "Tole 8 zem", price: "560.000" },
+      { spec: "Tole 1 ly",  price: "780.000" },
     ],
-    note: "Cửa khổ nhỏ (dưới 8m²) có phụ phí theo quy cách",
+    note: "Cửa dưới 8m² cộng thêm 20.000–50.000 đ/m²",
   },
   {
     title: "Cửa Cuốn Inox",
-    unit: "tính theo m² (cửa từ 8m² trở lên)",
+    unit: "đ/m² (cửa từ 8m² trở lên)",
     rows: [
-      { spec: "Inox 6 zem", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Inox 8 zem", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Inox 6 zem", price: "1.700.000" },
+      { spec: "Inox 8 zem", price: "1.900.000" },
     ],
     note: "Cửa dưới 8m² cộng thêm theo thực tế",
   },
   {
     title: "Cửa Cuốn Công Nghệ Đức",
-    unit: "tính theo m²",
+    unit: "đ/m²",
     rows: [
-      { spec: "Mã KV 380R", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Mã KV 422R", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Mã KV 468R", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Mã CT 5222R", price: "Gọi để tư vấn, báo giá" },
-      { spec: "Mã MT 5222R", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Mã KV 380R", price: "1.450.000" },
+      { spec: "Mã KV 422R", price: "1.750.000" },
+      { spec: "Mã KV 468R", price: "2.150.000" },
+      { spec: "Mã CT 5222R", price: "2.200.000" },
+      { spec: "Mã MT 5222R", price: "2.300.000" },
     ],
     note: "Giá tính theo diện tích cửa thực tế sau khi khảo sát",
   },
   {
     title: "Cửa Cuốn Công Nghệ Úc",
-    unit: "tính theo m²",
+    unit: "đ/m²",
     rows: [
-      { spec: "Tole màu 5.2 zem",       price: "Gọi để tư vấn, báo giá" },
-      { spec: "Tole màu 5.2 zem Blusc", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Tole màu 5.2 zem",       price: "700.000" },
+      { spec: "Tole màu 5.2 zem Blusc", price: "900.000" },
     ],
-    note: "Cửa Úc có phụ phí phụ kiện riêng",
+    note: "Cửa Úc cộng thêm 600đ/bộ phụ kiện",
   },
 ];
 
 const motorTable = [
-  { spec: "Motor + Remote 300kg", price: "Gọi để tư vấn, báo giá" },
-  { spec: "Motor + Remote 400kg", price: "Gọi để tư vấn, báo giá" },
-  { spec: "Motor + Remote 500kg", price: "Gọi để tư vấn, báo giá" },
-  { spec: "Motor + Remote Cửa Úc", price: "Gọi để tư vấn, báo giá" },
+  { spec: "Motor + Remote 300kg", price: "3.300.000" },
+  { spec: "Motor + Remote 400kg", price: "3.500.000" },
+  { spec: "Motor + Remote 500kg", price: "4.000.000" },
+  { spec: "Motor + Remote Cửa Úc", price: "4.500.000" },
 ];
 
 const accessoryTable = [
-  { spec: "Khóa ngang cửa cuốn tole",  price: "Gọi để tư vấn, báo giá" },
-  { spec: "Khóa ngang cửa cuốn Úc",    price: "Gọi để tư vấn, báo giá" },
+  { spec: "Khóa ngang cửa cuốn tole",  price: "350.000" },
+  { spec: "Khóa ngang cửa cuốn Úc",    price: "450.000" },
 ];
 
 const faqItems = [
@@ -145,7 +145,7 @@ export default function BaoGiaCuaCuonCanTho() {
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Báo giá rõ từng hạng mục — vật tư, motor, phụ kiện tính riêng, VAT ghi rõ.
+              Giá niêm yết rõ từng hạng mục — vật tư, motor, phụ kiện tính riêng, VAT ghi rõ.
               Không có "giá bẫy" rồi cộng thêm sau khi ký hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -183,7 +183,7 @@ export default function BaoGiaCuaCuonCanTho() {
                     <thead className="bg-muted">
                       <tr>
                         <th className="px-4 py-3 text-left font-semibold">Loại</th>
-                        <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
+                        <th className="px-4 py-3 text-right font-semibold">Đơn giá (đ/m²)</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y">
@@ -217,7 +217,7 @@ export default function BaoGiaCuaCuonCanTho() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Loại motor</th>
-                      <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
+                      <th className="px-4 py-3 text-right font-semibold">Giá (đ/bộ)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -239,7 +239,7 @@ export default function BaoGiaCuaCuonCanTho() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Phụ kiện</th>
-                      <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
+                      <th className="px-4 py-3 text-right font-semibold">Giá (đ/bộ)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -258,7 +258,7 @@ export default function BaoGiaCuaCuonCanTho() {
               <p className="font-semibold mb-1">Lưu ý quan trọng</p>
               <ul className="space-y-1 list-disc list-inside text-amber-800">
                 <li>Giá trên chưa bao gồm VAT</li>
-                <li>Cửa khổ nhỏ (dưới 8m²) có phụ phí theo quy cách</li>
+                <li>Cửa dưới 8m² cộng thêm 20.000–50.000 đ/m²</li>
                 <li>Chi phí lắp đặt và vận chuyển tính riêng</li>
                 <li>{WARRANTY}</li>
                 <li>Giá có thể thay đổi theo thời điểm — liên hệ để nhận giá cập nhật nhất</li>

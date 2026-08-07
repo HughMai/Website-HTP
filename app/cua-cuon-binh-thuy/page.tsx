@@ -82,7 +82,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Bình Thủy giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Bình Thủy tùy chất liệu (tole, thép tĩnh điện, nhôm công nghệ Đức), khổ cửa và loại motor. Gọi 0945 042 345 để được khảo sát và báo giá miễn phí tận nơi tại Bình Thủy.",
+      "Giá cửa cuốn tại Bình Thủy từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0945 042 345 để được khảo sát và báo giá miễn phí tận nơi tại Bình Thủy.",
   },
   {
     question: "Hưng Thành Phát Door có showroom tại Bình Thủy không?",
