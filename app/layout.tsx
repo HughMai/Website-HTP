@@ -246,9 +246,12 @@ export default function RootLayout({
             never lands (blocked/failed/timed-out JS) the homepage would stay blank forever. The
             keyframe reveals it at 8s instead; data-htp-ready cancels the keyframe when JS is alive. */}
         <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0;animation:htp-page-reveal 1ms linear 8s forwards}@keyframes htp-page-reveal{to{opacity:1}}[data-htp-ready] #page-root{opacity:1;animation:none}` }} />
-        {/* JS off entirely — no need to make them wait out the 8s failsafe. */}
+        {/* JS off entirely — no need to make them wait out the 8s failsafe.
+            The section rules undo framer-motion's SSR'd hidden state: those
+            sections animate in on scroll, so without JS their content is real,
+            present in the DOM, and permanently invisible. */}
         <noscript>
-          <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:1;animation:none}` }} />
+          <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:1;animation:none}#gioi-thieu *,#quy-trinh *,#danh-gia *,#lien-he *{opacity:1!important;transform:none!important}` }} />
         </noscript>
         <script
           type="application/ld+json"

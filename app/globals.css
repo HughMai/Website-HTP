@@ -86,6 +86,16 @@
   }
 }
 
+/* Printing never fires the scroll observers that reveal these sections, so a
+   printed or PDF'd page loses their content entirely. Force them visible. */
+@media print {
+  #page-root { opacity: 1 !important; animation: none !important; }
+  #gioi-thieu *, #quy-trinh *, #danh-gia *, #lien-he * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Fallback for the inline head style — always hide until ready signal.
    Keep in sync with the <style> block in app/layout.tsx. */
 #page-root { opacity: 0; animation: htp-page-reveal 1ms linear 8s forwards; }
