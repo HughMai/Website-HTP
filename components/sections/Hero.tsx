@@ -32,8 +32,8 @@ const heroShots = [
     alt: "Cửa cuốn nan nhôm do Hưng Thành Phát lắp tại Cần Thơ",
   },
   {
-    src: "/cong-trinh/nk38-cua-nhom-4-canh-xam/01.jpg",
-    alt: "Cửa đi nhôm kính 4 cánh do Hưng Thành Phát lắp tại Cần Thơ",
+    src: "/cong-trinh/nk23-cua-nhom-kinh-doi-xam/01.jpg",
+    alt: "Cửa đi nhôm kính 2 cánh do Hưng Thành Phát lắp tại Cần Thơ",
   },
 ];
 

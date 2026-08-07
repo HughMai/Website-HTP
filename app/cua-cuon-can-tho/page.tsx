@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Clock, MapPin, ArrowRight, ShieldCheck, Factory, HandCoins } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -358,6 +359,8 @@ export default function CuaCuonCanTho() {
             </div>
           </div>
         </section>
+
+        <CtaBand source="Cửa cuốn Cần Thơ" />
 
         {/* FAQ */}
         <section className="bg-muted/30 py-16 md:py-24">

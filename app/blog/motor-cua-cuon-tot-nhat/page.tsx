@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -352,6 +353,8 @@ export default function MotorCuaCuonTotNhat() {
             </div>
           </div>
         </article>
+
+        <CtaBand source="Blog — chọn motor" />
 
         {/* CTA */}
         <section className="bg-brand py-14">

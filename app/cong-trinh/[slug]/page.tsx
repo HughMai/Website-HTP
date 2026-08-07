@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { ProjectGallery } from "@/components/cong-trinh/ProjectGallery";
 import { CongTrinhCard } from "@/components/cong-trinh/CongTrinhCard";
@@ -163,7 +164,7 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
                     variant="outline"
                     className="border-white/40 text-white hover:bg-white hover:text-brand"
                   >
-                    <Link href="/#lien-he">
+                    <Link href="#nhan-bao-gia">
                       <FileText className="h-4 w-4" aria-hidden /> Nhận báo giá
                     </Link>
                   </Button>
@@ -192,6 +193,12 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
             </div>
           </div>
         </section>
+
+        <CtaBand
+          id="nhan-bao-gia"
+          source={`Công trình: ${p.title}`}
+          title="Muốn một công trình như thế này?"
+        />
       </main>
       <Footer />
     </>

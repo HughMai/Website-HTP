@@ -241,8 +241,15 @@ export default function RootLayout({
     <html lang="vi" className={`${inter.variable} ${playfair.variable} ${beVietnam.variable}`}>
       <head>
         {/* Always hide #page-root — browser paints streaming HTML before any script can run.
-            JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits. */}
-        <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0}[data-htp-ready] #page-root{opacity:1}` }} />
+            JS only needs to REVEAL for returning visitors; IntroAnimation reveals for first visits.
+            htp-page-reveal is the failsafe: data-htp-ready is set from a useEffect, so if hydration
+            never lands (blocked/failed/timed-out JS) the homepage would stay blank forever. The
+            keyframe reveals it at 8s instead; data-htp-ready cancels the keyframe when JS is alive. */}
+        <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}#page-root{opacity:0;animation:htp-page-reveal 1ms linear 8s forwards}@keyframes htp-page-reveal{to{opacity:1}}[data-htp-ready] #page-root{opacity:1;animation:none}` }} />
+        {/* JS off entirely — no need to make them wait out the 8s failsafe. */}
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: `#page-root{opacity:1;animation:none}` }} />
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

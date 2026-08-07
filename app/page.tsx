@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
+// Server-side only — reading the length here keeps the 95KB project library
+// out of Gallery's client bundle.
+import { CONG_TRINH } from "@/lib/cong-trinh-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
@@ -22,9 +25,6 @@ const Testimonials = dynamic(() =>
   import("@/components/sections/Testimonials").then((m) => m.Testimonials)
 );
 const Gallery = dynamic(() => import("@/components/sections/Gallery").then((m) => m.Gallery));
-const CongTrinhShowcase = dynamic(() =>
-  import("@/components/sections/CongTrinhShowcase").then((m) => m.CongTrinhShowcase)
-);
 const CtaBand = dynamic(() => import("@/components/sections/CtaBand").then((m) => m.CtaBand));
 const ServiceAreas = dynamic(() =>
   import("@/components/sections/ServiceAreas").then((m) => m.ServiceAreas)
@@ -45,9 +45,8 @@ export default function HomePage() {
         <About />
         <Products />
         <CtaBand source="Sau mục sản phẩm" />
-        <CongTrinhShowcase />
         <Process />
-        <Gallery />
+        <Gallery projectCount={CONG_TRINH.length} />
         <Testimonials />
         <CtaBand
           title="Xem xong rồi — giờ cần con số cụ thể?"

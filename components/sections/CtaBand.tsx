@@ -12,15 +12,18 @@ export function CtaBand({
   title = "Cần báo giá cho công trình của bạn?",
   subtitle = "Gửi số điện thoại — thợ khảo sát gọi lại trong ít phút, tư vấn miễn phí.",
   source,
+  id,
 }: {
   title?: string;
   subtitle?: string;
   source: string;
+  /** Set when something on the same page links down to this band. */
+  id?: string;
 }) {
   const primaryHotline = SITE.hotlines[0];
 
   return (
-    <section className="relative overflow-hidden bg-brand py-12 md:py-16">
+    <section id={id} className="relative scroll-mt-20 overflow-hidden bg-brand py-12 md:py-16">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 -top-24 h-[320px] w-[320px] rounded-full bg-amber-400/10 blur-3xl"

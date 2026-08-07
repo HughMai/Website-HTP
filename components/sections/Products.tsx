@@ -29,7 +29,7 @@ export function Products() {
         {/* Category blocks */}
         <div className="mt-12 space-y-14">
           {PRODUCT_CATEGORIES.map((cat) => (
-            <ProductCategoryRow key={cat.id} category={cat} />
+            <ProductCategoryRow key={cat.id} category={cat} showSubtypes={false} />
           ))}
         </div>
       </div>

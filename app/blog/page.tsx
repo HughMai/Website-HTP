@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
@@ -115,6 +116,8 @@ export default function BlogIndex() {
             </div>
           </div>
         </section>
+        <CtaBand source="Trang blog" />
+
       </main>
       <Footer />
     </>

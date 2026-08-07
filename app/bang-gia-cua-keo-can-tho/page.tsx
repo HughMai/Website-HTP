@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -203,6 +204,8 @@ export default function BangGiaCuaKeoCanTho() {
             </div>
           </div>
         </section>
+
+        <CtaBand source="Bảng giá cửa kéo" />
 
         {/* FAQ */}
         <section className="bg-muted/30 py-16 md:py-20">

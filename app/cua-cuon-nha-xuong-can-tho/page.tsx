@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -184,7 +185,7 @@ export default function CuaCuonNhaXuongCanTho() {
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}
                 </Button>
               </a>
-              <Link href="/#lien-he">
+              <Link href="#nhan-bao-gia">
                 <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
                   Báo giá miễn phí
                 </Button>
@@ -252,6 +253,8 @@ export default function CuaCuonNhaXuongCanTho() {
             </div>
           </div>
         </section>
+
+        <CtaBand id="nhan-bao-gia" source="Cửa cuốn nhà xưởng" />
 
         {/* FAQ */}
         <section className="bg-muted/30 py-16 md:py-24">

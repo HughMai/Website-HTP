@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Clock, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -224,7 +225,7 @@ export default function LapDatCuaCuonCanTho() {
                   Gọi {SITE.hotlines[0]}
                 </Button>
               </a>
-              <Link href="/#lien-he">
+              <Link href="#nhan-bao-gia">
                 <Button
                   size="lg"
                   variant="outline"
@@ -330,6 +331,8 @@ export default function LapDatCuaCuonCanTho() {
             </div>
           </div>
         </section>
+
+        <CtaBand id="nhan-bao-gia" source="Lắp đặt cửa cuốn" />
 
         {/* FAQ */}
         <section className="py-16 md:py-24">

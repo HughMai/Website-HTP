@@ -1,12 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { GALLERY_IMAGES } from "@/lib/site-data";
 
 const tiles = [...GALLERY_IMAGES, ...GALLERY_IMAGES];
 
-export function Gallery() {
+export function Gallery({
+  /** Passed from the server page so the count can't go stale. */
+  projectCount,
+}: {
+  projectCount: number;
+}) {
   return (
     <section
       id="du-an"
@@ -28,6 +35,10 @@ export function Gallery() {
             Hơn 500 công trình lớn nhỏ khắp Đồng Bằng Sông Cửu Long — minh
             chứng sống động cho chất lượng thi công và sự tin tưởng của khách
             hàng.
+          </p>
+          <p className="mt-3 text-sm font-medium text-brand/60">
+            Toàn bộ hình dưới đây là ảnh chụp thực tế tại công trình — không
+            phải ảnh mẫu, không phải ảnh catalogue.
           </p>
         </div>
       </div>
@@ -58,6 +69,17 @@ export function Gallery() {
             </figure>
           ))}
         </motion.div>
+      </div>
+
+      {/* The homepage's only in-body path into the project library. */}
+      <div className="container mt-10 text-center">
+        <Link
+          href="/cong-trinh"
+          className="inline-flex items-center gap-2 rounded-full border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition hover:border-amber-400 hover:bg-amber-50"
+        >
+          Xem tất cả {projectCount} công trình
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
       </div>
     </section>
   );

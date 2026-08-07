@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -244,6 +245,8 @@ export default function CuaCuonOMon() {
             </div>
           </div>
         </section>
+
+        <CtaBand source="Cửa cuốn Ô Môn" />
 
         {/* FAQ */}
         <section className="py-16 md:py-24">

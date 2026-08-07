@@ -60,10 +60,18 @@ function toCards(cat: Category): Card[] {
 export function ProductCategoryRow({
   category,
   headingLevel = "h3",
+  showSubtypes = true,
 }: {
   category: Category;
   /** h3 under the homepage's h2; h2 on /san-pham where it's the page's own level. */
   headingLevel?: "h2" | "h3";
+  /**
+   * The chip row under the cards. Off on the homepage, where it reads as
+   * clutter under every block; /san-pham keeps it so the taxonomy and its
+   * keywords still live somewhere. A category with no photos ignores this and
+   * still renders its subtypes as tiles — they are the only content it has.
+   */
+  showSubtypes?: boolean;
 }) {
   const cards = toCards(category);
   const Heading = headingLevel;
@@ -149,6 +157,7 @@ export function ProductCategoryRow({
           category has no photos at all it carries the block on its own, so it
           renders as tiles rather than a thin strip of chips. */}
       {cards.length > 0 ? (
+        showSubtypes && (
         <ul className="mt-4 flex flex-wrap gap-2">
           {category.subtypes.map((s) => (
             <li key={s.name}>
@@ -161,6 +170,7 @@ export function ProductCategoryRow({
             </li>
           ))}
         </ul>
+        )
       ) : (
         <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {category.subtypes.map((s) => (
