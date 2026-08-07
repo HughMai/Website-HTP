@@ -49,6 +49,9 @@ export const MAIN_NAV = [
     href: "/san-pham",
     label: "Sản Phẩm",
     children: [
+      // The head-term hub goes first: it is the page that should rank for
+      // "cửa cuốn", and the nhôm page below it is one of its variants.
+      { href: "/cua-cuon-can-tho", label: "Cửa Cuốn" },
       { href: "/cua-cuon-nhom-can-tho", label: "Cửa Cuốn Nhôm" },
       { href: "/cua-nhom-kinh-can-tho", label: "Cửa Nhôm Kính" },
       { href: "/cua-keo-can-tho", label: "Cửa Kéo" },
@@ -97,6 +100,7 @@ export const FOOTER_LINK_GROUPS = [
   {
     title: "Sản Phẩm",
     links: [
+      { href: "/cua-cuon-can-tho", label: "Cửa Cuốn" },
       { href: "/cua-cuon-nhom-can-tho", label: "Cửa Cuốn Nhôm" },
       { href: "/cua-nhom-kinh-can-tho", label: "Cửa Nhôm Kính" },
       { href: "/cua-keo-can-tho", label: "Cửa Kéo" },
@@ -170,7 +174,10 @@ export const PRODUCT_CATEGORIES = [
     // Lowest per-m² rate in the quote engine below — shown so a visitor can
     // self-qualify before calling. Same source as QuoteAndContact's PRICE_PER_SQM.
     priceFrom: "từ 500.000đ/m²",
-    pageLink: { href: "/cua-cuon-nhom-can-tho", label: "Xem Cửa Cuốn Cần Thơ" },
+    // "Xem Cửa Cuốn Cần Thơ" is head-term anchor text, so it has to point at the
+    // head-term hub. It used to point at the nhôm variant, which taught Google
+    // that the variant was the cửa cuốn page and left the hub with no links.
+    pageLink: { href: "/cua-cuon-can-tho", label: "Xem Cửa Cuốn Cần Thơ" },
     // Real installs from the công trình library, hand-picked per category.
     // `label` describes only what the photo actually shows — colour, form and
     // setting. It never claims a material or brand that can't be seen, so the

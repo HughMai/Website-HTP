@@ -345,7 +345,17 @@ export default function CuaCuonNhomCanTho() {
 
         {/* Cross-links */}
         <section className="py-10">
-          <div className="container max-w-3xl grid gap-4 sm:grid-cols-2">
+          <div className="container max-w-4xl grid gap-4 sm:grid-cols-3">
+            {/* Up-link to the head-term hub: this page is one variant of it. */}
+            <div className="flex flex-col justify-between gap-3 rounded-2xl border bg-brand/5 px-6 py-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Chưa chọn được loại?</p>
+                <p className="mt-1 font-semibold text-brand">So sánh tất cả dòng cửa cuốn</p>
+              </div>
+              <Link href="/cua-cuon-can-tho" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+                Cửa Cuốn Cần Thơ <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
             <div className="flex flex-col justify-between gap-3 rounded-2xl border bg-brand/5 px-6 py-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Cần lắp mới?</p>

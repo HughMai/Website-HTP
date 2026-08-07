@@ -197,7 +197,7 @@ export function Hero() {
           aria-label="Danh mục sản phẩm nhanh"
         >
           {[
-            { href: "/cua-cuon-nhom-can-tho", label: "Cửa cuốn" },
+            { href: "/cua-cuon-can-tho", label: "Cửa cuốn" },
             { href: "/cua-nhom-kinh-can-tho", label: "Cửa nhôm kính" },
             { href: "/cua-keo-can-tho", label: "Cửa kéo" },
             { href: "/lan-can-nhom-kinh-can-tho", label: "Lan can kính" },

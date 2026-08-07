@@ -283,10 +283,10 @@ export default function CuaCuonCaiRang() {
               </div>
               <ArrowRight className="h-4 w-4 text-brand" />
             </Link>
-            <Link href="/cua-cuon-nhom-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
+            <Link href="/cua-cuon-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
               <div>
-                <p className="font-semibold text-brand">Cửa Cuốn Nhôm Đức</p>
-                <p className="text-sm text-muted-foreground">Dòng cao cấp nhất</p>
+                <p className="font-semibold text-brand">Cửa Cuốn Cần Thơ</p>
+                <p className="text-sm text-muted-foreground">Tất cả dòng cửa cuốn</p>
               </div>
               <ArrowRight className="h-4 w-4 text-brand" />
             </Link>
