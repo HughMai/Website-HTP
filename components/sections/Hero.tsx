@@ -179,7 +179,9 @@ export function Hero() {
                   fill
                   sizes="(min-width: 1024px) 22vw, 0px"
                   className="object-cover"
-                  priority={i === 0}
+                  // Both arch shots sit above the fold on desktop, so both are
+                  // LCP candidates — whichever renders larger wins. Preload both.
+                  priority
                 />
               </div>
             ))}
