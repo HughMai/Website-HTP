@@ -1,6 +1,7 @@
 "use client";
 
-import { MessageCircle, Phone } from "lucide-react";
+import Link from "next/link";
+import { Check, MessageCircle, Phone } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
 import { SITE, ZALO_URL } from "@/lib/site-data";
 
@@ -64,6 +65,29 @@ export function CtaBand({
             <p className="mt-3 text-xs text-white/55">
               Khảo sát và báo giá miễn phí trong nội ô Cần Thơ.
             </p>
+
+            {/* Doubt peaks at the CTA, so the risk answers belong here — not only
+                up in the hero where the visitor has already scrolled past them. */}
+            <ul className="mt-4 space-y-2 border-t border-white/12 pt-4">
+              {[
+                "Lắp xong mới thanh toán — không đặt cọc trước toàn bộ",
+                "Bồi thường 200% nếu dùng sai vật liệu đã cam kết",
+              ].map((line) => (
+                <li key={line} className="flex items-start gap-2 text-xs text-white/75">
+                  <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden />
+                  {line}
+                </li>
+              ))}
+              <li className="flex items-start gap-2 text-xs text-white/75">
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden />
+                <span>
+                  Ảnh thật từng công trình đã lắp —{" "}
+                  <Link href="/cong-trinh" className="font-semibold text-amber-400 underline-offset-2 hover:underline">
+                    xem công trình
+                  </Link>
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
