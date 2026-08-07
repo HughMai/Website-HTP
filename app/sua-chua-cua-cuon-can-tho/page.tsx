@@ -170,34 +170,34 @@ const pricingGroups = [
   {
     label: "Cửa Cuốn",
     rows: [
-      { item: "Sửa / lập trình lại remote", range: "100.000 – 300.000 đ" },
-      { item: "Chỉnh ray, con lăn lệch", range: "200.000 – 500.000 đ" },
-      { item: "Thay lò xo cân bằng", range: "300.000 – 700.000 đ" },
-      { item: "Sửa motor (cuộn dây, tụ, bo mạch)", range: "300.000 – 1.500.000 đ" },
-      { item: "Thay motor nhập khẩu mới", range: "1.500.000 – 4.000.000 đ" },
-      { item: "Thay bình lưu điện", range: "400.000 – 900.000 đ" },
-      { item: "Thay dây cuốn", range: "200.000 – 600.000 đ" },
+      { item: "Sửa / lập trình lại remote", range: "Gọi để tư vấn, báo giá" },
+      { item: "Chỉnh ray, con lăn lệch", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay lò xo cân bằng", range: "Gọi để tư vấn, báo giá" },
+      { item: "Sửa motor (cuộn dây, tụ, bo mạch)", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay motor nhập khẩu mới", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay bình lưu điện", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay dây cuốn", range: "Gọi để tư vấn, báo giá" },
     ],
   },
   {
     label: "Cửa Kéo",
     rows: [
-      { item: "Chỉnh / nắn ray lệch", range: "150.000 – 400.000 đ" },
-      { item: "Thay con lăn (1 bộ)", range: "100.000 – 300.000 đ" },
-      { item: "Sửa / thay khóa ngang", range: "200.000 – 500.000 đ" },
-      { item: "Hàn / gia cố khung kéo", range: "300.000 – 800.000 đ" },
-      { item: "Thay phụ kiện rỉ sét", range: "200.000 – 600.000 đ" },
+      { item: "Chỉnh / nắn ray lệch", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay con lăn (1 bộ)", range: "Gọi để tư vấn, báo giá" },
+      { item: "Sửa / thay khóa ngang", range: "Gọi để tư vấn, báo giá" },
+      { item: "Hàn / gia cố khung kéo", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay phụ kiện rỉ sét", range: "Gọi để tư vấn, báo giá" },
     ],
   },
   {
     label: "Cửa Nhôm Kính",
     rows: [
-      { item: "Thay kính vỡ (kính đơn, cắt theo kích thước)", range: "300.000 – 1.200.000 đ/tấm" },
-      { item: "Sửa / thay bản lề lỏng", range: "150.000 – 400.000 đ" },
-      { item: "Thay gioăng cao su toàn bộ cửa", range: "200.000 – 500.000 đ" },
-      { item: "Sửa / thay khóa cửa nhôm", range: "200.000 – 600.000 đ" },
-      { item: "Bơm lại ron silicone chống thấm", range: "150.000 – 450.000 đ" },
-      { item: "Thay tay nắm / tay gạt", range: "100.000 – 350.000 đ" },
+      { item: "Thay kính vỡ (kính đơn, cắt theo kích thước)", range: "Gọi để tư vấn, báo giá" },
+      { item: "Sửa / thay bản lề lỏng", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay gioăng cao su toàn bộ cửa", range: "Gọi để tư vấn, báo giá" },
+      { item: "Sửa / thay khóa cửa nhôm", range: "Gọi để tư vấn, báo giá" },
+      { item: "Bơm lại ron silicone chống thấm", range: "Gọi để tư vấn, báo giá" },
+      { item: "Thay tay nắm / tay gạt", range: "Gọi để tư vấn, báo giá" },
     ],
   },
 ];
@@ -220,7 +220,7 @@ const faqItems = [
   {
     question: "Sửa cửa cuốn bị lỗi motor hết bao nhiêu tiền?",
     answer:
-      "Chi phí sửa motor cửa cuốn tại Cần Thơ dao động từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng hóc. Nếu cần thay motor mới, chi phí từ 1.500.000 đến 4.000.000 đồng. Chúng tôi báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+      "Chi phí sửa motor cửa cuốn tùy loại motor và mức độ hỏng hóc; thay motor mới sẽ khác với sửa. Chúng tôi kiểm tra và báo giá miễn phí trước khi sửa, không phát sinh thêm. Gọi để tư vấn, báo giá.",
   },
   {
     question: "Cửa cuốn không lên được — nguyên nhân là gì?",
@@ -235,7 +235,7 @@ const faqItems = [
   {
     question: "Thay kính cửa nhôm hết bao nhiêu tiền?",
     answer:
-      "Chi phí thay kính cửa nhôm tại Cần Thơ dao động từ 300.000 đến 1.200.000 đồng mỗi tấm tùy kích thước và loại kính (đơn, hộp, cường lực). Chúng tôi đo và cắt kính theo kích thước thực tế tại showroom.",
+      "Chi phí thay kính cửa nhôm tùy kích thước và loại kính (đơn, hộp, cường lực). Chúng tôi đo và cắt kính theo kích thước thực tế tại showroom. Gọi để tư vấn, báo giá.",
   },
   {
     question: "Có bảo hành sau khi sửa không?",

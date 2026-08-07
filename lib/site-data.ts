@@ -6,8 +6,6 @@ export const SITE = {
   legalName: "Công ty TNHH SX - TM - DV Hưng Thành Phát",
   tagline: "Giải Pháp Cửa Cao Cấp Cho Mọi Công Trình",
   hotlines: ["0945 042 345", "0913 574 077"] as const,
-  // Landline on the storefront sign — a fixed-line number is a strong local NAP signal.
-  landline: "02923 730 081",
   email: "hungthanhphat6688@gmail.com",
   address: "235 - 237 (281 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
   mapQuery:
@@ -37,7 +35,6 @@ export const ZALO_URL = "https://zalo.me/0945042345";
 export const HOTLINE_ROLES = [
   { role: "Báo giá & tư vấn", number: SITE.hotlines[0] },
   { role: "Kỹ thuật & bảo hành", number: SITE.hotlines[1] },
-  { role: "Văn phòng (cố định)", number: SITE.landline },
 ] as const;
 
 // Route-based navigation. `children` render as a dropdown on desktop and an
@@ -171,9 +168,9 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-cuon",
     name: "Cửa Cuốn",
     tagline: "Vận hành êm – Bảo mật cao – Tiết kiệm không gian",
-    // Lowest per-m² rate in the quote engine below — shown so a visitor can
-    // self-qualify before calling. Same source as QuoteAndContact's PRICE_PER_SQM.
-    priceFrom: "từ 500.000đ/m²",
+    // No public prices anywhere on the site: quotes are given on the phone or
+    // after a survey. Keep this a call-to-action, never a figure.
+    priceFrom: "Gọi để tư vấn, báo giá",
     // "Xem Cửa Cuốn Cần Thơ" is head-term anchor text, so it has to point at the
     // head-term hub. It used to point at the nhôm variant, which taught Google
     // that the variant was the cửa cuốn page and left the hub with no links.
@@ -206,7 +203,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-nhom-kinh",
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
-    priceFrom: "từ 1.400.000đ/m²",
+    priceFrom: "Gọi để tư vấn, báo giá",
     pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
     showcase: [
       { slug: "nk23-cua-nhom-kinh-doi-xam", label: "Cửa đi nhôm kính 2 cánh" },
@@ -224,7 +221,7 @@ export const PRODUCT_CATEGORIES = [
     id: "lan-can-cau-thang",
     name: "Lan Can – Cầu Thang Kính",
     tagline: "Kính cường lực – Tay vịn gỗ hoặc nhôm – Thoáng và an toàn",
-    priceFrom: "từ 1.950.000đ/m²",
+    priceFrom: "Gọi để tư vấn, báo giá",
     pageLink: {
       href: "/lan-can-nhom-kinh-can-tho",
       label: "Xem Lan Can Nhôm Kính Cần Thơ",
@@ -246,7 +243,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-keo",
     name: "Cửa Kéo",
     tagline: "Bền bỉ – Chống đột nhập – Phù hợp mặt tiền kinh doanh",
-    priceFrom: "từ 540.000đ/m²",
+    priceFrom: "Gọi để tư vấn, báo giá",
     pageLink: { href: "/cua-keo-can-tho", label: "Xem Cửa Kéo Cần Thơ" },
     showcase: [
       { slug: "p23-keo-xanh-vlxd-linh", label: "Cửa kéo xanh mặt tiền" },
@@ -265,7 +262,7 @@ export const PRODUCT_CATEGORIES = [
     id: "motor-binh-luu-dien",
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
-    priceFrom: "từ 3.300.000đ/bộ",
+    priceFrom: "Gọi để tư vấn, báo giá",
     pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
     // No photos: there is no "công trình" for a remote control, and the supplier
     // shots that used to sit here were a competitor's catalogue images. Renders

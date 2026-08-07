@@ -91,10 +91,10 @@ const advantages = [
 ];
 
 const pricing = [
-  { size: "Rộng 2.5m × Cao 2.5m", range: "3.800.000 – 5.500.000 đ" },
-  { size: "Rộng 3.0m × Cao 2.8m", range: "4.500.000 – 6.500.000 đ" },
-  { size: "Rộng 4.0m × Cao 3.0m", range: "6.000.000 – 9.000.000 đ" },
-  { size: "Rộng 5.0m × Cao 3.5m", range: "8.500.000 – 13.000.000 đ" },
+  { size: "Rộng 2.5m × Cao 2.5m", range: "Gọi để tư vấn, báo giá" },
+  { size: "Rộng 3.0m × Cao 2.8m", range: "Gọi để tư vấn, báo giá" },
+  { size: "Rộng 4.0m × Cao 3.0m", range: "Gọi để tư vấn, báo giá" },
+  { size: "Rộng 5.0m × Cao 3.5m", range: "Gọi để tư vấn, báo giá" },
   { size: "Rộng 6.0m trở lên", range: "Liên hệ báo giá" },
 ];
 
@@ -107,7 +107,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhôm Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn nhôm tại Cần Thơ dao động từ 3.800.000 đến 13.000.000 đồng tùy kích thước và loại nhôm. Giá đã bao gồm motor, phụ kiện và nhân công lắp đặt. Liên hệ để được báo giá chính xác theo kích thước thực tế.",
+      "Giá cửa cuốn nhôm tại Cần Thơ tùy kích thước và loại nhôm, đã bao gồm motor, phụ kiện và nhân công lắp đặt. Gọi để tư vấn, báo giá chính xác theo kích thước thực tế.",
   },
   {
     question: "Cửa cuốn nhôm có bền hơn cửa cuốn thép không?",

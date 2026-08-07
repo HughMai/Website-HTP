@@ -87,11 +87,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { size: "2.0m × 2.5m", range: "2.200.000 – 3.500.000 đ" },
-  { size: "2.5m × 2.5m", range: "2.800.000 – 4.500.000 đ" },
-  { size: "3.0m × 2.8m", range: "3.200.000 – 5.200.000 đ" },
-  { size: "4.0m × 3.0m", range: "4.500.000 – 7.000.000 đ" },
-  { size: "5.0m × 3.5m", range: "6.000.000 – 9.500.000 đ" },
+  { size: "2.0m × 2.5m", range: "Gọi để tư vấn, báo giá" },
+  { size: "2.5m × 2.5m", range: "Gọi để tư vấn, báo giá" },
+  { size: "3.0m × 2.8m", range: "Gọi để tư vấn, báo giá" },
+  { size: "4.0m × 3.0m", range: "Gọi để tư vấn, báo giá" },
+  { size: "5.0m × 3.5m", range: "Gọi để tư vấn, báo giá" },
   { size: "Kích thước đặc biệt", range: "Liên hệ báo giá" },
 ];
 
@@ -104,7 +104,7 @@ const faqItems = [
   {
     question: "Cửa kéo Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa kéo tại Cần Thơ từ 2.200.000 đến 9.500.000 đồng tùy kích thước và chất liệu (thép, nhôm, inox). Giá đã bao gồm phụ kiện và lắp đặt. Liên hệ 0945 042 345 để được báo giá chính xác.",
+      "Giá cửa kéo tại Cần Thơ tùy kích thước và chất liệu (thép, nhôm, inox), đã bao gồm phụ kiện và lắp đặt. Gọi 0945 042 345 để được tư vấn, báo giá chính xác.",
   },
   {
     question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào phù hợp hơn?",

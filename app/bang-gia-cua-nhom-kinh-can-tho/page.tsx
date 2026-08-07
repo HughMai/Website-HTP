@@ -30,84 +30,84 @@ const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xu�
 const pricingGroups = [
   {
     title: "Nhôm Việt — Cửa Đi",
-    unit: "đ/m² — kính trắng 8 ly CL",
+    unit: "tính theo m² — kính trắng 8 ly CL",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "2.200.000" },
-      { spec: "Nhôm 1.4 ly/m²", price: "2.400.000" },
-      { spec: "Nhôm 2.0 ly/m²", price: "2.600.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Nhôm 1.4 ly/m²", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Nhôm 2.0 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
-    note: "Kính mờ cộng thêm 70.000 đ/m²",
+    note: "Kính mờ có phụ phí riêng — gọi để tư vấn",
   },
   {
     title: "Nhôm Việt — Cửa Sổ",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "2.100.000" },
-      { spec: "Nhôm 1.4 ly/m²", price: "2.300.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Nhôm 1.4 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
-    note: "Kính mờ cộng thêm 70.000 đ/m²",
+    note: "Kính mờ có phụ phí riêng — gọi để tư vấn",
   },
   {
     title: "Nhôm Việt — Vách Kính",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "1.400.000" },
-      { spec: "Nhôm 1.4 ly/m²", price: "1.500.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Nhôm 1.4 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
-    note: "Kính hộp nan đồng cộng thêm 1.100.000 đ/m²",
+    note: "Kính hộp nan đồng có phụ phí riêng — gọi để tư vấn",
   },
   {
     title: "Nhôm Nhập — Cửa Đi",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "2.600.000" },
-      { spec: "Nhôm 1.4 ly/m²", price: "2.800.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Nhôm 1.4 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
     note: "Chất lượng nhôm cao hơn nhôm Việt",
   },
   {
     title: "Nhôm Nhập — Cửa Sổ",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "2.500.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
     note: "",
   },
   {
     title: "Nhôm Nhập — Vách Kính",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Nhôm 1.2 ly/m²", price: "1.700.000" },
+      { spec: "Nhôm 1.2 ly/m²", price: "Gọi để tư vấn, báo giá" },
     ],
     note: "",
   },
   {
     title: "Nhôm Maxpro (Cao Cấp)",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Hệ 55", price: "4.000.000" },
-      { spec: "Hệ 65", price: "4.600.000" },
-      { spec: "Hệ 83", price: "5.800.000" },
+      { spec: "Hệ 55", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Hệ 65", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Hệ 83", price: "Gọi để tư vấn, báo giá" },
     ],
     note: "Dòng cao cấp — cách âm, cách nhiệt vượt trội",
   },
   {
     title: "Cửa Kính Bản Lề Sàn",
-    unit: "đ/m²",
+    unit: "tính theo m²",
     rows: [
-      { spec: "Kính 10 ly", price: "1.500.000" },
-      { spec: "Kính 12 ly", price: "1.650.000" },
+      { spec: "Kính 10 ly", price: "Gọi để tư vấn, báo giá" },
+      { spec: "Kính 12 ly", price: "Gọi để tư vấn, báo giá" },
     ],
     note: "Phù hợp cửa chính, showroom, văn phòng",
   },
 ];
 
 const lanCanTable = [
-  { spec: "Lan can tay gỗ",          price: "1.950.000", unit: "đ/m" },
-  { spec: "Lan can tay nhôm 3D 2×2", price: "2.050.000", unit: "đ/m" },
-  { spec: "Lan can tay nhôm 3D 3×3", price: "2.300.000", unit: "đ/m" },
-  { spec: "Lan can tay nhôm 3D 4×4", price: "2.600.000", unit: "đ/m" },
-  { spec: "Lan can máng cover",       price: "5.800.000", unit: "đ/m" },
+  { spec: "Lan can tay gỗ",          price: "Gọi để tư vấn, báo giá", unit: "tính theo mét dài" },
+  { spec: "Lan can tay nhôm 3D 2×2", price: "Gọi để tư vấn, báo giá", unit: "tính theo mét dài" },
+  { spec: "Lan can tay nhôm 3D 3×3", price: "Gọi để tư vấn, báo giá", unit: "tính theo mét dài" },
+  { spec: "Lan can tay nhôm 3D 4×4", price: "Gọi để tư vấn, báo giá", unit: "tính theo mét dài" },
+  { spec: "Lan can máng cover",       price: "Gọi để tư vấn, báo giá", unit: "tính theo mét dài" },
 ];
 
 const faqItems = [
@@ -121,7 +121,7 @@ const faqItems = [
   },
   {
     question: "Giá cửa nhôm kính đã bao gồm kính chưa?",
-    answer: "Có. Giá bảng trên đã bao gồm kính trắng 8 ly tiêu chuẩn. Kính mờ cộng thêm 70.000 đ/m². Các loại kính đặc biệt (cường lực, hộp, phản quang) báo giá riêng.",
+    answer: "Có. Báo giá đã bao gồm kính trắng 8 ly tiêu chuẩn. Kính mờ có phụ phí riêng — gọi để tư vấn. Các loại kính đặc biệt (cường lực, hộp, phản quang) báo giá riêng.",
   },
   {
     question: "Bảo hành cửa nhôm kính như thế nào?",
@@ -184,7 +184,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Giá niêm yết đã bao gồm kính trắng 8 ly tiêu chuẩn. Kính đặc biệt, VAT, và lắp
+              Báo giá đã bao gồm kính trắng 8 ly tiêu chuẩn. Kính đặc biệt, VAT, và lắp
               đặt ghi rõ riêng — không có hạng mục ẩn phát sinh sau khi ký hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -217,7 +217,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
                     <thead className="bg-muted">
                       <tr>
                         <th className="px-4 py-3 text-left font-semibold">Loại</th>
-                        <th className="px-4 py-3 text-right font-semibold">Đơn giá</th>
+                        <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y">
@@ -243,7 +243,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Loại lan can</th>
-                      <th className="px-4 py-3 text-right font-semibold">Đơn giá</th>
+                      <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -262,7 +262,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
               <p className="font-semibold mb-1">Lưu ý quan trọng</p>
               <ul className="space-y-1 list-disc list-inside text-amber-800">
                 <li>Giá trên chưa bao gồm VAT</li>
-                <li>Giá cửa đã bao gồm kính trắng 8 ly tiêu chuẩn</li>
+                <li>Báo giá đã bao gồm kính trắng 8 ly tiêu chuẩn</li>
                 <li>Kính mờ, kính cường lực, kính hộp tính riêng theo yêu cầu</li>
                 <li>Chi phí lắp đặt và vận chuyển tính riêng</li>
                 <li>{WARRANTY}</li>

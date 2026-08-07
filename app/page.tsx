@@ -44,7 +44,7 @@ export default function HomePage() {
         <Testimonials />
         <CtaBand
           title="Xem xong rồi — giờ cần con số cụ thể?"
-          subtitle="Nhập kích thước để tự ước tính, hoặc để lại số để thợ báo giá chính xác theo công trình."
+          subtitle="Để lại số điện thoại — thợ khảo sát gọi lại và báo giá chính xác theo công trình của bạn."
           source="Trước mục báo giá"
         />
         <ServiceAreas />

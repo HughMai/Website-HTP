@@ -41,8 +41,8 @@ const comparison = [
   },
   {
     criteria: "Giá thành",
-    nhom: "Cao hơn thép 60–100%. Mã KV 380R từ 1.450.000đ/m², mã CT 5222R từ 2.200.000đ/m².",
-    thep: "Thấp hơn nhôm đáng kể. Tole 6 zem từ 500.000đ/m², tole 1 ly từ 780.000đ/m².",
+    nhom: "Cao hơn thép 60–100%, chênh theo mã nhôm và độ dày thanh. Gọi để tư vấn, báo giá.",
+    thep: "Thấp hơn nhôm đáng kể, chênh theo độ dày tole. Gọi để tư vấn, báo giá.",
     winner: "thep",
   },
   {
@@ -194,7 +194,7 @@ export default function NhomDucVsThepTinhDien() {
                   <li>✓ Nhà phố, biệt thự, garage cần thẩm mỹ cao</li>
                   <li>✓ Văn phòng, showroom yêu cầu vận hành im lặng</li>
                   <li>✓ Muốn cửa bền 20–30 năm, không cần bảo trì nhiều</li>
-                  <li>✓ Ngân sách từ 1.450.000đ/m² trở lên</li>
+                  <li>✓ Ưu tiên độ bền và thẩm mỹ lâu dài</li>
                 </ul>
               </div>
 
@@ -203,7 +203,7 @@ export default function NhomDucVsThepTinhDien() {
                 <ul className="space-y-1.5 text-sm text-amber-800">
                   <li>✓ Kho hàng, nhà xưởng không ưu tiên thẩm mỹ</li>
                   <li>✓ Mặt tiền kinh doanh cần chi phí thấp</li>
-                  <li>✓ Ngân sách hạn chế, từ 500.000đ/m²</li>
+                  <li>✓ Ngân sách hạn chế, cần giải pháp tiết kiệm</li>
                   <li>✓ Sẵn sàng bảo trì chống gỉ định kỳ 2–3 năm/lần</li>
                 </ul>
               </div>

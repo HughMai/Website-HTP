@@ -178,13 +178,6 @@ const jsonLd = {
       availableLanguage: "Vietnamese",
       areaServed: "VN",
     },
-    {
-      "@type": "ContactPoint",
-      telephone: SITE.landline.replace(/\s/g, ""),
-      contactType: "customer service",
-      availableLanguage: "Vietnamese",
-      areaServed: "VN",
-    },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

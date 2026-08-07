@@ -87,11 +87,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { system: "Cửa đi nhôm kính 1 cánh (0.8×2.1m)", range: "3.500.000 – 6.000.000 đ" },
-  { system: "Cửa đi nhôm kính 2 cánh (1.6×2.1m)", range: "6.000.000 – 11.000.000 đ" },
-  { system: "Cửa sổ nhôm kính (1.2×1.2m)", range: "2.200.000 – 4.500.000 đ" },
-  { system: "Lan can nhôm kính (theo m dài)", range: "1.800.000 – 3.500.000 đ/m" },
-  { system: "Mặt dựng nhôm kính (theo m²)", range: "1.200.000 – 2.500.000 đ/m²" },
+  { system: "Cửa đi nhôm kính 1 cánh (0.8×2.1m)", range: "Gọi để tư vấn, báo giá" },
+  { system: "Cửa đi nhôm kính 2 cánh (1.6×2.1m)", range: "Gọi để tư vấn, báo giá" },
+  { system: "Cửa sổ nhôm kính (1.2×1.2m)", range: "Gọi để tư vấn, báo giá" },
+  { system: "Lan can nhôm kính (theo m dài)", range: "Gọi để tư vấn, báo giá" },
+  { system: "Mặt dựng nhôm kính (theo m²)", range: "Gọi để tư vấn, báo giá" },
   { system: "Kích thước đặc biệt / công trình lớn", range: "Liên hệ báo giá" },
 ];
 
@@ -104,7 +104,7 @@ const faqItems = [
   {
     question: "Cửa nhôm kính Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000–6.000.000đ, cửa đi 2 cánh từ 6.000.000–11.000.000đ. Mặt dựng và lan can tính theo m². Liên hệ 0945 042 345 để được báo giá chính xác sau khảo sát.",
+      "Giá cửa nhôm kính phụ thuộc vào loại hệ, kích thước và loại kính; mặt dựng và lan can tính theo m². Gọi 0945 042 345 để được tư vấn, báo giá chính xác sau khảo sát.",
   },
   {
     question: "Cửa nhôm kính có chống nóng không?",

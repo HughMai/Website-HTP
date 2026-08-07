@@ -28,19 +28,19 @@ export const metadata: Metadata = {
 const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất";
 
 const cuaCoLau = [
-  { spec: "U 6 zem",  price: "640.000" },
-  { spec: "U 8 zem",  price: "700.000" },
-  { spec: "U 1 ly",   price: "760.000" },
-  { spec: "U 1.2 ly", price: "820.000" },
-  { spec: "U 1.4 ly", price: "900.000" },
+  { spec: "U 6 zem",  price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 8 zem",  price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1 ly",   price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1.2 ly", price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1.4 ly", price: "Gọi để tư vấn, báo giá" },
 ];
 
 const cuaKhongLau = [
-  { spec: "U 6 zem",  price: "540.000" },
-  { spec: "U 8 zem",  price: "600.000" },
-  { spec: "U 1 ly",   price: "660.000" },
-  { spec: "U 1.2 ly", price: "720.000" },
-  { spec: "U 1.4 ly", price: "800.000" },
+  { spec: "U 6 zem",  price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 8 zem",  price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1 ly",   price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1.2 ly", price: "Gọi để tư vấn, báo giá" },
+  { spec: "U 1.4 ly", price: "Gọi để tư vấn, báo giá" },
 ];
 
 const faqItems = [
@@ -50,7 +50,7 @@ const faqItems = [
   },
   {
     question: "Giá cửa kéo tính như thế nào?",
-    answer: "Giá tính theo m² diện tích cửa (chiều rộng × chiều cao). Cửa dưới 8m² cộng thêm 20.000 đ/m²; cửa dưới 5m² cộng thêm 40.000 đ/m². Chưa bao gồm VAT và chi phí lắp đặt.",
+    answer: "Giá tính theo m² diện tích cửa (chiều rộng × chiều cao). Cửa khổ nhỏ có phụ phí theo quy cách, chưa bao gồm VAT và chi phí lắp đặt. Gọi để tư vấn, báo giá.",
   },
   {
     question: "Zem là gì trong báo giá cửa kéo?",
@@ -113,7 +113,7 @@ export default function BangGiaCuaKeoCanTho() {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Bảng Giá Cửa Kéo Cần Thơ 2025 —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Không Phụ Phí Ẩn, Có Lá & Không Lá, Từ 540.000đ/m²
+                Không Phụ Phí Ẩn — Có Lá & Không Lá, Gọi Để Tư Vấn, Báo Giá
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
@@ -152,7 +152,7 @@ export default function BangGiaCuaKeoCanTho() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Loại thanh U</th>
-                      <th className="px-4 py-3 text-right font-semibold">Đơn giá (đ/m²)</th>
+                      <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -176,7 +176,7 @@ export default function BangGiaCuaKeoCanTho() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Loại thanh U</th>
-                      <th className="px-4 py-3 text-right font-semibold">Đơn giá (đ/m²)</th>
+                      <th className="px-4 py-3 text-right font-semibold">Báo giá</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -195,8 +195,8 @@ export default function BangGiaCuaKeoCanTho() {
               <p className="font-semibold mb-1">Lưu ý quan trọng</p>
               <ul className="space-y-1 list-disc list-inside text-amber-800">
                 <li>Giá trên chưa bao gồm VAT</li>
-                <li>Cửa dưới 8m² cộng thêm 20.000 đ/m²</li>
-                <li>Cửa dưới 5m² cộng thêm 40.000 đ/m²</li>
+                <li>Cửa khổ nhỏ (dưới 8m²) có phụ phí theo quy cách</li>
+                <li>Cửa khổ rất nhỏ (dưới 5m²) phụ phí cao hơn</li>
                 <li>Chi phí lắp đặt tính riêng sau khi khảo sát</li>
                 <li>{WARRANTY}</li>
                 <li>Tiêu chuẩn: khoảng cách giữa các thanh U là 1 tấc</li>

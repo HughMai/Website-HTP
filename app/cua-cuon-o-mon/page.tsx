@@ -81,7 +81,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhà xưởng Ô Môn giá bao nhiêu?",
     answer:
-      "Cửa cuốn khổ lớn cho nhà xưởng tại Ô Môn từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor công nghiệp và VAT. Liên hệ 0945 042 345 để được khảo sát và báo giá tận nơi.",
+      "Cửa cuốn khổ lớn cho nhà xưởng tại Ô Môn tùy chất liệu (tole thép tĩnh điện, nhôm công nghệ Đức), khổ cửa và motor công nghiệp. Gọi 0945 042 345 để được khảo sát và báo giá tận nơi.",
   },
   {
     question: "Cửa cuốn khổ lớn cho nhà xưởng có thể rộng tối đa bao nhiêu?",

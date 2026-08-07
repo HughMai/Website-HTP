@@ -96,7 +96,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhà xưởng Cần Thơ khổ lớn giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn nhà xưởng phụ thuộc vào khổ cửa và chất liệu. Tole Đài Loan từ 500.000đ/m², thép tĩnh điện từ 700.000đ/m². Motor tải trọng 500kg khoảng 4.000.000đ, 1000kg khoảng 6.000.000–8.000.000đ. Liên hệ để được báo giá trọn gói.",
+      "Giá cửa cuốn nhà xưởng phụ thuộc vào khổ cửa, chất liệu (tole, thép tĩnh điện) và tải trọng motor công nghiệp. Gọi để tư vấn, báo giá trọn gói.",
   },
   {
     question: "Cửa cuốn nhà xưởng rộng 6–8m có lắp được không?",
