@@ -11,7 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import {
+  LeadError,
+  LeadHoneypot,
+  LeadSuccess,
+  useLeadSubmit,
+} from "@/hooks/useLeadSubmit";
 import { SITE } from "@/lib/site-data";
 
 const VN_PHONE_RE = /^0(3|5|7|8|9)\d{8}$/;
@@ -50,43 +55,18 @@ const fadeUp = {
 };
 
 export function Contact() {
-  const { toast } = useToast();
+  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef } =
+    useLeadSubmit("Form liên hệ trang chủ");
 
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: { name: "", phone: "", email: "", message: "" },
     mode: "onTouched",
   });
-
-  const onSubmit = async (data: ContactFormValues) => {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (!res.ok) {
-      toast({
-        title: "Gửi thất bại",
-        description:
-          "Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    toast({
-      title: "Gửi yêu cầu thành công!",
-      description:
-        "Cảm ơn Quý khách. Hưng Thành Phát sẽ liên hệ lại trong vòng 15 phút.",
-    });
-    reset();
-  };
 
   return (
     <section
@@ -143,12 +123,19 @@ export function Contact() {
 
           {/* Form */}
           <motion.div variants={fadeUp} custom={1}>
+            {status === "success" ? (
+              <div className="rounded-2xl bg-white p-6 text-brand shadow-2xl md:p-8">
+                <LeadSuccess tone="light" />
+              </div>
+            ) : (
             <form
               noValidate
-              onSubmit={handleSubmit(onSubmit)}
-              className="rounded-2xl bg-white p-6 text-brand shadow-2xl md:p-8"
+              onSubmit={handleSubmit(submit)}
+              className="relative rounded-2xl bg-white p-6 text-brand shadow-2xl md:p-8"
               aria-labelledby="contact-form-title"
             >
+              <LeadHoneypot honeypotRef={honeypotRef} />
+
               <h3
                 id="contact-form-title"
                 className="text-lg font-semibold text-brand"
@@ -158,6 +145,15 @@ export function Contact() {
               <p className="mt-1 text-sm text-brand/65">
                 Chuyên viên sẽ phản hồi trong vòng 15 phút.
               </p>
+
+              {status === "error" && errorMessage && (
+                <LeadError
+                  message={errorMessage}
+                  onRetry={dismissError}
+                  tone="light"
+                  className="mt-4"
+                />
+              )}
 
               <div className="mt-5 space-y-4">
                 <div className="space-y-1.5">
@@ -203,7 +199,7 @@ export function Contact() {
                 <div className="space-y-1.5">
                   <Label htmlFor="email">
                     Email{" "}
-                    <span className="font-normal text-brand/45">(Không bắt buộc)</span>
+                    <span className="font-normal text-brand/70">(Không bắt buộc)</span>
                   </Label>
                   <Input
                     id="email"
@@ -225,7 +221,7 @@ export function Contact() {
                 <div className="space-y-1.5">
                   <Label htmlFor="message">
                     Nhu Cầu / Lời Nhắn{" "}
-                    <span className="font-normal text-brand/45">(Không bắt buộc)</span>
+                    <span className="font-normal text-brand/70">(Không bắt buộc)</span>
                   </Label>
                   <Textarea
                     id="message"
@@ -267,6 +263,7 @@ export function Contact() {
                 </p>
               </div>
             </form>
+            )}
           </motion.div>
         </motion.div>
       </div>

@@ -62,7 +62,7 @@ export function CtaBand({
               Hoặc để lại thông tin, mình gọi lại:
             </p>
             <LeadForm source={source} tone="dark" submitLabel="Gửi" />
-            <p className="mt-3 text-xs text-white/55">
+            <p className="mt-3 text-sm text-white/55">
               Khảo sát và báo giá miễn phí trong nội ô Cần Thơ.
             </p>
 
@@ -73,12 +73,12 @@ export function CtaBand({
                 "Lắp xong mới thanh toán — không đặt cọc trước toàn bộ",
                 "Bồi thường 200% nếu dùng sai vật liệu đã cam kết",
               ].map((line) => (
-                <li key={line} className="flex items-start gap-2 text-xs text-white/75">
+                <li key={line} className="flex items-start gap-2 text-sm text-white/75">
                   <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden />
                   {line}
                 </li>
               ))}
-              <li className="flex items-start gap-2 text-xs text-white/75">
+              <li className="flex items-start gap-2 text-sm text-white/75">
                 <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden />
                 <span>
                   Ảnh thật từng công trình đã lắp —{" "}

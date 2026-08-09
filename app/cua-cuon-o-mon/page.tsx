@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Factory, MapPin, Phone, Trophy, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Ô Môn Cần Thơ — Lắp Đặt Kho Xưởng & Nhà Phố, Bảo Hành Chính Hãng",
+  title: "Cửa Cuốn Ô Môn Cần Thơ — Kho Xưởng, Nhà Phố",
   description:
     "Cửa cuốn Ô Môn Cần Thơ — lắp đặt nhà xưởng, khu công nghiệp và nhà phố tại Ô Môn. Cửa cuốn khổ lớn chuyên công nghiệp. Gọi ngay: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-o-mon` },
@@ -51,22 +51,22 @@ const products = [
 
 const localHighlights = [
   {
-    icon: "🏭",
+    icon: Factory,
     title: "Chuyên cửa cuốn công nghiệp khổ lớn",
     desc: "Ô Môn có nhiều khu công nghiệp, nhà máy và cơ sở sản xuất. Chúng tôi lắp cửa cuốn khổ lớn từ 4m đến 8m chiều rộng — xe tải vào thoải mái, vận hành bền bỉ nhiều ca.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Hỗ trợ nhanh — không để dây chuyền đứng",
     desc: "Cửa xưởng hỏng là dây chuyền sản xuất đứng. Đội kỹ thuật ưu tiên xử lý khẩn cấp tại Ô Môn — phản hồi nhanh nhất có thể để khôi phục hoạt động.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Lắp đặt ngoài giờ sản xuất",
     desc: "Để không gián đoạn hoạt động nhà máy, chúng tôi linh hoạt lắp đặt vào ca đêm, cuối tuần hoặc ngày nghỉ — theo lịch phù hợp với kế hoạch sản xuất của bạn.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "21 năm kinh nghiệm tại Cần Thơ",
     desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Hàng trăm công trình công nghiệp và dân dụng tại Ô Môn đang được bảo hành định kỳ.",
   },
@@ -101,7 +101,7 @@ const faqItems = [
   {
     question: "Cửa cuốn bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho cửa cuốn nhôm và thép, 10 năm cho một số dòng cao cấp. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
   },
 ];
 
@@ -156,7 +156,7 @@ export default function CuaCuonOMon() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -198,7 +198,7 @@ export default function CuaCuonOMon() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {localHighlights.map((h) => (
                 <div key={h.title} className="rounded-xl border bg-card p-5">
-                  <div className="mb-3 text-2xl">{h.icon}</div>
+                  <div className="mb-3 text-2xl"><h.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-1.5 font-semibold text-sm">{h.title}</h3>
                   <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>

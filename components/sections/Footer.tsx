@@ -36,7 +36,7 @@ export function Footer() {
             </span>
             <p className="text-base font-semibold text-white">{SITE.brand}</p>
           </div>
-          <p className="mt-3 text-xs leading-relaxed text-white/65 sm:text-sm">
+          <p className="mt-3 text-sm leading-relaxed text-white/65">
             Đơn vị tiên phong trong lĩnh vực cung cấp và lắp đặt cửa cuốn, cửa
             nhôm kính, cửa kéo cao cấp — đồng hành cùng khách hàng từ năm{" "}
             {SITE.foundedYear}.
@@ -47,7 +47,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Theo dõi chúng tôi trên Facebook"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
             >
               <Facebook className="h-4 w-4" />
             </a>
@@ -56,7 +56,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Liên hệ qua Zalo"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/15 bg-white/5 text-white/80 transition hover:bg-white hover:text-brand"
             >
               {/* Zalo Z brand mark */}
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
@@ -67,15 +67,17 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white">
             Liên Kết Nhanh
           </p>
-          <ul className="mt-3 space-y-1.5 text-xs sm:text-sm">
+          {/* Footer nav is a real navigation list, not prose, so each row gets
+              a 44px row instead of a 20px line box to aim at. */}
+          <ul className="mt-2 text-sm">
             {MAIN_NAV.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="text-white/70 transition hover:text-white"
+                  className="flex min-h-[44px] items-center text-white/70 transition hover:text-white"
                 >
                   {l.label}
                 </Link>
@@ -85,10 +87,10 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-white sm:text-sm">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white">
             Thông Tin Liên Hệ
           </p>
-          <ul className="mt-3 space-y-1.5 text-xs text-white/75 sm:text-sm">
+          <ul className="mt-3 space-y-2 text-sm text-white/75">
             {/* Split by what the caller wants so they reach the right person
                 on the first try instead of being passed around. */}
             {HOTLINE_ROLES.map((r) => (
@@ -154,7 +156,7 @@ export function Footer() {
               href={mapLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-2 border-t border-white/10 bg-white/[0.04] px-3 py-2.5 text-xs leading-relaxed text-white/75 transition hover:bg-white/10 hover:text-white"
+              className="flex min-h-[44px] items-center gap-2 border-t border-white/10 bg-white/[0.04] px-3 py-2.5 text-xs leading-relaxed text-white/75 transition hover:bg-white/10 hover:text-white"
             >
               <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-300" aria-hidden />
               {SITE.address}
@@ -167,14 +169,20 @@ export function Footer() {
           linked (see FOOTER_LINK_GROUPS) without a full-height link grid. */}
       <div className="border-t border-white/10">
         <nav aria-label="Sơ đồ trang" className="container py-4 md:py-5">
-          <ul className="flex flex-wrap gap-x-2 gap-y-1 text-xs leading-relaxed text-white/60">
+          {/* Two columns of real rows on a phone, the compact dot-separated run
+              from sm: up. Eighteen 12px links wrapped into a single paragraph is
+              a fine desktop index and an unusable one under a thumb. */}
+          <ul className="grid grid-cols-2 gap-x-4 text-sm text-white/60 sm:flex sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-1 sm:text-xs sm:leading-relaxed">
             {sitemapLinks.map((l, i) => (
               <li key={l.href} className="flex items-center gap-2">
-                <Link href={l.href} className="transition hover:text-white">
+                <Link
+                  href={l.href}
+                  className="flex min-h-[44px] items-center transition hover:text-white sm:min-h-0"
+                >
                   {l.label}
                 </Link>
                 {i < sitemapLinks.length - 1 && (
-                  <span aria-hidden className="text-white/25">
+                  <span aria-hidden className="hidden text-white/25 sm:inline">
                     ·
                   </span>
                 )}
@@ -185,7 +193,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col items-center justify-between gap-1.5 py-3 text-xs text-white/55 sm:flex-row sm:gap-3 sm:py-5">
+        <div className="container flex flex-col items-center justify-between gap-1.5 py-3 text-sm text-white/55 sm:flex-row sm:gap-3 sm:py-5">
           <p>
             © {year} {SITE.brand}. Mọi quyền được bảo lưu.
           </p>

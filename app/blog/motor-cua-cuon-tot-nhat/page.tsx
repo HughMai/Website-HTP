@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Motor Cửa Cuốn Nào Tốt Nhất 2026? So Sánh 5 Thương Hiệu Phổ Biến",
+  title: "Motor Cửa Cuốn Nào Tốt Nhất 2026? So Sánh 5 Hãng",
   description:
     "Motor cửa cuốn nào tốt nhất? So sánh Somfy, CAME, Nice, B&D và motor Đài Loan — độ bền, giá thành, độ ồn, bảo hành. Tư vấn từ 21 năm kinh nghiệm lắp đặt tại Cần Thơ.",
   alternates: { canonical: `${siteUrl}/blog/motor-cua-cuon-tot-nhat` },
@@ -71,7 +71,7 @@ const motors = [
     durability: "12–15 năm",
     warranty: "3 năm",
     bestFor: "Garage nhà phố, khu dân cư cao cấp",
-    pros: ["Nổi tiếng với dòng garage", "Công nghệ chống ồn tốt", "Bảo hành 3 năm"],
+    pros: ["Nổi tiếng với dòng garage", "Công nghệ chống ồn tốt", "Bảo hành chính hãng"],
     cons: ["Ít phổ biến tại miền Tây", "Khó tìm thợ bảo trì ở tỉnh"],
     verdict: "midrange",
   },
@@ -193,7 +193,7 @@ export default function MotorCuaCuonTotNhat() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container max-w-3xl text-center">
@@ -262,23 +262,23 @@ export default function MotorCuaCuonTotNhat() {
                           <p className="text-sm font-semibold">{m.warranty}</p>
                         </div>
                       </div>
-                      <p className="text-xs text-muted-foreground mb-3">
+                      <p className="text-sm text-muted-foreground mb-3">
                         <span className="font-semibold text-foreground">Phù hợp:</span> {m.bestFor}
                       </p>
                       <div className="grid sm:grid-cols-2 gap-3">
                         <div className="rounded-lg bg-emerald-50 border border-emerald-100 p-3">
-                          <p className="text-xs font-semibold text-emerald-700 mb-1.5">Ưu điểm</p>
+                          <p className="text-sm font-semibold text-emerald-700 mb-1.5">Ưu điểm</p>
                           <ul className="space-y-1">
                             {m.pros.map((p) => (
-                              <li key={p} className="text-xs text-emerald-800">✓ {p}</li>
+                              <li key={p} className="text-sm text-emerald-800">✓ {p}</li>
                             ))}
                           </ul>
                         </div>
                         <div className="rounded-lg bg-muted p-3">
-                          <p className="text-xs font-semibold text-muted-foreground mb-1.5">Nhược điểm</p>
+                          <p className="text-sm font-semibold text-muted-foreground mb-1.5">Nhược điểm</p>
                           <ul className="space-y-1">
                             {m.cons.map((c) => (
-                              <li key={c} className="text-xs text-muted-foreground">✗ {c}</li>
+                              <li key={c} className="text-sm text-muted-foreground">✗ {c}</li>
                             ))}
                           </ul>
                         </div>
@@ -298,8 +298,8 @@ export default function MotorCuaCuonTotNhat() {
                     <div className="flex items-start gap-4">
                       <div className="flex-1">
                         <p className="font-semibold text-sm mb-1">{g.useCase}</p>
-                        <p className="text-xs text-brand font-semibold mb-1.5">→ {g.recommendation}</p>
-                        <p className="text-xs text-muted-foreground">{g.reason}</p>
+                        <p className="text-sm text-brand font-semibold mb-1.5">→ {g.recommendation}</p>
+                        <p className="text-sm text-muted-foreground">{g.reason}</p>
                       </div>
                     </div>
                   </div>

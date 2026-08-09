@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight, CheckCircle2, Wrench } from "lucide-react";
+import { AlertTriangle, AppWindow, ArrowRight, BatteryCharging, Bolt, CheckCircle2, Clock, Droplet, KeyRound, Link2, Lock, MapPin, Phone, RadioTower, RefreshCw, Rows3, Ruler, Settings, Waves, Wind, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -34,32 +34,32 @@ const issueGroups = [
     headingColor: "text-brand",
     issues: [
       {
-        icon: "⚡",
+        icon: Zap,
         title: "Motor cháy / quá tải",
         desc: "Nhấn remote không phản hồi hoặc nghe tiếng kêu lạ từ hộp motor — cần kiểm tra cuộn dây, tụ điện và bo mạch điều khiển.",
       },
       {
-        icon: "📡",
+        icon: RadioTower,
         title: "Remote mất tín hiệu",
         desc: "Nhấn remote không phản ứng dù đã thay pin — thường do lập trình bị xóa hoặc bo mạch thu phát lỗi.",
       },
       {
-        icon: "🔄",
+        icon: RefreshCw,
         title: "Cửa lệch ray / kẹt",
         desc: "Cửa bị cọ hoặc kẹt khi lên/xuống — cần chỉnh lại ray dẫn hướng, con lăn và gia cố khung.",
       },
       {
-        icon: "🌀",
+        icon: Wind,
         title: "Lò xo gãy / giảm lực",
         desc: "Cửa nặng bất thường, motor quá tải sớm — lò xo cân bằng đã yếu hoặc gãy, cần thay mới đúng tải trọng.",
       },
       {
-        icon: "🔋",
+        icon: BatteryCharging,
         title: "Bình lưu điện hỏng",
         desc: "Cửa không hoạt động khi mất điện — bình lưu cạn hoặc không nhận sạc, cần kiểm tra và thay thế.",
       },
       {
-        icon: "🔩",
+        icon: Bolt,
         title: "Dây cuốn mòn / đứt",
         desc: "Cửa cuốn không đều hoặc mép nhăn — cần thay dây cuốn kịp thời tránh đứt đột ngột nguy hiểm.",
       },
@@ -72,32 +72,32 @@ const issueGroups = [
     headingColor: "text-amber-700",
     issues: [
       {
-        icon: "🛤️",
+        icon: Rows3,
         title: "Ray cong / lệch",
         desc: "Cửa kéo bị kẹt hoặc nặng tay khi mở — ray bị cong do va đập hoặc hàn yếu, cần nắn chỉnh hoặc thay mới.",
       },
       {
-        icon: "⚙️",
+        icon: Settings,
         title: "Con lăn mòn / kẹt",
         desc: "Cửa di chuyển khó khăn, nghe tiếng cọ kim loại — con lăn mòn hoặc bụi bẩn tích tụ, cần vệ sinh và thay mới.",
       },
       {
-        icon: "🔐",
+        icon: Lock,
         title: "Khóa ngang lỏng / hỏng",
         desc: "Khóa ngang không chốt được hoặc bị rơ lỏng — ảnh hưởng an ninh trực tiếp, cần sửa hoặc thay khóa mới.",
       },
       {
-        icon: "🔧",
+        icon: Wrench,
         title: "Thanh U vặn / biến dạng",
         desc: "Cửa bị méo hoặc không đóng thẳng — thanh U bị uốn cong do lực tác động mạnh, cần gia cố hoặc thay khung.",
       },
       {
-        icon: "🦀",
+        icon: AlertTriangle,
         title: "Phụ kiện rỉ sét",
         desc: "Bu-lông, ốc vít, bản lề bị rỉ sét sau thời gian dài — cần thay thế trước khi gây hỏng kết cấu lan rộng.",
       },
       {
-        icon: "🔗",
+        icon: Link2,
         title: "Mối hàn gãy / nứt",
         desc: "Khung cửa bị tách mối hàn do rung động tích lũy hoặc va đập — cần hàn gia cố lại ngay để đảm bảo an toàn.",
       },
@@ -110,32 +110,32 @@ const issueGroups = [
     headingColor: "text-sky-700",
     issues: [
       {
-        icon: "🪟",
+        icon: AppWindow,
         title: "Kính vỡ / nứt",
         desc: "Kính bị vỡ do va đập hoặc nứt ứng suất nhiệt — cần thay kính cắt theo kích thước thực tế, đảm bảo đúng độ dày và loại kính.",
       },
       {
-        icon: "🔩",
+        icon: Bolt,
         title: "Bản lề lỏng / gãy",
         desc: "Cửa bị chảy xệ hoặc cạo sàn khi đóng mở — bản lề bị lỏng hoặc gãy, cần siết chặt hoặc thay mới đúng loại.",
       },
       {
-        icon: "💧",
+        icon: Droplet,
         title: "Gioăng cao su bong / rách",
         desc: "Gió lùa hoặc nước mưa thấm vào — gioăng cao su xung quanh kính bị lão hóa, cần thay toàn bộ để phục hồi khả năng cách âm, cách nhiệt.",
       },
       {
-        icon: "🔑",
+        icon: KeyRound,
         title: "Khóa cửa nhôm kẹt / hỏng",
         desc: "Khóa không vào khớp hoặc tay khóa bị cứng — cần tra dầu, chỉnh vị trí khớp cài hoặc thay bộ khóa mới.",
       },
       {
-        icon: "📐",
+        icon: Ruler,
         title: "Thanh nhôm cong / trầy xước",
         desc: "Khung nhôm bị cong do va đập làm cửa không đóng kín — cần nắn chỉnh hoặc thay thanh nhôm mới đúng profile.",
       },
       {
-        icon: "🌊",
+        icon: Waves,
         title: "Ron nước lão hóa / thấm dột",
         desc: "Nước mưa thấm vào khe cửa dù đã đóng kín — ron silicone và ron EPDM bị lão hóa sau 3–5 năm cần bơm lại hoặc thay mới.",
       },
@@ -326,7 +326,7 @@ export default function SuaChuaCuaCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -415,7 +415,7 @@ export default function SuaChuaCuaCanTho() {
                         key={issue.title}
                         className={`rounded-xl border p-5 ${group.color}`}
                       >
-                        <div className="mb-2 text-2xl">{issue.icon}</div>
+                        <div className="mb-2 text-2xl"><issue.icon className="h-7 w-7" aria-hidden /></div>
                         <h4 className="mb-1.5 font-semibold">{issue.title}</h4>
                         <p className="text-sm text-muted-foreground">{issue.desc}</p>
                       </div>

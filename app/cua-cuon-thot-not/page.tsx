@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Car, ClipboardList, Clock, MapPin, Phone, Trophy, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành Chính Hãng",
+  title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi",
   description:
     "Cửa cuốn Thốt Nốt Cần Thơ — lắp đặt nhà phố, kho xưởng tại Thốt Nốt và các xã lân cận. Đến tận nơi, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-thot-not` },
@@ -51,22 +51,22 @@ const products = [
 
 const localHighlights = [
   {
-    icon: "🚗",
+    icon: Car,
     title: "Đến tận nơi — không ngại xa",
     desc: "Thốt Nốt cách showroom khoảng 30–35km. Chúng tôi vẫn đến tận nơi khảo sát và lắp đặt — phí đi lại (nếu có) được thông báo rõ ràng trước khi ký hợp đồng, không phát sinh sau.",
   },
   {
-    icon: "📋",
+    icon: ClipboardList,
     title: "Đặt lịch trước — đúng giờ, đúng hẹn",
     desc: "Đặt lịch trước 1–2 ngày để chúng tôi sắp xếp kỹ thuật viên có mặt đúng giờ tại Thốt Nốt — không để bạn chờ đợi.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Sửa chữa và bảo trì định kỳ",
     desc: "Sau khi lắp đặt, đội kỹ thuật tiếp tục hỗ trợ sửa chữa và bảo trì định kỳ tại Thốt Nốt — không phải lo tìm thợ xa lạ khi cửa có sự cố.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "21 năm uy tín tại Cần Thơ",
     desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Phục vụ khách hàng từ trung tâm đến các huyện xa — uy tín không phân biệt địa bàn.",
   },
@@ -102,7 +102,7 @@ const faqItems = [
   {
     question: "Cửa cuốn bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho cửa cuốn nhôm và thép, 10 năm cho một số dòng cao cấp. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt, kể cả tại Thốt Nốt.",
+      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt, kể cả tại Thốt Nốt.",
   },
 ];
 
@@ -157,7 +157,7 @@ export default function CuaCuonThotNot() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -199,7 +199,7 @@ export default function CuaCuonThotNot() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {localHighlights.map((h) => (
                 <div key={h.title} className="rounded-xl border bg-card p-5">
-                  <div className="mb-3 text-2xl">{h.icon}</div>
+                  <div className="mb-3 text-2xl"><h.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-1.5 font-semibold text-sm">{h.title}</h3>
                   <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>

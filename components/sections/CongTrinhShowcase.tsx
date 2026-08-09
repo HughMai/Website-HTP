@@ -72,7 +72,7 @@ export function CongTrinhShowcase() {
               aria-selected={active === t.key}
               onClick={() => setActive(t.key)}
               className={cn(
-                "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition",
+                "inline-flex min-h-[44px] shrink-0 items-center rounded-full border px-4 text-sm font-medium transition",
                 active === t.key
                   ? "border-brand bg-brand text-white"
                   : "border-brand/15 bg-white text-brand/70 hover:border-brand/40 hover:text-brand"

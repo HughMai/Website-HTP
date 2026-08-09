@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, CloudRain, Lock, MapPin, Palette, Phone, Scale, ShieldCheck, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -59,32 +59,32 @@ const variants = [
 
 const advantages = [
   {
-    icon: "🔇",
+    icon: VolumeX,
     title: "Vận hành cực êm",
     desc: "Bấm remote lúc 11 giờ đêm — hàng xóm không nghe thấy gì. Lò xo cân bằng chính xác giảm tiếng ồn xuống dưới 45dB, êm hơn cửa thép 60%.",
   },
   {
-    icon: "⚖️",
+    icon: Scale,
     title: "Nhẹ — motor bền lâu hơn",
     desc: "Nhôm nhẹ hơn thép 60% — motor không phải vật lộn mỗi lần mở. Cùng kích thước cửa, motor bền 2–3 lần so với lắp cửa thép.",
   },
   {
-    icon: "🌧️",
+    icon: CloudRain,
     title: "Không gỉ — không cần sơn lại",
     desc: "5 năm sau lắp, 10 năm sau lắp — nhôm đùn anodize vẫn sáng bóng như mới. Không gỉ, không bong sơn, không tốn tiền bảo trì ngoại thất.",
   },
   {
-    icon: "🎨",
+    icon: Palette,
     title: "Đa dạng màu sắc",
     desc: "Hơn 20 màu chuẩn RAL — trắng, xám, nâu gỗ, đen — hoặc theo màu mặt tiền nhà bạn. Màu sắc được giữ đồng đều suốt vòng đời sản phẩm.",
   },
   {
-    icon: "🔒",
+    icon: Lock,
     title: "Khóa ngang tích hợp",
     desc: "Ban đêm cần bảo mật thêm? Khóa ngang chống cạy lắp thêm là xong — không cần đặt thêm khóa phụ lộ thiên kém thẩm mỹ.",
   },
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Bảo hành — bồi thường 200% nếu sai vật liệu",
     desc: "Bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất, sửa miễn phí tại nhà. Nếu dùng sai chủng loại so với cam kết — bồi thường 200% giá trị hợp đồng.",
   },
@@ -174,7 +174,7 @@ export default function CuaCuonNhomCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {/* Hero */}
@@ -229,7 +229,7 @@ export default function CuaCuonNhomCanTho() {
               {variants.map((v) => (
                 <div key={v.name} className="rounded-xl border bg-card p-6">
                   <h3 className="font-semibold text-brand">{v.name}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{v.spec}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{v.spec}</p>
                   <p className="mt-3 text-sm text-muted-foreground">{v.note}</p>
                   <div className="mt-4 flex flex-wrap gap-2 text-xs">
                     <span className="rounded-full bg-brand/5 px-3 py-1 font-medium text-brand">
@@ -256,7 +256,7 @@ export default function CuaCuonNhomCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {advantages.map((a) => (
                 <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{a.icon}</div>
+                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{a.title}</h3>
                   <p className="text-sm text-muted-foreground">{a.desc}</p>
                 </div>
@@ -352,7 +352,7 @@ export default function CuaCuonNhomCanTho() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Chưa chọn được loại?</p>
                 <p className="mt-1 font-semibold text-brand">So sánh tất cả dòng cửa cuốn</p>
               </div>
-              <Link href="/cua-cuon-can-tho" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+              <Link href="/cua-cuon-can-tho" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand hover:underline">
                 Cửa Cuốn Cần Thơ <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -361,7 +361,7 @@ export default function CuaCuonNhomCanTho() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Cần lắp mới?</p>
                 <p className="mt-1 font-semibold text-brand">Xem dịch vụ lắp đặt trọn gói</p>
               </div>
-              <Link href="/lap-dat-cua-cuon-can-tho" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+              <Link href="/lap-dat-cua-cuon-can-tho" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand hover:underline">
                 Lắp Đặt Cửa Cuốn <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -370,7 +370,7 @@ export default function CuaCuonNhomCanTho() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Cửa bị hỏng?</p>
                 <p className="mt-1 font-semibold text-brand">Xem dịch vụ sửa chữa — đến tận nơi</p>
               </div>
-              <Link href="/sua-chua-cua-cuon-can-tho" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+              <Link href="/sua-chua-cua-cuon-can-tho" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand hover:underline">
                 Sửa Chữa Cửa Cuốn <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

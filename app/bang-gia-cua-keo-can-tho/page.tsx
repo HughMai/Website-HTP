@@ -100,7 +100,7 @@ export default function BangGiaCuaKeoCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {/* Hero */}
@@ -146,7 +146,7 @@ export default function BangGiaCuaKeoCanTho() {
             {/* Cửa có láu */}
             <div>
               <h3 className="mb-1 font-semibold text-brand">Cửa Kéo Có Lá</h3>
-              <p className="mb-3 text-xs text-muted-foreground">Có thanh dọc gia cố — cứng chắc, bảo mật cao hơn</p>
+              <p className="mb-3 text-sm text-muted-foreground">Có thanh dọc gia cố — cứng chắc, bảo mật cao hơn</p>
               <div className="overflow-hidden rounded-xl border">
                 <table className="w-full text-sm">
                   <thead className="bg-muted">
@@ -170,7 +170,7 @@ export default function BangGiaCuaKeoCanTho() {
             {/* Cửa không láu */}
             <div>
               <h3 className="mb-1 font-semibold text-brand">Cửa Kéo Không Lá</h3>
-              <p className="mb-3 text-xs text-muted-foreground">Không có thanh dọc — giá hợp lý, phù hợp cửa hàng nhỏ</p>
+              <p className="mb-3 text-sm text-muted-foreground">Không có thanh dọc — giá hợp lý, phù hợp cửa hàng nhỏ</p>
               <div className="overflow-hidden rounded-xl border">
                 <table className="w-full text-sm">
                   <thead className="bg-muted">

@@ -47,7 +47,7 @@ export default function CongTrinhPage({
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <section className="relative overflow-hidden bg-brand pt-28 pb-16 text-white md:pt-36 md:pb-20">
           <div className="container">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/85">

@@ -8,7 +8,12 @@ import { Loader2, Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import {
+  LeadError,
+  LeadHoneypot,
+  LeadSuccess,
+  useLeadSubmit,
+} from "@/hooks/useLeadSubmit";
 import { cn } from "@/lib/utils";
 
 const VN_PHONE_RE = /^0(3|5|7|8|9)\d{8}$/;
@@ -26,10 +31,9 @@ const leadSchema = z.object({
 type LeadValues = z.infer<typeof leadSchema>;
 
 /**
- * Compact name + phone capture. Posts the same payload shape as the full
- * QuoteAndContact form so `/api/contact` (Telegram + email + CRM forward)
- * needs no changes — `source` rides along in `message` so the family can tell
- * where the lead came from.
+ * Compact name + phone capture. Transport, error taxonomy and the persistent
+ * confirmation all live in `useLeadSubmit`, shared with Contact and
+ * QuoteAndContact so the three can no longer drift apart.
  */
 export function LeadForm({
   source,
@@ -42,48 +46,44 @@ export function LeadForm({
   className?: string;
   submitLabel?: string;
 }) {
-  const { toast } = useToast();
+  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef } =
+    useLeadSubmit(source);
+
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LeadValues>({
     resolver: zodResolver(leadSchema),
     defaultValues: { name: "", phone: "" },
     mode: "onTouched",
   });
 
-  const onSubmit = async (data: LeadValues) => {
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, message: `Yêu cầu gọi lại — ${source}` }),
-      });
-      if (!res.ok) throw new Error("request failed");
-      toast({
-        title: "Đã nhận thông tin!",
-        description: "Hưng Thành Phát sẽ gọi lại cho bạn trong ít phút.",
-      });
-      reset();
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Gửi không thành công",
-        description: "Bạn vui lòng gọi trực tiếp 0945 042 345 giúp mình nhé.",
-      });
-    }
-  };
-
   const dark = tone === "dark";
+
+  // Success REPLACES the form. A blank form after a successful submit reads as
+  // "nothing happened" and invites the same customer to send twice.
+  if (status === "success") {
+    return <LeadSuccess tone={tone} className={className} />;
+  }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={cn("w-full", className)}
+      onSubmit={handleSubmit(submit)}
+      className={cn("relative w-full", className)}
       noValidate
     >
+      <LeadHoneypot honeypotRef={honeypotRef} />
+
+      {status === "error" && errorMessage && (
+        <LeadError
+          message={errorMessage}
+          onRetry={dismissError}
+          tone={tone}
+          className="mb-3"
+        />
+      )}
+
       <div className="flex flex-col gap-2 sm:flex-row">
         <div className="flex-1">
           <Input

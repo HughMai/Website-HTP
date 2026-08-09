@@ -5,7 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { ChevronDown, Menu, Phone } from "lucide-react";
+import {
+  AppWindow,
+  Blinds,
+  ChevronDown,
+  Columns3,
+  Menu,
+  Phone,
+  Settings,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,14 +24,41 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { MAIN_NAV, SITE } from "@/lib/site-data";
+import { MAIN_NAV, SITE, type NavChild, type NavItem } from "@/lib/site-data";
 
-type NavItem = (typeof MAIN_NAV)[number];
+type NavItemWithChildren = NavItem & { children: NavChild[] };
 
-function hasChildren(
-  item: NavItem
-): item is Extract<NavItem, { children: readonly unknown[] }> {
-  return "children" in item;
+function hasChildren(item: NavItem): item is NavItemWithChildren {
+  return Array.isArray(item.children) && item.children.length > 0;
+}
+
+/**
+ * Only the Sản Phẩm menu carries icons and descriptions, so it renders as a
+ * two-column card menu. Bảng Giá and Dịch Vụ stay plain text lists.
+ */
+function hasThumbnails(item: NavItemWithChildren) {
+  return item.children.some((c) => c.icon || c.desc);
+}
+
+// Blinds reads as a roller shutter, Columns3 as the vertical slats of a cửa
+// kéo, AppWindow as a glazed frame. Icons, not photos: a 64px crop of a whole
+// shopfront has no legible subject and just looks blurry.
+const NAV_ICONS = {
+  "cua-cuon": Blinds,
+  "cua-keo": Columns3,
+  "nhom-kinh": AppWindow,
+  "phu-kien": Settings,
+} as const;
+
+function NavIcon({
+  icon,
+  className,
+}: {
+  icon: NavChild["icon"];
+  className?: string;
+}) {
+  const Icon = icon ? NAV_ICONS[icon] : Settings;
+  return <Icon className={className} aria-hidden />;
 }
 
 export function Navbar() {
@@ -94,7 +129,7 @@ export function Navbar() {
             <span
               className={cn(
                 "hidden text-[10px] font-medium uppercase tracking-[0.14em] transition-colors md:block",
-                scrolled ? "text-brand/55" : "text-white/65"
+                scrolled ? "text-brand/70" : "text-white/65"
               )}
             >
               Cần Thơ · Từ {SITE.foundedYear}
@@ -180,16 +215,48 @@ export function Navbar() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.16 }}
-                    className="absolute left-0 top-full min-w-[248px] pt-2"
+                    className={cn(
+                      "absolute left-0 top-full pt-2",
+                      hasThumbnails(item) ? "w-[560px]" : "min-w-[248px]"
+                    )}
                   >
-                    <ul className="overflow-hidden rounded-xl border border-brand/10 bg-white p-1.5 shadow-[0_18px_40px_-16px_rgba(10,37,64,0.35)]">
+                    <ul
+                      className={cn(
+                        "overflow-hidden rounded-xl border border-brand/10 bg-white p-1.5 shadow-[0_18px_40px_-16px_rgba(10,37,64,0.35)]",
+                        // Photo menus go two-up; plain text menus stay a list.
+                        hasThumbnails(item) && "grid grid-cols-2 gap-1.5 p-2"
+                      )}
+                    >
                       {item.children.map((child) => (
                         <li key={child.href}>
                           <Link
                             href={child.href}
-                            className="block rounded-lg px-3 py-2.5 text-sm font-medium text-brand/80 transition-colors hover:bg-brand-50 hover:text-brand"
+                            className={cn(
+                              "group/mi rounded-lg transition-colors hover:bg-brand-50",
+                              hasThumbnails(item)
+                                ? "flex min-h-[44px] gap-3 p-2"
+                                : "flex min-h-[44px] items-center px-3 text-sm font-medium text-brand/80 hover:text-brand"
+                            )}
                           >
-                            {child.label}
+                            {hasThumbnails(item) && (
+                              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand transition-colors group-hover/mi:bg-brand group-hover/mi:text-white">
+                                <NavIcon icon={child.icon} className="h-5 w-5" />
+                              </span>
+                            )}
+                            {hasThumbnails(item) ? (
+                              <span className="min-w-0">
+                                <span className="block text-sm font-semibold text-brand">
+                                  {child.label}
+                                </span>
+                                {child.desc && (
+                                  <span className="mt-0.5 block text-xs leading-snug text-brand/60">
+                                    {child.desc}
+                                  </span>
+                                )}
+                              </span>
+                            ) : (
+                              child.label
+                            )}
                           </Link>
                         </li>
                       ))}
@@ -262,15 +329,38 @@ export function Navbar() {
                       </Link>
                     </SheetClose>
                     {hasChildren(item) && (
-                      <ul className="mb-1 ml-3 border-l border-brand/15 pl-3">
+                      <ul
+                        className={cn(
+                          "mb-1",
+                          hasThumbnails(item)
+                            ? "mt-1 grid grid-cols-2 gap-2 px-1"
+                            : "ml-3 border-l border-brand/15 pl-3"
+                        )}
+                      >
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <SheetClose asChild>
                               <Link
                                 href={child.href}
-                                className="block rounded-lg px-3 py-2 text-sm text-brand/70 transition-colors hover:bg-brand-50 hover:text-brand"
+                                className={cn(
+                                  "transition-colors hover:bg-brand-50 hover:text-brand",
+                                  hasThumbnails(item)
+                                    ? "block overflow-hidden rounded-xl border border-brand/10"
+                                    : "flex min-h-[44px] items-center rounded-lg px-3 text-sm text-brand/70"
+                                )}
                               >
-                                {child.label}
+                                {hasThumbnails(item) ? (
+                                  <span className="flex min-h-[44px] items-center gap-3 p-3">
+                                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand">
+                                      <NavIcon icon={child.icon} className="h-5 w-5" />
+                                    </span>
+                                    <span className="text-sm font-semibold text-brand">
+                                      {child.label}
+                                    </span>
+                                  </span>
+                                ) : (
+                                  child.label
+                                )}
                               </Link>
                             </SheetClose>
                           </li>

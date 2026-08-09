@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, Clock, MapPin, Phone, Trophy, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -51,22 +51,22 @@ const products = [
 
 const localHighlights = [
   {
-    icon: "🏙️",
+    icon: Building2,
     title: "Chuyên phục vụ nhà phố mặt tiền",
     desc: "Ninh Kiều là trung tâm thương mại sầm uất nhất Cần Thơ. Chúng tôi có kinh nghiệm lắp hàng trăm cửa cuốn cho nhà phố mặt tiền, quán ăn, shop và văn phòng tại đây.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Từ showroom đến Ninh Kiều — 15 phút",
     desc: "Showroom tại Bình Thủy, chỉ 15 phút đến trung tâm Ninh Kiều. Kỹ thuật viên có mặt nhanh, lắp xong trong buổi — không làm gián đoạn kinh doanh của bạn.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Sửa chữa khẩn cấp tại trung tâm",
     desc: "Cửa hỏng giữa giờ kinh doanh? Đội kỹ thuật hỗ trợ khẩn cấp tại toàn bộ Ninh Kiều — ưu tiên xử lý nhanh để bạn không mất doanh thu.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "21 năm uy tín tại Cần Thơ",
     desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Hàng nghìn công trình tại trung tâm thành phố. Uy tín được kiểm chứng qua thời gian.",
   },
@@ -103,7 +103,7 @@ const faqItems = [
   {
     question: "Cửa cuốn bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho cửa cuốn nhôm, 10 năm cho một số dòng cao cấp. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
   },
 ];
 
@@ -158,7 +158,7 @@ export default function CuaCuonNinhKieu() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -200,7 +200,7 @@ export default function CuaCuonNinhKieu() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {localHighlights.map((h) => (
                 <div key={h.title} className="rounded-xl border bg-card p-5">
-                  <div className="mb-3 text-2xl">{h.icon}</div>
+                  <div className="mb-3 text-2xl"><h.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-1.5 font-semibold text-sm">{h.title}</h3>
                   <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>

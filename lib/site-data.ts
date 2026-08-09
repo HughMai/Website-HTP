@@ -40,21 +40,64 @@ export const HOTLINE_ROLES = [
 // Route-based navigation. `children` render as a dropdown on desktop and an
 // expanded group in the mobile sheet. Every href is a real page — the old
 // anchor-only nav could not reach the 21 landing pages at all.
-export const MAIN_NAV = [
+export type NavChild = {
+  href: string;
+  label: string;
+  /**
+   * Icon key for the visual Sản Phẩm menu, mapped to a lucide component in the
+   * Navbar.
+   *
+   * Deliberately an icon and not a photo. Real install shots were tried here
+   * first and read as mush: a 64px tile of a whole shopfront has no legible
+   * subject at that scale, so downscaling only made a busy photo blurry. Icons
+   * stay crisp at any density and give all four categories one visual language.
+   * Full-size install photos still do their job on the product pages, where
+   * they are large enough to actually show the door.
+   */
+  icon?: "cua-cuon" | "cua-keo" | "nhom-kinh" | "phu-kien";
+  desc?: string;
+};
+
+export type NavItem = {
+  href: string;
+  label: string;
+  children?: NavChild[];
+};
+
+export const MAIN_NAV: NavItem[] = [
   { href: "/", label: "Trang Chủ" },
   {
     href: "/san-pham",
     label: "Sản Phẩm",
+    // Four categories, one per thing the xưởng actually makes. The variant
+    // pages (cửa cuốn nhôm, cửa kéo thép, lan can, nhà xưởng) were pulled out
+    // of the nav to stop it reading as a keyword list; each is still linked
+    // in-body from its parent pillar page, so none of them is orphaned.
     children: [
-      // The head-term hub goes first: it is the page that should rank for
-      // "cửa cuốn", and the nhôm page below it is one of its variants.
-      { href: "/cua-cuon-can-tho", label: "Cửa Cuốn" },
-      { href: "/cua-cuon-nhom-can-tho", label: "Cửa Cuốn Nhôm" },
-      { href: "/cua-nhom-kinh-can-tho", label: "Cửa Nhôm Kính" },
-      { href: "/cua-keo-can-tho", label: "Cửa Kéo" },
-      { href: "/cua-keo-thep-can-tho", label: "Cửa Kéo Thép" },
-      { href: "/lan-can-nhom-kinh-can-tho", label: "Lan Can Nhôm Kính" },
-      { href: "/cua-cuon-nha-xuong-can-tho", label: "Cửa Cuốn Nhà Xưởng" },
+      {
+        href: "/cua-cuon-can-tho",
+        label: "Cửa Cuốn",
+        icon: "cua-cuon",
+        desc: "Nhôm, thép, tấm liền, inox — từ 500.000đ/m²",
+      },
+      {
+        href: "/cua-keo-can-tho",
+        label: "Cửa Kéo",
+        icon: "cua-keo",
+        desc: "Mặt tiền kinh doanh, chống đột nhập — từ 540.000đ/m²",
+      },
+      {
+        href: "/cua-nhom-kinh-can-tho",
+        label: "Nhôm Kính",
+        icon: "nhom-kinh",
+        desc: "Cửa đi, cửa sổ, lan can, mặt dựng — từ 1.400.000đ/m²",
+      },
+      {
+        href: "/phu-kien-cua-cuon-can-tho",
+        label: "Phụ Kiện",
+        icon: "phu-kien",
+        desc: "Motor, bình lưu điện, remote, khóa — chính hãng",
+      },
     ],
   },
   { href: "/cong-trinh", label: "Công Trình" },
@@ -262,7 +305,7 @@ export const PRODUCT_CATEGORIES = [
     name: "Motor – Bình Lưu Điện",
     tagline: "Vận hành ổn định – Dự phòng điện – Phụ kiện chính hãng",
     priceFrom: "từ 3.300.000đ/bộ",
-    pageLink: { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa Chữa & Thay Motor" },
+    pageLink: { href: "/phu-kien-cua-cuon-can-tho", label: "Xem Phụ Kiện Cửa Cuốn" },
     // No photos: there is no "công trình" for a remote control, and the supplier
     // shots that used to sit here were a competitor's catalogue images. Renders
     // as tiles until the xưởng photographs the units it actually stocks.

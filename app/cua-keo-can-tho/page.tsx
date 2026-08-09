@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -55,32 +56,32 @@ const types = [
 
 const advantages = [
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Bảo mật cao hơn cửa cuốn",
     desc: "Cấu trúc nan kéo đan chéo chắc chắn, khóa ngang đa điểm — khó phá hơn cửa cuốn thông thường.",
   },
   {
-    icon: "🌬️",
+    icon: Wind,
     title: "Thông thoáng khi đóng",
     desc: "Khe hở giữa các nan cho phép thông gió và quan sát từ bên ngoài — lý tưởng cho cửa hàng vừa đóng vừa trưng hàng.",
   },
   {
-    icon: "📐",
+    icon: Ruler,
     title: "Tiết kiệm không gian",
     desc: "Cửa kéo gom sang một bên thay vì cuộn lên — phù hợp mặt tiền có trần thấp hoặc máy lạnh gần cửa.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Bảo trì đơn giản, chi phí thấp",
     desc: "Cơ học đơn giản — không cần motor, ít hỏng hóc, phụ kiện thay thế phổ biến, dễ tìm trên toàn quốc.",
   },
   {
-    icon: "💰",
+    icon: Banknote,
     title: "Giá thấp hơn 20–30% so với cửa cuốn",
     desc: "Chi phí đầu tư thấp với độ bảo mật tương đương — lựa chọn tối ưu cho chủ kinh doanh muốn tiết kiệm.",
   },
   {
-    icon: "🏪",
+    icon: Store,
     title: "Phù hợp mọi loại mặt tiền",
     desc: "Từ nhà phố 3m đến shophouse 6m — cửa kéo linh hoạt về kích thước và kiểu dáng.",
   },
@@ -172,7 +173,7 @@ export default function CuaKeoCanTho() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -224,7 +225,7 @@ export default function CuaKeoCanTho() {
                   </span>
                   <h3 className="mt-3 font-semibold">{t.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-                  <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-brand/70">
+                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand/70">
                     <ShieldCheck className="h-3.5 w-3.5" /> {t.best}
                   </p>
                 </div>
@@ -244,7 +245,7 @@ export default function CuaKeoCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {advantages.map((a) => (
                 <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{a.icon}</div>
+                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{a.title}</h3>
                   <p className="text-sm text-muted-foreground">{a.desc}</p>
                 </div>
@@ -299,6 +300,11 @@ export default function CuaKeoCanTho() {
             </div>
           </div>
         </section>
+
+        <ProductPhotos
+          categoryId="cua-keo"
+          heading="Ảnh cửa kéo Hưng Thành Phát đã lắp tại Cần Thơ"
+        />
 
         <CtaBand source="Cửa kéo Cần Thơ" />
 

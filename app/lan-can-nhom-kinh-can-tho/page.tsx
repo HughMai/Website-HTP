@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Sparkles, Waves, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Lan Can Nhôm Kính Cần Thơ — Cầu Thang, Ban Công, Sân Thượng",
+  title: "Lan Can Nhôm Kính Cần Thơ — Cầu Thang, Ban Công",
   description:
     "Lan can nhôm kính Cần Thơ — cầu thang, ban công, sân thượng. Kính cường lực an toàn, khung nhôm bền bỉ, thẩm mỹ cao. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/lan-can-nhom-kinh-can-tho` },
@@ -51,32 +51,32 @@ const types = [
 
 const advantages = [
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Kính cường lực — con bạn leo cũng không lo",
     desc: "Kính cường lực 8–12mm chịu lực gấp 5 lần kính thường. Khi vỡ (rất hiếm) không tạo mảnh sắc — an toàn tuyệt đối cho trẻ em và người cao tuổi.",
   },
   {
-    icon: "✨",
+    icon: Sparkles,
     title: "Cầu thang nhìn như biệt thự — từ 1.950.000đ/m",
     desc: "Kính trong suốt mở rộng tầm nhìn, ánh sáng lan khắp cầu thang. Khách đến nhà ai cũng hỏi thợ đâu để lắp.",
   },
   {
-    icon: "🌊",
+    icon: Waves,
     title: "Không gỉ — không sơn lại — không lo mùa mưa",
     desc: "Nhôm anod hóa và kính không gỉ sét trong khí hậu nóng ẩm Cần Thơ. Trong khi hàng xóm sơn lại lan can sắt mỗi 2 năm, bạn chỉ cần lau kính.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Bảo trì gần như bằng không",
     desc: "Không cần sơn lại, không cần xử lý định kỳ. Lau kính sạch là đủ — đơn giản như lau cửa sổ.",
   },
   {
-    icon: "📐",
+    icon: Ruler,
     title: "Gia công theo số đo thực tế",
     desc: "Mỗi bộ lan can được cắt và gia công theo số đo chính xác tại công trình — không có kích thước chuẩn ép buộc, phù hợp mọi thiết kế cầu thang.",
   },
   {
-    icon: "💰",
+    icon: Banknote,
     title: "Đẹp không kém inox — giá thấp hơn 20–30%",
     desc: "Lan can nhôm kính có thẩm mỹ ngang inox nhưng chi phí thấp hơn đáng kể. Tối ưu cho nhà phố muốn đẹp mà ngân sách có hạn.",
   },
@@ -165,7 +165,7 @@ export default function LanCanNhomKinhCanTho() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -234,7 +234,7 @@ export default function LanCanNhomKinhCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {advantages.map((a) => (
                 <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{a.icon}</div>
+                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{a.title}</h3>
                   <p className="text-sm text-muted-foreground">{a.desc}</p>
                 </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, ArrowRight } from "lucide-react";
+import { ArrowRight, Flame, Lightbulb, Phone, TrendingDown, Turtle, Volume2, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Hướng Dẫn Bảo Trì Cửa Cuốn Đúng Cách — 5 Bước Đơn Giản",
+  title: "Bảo Trì Cửa Cuốn Đúng Cách — 5 Bước Đơn Giản",
   description:
     "Cách bảo trì cửa cuốn đúng cách tại nhà — 5 bước đơn giản giúp tăng tuổi thọ từ 5 lên 15 năm, giảm 80% sự cố hỏng hóc. Hướng dẫn từ chuyên gia Hưng Thành Phát Door.",
   alternates: { canonical: `${siteUrl}/blog/cach-bao-tri-cua-cuon` },
@@ -65,12 +65,12 @@ const steps = [
 ];
 
 const warningSigns = [
-  { icon: "⚡", sign: "Nhấn remote nhiều lần mới phản hồi", action: "Thay pin remote hoặc kiểm tra bo mạch thu" },
-  { icon: "🔊", sign: "Tiếng kêu lạ khi lên/xuống", action: "Kiểm tra ray, con lăn và lò xo ngay" },
-  { icon: "🐢", sign: "Cửa lên/xuống chậm hơn bình thường", action: "Tra dầu ray, kiểm tra lò xo và tải motor" },
-  { icon: "🔥", sign: "Motor nóng sau khi vận hành ngắn", action: "Kiểm tra cân bằng lò xo — có thể lò xo đã yếu" },
-  { icon: "📉", sign: "Cửa không giữ được ở nửa chừng", action: "Lò xo cân bằng yếu — cần thay sớm" },
-  { icon: "💡", sign: "Cửa không vận hành khi mất điện", action: "Bình lưu điện hỏng hoặc hết tuổi thọ" },
+  { icon: Zap, sign: "Nhấn remote nhiều lần mới phản hồi", action: "Thay pin remote hoặc kiểm tra bo mạch thu" },
+  { icon: Volume2, sign: "Tiếng kêu lạ khi lên/xuống", action: "Kiểm tra ray, con lăn và lò xo ngay" },
+  { icon: Turtle, sign: "Cửa lên/xuống chậm hơn bình thường", action: "Tra dầu ray, kiểm tra lò xo và tải motor" },
+  { icon: Flame, sign: "Motor nóng sau khi vận hành ngắn", action: "Kiểm tra cân bằng lò xo — có thể lò xo đã yếu" },
+  { icon: TrendingDown, sign: "Cửa không giữ được ở nửa chừng", action: "Lò xo cân bằng yếu — cần thay sớm" },
+  { icon: Lightbulb, sign: "Cửa không vận hành khi mất điện", action: "Bình lưu điện hỏng hoặc hết tuổi thọ" },
 ];
 
 const faqSchema = {
@@ -106,7 +106,7 @@ export default function CachBaoTriCuaCuon() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container max-w-3xl text-center">
@@ -171,7 +171,7 @@ export default function CachBaoTriCuaCuon() {
                 {warningSigns.map((w) => (
                   <div key={w.sign} className="rounded-xl border bg-card p-4">
                     <div className="flex items-start gap-3">
-                      <span className="text-2xl">{w.icon}</span>
+                      <span className="text-2xl"><w.icon className="h-7 w-7" aria-hidden /></span>
                       <div>
                         <p className="font-semibold text-sm">{w.sign}</p>
                         <p className="text-xs text-muted-foreground mt-1">→ {w.action}</p>

@@ -32,9 +32,8 @@ export function Gallery({
             Khoảnh khắc thi công thực tế từ đội ngũ Hưng Thành Phát.
           </h2>
           <p className="mt-4 text-base text-brand/70">
-            Hơn 500 công trình lớn nhỏ khắp Đồng Bằng Sông Cửu Long — minh
-            chứng sống động cho chất lượng thi công và sự tin tưởng của khách
-            hàng.
+            Nhà phố, mặt bằng kinh doanh và nhà xưởng khắp Đồng Bằng Sông Cửu
+            Long — chụp tại chỗ trong lúc đội thợ đang lắp.
           </p>
           <p className="mt-3 text-sm font-medium text-brand/60">
             Toàn bộ hình dưới đây là ảnh chụp thực tế tại công trình — không

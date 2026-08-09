@@ -44,14 +44,14 @@ export function PortfolioGrid({
               onClick={() => setFilter(p.key)}
               aria-pressed={on}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition",
+                "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border px-4 text-sm font-medium transition",
                 on
                   ? "border-brand bg-brand text-white"
                   : "border-brand/15 bg-white text-brand/70 hover:border-brand/40 hover:text-brand"
               )}
             >
               {p.label}
-              <span className={cn("text-xs font-semibold", on ? "text-white/70" : "text-brand/40")}>
+              <span className={cn("text-xs font-semibold", on ? "text-white/70" : "text-brand/70")}>
                 {counts[p.key] ?? 0}
               </span>
             </button>

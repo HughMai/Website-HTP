@@ -93,7 +93,7 @@ export function ProductCategoryRow({
         </div>
         <Link
           href={category.pageLink.href}
-          className="inline-flex items-center gap-1 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-600"
+          className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-600"
         >
           {category.pageLink.label}
           <ArrowRight className="h-4 w-4" aria-hidden />
@@ -136,11 +136,11 @@ export function ProductCategoryRow({
                 )}
               </div>
               <div className="border-t border-brand/10 bg-gray-50 px-3 py-3">
-                <p className="text-[11px] font-bold uppercase leading-snug tracking-wider text-brand transition-colors group-hover:text-amber-600 md:text-xs">
+                <p className="text-xs font-bold uppercase leading-snug tracking-wider text-brand transition-colors group-hover:text-amber-600 md:text-sm">
                   {card.label}
                 </p>
                 {card.isRealInstall && (
-                  <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-amber-600">
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-amber-600">
                     Xem công trình
                     <ArrowRight className="h-3 w-3" aria-hidden />
                   </span>
@@ -163,7 +163,7 @@ export function ProductCategoryRow({
             <li key={s.name}>
               <Link
                 href={category.pageLink.href}
-                className="inline-block rounded-full border border-brand/15 bg-white px-3 py-1.5 text-xs font-medium text-brand/75 transition hover:border-amber-400 hover:bg-amber-50 hover:text-brand"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-brand/15 bg-white px-3 text-xs font-medium text-brand/75 transition hover:border-amber-400 hover:bg-amber-50 hover:text-brand"
               >
                 {s.name}
               </Link>

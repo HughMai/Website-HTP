@@ -1,30 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Be_Vietnam_Pro, Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { FloatingContact } from "@/components/FloatingContact";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { SITE } from "@/lib/site-data";
+import { assertContactEnv } from "@/lib/env";
 import "./globals.css";
 
+// Runs at build time for every statically generated page. Fails a production
+// build outright when no lead channel is configured — see lib/env.ts.
+assertContactEnv();
+
+// One family, per DESIGN.md. Playfair_Display (12 files) and Be_Vietnam_Pro
+// (10 files) used to be declared here and referenced by nothing, so all 152
+// pages preloaded 22 font files that rendered zero glyphs.
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin", "vietnamese"],
-  display: "swap",
-  variable: "--font-playfair",
-  weight: ["500", "700", "800"],
-  style: ["normal", "italic"],
-});
-
-const beVietnam = Be_Vietnam_Pro({
-  subsets: ["latin", "vietnamese"],
-  display: "swap",
-  variable: "--font-be-vietnam",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 const siteUrl =
@@ -40,9 +33,11 @@ const ogImage = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ | Hưng Thành Phát Door",
-    template: "%s | Hưng Thành Phát Door",
+    default: "Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ | HTP Door",
+    // Google shows ~60 characters. The old suffix (" | Hưng Thành Phát Door")
+    // cost 23 of them on every page, which pushed all 24 titles past the cut.
+    // 11 characters keeps a brand token in the SERP without eating the keyword.
+    template: "%s | HTP Door",
   },
   description:
     "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 21+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
@@ -230,7 +225,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={`${inter.variable} ${playfair.variable} ${beVietnam.variable}`}>
+    <html lang="vi" className={inter.variable}>
       <head>
         {/* Dark background so the first paint never flashes white behind the navy hero. */}
         <style dangerouslySetInnerHTML={{ __html: `html{background:#080b16}` }} />
@@ -250,6 +245,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        {/* First tab stop on every one of the 152 pages. Without it a keyboard
+            user walks the whole nav before reaching content, on every page. */}
+        <a href="#main" className="skip-link">
+          Bỏ qua điều hướng, tới nội dung chính
+        </a>
         {children}
         <FloatingContact />
         <StickyCallBar />

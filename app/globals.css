@@ -84,6 +84,49 @@
   .pause-on-hover:hover .animate-marquee {
     animation-play-state: paused;
   }
+
+  /* Skip-to-content. Off-screen until focused, then pinned top-left so the
+     first Tab on any page jumps past the nav. 44px tall for the tap target. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 1rem;
+    border-bottom-right-radius: 0.5rem;
+    background: #0a2540;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    left: 0;
+    outline: 2px solid #fbbf24;
+    outline-offset: 2px;
+  }
+}
+
+/* Motion-sensitive visitors get two permanently sliding marquees otherwise.
+   Hover-pause does not help them, and it does nothing at all on touch. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 /* Printing never fires the scroll observers that reveal these sections, so a

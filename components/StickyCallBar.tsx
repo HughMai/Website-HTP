@@ -25,7 +25,7 @@ export function StickyCallBar() {
             aria-label={`Gọi hotline ${primaryHotline}`}
           >
             <Phone className="h-5 w-5 text-red-500" aria-hidden />
-            <span className="text-[11px] font-bold">Gọi ngay</span>
+            <span className="text-xs font-bold">Gọi ngay</span>
           </a>
           <a
             href={ZALO_URL}
@@ -35,7 +35,7 @@ export function StickyCallBar() {
             aria-label="Nhắn tin qua Zalo"
           >
             <MessageCircle className="h-5 w-5 text-[#0068FF]" aria-hidden />
-            <span className="text-[11px] font-bold">Chat Zalo</span>
+            <span className="text-xs font-bold">Chat Zalo</span>
           </a>
           <a
             href="/bao-gia-cua-cuon-can-tho"
@@ -43,7 +43,7 @@ export function StickyCallBar() {
             aria-label="Nhận báo giá"
           >
             <Ruler className="h-5 w-5 text-amber-500" aria-hidden />
-            <span className="text-[11px] font-bold">Báo giá</span>
+            <span className="text-xs font-bold">Báo giá</span>
           </a>
         </div>
       </div>

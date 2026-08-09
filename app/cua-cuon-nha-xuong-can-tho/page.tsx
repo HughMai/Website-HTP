@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, BatteryCharging, Clock, MapPin, Phone, Ruler, Settings, ShieldCheck, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Nhà Xưởng Cần Thơ — Khổ Lớn, Chịu Tải, Bền Bỉ",
+  title: "Cửa Cuốn Nhà Xưởng Cần Thơ — Khổ Lớn, Chịu Tải",
   description:
     "Cửa cuốn nhà xưởng, kho hàng Cần Thơ — khổ rộng 4–12m, thép sơn tĩnh điện, tole Đài Loan, chịu tải nặng. Motor công nghiệp, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-nha-xuong-can-tho` },
@@ -55,32 +55,32 @@ const products = [
 
 const features = [
   {
-    icon: "📏",
+    icon: Ruler,
     title: "Khổ cửa từ 3–12m — xe container ra vào thoải mái",
     desc: "Sản xuất theo đặt hàng, không giới hạn khổ rộng. Cửa 10–12m cho xe container, forklift, hoặc thiết bị khổ lớn di chuyển qua ngày.",
   },
   {
-    icon: "⚙️",
+    icon: Settings,
     title: "Motor 500–1000kg — mở cả trăm lần vẫn trơn",
     desc: "Motor tải trọng công nghiệp được chọn theo trọng lượng cửa thực tế — không quá tải, không hao mòn sớm, vận hành ổn định suốt ca sản xuất.",
   },
   {
-    icon: "🔋",
+    icon: BatteryCharging,
     title: "Bình lưu điện — dây chuyền không dừng khi mất điện",
     desc: "Mất điện lưới — bình lưu tự chuyển nguồn tức thì. Cửa tiếp tục vận hành, dây chuyền không gián đoạn, thiệt hại không tính theo giờ nữa.",
   },
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Chống gỉ — bền trong môi trường hóa chất và ẩm",
     desc: "Sơn tĩnh điện epoxy chịu hóa chất, độ ẩm cao và nước rửa công nghiệp — phù hợp xưởng chế biến thực phẩm, hóa chất, kho lạnh đông.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Thi công cuối tuần — không gián đoạn sản xuất",
     desc: "Đội kỹ thuật thi công tối thứ 7 hoặc chủ nhật theo yêu cầu — xưởng bạn tiếp tục hoạt động bình thường, thứ 2 mở cửa mới.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Bảo trì hợp đồng 6 tháng/lần",
     desc: "Gói bảo trì định kỳ — kiểm tra motor, tra dầu ray, cân bằng lò xo — phát hiện hỏng hóc trước khi xảy ra sự cố, kéo dài tuổi thọ 2–3 lần.",
   },
@@ -161,7 +161,7 @@ export default function CuaCuonNhaXuongCanTho() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -231,7 +231,7 @@ export default function CuaCuonNhaXuongCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {features.map((f) => (
                 <div key={f.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{f.icon}</div>
+                  <div className="mb-3 text-3xl"><f.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{f.title}</h3>
                   <p className="text-sm text-muted-foreground">{f.desc}</p>
                 </div>

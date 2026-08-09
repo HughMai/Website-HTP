@@ -81,7 +81,7 @@ export function Process() {
           >
             4 bước đơn giản — từ tư vấn đến bàn giao.
           </h2>
-          <p className="mt-2 text-xs font-medium text-amber-300 md:mt-3 md:text-sm">
+          <p className="mt-2 text-sm font-medium text-amber-300 md:mt-3">
             Bồi thường 200% tổng giá trị hợp đồng nếu sử dụng không đúng chủng
             loại, thương hiệu đã cam kết.
           </p>
@@ -120,7 +120,7 @@ export function Process() {
                   <h3 className="mt-3 text-sm font-semibold text-white md:mt-5 md:text-base">
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-white/65 md:mt-2 md:text-sm">
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/65 md:mt-2">
                     {step.description}
                   </p>
                 </motion.div>

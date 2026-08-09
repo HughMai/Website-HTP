@@ -55,7 +55,7 @@ export default function BlogIndex() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
@@ -109,7 +109,7 @@ export default function BlogIndex() {
               </p>
               <a
                 href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand/90"
+                className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand/90"
               >
                 Gọi {SITE.hotlines[0]}
               </a>

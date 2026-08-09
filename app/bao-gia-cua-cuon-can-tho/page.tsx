@@ -128,7 +128,7 @@ export default function BaoGiaCuaCuonCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {/* Hero */}
@@ -177,7 +177,7 @@ export default function BaoGiaCuaCuonCanTho() {
             {cuaCuonTables.map((table) => (
               <div key={table.title}>
                 <h3 className="mb-1 font-semibold text-brand">{table.title}</h3>
-                <p className="mb-3 text-xs text-muted-foreground">Đơn vị: {table.unit}</p>
+                <p className="mb-3 text-sm text-muted-foreground">Đơn vị: {table.unit}</p>
                 <div className="overflow-hidden rounded-xl border">
                   <table className="w-full text-sm">
                     <thead className="bg-muted">

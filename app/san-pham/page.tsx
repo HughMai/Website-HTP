@@ -63,7 +63,7 @@ export default function SanPhamPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="relative overflow-hidden bg-brand pt-28 pb-16 text-white md:pt-36 md:pb-20">
           <div className="container">

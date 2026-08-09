@@ -126,20 +126,6 @@ export function Testimonials() {
       className="overflow-hidden bg-slate-50 py-12 md:py-20"
       aria-labelledby="testimonials-heading"
     >
-      <style>{`
-        @keyframes htp-marquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-        .htp-marquee-track {
-          animation: htp-marquee 40s linear infinite;
-          will-change: transform;
-        }
-        .htp-marquee-track:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-
       {/* Heading */}
       <motion.div
         initial="hidden"
@@ -155,15 +141,18 @@ export function Testimonials() {
           id="testimonials-heading"
           className="mt-3 text-balance text-2xl font-semibold tracking-tight text-slate-800 md:mt-4 md:text-4xl"
         >
-          500+ công trình — khách hàng tin tưởng.
+          Khách hàng Cần Thơ nói gì sau khi lắp.
         </h2>
         <p className="mt-2 text-sm text-slate-500 md:mt-3">
           Đánh giá thực tế từ khách hàng trên Google Business.
         </p>
       </motion.div>
 
-      {/* Marquee track */}
-      <div className="relative">
+      {/* Marquee track. Animation comes from the Tailwind `marquee` keyframes
+          in tailwind.config.ts — this section used to re-declare an identical
+          40s linear infinite animation in an inline <style> block, and
+          `pause-on-hover` duplicated a rule already in globals.css. */}
+      <div className="pause-on-hover relative">
         {/* Fade edges */}
         <div
           aria-hidden
@@ -174,7 +163,7 @@ export function Testimonials() {
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-slate-50 to-transparent md:w-32"
         />
 
-        <div className="htp-marquee-track flex w-max py-4">
+        <div className="animate-marquee flex w-max py-4 will-change-transform">
           {track.map((review, i) => (
             <ReviewCard key={i} {...review} />
           ))}

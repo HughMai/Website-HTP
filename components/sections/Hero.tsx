@@ -17,10 +17,13 @@ const fadeUp = {
   }),
 };
 
+// One claim per element. The eyebrow owns the workshop, the H1 owns the risk
+// reversal, the subhead owns speed, and these three own everything else — the
+// hero used to state "500+" and "lắp xong mới thanh toán" twice each.
 const trustChips = [
   { icon: ShieldCheck, label: "Bồi thường 200% nếu sai vật liệu" },
-  { icon: Hammer, label: "500+ công trình từ 2005" },
-  { icon: BadgeCheck, label: "Lắp xong mới thanh toán" },
+  { icon: Hammer, label: "500+ công trình đã bàn giao" },
+  { icon: BadgeCheck, label: "Thợ của xưởng, không qua thầu phụ" },
 ];
 
 // Real installs from the công trình library — the arch frames echo a door
@@ -77,18 +80,18 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-amber-200 backdrop-blur"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-              Phục vụ Cần Thơ từ {SITE.foundedYear} — 500+ công trình
+              Xưởng sản xuất tại Cần Thơ từ {SITE.foundedYear}
             </motion.span>
 
             <motion.h1
               variants={fadeUp}
               custom={1}
               id="hero-heading"
-              className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-6xl md:leading-[1.05]"
+              className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl md:leading-[1.05]"
             >
-              Cửa Cuốn, Nhôm Kính, Cửa Kéo{" "}
+              Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
-                Cần Thơ
+                Lắp Xong Mới Thanh Toán
               </span>
             </motion.h1>
 
@@ -97,8 +100,7 @@ export function Hero() {
               custom={2}
               className="mt-5 max-w-xl text-balance text-base text-white/80 md:text-lg"
             >
-              Khảo sát và báo giá miễn phí trong ngày. Lắp đúng hẹn, lắp xong
-              mới thanh toán — bồi thường 200% nếu dùng sai vật liệu cam kết.
+              Khảo sát và báo giá miễn phí trong ngày, lắp đúng hẹn.
             </motion.p>
 
             {/* Primary capture — above the fold, two fields */}
@@ -107,7 +109,7 @@ export function Hero() {
                 Để lại số — thợ gọi lại trong ít phút:
               </p>
               <LeadForm source="Hero trang chủ" tone="dark" />
-              <p className="mt-2 text-xs text-white/55">
+              <p className="mt-2 text-sm text-white/55">
                 Hoặc gọi thẳng {primaryHotline} — miễn phí tư vấn, không ép chốt.
               </p>
             </motion.div>
@@ -179,9 +181,13 @@ export function Hero() {
                   fill
                   sizes="(min-width: 1024px) 22vw, 0px"
                   className="object-cover"
-                  // Both arch shots sit above the fold on desktop, so both are
-                  // LCP candidates — whichever renders larger wins. Preload both.
-                  priority
+                  // Only the first shot gets the preload. This grid is
+                  // `hidden ... lg:grid`, so below 1024px neither image renders
+                  // and the LCP is the H1 text — preloading both meant every
+                  // mobile visitor fetched two images they never see. On
+                  // desktop only one element can be the LCP, and it is this
+                  // one: same size as its sibling but without the mt-10 offset.
+                  priority={i === 0}
                 />
               </div>
             ))}
@@ -207,7 +213,7 @@ export function Hero() {
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80 transition hover:border-amber-400/50 hover:bg-amber-400/10 hover:text-white"
+              className="inline-flex min-h-[44px] items-center rounded-full border border-white/15 bg-white/5 px-4 text-sm text-white/80 transition hover:border-amber-400/50 hover:bg-amber-400/10 hover:text-white"
             >
               {l.label}
             </Link>

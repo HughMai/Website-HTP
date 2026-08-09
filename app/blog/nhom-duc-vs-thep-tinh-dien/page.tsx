@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Nhôm Đức Hay Thép Tĩnh Điện? So Sánh Chi Tiết 2026",
+  title: "Cửa Cuốn Nhôm Đức Hay Thép Tĩnh Điện? So Sánh",
   description:
     "Nên chọn cửa cuốn nhôm công nghệ Đức hay thép sơn tĩnh điện? So sánh 6 tiêu chí: độ bền, tiếng ồn, giá, thẩm mỹ, bảo trì và phù hợp mục đích sử dụng.",
   alternates: { canonical: `${siteUrl}/blog/nhom-duc-vs-thep-tinh-dien` },
@@ -118,7 +118,7 @@ export default function NhomDucVsThepTinhDien() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container max-w-3xl text-center">

@@ -62,10 +62,10 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         {/* breadcrumb (pt-20 clears the fixed navbar) */}
         <nav className="border-b border-brand/10 bg-white pt-20" aria-label="Breadcrumb">
-          <ol className="container flex flex-wrap items-center gap-1.5 py-3 text-[13px] text-brand/55">
+          <ol className="container flex flex-wrap items-center gap-1.5 py-3 text-sm text-brand/70">
             <li>
               <Link href="/" className="hover:text-brand">
                 Trang chủ
@@ -141,7 +141,7 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
                 <dl className="divide-y divide-brand/10">
                   {info.map(([k, v]) => (
                     <div key={k} className="flex justify-between gap-4 py-2.5 text-sm">
-                      <dt className="text-brand/55">{k}</dt>
+                      <dt className="text-brand/70">{k}</dt>
                       <dd className="text-right font-semibold text-brand">{v}</dd>
                     </div>
                   ))}

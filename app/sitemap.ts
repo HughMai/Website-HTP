@@ -46,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${siteUrl}/phu-kien-cua-cuon-can-tho`,
+      lastModified: new Date("2026-08-08"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${siteUrl}/lap-dat-cua-cuon-can-tho`,
       lastModified: new Date("2026-05-14"),
       changeFrequency: "monthly",

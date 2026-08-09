@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Factory, MapPin, Phone, Trophy, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -10,7 +10,7 @@ import { SITE } from "@/lib/site-data";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 export const metadata: Metadata = {
-  title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành Chính Hãng",
+  title: "Cửa Cuốn Cái Răng Cần Thơ — Nhà Phố & Kho Xưởng",
   description:
     "Cửa cuốn Cái Răng Cần Thơ — lắp đặt nhà phố, kho hàng, nhà xưởng khu vực Cái Răng. Khảo sát miễn phí, lắp trong ngày, bảo hành chính hãng. Gọi: 0945 042 345.",
   alternates: { canonical: `${siteUrl}/cua-cuon-cai-rang` },
@@ -51,22 +51,22 @@ const products = [
 
 const localHighlights = [
   {
-    icon: "🏭",
+    icon: Factory,
     title: "Chuyên kho hàng và nhà xưởng",
     desc: "Cái Răng có nhiều khu vực kho hàng, chợ đầu mối và cơ sở sản xuất. Chúng tôi có kinh nghiệm lắp cửa cuốn khổ lớn cho kho xưởng và cửa cuốn nhôm cho nhà phố tại đây.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Gần — kỹ thuật viên đến nhanh",
     desc: "Showroom Bình Thủy liền kề Cái Răng qua cầu Cái Răng. Kỹ thuật viên có mặt nhanh chóng, lắp xong trong ngày — không gián đoạn hoạt động kinh doanh.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Hỗ trợ sửa chữa khẩn cấp",
     desc: "Cửa kho hàng hỏng giữa mùa cao điểm? Đội kỹ thuật hỗ trợ khẩn cấp tại toàn bộ Cái Răng — xử lý nhanh để không ảnh hưởng đến hàng hóa và kinh doanh.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "21 năm phục vụ Cần Thơ",
     desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Hàng trăm công trình tại Cái Răng được bảo hành và bảo trì định kỳ.",
   },
@@ -102,7 +102,7 @@ const faqItems = [
   {
     question: "Cửa cuốn bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho cửa cuốn nhôm, 10 năm cho một số dòng cao cấp. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
   },
 ];
 
@@ -157,7 +157,7 @@ export default function CuaCuonCaiRang() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -199,7 +199,7 @@ export default function CuaCuonCaiRang() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {localHighlights.map((h) => (
                 <div key={h.title} className="rounded-xl border bg-card p-5">
-                  <div className="mb-3 text-2xl">{h.icon}</div>
+                  <div className="mb-3 text-2xl"><h.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-1.5 font-semibold text-sm">{h.title}</h3>
                   <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>

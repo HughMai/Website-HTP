@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Trophy, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -51,22 +51,22 @@ const products = [
 
 const localHighlights = [
   {
-    icon: "📍",
+    icon: MapPin,
     title: "Showroom tại Bình Thủy — xem mẫu trước",
     desc: "235–237 Võ Văn Kiệt, Bình Thủy — đến xem mẫu cửa thực tế, chạm tay vào vật liệu, so sánh trực tiếp trước khi quyết định. Không cần đặt hàng theo ảnh.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Gọi sáng — thợ đến trong 2 giờ",
     desc: "Kỹ thuật viên có mặt tại Bình Thủy trong vòng 2 giờ sau khi gọi, không tính phí đi lại — kịp lắp xong trước bữa cơm trưa.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Sửa chữa khẩn cấp ngoài giờ",
     desc: "Cửa hỏng lúc 9 giờ tối? Đội kỹ thuật hỗ trợ khẩn cấp tại Bình Thủy và lân cận — vì cửa hỏng không chờ đến sáng.",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "21 năm phục vụ Bình Thủy",
     desc: "Từ năm 2005 — đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. Hàng nghìn cửa cuốn được lắp và bảo trì tại Bình Thủy. Hỏi hàng xóm ai đã từng dùng.",
   },
@@ -97,7 +97,7 @@ const faqItems = [
   {
     question: "Cửa cuốn bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho cửa cuốn nhôm công nghệ Đức, 10 năm cho một số dòng cao cấp. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+      "Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
   },
   {
     question: "Bình Thủy có nhiều nhà bị ngập lũ — cửa cuốn có phù hợp không?",
@@ -157,7 +157,7 @@ export default function CuaCuonBinhThuy() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -199,7 +199,7 @@ export default function CuaCuonBinhThuy() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {localHighlights.map((h) => (
                 <div key={h.title} className="rounded-xl border bg-card p-5">
-                  <div className="mb-3 text-2xl">{h.icon}</div>
+                  <div className="mb-3 text-2xl"><h.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-1.5 font-semibold text-sm">{h.title}</h3>
                   <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>

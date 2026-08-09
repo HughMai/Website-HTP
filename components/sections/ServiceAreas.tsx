@@ -48,7 +48,7 @@ export function ServiceAreas() {
             <Link
               key={a.href}
               href={a.href}
-              className="rounded-full border border-brand/15 bg-white px-5 py-2.5 text-sm font-medium text-brand transition hover:border-amber-400 hover:bg-amber-50"
+              className="inline-flex min-h-[44px] items-center rounded-full border border-brand/15 bg-white px-5 text-sm font-medium text-brand transition hover:border-amber-400 hover:bg-amber-50"
             >
               {a.label}
             </Link>

@@ -4,6 +4,7 @@ import { Phone, Clock, MapPin, ArrowRight, ShieldCheck, Factory, HandCoins } fro
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -192,7 +193,7 @@ export default function CuaCuonCanTho() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -249,7 +250,7 @@ export default function CuaCuonCanTho() {
                     </span>
                     <h3 className="mt-3 font-semibold">{t.name}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-                    <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-brand/70">
+                    <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand/70">
                       <ShieldCheck className="h-3.5 w-3.5" /> {t.best}
                     </p>
                   </div>
@@ -320,7 +321,7 @@ export default function CuaCuonCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {steps.map((s) => (
                 <div key={s.n} className="rounded-xl border bg-background p-6">
-                  <span className="text-sm font-bold tracking-widest text-brand/40">{s.n}</span>
+                  <span className="text-sm font-bold tracking-widest text-brand/70">{s.n}</span>
                   <h3 className="mt-2 font-semibold">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
@@ -343,7 +344,7 @@ export default function CuaCuonCanTho() {
                 <Link
                   key={d.name}
                   href={d.href}
-                  className="rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-medium text-brand transition-colors hover:bg-brand hover:text-white"
+                  className="inline-flex min-h-[44px] items-center rounded-full border border-brand/20 bg-brand/5 px-4 text-sm font-medium text-brand transition-colors hover:bg-brand hover:text-white"
                 >
                   Cửa cuốn {d.name}
                 </Link>
@@ -359,6 +360,11 @@ export default function CuaCuonCanTho() {
             </div>
           </div>
         </section>
+
+        <ProductPhotos
+          categoryId="cua-cuon"
+          heading="Ảnh cửa cuốn Hưng Thành Phát đã lắp tại Cần Thơ"
+        />
 
         <CtaBand source="Cửa cuốn Cần Thơ" />
 

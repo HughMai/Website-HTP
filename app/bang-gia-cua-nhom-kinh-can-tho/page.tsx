@@ -167,7 +167,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {/* Hero */}
@@ -211,7 +211,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
             {pricingGroups.map((group) => (
               <div key={group.title}>
                 <h3 className="mb-1 font-semibold text-brand">{group.title}</h3>
-                <p className="mb-3 text-xs text-muted-foreground">Đơn vị: {group.unit}</p>
+                <p className="mb-3 text-sm text-muted-foreground">Đơn vị: {group.unit}</p>
                 <div className="overflow-hidden rounded-xl border">
                   <table className="w-full text-sm">
                     <thead className="bg-muted">
@@ -237,7 +237,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
             {/* Lan can */}
             <div>
               <h3 className="mb-1 font-semibold text-brand">Lan Can Cầu Thang</h3>
-              <p className="mb-3 text-xs text-muted-foreground">Đơn vị: đ/m dài</p>
+              <p className="mb-3 text-sm text-muted-foreground">Đơn vị: đ/m dài</p>
               <div className="overflow-hidden rounded-xl border">
                 <table className="w-full text-sm">
                   <thead className="bg-muted">

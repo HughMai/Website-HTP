@@ -11,7 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import {
+  LeadError,
+  LeadHoneypot,
+  LeadSuccess,
+  useLeadSubmit,
+} from "@/hooks/useLeadSubmit";
 import { SITE } from "@/lib/site-data";
 
 // ─── Contact form schema ──────────────────────────────────────────────────────
@@ -40,31 +45,16 @@ const fadeUp = {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function QuoteAndContact() {
-  const { toast } = useToast();
-
   // ── Contact form ─────────────────────────────────────────────────────────
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
+  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef } =
+    useLeadSubmit("Form báo giá trang chủ");
+
+  const { register, handleSubmit, formState: { errors } } =
     useForm<ContactFormValues>({
       resolver: zodResolver(contactSchema),
       defaultValues: { name: "", phone: "", email: "", message: "" },
       mode: "onTouched",
     });
-
-  const onSubmit = async (data: ContactFormValues) => {
-    const payload: Record<string, unknown> = { ...data };
-
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) {
-      toast({ title: "Gửi thất bại", description: "Vui lòng thử lại hoặc gọi trực tiếp.", variant: "destructive" });
-      return;
-    }
-    toast({ title: "Gửi yêu cầu thành công!", description: "Hưng Thành Phát sẽ liên hệ trong vòng 15 phút." });
-    reset();
-  };
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -109,7 +99,7 @@ export function QuoteAndContact() {
               <a
                 key={hotline}
                 href={`tel:${hotline.replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 active:scale-95"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 active:scale-95"
               >
                 <Phone className="h-3.5 w-3.5" aria-hidden />
                 {hotline}
@@ -137,12 +127,21 @@ export function QuoteAndContact() {
                 Chuyên viên sẽ phản hồi trong vòng 15 phút.
               </p>
 
+              {status === "success" ? (
+                <LeadSuccess tone="light" className="mt-5" />
+              ) : (
               <form
                 noValidate
-                onSubmit={handleSubmit(onSubmit)}
-                className="mt-5 space-y-4"
+                onSubmit={handleSubmit(submit)}
+                className="relative mt-5 space-y-4"
                 aria-label="Form yêu cầu báo giá"
               >
+                <LeadHoneypot honeypotRef={honeypotRef} />
+
+                {status === "error" && errorMessage && (
+                  <LeadError message={errorMessage} onRetry={dismissError} tone="light" />
+                )}
+
                 <div className="space-y-1.5">
                   <Label htmlFor="c-name">Họ và Tên <span className="text-destructive">*</span></Label>
                   <Input id="c-name" placeholder="Nguyễn Văn A" autoComplete="name"
@@ -159,7 +158,7 @@ export function QuoteAndContact() {
 
                 <div className="space-y-1.5">
                   <Label htmlFor="c-email">
-                    Email <span className="font-normal text-brand/40">(Không bắt buộc)</span>
+                    Email <span className="font-normal text-brand/70">(Không bắt buộc)</span>
                   </Label>
                   <Input id="c-email" type="email" placeholder="example@gmail.com"
                     inputMode="email" autoComplete="email" aria-invalid={!!errors.email} {...register("email")} />
@@ -168,7 +167,7 @@ export function QuoteAndContact() {
 
                 <div className="space-y-1.5">
                   <Label htmlFor="c-message">
-                    Nhu Cầu / Lời Nhắn <span className="font-normal text-brand/40">(Không bắt buộc)</span>
+                    Nhu Cầu / Lời Nhắn <span className="font-normal text-brand/70">(Không bắt buộc)</span>
                   </Label>
                   <Textarea id="c-message" placeholder="Ví dụ: Cần báo giá cửa cuốn mặt tiền nhà phố 4m..."
                     aria-invalid={!!errors.message} {...register("message")} />
@@ -183,10 +182,11 @@ export function QuoteAndContact() {
                   )}
                 </Button>
 
-                <p className="text-center text-xs text-brand/45">
+                <p className="text-center text-sm text-brand/70">
                   Bằng việc gửi yêu cầu, bạn đồng ý để Hưng Thành Phát liên hệ qua số điện thoại đã cung cấp.
                 </p>
               </form>
+              )}
             </div>
           </div>
 

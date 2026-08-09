@@ -26,3 +26,13 @@ scripts/screenshots/
 
 # playwright-cli session logs & snapshots
 .playwright-cli/
+.gstack/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+*.tmp.js
+*.tmp.sh
+*.tmp.json

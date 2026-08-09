@@ -62,7 +62,7 @@ export function About() {
               id="about-heading"
               className="mt-4 text-balance text-3xl font-semibold tracking-tight text-brand md:text-4xl"
             >
-              21 năm, 500+ công trình —
+              21 năm làm nghề —
               <br className="hidden sm:block" />
               chưa một khách nào gọi lại vì sai vật liệu.
             </h2>
@@ -78,7 +78,7 @@ export function About() {
               sizes="(max-width: 767px) 100vw, 50vw"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand/70 to-transparent px-5 pb-4 pt-10">
-              <p className="flex items-center gap-1.5 text-xs font-medium text-white/90">
+              <p className="flex items-center gap-1.5 text-sm font-medium text-white/90">
                 <MapPin className="h-3.5 w-3.5 shrink-0 text-white/70" aria-hidden />
                 235–237 Võ Văn Kiệt, Bình Thủy, Cần Thơ
               </p>

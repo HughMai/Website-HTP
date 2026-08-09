@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, Clock, Construction, Lock, MapPin, Phone, ShieldCheck, Sparkles, Thermometer, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -55,32 +56,32 @@ const systems = [
 
 const advantages = [
   {
-    icon: "🔇",
+    icon: VolumeX,
     title: "Cách âm vượt trội",
     desc: "Đường phố đông xe cộ trở thành tiếng thì thầm khi bạn đóng cửa. Kính hộp 2 lớp hoặc Low-E giảm tiếng ồn 30–40dB — giấc ngủ và sự tập trung trở lại.",
   },
   {
-    icon: "🌡️",
+    icon: Thermometer,
     title: "Cách nhiệt — tiết kiệm điện",
     desc: "Buổi chiều nóng nung người bên ngoài — bên trong phòng mát hơn 5–7°C nhờ kính Low-E phản xạ tia hồng ngoại. Hóa đơn điện lạnh giảm thấy rõ.",
   },
   {
-    icon: "✨",
+    icon: Sparkles,
     title: "Nhà phố nhìn khác hẳn",
     desc: "Profile nhôm định hình mỏng, đường nét sắc nét — hàng xóm hỏi bạn vừa sửa nhà hay xây mới. Không cần đập tường, chỉ cần thay cửa.",
   },
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Bền 20 năm — không gỉ sét",
     desc: "Hàng xóm dùng cửa sắt phải sơn lại mỗi 2–3 năm. Bạn lắp nhôm kính một lần, 20 năm sau vẫn nguyên màu, không gỉ, không cong vênh.",
   },
   {
-    icon: "🔒",
+    icon: Lock,
     title: "Khóa đa điểm an toàn",
     desc: "Hệ khóa chốt 3–5 điểm tích hợp vào profile nhôm — chống phá khóa và đột nhập hiệu quả hơn cửa gỗ hay sắt truyền thống.",
   },
   {
-    icon: "🏗️",
+    icon: Construction,
     title: "Thi công trọn gói — lắp xong mới trả",
     desc: "Từ khảo sát, gia công đến lắp đặt hoàn thiện — Hưng Thành Phát lo toàn bộ. Chạy thử hài lòng, ký nghiệm thu, rồi mới thanh toán.",
   },
@@ -124,7 +125,7 @@ const faqItems = [
   {
     question: "Cửa nhôm kính bảo hành bao lâu?",
     answer:
-      "Hưng Thành Phát Door bảo hành cửa nhôm kính theo kỳ hạn tiêu chuẩn của nhà sản xuất — tối thiểu 5 năm cho profile nhôm và phụ kiện, 10 năm cho kính. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế miễn phí tại công trình.",
+      "Hưng Thành Phát Door bảo hành cửa nhôm kính theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế miễn phí tại công trình.",
   },
   {
     question: "Có nhận thi công công trình lớn như cao ốc, khu đô thị không?",
@@ -177,7 +178,7 @@ export default function CuaNhomKinhCanTho() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
-      <main>
+      <main id="main">
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
@@ -230,7 +231,7 @@ export default function CuaNhomKinhCanTho() {
                   </span>
                   <h3 className="mt-3 font-semibold">{s.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-                  <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-brand/70">
+                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand/70">
                     <ShieldCheck className="h-3.5 w-3.5" /> {s.best}
                   </p>
                 </div>
@@ -250,7 +251,7 @@ export default function CuaNhomKinhCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {advantages.map((a) => (
                 <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{a.icon}</div>
+                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{a.title}</h3>
                   <p className="text-sm text-muted-foreground">{a.desc}</p>
                 </div>
@@ -307,6 +308,11 @@ export default function CuaNhomKinhCanTho() {
             </div>
           </div>
         </section>
+
+        <ProductPhotos
+          categoryId="cua-nhom-kinh"
+          heading="Ảnh cửa nhôm kính Hưng Thành Phát đã lắp tại Cần Thơ"
+        />
 
         <CtaBand id="nhan-bao-gia" source="Cửa nhôm kính" />
 

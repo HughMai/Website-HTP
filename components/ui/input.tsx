@@ -10,7 +10,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-11 w-full rounded-md border border-input bg-white px-4 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+          // text-base (16px) on mobile is not cosmetic: iOS Safari zooms the
+          // whole viewport whenever a focused field is under 16px, so every
+          // lead form used to jump and re-centre mid-typing.
+          "flex h-11 w-full rounded-md border border-input bg-white px-4 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm",
           className
         )}
         ref={ref}

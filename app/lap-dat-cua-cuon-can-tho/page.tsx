@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight, Bolt, CheckCircle2, Clock, Construction, Globe, MapPin, Phone, Settings, Sparkles, Square } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -29,37 +29,37 @@ export const metadata: Metadata = {
 
 const doorTypes = [
   {
-    icon: "🏗️",
+    icon: Construction,
     name: "Cửa Cuốn Nhôm Công Nghệ Đức",
     desc: "Thanh nhôm đùn dày 0.8–1.2mm, cơ cấu lò xo cân bằng chính xác — vận hành êm, nhẹ, bền trên 10 năm.",
     best: "Nhà phố, biệt thự, showroom",
   },
   {
-    icon: "⚙️",
+    icon: Settings,
     name: "Cửa Cuốn Thép Sơn Tĩnh Điện",
     desc: "Thép dập sóng sơn tĩnh điện chống gỉ — phù hợp nhà xưởng, kho bãi, bảo mật cao.",
     best: "Nhà xưởng, kho hàng, cửa hàng",
   },
   {
-    icon: "✨",
+    icon: Sparkles,
     name: "Cửa Cuốn Inox SUS 304",
     desc: "Inox 304 chống oxy hóa, sáng bóng vĩnh cửu — phù hợp môi trường ẩm hoặc yêu cầu thẩm mỹ cao.",
     best: "Nhà hàng, khách sạn, văn phòng",
   },
   {
-    icon: "🔩",
+    icon: Bolt,
     name: "Cửa Cuốn Tôle Công Nghệ Đài Loan",
     desc: "Tôle sóng dày, giá thành hợp lý — giải pháp kinh tế cho cửa hàng, nhà kho cần độ bền cơ bản.",
     best: "Cửa hàng tạp hóa, kho nhỏ",
   },
   {
-    icon: "🔲",
+    icon: Square,
     name: "Cửa Cuốn Tấm Liền",
     desc: "Bề mặt phẳng hoàn toàn, cách âm tốt — thiết kế hiện đại cho mặt tiền kinh doanh cao cấp.",
     best: "Spa, phòng khám, văn phòng",
   },
   {
-    icon: "🌐",
+    icon: Globe,
     name: "Cửa Cuốn Song Ngang / Mắt Võng",
     desc: "Nan thép song hở thoáng, có thể quan sát bên trong khi đóng — phổ biến cho cửa hàng ban đêm.",
     best: "Cửa hàng, siêu thị mini",
@@ -195,7 +195,7 @@ export default function LapDatCuaCuonCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -256,10 +256,10 @@ export default function LapDatCuaCuonCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {doorTypes.map((d) => (
                 <div key={d.name} className="rounded-xl border bg-card p-6">
-                  <div className="mb-3 text-3xl">{d.icon}</div>
+                  <div className="mb-3 text-3xl"><d.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{d.name}</h3>
                   <p className="mb-3 text-sm text-muted-foreground">{d.desc}</p>
-                  <p className="text-xs font-medium text-brand/70">
+                  <p className="text-sm font-medium text-brand/70">
                     Phù hợp: {d.best}
                   </p>
                 </div>
@@ -367,7 +367,7 @@ export default function LapDatCuaCuonCanTho() {
               </div>
               <Link
                 href="/sua-chua-cua-cuon-can-tho"
-                className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+                className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
               >
                 Xem Dịch Vụ Sửa Chữa
                 <ArrowRight className="h-4 w-4" />

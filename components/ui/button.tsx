@@ -17,11 +17,14 @@ const buttonVariants = cva(
         secondary: "bg-brand-50 text-brand hover:bg-brand-100",
         link: "text-brand underline-offset-4 hover:underline",
       },
+      // 44px floor on every variant. `sm` and `icon` were 36px and 40px, which
+      // is under the tap target a thumb can reliably hit; `sm` stays visually
+      // compact through horizontal padding rather than height.
       size: {
         default: "h-11 px-5 py-2",
-        sm: "h-9 px-3",
+        sm: "h-11 px-3",
         lg: "h-12 px-7 text-base",
-        icon: "h-10 w-10",
+        icon: "h-11 w-11",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

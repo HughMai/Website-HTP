@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -49,32 +49,32 @@ const variants = [
 
 const advantages = [
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Chống đột nhập hiệu quả",
     desc: "11 giờ đêm khóa cửa xong về ngủ — thanh thép hộp và khóa đa điểm không để kẻ trộm có cơ hội. Bền hơn cửa cuốn thông thường trong môi trường mặt tiền.",
   },
   {
-    icon: "🌬️",
+    icon: Wind,
     title: "Thông thoáng khi đóng",
     desc: "Cửa đóng mà khách vẫn thấy hàng qua nan — không mất doanh thu trưng bày, thông gió tự nhiên, không nóng bức trong cửa hàng.",
   },
   {
-    icon: "📐",
+    icon: Ruler,
     title: "Tiết kiệm không gian",
     desc: "Trần thấp, máy lạnh gần cửa, rào cản cơ học — cửa kéo gom sang một bên, không chiếm mét vuông nào phía trên đầu.",
   },
   {
-    icon: "🔧",
+    icon: Wrench,
     title: "Bảo trì đơn giản",
     desc: "Không motor, không mạch điện phức tạp — hỏng thì sửa một buổi sáng. Không lo mất điện, không lo cập nhật phần mềm.",
   },
   {
-    icon: "💰",
+    icon: Banknote,
     title: "Chi phí hợp lý",
     desc: "So với cửa cuốn nhôm cùng kích thước, tiết kiệm 20–30% — mà bảo mật không kém. Đúng cho chủ kinh doanh thực dụng.",
   },
   {
-    icon: "🏪",
+    icon: Store,
     title: "Phù hợp mặt tiền kinh doanh",
     desc: "Hàng triệu mặt tiền tại Việt Nam dùng cửa kéo thép — phụ kiện phổ biến, dễ thay, thợ nào cũng biết sửa.",
   },
@@ -164,7 +164,7 @@ export default function CuaKeoThepCanTho() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         {/* Hero */}
@@ -218,7 +218,7 @@ export default function CuaKeoThepCanTho() {
                   </span>
                   <h3 className="mt-3 font-semibold">{v.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
-                  <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-brand/70">
+                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand/70">
                     <ShieldCheck className="h-3.5 w-3.5" /> Phù hợp: {v.best}
                   </p>
                 </div>
@@ -238,7 +238,7 @@ export default function CuaKeoThepCanTho() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {advantages.map((a) => (
                 <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl">{a.icon}</div>
+                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
                   <h3 className="mb-2 font-semibold">{a.title}</h3>
                   <p className="text-sm text-muted-foreground">{a.desc}</p>
                 </div>
@@ -323,7 +323,7 @@ export default function CuaKeoThepCanTho() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Xem thêm</p>
                 <p className="mt-1 font-semibold text-brand">Cửa cuốn nhôm — nhẹ, êm, tự động</p>
               </div>
-              <Link href="/cua-cuon-nhom-can-tho" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+              <Link href="/cua-cuon-nhom-can-tho" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand hover:underline">
                 Cửa Cuốn Nhôm Cần Thơ <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -332,7 +332,7 @@ export default function CuaKeoThepCanTho() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-brand/60">Xem tất cả sản phẩm</p>
                 <p className="mt-1 font-semibold text-brand">Cửa cuốn, cửa kéo & nhôm kính cao cấp</p>
               </div>
-              <Link href="/#san-pham" className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+              <Link href="/#san-pham" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand hover:underline">
                 Xem Sản Phẩm <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
