@@ -43,7 +43,7 @@ export function Footer() {
           </p>
           <div className="mt-4 flex items-center gap-2">
             <a
-              href="https://www.facebook.com/profile.php?id=100041851129169"
+              href="https://www.facebook.com/104890471381054"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Theo dõi chúng tôi trên Facebook"
