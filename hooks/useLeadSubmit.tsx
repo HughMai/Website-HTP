@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { CheckCircle2, Phone } from "lucide-react";
+import { getAttribution } from "@/lib/attribution";
 import { SITE, ZALO_URL } from "@/lib/site-data";
+import { trackLead } from "@/lib/track";
 import { cn } from "@/lib/utils";
 
 /**
@@ -66,6 +68,10 @@ export function useLeadSubmit(source: string) {
           body: JSON.stringify({
             ...data,
             source,
+            // First-touch ad attribution, if this visitor arrived on a tagged
+            // or click-id'd URL. Empty object when they didn't — the CRM then
+            // files the lead as a plain website lead.
+            ...getAttribution(),
             website: honeypot.current,
             renderedAt: renderedAt.current,
           }),
@@ -77,6 +83,9 @@ export function useLeadSubmit(source: string) {
       }
 
       if (res.ok) {
+        // Report the conversion only on a confirmed 200. Firing on submit would
+        // teach Smart Bidding to chase clicks that never reached the shop.
+        trackLead("form_submit", { source });
         setStatus("success");
         return;
       }

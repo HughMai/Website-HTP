@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@/components/Analytics";
+import { AttributionCapture } from "@/components/AttributionCapture";
 import { FloatingContact } from "@/components/FloatingContact";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { SITE } from "@/lib/site-data";
@@ -254,6 +256,8 @@ export default function RootLayout({
         <FloatingContact />
         <StickyCallBar />
         <Toaster />
+        <AttributionCapture />
+        <Analytics />
       </body>
     </html>
   );

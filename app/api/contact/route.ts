@@ -17,6 +17,14 @@ const schema = z.object({
   // Forwarded to the CRM as its own field so `need` keeps meaning "what the
   // customer asked for" rather than "where they clicked".
   source:   z.preprocess((val) => (val === "" ? undefined : val), z.string().trim().max(120).optional()),
+  // First-touch ad attribution from lib/attribution.ts. All optional — an
+  // organic visitor sends none of these, and the CRM defaults to "website".
+  utm_source:   z.string().trim().max(60).optional(),
+  utm_medium:   z.string().trim().max(60).optional(),
+  utm_campaign: z.string().trim().max(60).optional(),
+  gclid:        z.string().trim().max(200).optional(),
+  fbclid:       z.string().trim().max(200).optional(),
+  landing:      z.string().trim().max(200).optional(),
   // Honeypot. Hidden from real users; bots fill every input they can find.
   website:  z.string().max(200).optional(),
   // Client timestamp of when the form mounted, for the timing gate above.
@@ -43,6 +51,14 @@ type Lead = {
   email?: string;
   message?: string;
   source?: string;
+  // Ad attribution. Only the CRM consumes these — Telegram and email are read
+  // by people, and a utm string in a phone notification is noise.
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  gclid?: string;
+  fbclid?: string;
+  landing?: string;
 };
 
 async function notifyViaTelegram(lead: Lead): Promise<Delivery> {
@@ -161,7 +177,15 @@ async function notifyViaCRM(lead: Lead): Promise<Delivery> {
         // does not silently change meaning.
         need: lead.message ?? "",
         sourcePage: lead.source ?? "",
-        note: [lead.email].filter(Boolean).join(" | "),
+        // store.attribution_from_utm() turns these into customers.source +
+        // customers.source_detail, which is the only way CAC per campaign can
+        // be answered later. Absent for organic visitors; the CRM defaults.
+        utm_source: lead.utm_source ?? "",
+        utm_medium: lead.utm_medium ?? "",
+        utm_campaign: lead.utm_campaign ?? "",
+        note: [lead.email, lead.gclid && `gclid:${lead.gclid}`,
+               lead.landing && `landing:${lead.landing}`]
+          .filter(Boolean).join(" | "),
       }),
     });
     if (!res.ok) return { channel, ok: false, reason: `HTTP ${res.status}` };
@@ -184,7 +208,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Dữ liệu không hợp lệ." }, { status: 400 });
   }
 
-  const { name, phone, email, message, source, website, renderedAt } = parsed.data;
+  const {
+    name, phone, email, message, source, website, renderedAt,
+    utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
+  } = parsed.data;
 
   // Bot gates. Answer 200 so a script learns nothing from the response, but log
   // the rejection with its reason — otherwise a mis-tuned threshold silently
@@ -202,7 +229,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  const lead: Lead = { name, phone, email, message, source };
+  const lead: Lead = {
+    name, phone, email, message, source,
+    utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
+  };
 
   const results = await Promise.all([
     notifyViaTelegram(lead),

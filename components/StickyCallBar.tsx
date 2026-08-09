@@ -2,6 +2,7 @@
 
 import { MapPin, MessageCircle, Phone } from "lucide-react";
 import { SITE, ZALO_URL } from "@/lib/site-data";
+import { trackLead } from "@/lib/track";
 
 /**
  * Mobile-only bottom action bar. Mobile is the majority of this site's traffic
@@ -21,6 +22,7 @@ export function StickyCallBar() {
         <div className="grid grid-cols-3 divide-x divide-brand/10">
           <a
             href={`tel:${primaryHotline.replace(/\s/g, "")}`}
+            onClick={() => trackLead("call_click", { source: "sticky_bar" })}
             className="flex flex-col items-center gap-0.5 py-2.5 text-brand active:bg-brand-50"
             aria-label={`Gọi hotline ${primaryHotline}`}
           >
@@ -31,6 +33,7 @@ export function StickyCallBar() {
             href={ZALO_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackLead("zalo_click", { source: "sticky_bar" })}
             className="flex flex-col items-center gap-0.5 py-2.5 text-brand active:bg-brand-50"
             aria-label="Nhắn tin qua Zalo"
           >
