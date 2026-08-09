@@ -34,6 +34,13 @@ const ROUTES = [
 
 const FORM_ROUTES = ["/", "/bao-gia-cua-cuon-can-tho", "/cua-cuon-can-tho"];
 
+/**
+ * 44px, minus half a pixel. Layout returns floats — an `h-11` box measures
+ * 43.999969 under a fractional device scale factor, and asserting against an
+ * exact 44 turns that rounding into a flaky failure rather than a finding.
+ */
+const MIN_TAP = 43.5;
+
 /** Scroll the whole page so lazy images and scroll-triggered sections settle. */
 async function settle(page: import("@playwright/test").Page) {
   await page.evaluate(async () => {
@@ -172,7 +179,7 @@ test.describe("Mobile navigation", () => {
     const open = page.getByRole("button", { name: "Mở menu" });
     await expect(open).toBeVisible();
     const openBox = (await open.boundingBox())!;
-    expect(Math.min(openBox.width, openBox.height)).toBeGreaterThanOrEqual(44);
+    expect(Math.min(openBox.width, openBox.height)).toBeGreaterThanOrEqual(MIN_TAP);
 
     await open.click();
     const sheet = page.getByRole("dialog");
@@ -185,13 +192,13 @@ test.describe("Mobile navigation", () => {
       expect(
         Math.min(b.width, b.height),
         `"${label}" is a ${Math.round(b.width)}x${Math.round(b.height)} target`
-      ).toBeGreaterThanOrEqual(44);
+      ).toBeGreaterThanOrEqual(MIN_TAP);
     }
 
     // The close control was the icon glyph itself, a 20x20 target.
     const close = sheet.getByRole("button", { name: "Đóng" });
     const cb = (await close.boundingBox())!;
-    expect(Math.min(cb.width, cb.height)).toBeGreaterThanOrEqual(44);
+    expect(Math.min(cb.width, cb.height)).toBeGreaterThanOrEqual(MIN_TAP);
 
     await close.click();
     await expect(sheet).toBeHidden();
@@ -201,11 +208,29 @@ test.describe("Mobile navigation", () => {
     page,
   }) => {
     await page.goto("/");
-    for (const name of [/^Gọi hotline/, /Zalo/, /báo giá/i]) {
+    for (const name of [
+      /^Gọi hotline/,
+      /Zalo/,
+      /Google Maps/,
+    ]) {
       const link = page.getByRole("link", { name }).last();
       const b = (await link.boundingBox())!;
-      expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(44);
+      expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(MIN_TAP);
     }
+  });
+
+  test("the sticky bar offers call, Zalo and the map — not a quote page", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const bar = page.locator("div.fixed.bottom-0").last();
+    const hrefs = await bar.locator("a").evaluateAll((els) =>
+      els.map((e) => e.getAttribute("href") ?? "")
+    );
+    expect(hrefs).toHaveLength(3);
+    expect(hrefs[0]).toMatch(/^tel:/);
+    expect(hrefs[1]).toContain("zalo.me");
+    expect(hrefs[2]).toContain("google.com/maps");
   });
 
   for (const route of ROUTES) {
@@ -232,7 +257,7 @@ test.describe("Mobile navigation", () => {
           // An anchor wrapping a button is not the hit target; the button is.
           if (el.tagName === "A" && el.querySelector("button")) continue;
 
-          if (Math.min(r.width, r.height) < 44) {
+          if (Math.min(r.width, r.height) < 43.5) {
             out.push(
               `${Math.round(r.width)}x${Math.round(r.height)} "${(
                 el.textContent ?? ""

@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, Phone, Ruler } from "lucide-react";
+import { MapPin, MessageCircle, Phone } from "lucide-react";
 import { SITE, ZALO_URL } from "@/lib/site-data";
 
 /**
@@ -37,13 +37,19 @@ export function StickyCallBar() {
             <MessageCircle className="h-5 w-5 text-[#0068FF]" aria-hidden />
             <span className="text-xs font-bold">Chat Zalo</span>
           </a>
+          {/* Google Maps listing, not a directions deep link — it opens the
+              shop's place page, where the customer can tap Chỉ đường, see the
+              photos, or check the reviews. Same destination and colour as the
+              desktop rail's map button. */}
           <a
-            href="/bao-gia-cua-cuon-can-tho"
+            href={SITE.mapDirectionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex flex-col items-center gap-0.5 py-2.5 text-brand active:bg-brand-50"
-            aria-label="Nhận báo giá"
+            aria-label="Xem showroom trên Google Maps"
           >
-            <Ruler className="h-5 w-5 text-amber-500" aria-hidden />
-            <span className="text-xs font-bold">Báo giá</span>
+            <MapPin className="h-5 w-5 text-emerald-500" aria-hidden />
+            <span className="text-xs font-bold">Bản đồ</span>
           </a>
         </div>
       </div>
