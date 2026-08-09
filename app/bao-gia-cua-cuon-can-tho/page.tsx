@@ -146,7 +146,7 @@ export default function BaoGiaCuaCuonCanTho() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Giá niêm yết rõ từng hạng mục — vật tư, motor, phụ kiện tính riêng, VAT ghi rõ.
-              Không có "giá bẫy" rồi cộng thêm sau khi ký hợp đồng.
+              Không có “giá bẫy” rồi cộng thêm sau khi ký hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
