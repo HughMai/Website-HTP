@@ -106,6 +106,7 @@ export function FloatingContact() {
     <div
       className="fixed bottom-10 right-6 z-50 hidden flex-col items-end gap-3 md:flex"
       aria-label="Liên hệ nhanh"
+      data-track="floating_rail"
     >
       <RailButton
         href={mapHref}

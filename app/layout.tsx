@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@/components/Analytics";
 import { AttributionCapture } from "@/components/AttributionCapture";
 import { FloatingContact } from "@/components/FloatingContact";
+import { LeadClickTracker } from "@/components/LeadClickTracker";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { SITE } from "@/lib/site-data";
 import { assertContactEnv } from "@/lib/env";
@@ -257,6 +258,7 @@ export default function RootLayout({
         <StickyCallBar />
         <Toaster />
         <AttributionCapture />
+        <LeadClickTracker />
         <Analytics />
       </body>
     </html>
