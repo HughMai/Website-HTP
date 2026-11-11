@@ -71,19 +71,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/bao-gia-cua-cuon-can-tho`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-11-04"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${siteUrl}/bang-gia-cua-keo-can-tho`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-11-04"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${siteUrl}/bang-gia-cua-nhom-kinh-can-tho`,
-      lastModified: new Date("2026-05-14"),
+      lastModified: new Date("2026-11-04"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/bang-gia-phu-kien-can-tho`,
+      lastModified: new Date("2026-11-04"),
       changeFrequency: "monthly",
       priority: 0.7,
     },

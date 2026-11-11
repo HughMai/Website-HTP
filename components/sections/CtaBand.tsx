@@ -14,10 +14,13 @@ export function CtaBand({
   subtitle = "Gửi số điện thoại — thợ khảo sát gọi lại trong ít phút, tư vấn miễn phí.",
   source,
   id,
+  paymentLine = "Đặt cọc khi chốt đơn, trả đủ vào ngày lắp đặt",
 }: {
   title?: string;
   subtitle?: string;
   source: string;
+  /** Installs take a deposit; repairs don't. The repair page overrides this. */
+  paymentLine?: string;
   /** Set when something on the same page links down to this band. */
   id?: string;
 }) {
@@ -70,7 +73,7 @@ export function CtaBand({
                 up in the hero where the visitor has already scrolled past them. */}
             <ul className="mt-4 space-y-2 border-t border-white/12 pt-4">
               {[
-                "Lắp xong mới thanh toán — không đặt cọc trước toàn bộ",
+                paymentLine,
                 "Bồi thường 200% nếu dùng sai vật liệu đã cam kết",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-2 text-sm text-white/75">

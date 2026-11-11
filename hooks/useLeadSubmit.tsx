@@ -131,6 +131,15 @@ function resetTurnstile(state: TurnstileState) {
   }
 }
 
+function newLeadId(): string {
+  try {
+    if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
+  } catch {
+    /* fall through */
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export function useLeadSubmit(source: string) {
   // Captured once on mount. The server rejects submissions that arrive
   // implausibly fast after this instant.
@@ -163,6 +172,9 @@ export function useLeadSubmit(source: string) {
           return;
         }
       }
+      // One id per submission: goes to the CRM (note) and to Google Ads as the
+      // conversion's transaction_id, so the two can be matched later.
+      const leadId = newLeadId();
 
       let res: Response;
       try {
@@ -176,6 +188,7 @@ export function useLeadSubmit(source: string) {
             // or click-id'd URL. Empty object when they didn't — the CRM then
             // files the lead as a plain website lead.
             ...getAttribution(),
+            lead_id: leadId,
             website: honeypot.current,
             renderedAt: renderedAt.current,
             ...(token ? { turnstileToken: token } : {}),
@@ -193,9 +206,10 @@ export function useLeadSubmit(source: string) {
         // Report the conversion only when the server says a channel received
         // the lead. Firing on submit would teach Smart Bidding to chase clicks
         // that never reached the shop — and the server's silent spam drops
-        // answer 200 too, just without `delivered`.
+        // answer 200 too, just without `delivered`. The lead id goes to Google
+        // Ads as transaction_id so a conversion can be matched to its CRM lead.
         const body = (await res.json().catch(() => null)) as { delivered?: number } | null;
-        if ((body?.delivered ?? 0) > 0) trackLead("form_submit", { source });
+        if ((body?.delivered ?? 0) > 0) trackLead("form_submit", { source }, leadId);
         setStatus("success");
         return;
       }

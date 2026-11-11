@@ -5,7 +5,9 @@ import Script from "next/script";
  * env var is set, so this is inert on every deploy until ads actually launch.
  *
  *   NEXT_PUBLIC_GA_MEASUREMENT_ID   G-XXXXXXX    GA4 — behaviour + goals
- *   NEXT_PUBLIC_GOOGLE_ADS_ID       AW-XXXXXXX   Google Ads conversions/remarketing
+ *   NEXT_PUBLIC_GOOGLE_ADS_ID       AW-XXXXXXX   Google Ads conversions (remarketing OFF:
+ *                                                 no consent for ad personalisation yet,
+ *                                                 PDPL Art. 28(8); runbook G6)
  *   NEXT_PUBLIC_META_PIXEL_ID       123456789    Meta Pixel — Messenger + site leads
  *
  * GA4 and Google Ads share one gtag.js load: loading it twice double-counts
@@ -39,7 +41,7 @@ export function Analytics() {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               ${GA_ID ? `gtag('config', '${GA_ID}');` : ""}
-              ${ADS_ID ? `gtag('config', '${ADS_ID}');` : ""}
+              ${ADS_ID ? `gtag('config', '${ADS_ID}', { allow_ad_personalization_signals: false });` : ""}
             `}
           </Script>
         </>

@@ -261,7 +261,11 @@ export function Contact() {
 
                 <p className="text-center text-xs text-brand/50">
                   Bằng việc gửi yêu cầu, Quý khách đồng ý cho Hưng Thành Phát
-                  liên hệ qua số điện thoại đã cung cấp.
+                  liên hệ qua số điện thoại đã cung cấp. Xem{" "}
+                  <a href="/chinh-sach-bao-mat" className="underline underline-offset-2">
+                    chính sách bảo mật
+                  </a>
+                  .
                 </p>
               </div>
             </form>

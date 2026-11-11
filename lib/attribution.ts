@@ -10,28 +10,36 @@
  *                                              │
  *   untagged landing ──► nothing stored ───────┴─► CRM falls back to "website"
  *
- * FIRST touch wins, matching the CRM side (store.add_web_lead keeps the
- * original attribution on a repeat phone). A customer who arrives via an ad and
- * later returns through a remarketing click should still credit the campaign
- * that found them.
+ * FIRST touch wins for the utm tags, matching the CRM side (store.add_web_lead
+ * keeps the original attribution on a repeat phone). A customer who arrives via
+ * an ad and later returns through another click should still credit the
+ * campaign that found them.
+ *
+ * Click ids are the exception: the LATEST gclid/gbraid/wbraid is kept, because
+ * an offline conversion upload has to name a click Google still remembers
+ * (90 days), and the newest click is the one most likely to be inside it.
  *
  * gclid/fbclid are captured too and inferred into a channel. Those ride along
  * on every ad click automatically, so a destination URL someone forgot to tag
  * still attributes correctly — which, given the tagging is done by hand, is the
- * case worth defending.
+ * case worth defending. gbraid/wbraid are what iPhone clicks often carry
+ * instead of a gclid.
  */
 
 const KEY = "htp_attribution";
 
-// Google Ads' own default conversion window. A click older than this should not
-// keep claiming credit for a lead.
-const TTL_MS = 30 * 24 * 60 * 60 * 1000;
+// Google Ads' longest click-through conversion window, and the age limit for
+// gclid offline uploads. A click older than this can't be credited anyway.
+// Counted from the latest ad click.
+const TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
 export type Attribution = {
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   fbclid?: string;
   landing?: string;
   ts: number;
@@ -67,19 +75,34 @@ export function captureAttribution(): void {
     const utm_medium = p.get("utm_medium") ?? undefined;
     const utm_campaign = p.get("utm_campaign") ?? undefined;
     const gclid = p.get("gclid") ?? undefined;
+    const gbraid = p.get("gbraid") ?? undefined;
+    const wbraid = p.get("wbraid") ?? undefined;
     const fbclid = p.get("fbclid") ?? undefined;
+    const googleClick = gclid || gbraid || wbraid;
 
     // Nothing identifying on this URL — leave any earlier touch alone.
-    if (!utm_source && !utm_medium && !utm_campaign && !gclid && !fbclid) return;
+    if (!utm_source && !utm_medium && !utm_campaign && !googleClick && !fbclid) return;
 
-    // First touch wins.
-    if (readStored()) return;
+    const stored = readStored();
+    if (stored) {
+      // First touch wins for the tags, but a new Google click replaces the old
+      // click ids and restarts the 90-day clock.
+      if (googleClick) {
+        window.localStorage.setItem(
+          KEY,
+          JSON.stringify({ ...stored, gclid, gbraid, wbraid, ts: Date.now() })
+        );
+      }
+      return;
+    }
 
     const next: Attribution = {
       utm_source,
       utm_medium,
       utm_campaign,
       gclid,
+      gbraid,
+      wbraid,
       fbclid,
       landing: window.location.pathname,
       ts: Date.now(),
@@ -87,7 +110,7 @@ export function captureAttribution(): void {
 
     // An untagged ad click still carries its click id. Infer the channel so it
     // does not land in the CRM as an anonymous "website" lead.
-    if (!next.utm_source && gclid) {
+    if (!next.utm_source && googleClick) {
       next.utm_source = "google";
       next.utm_medium = next.utm_medium ?? "cpc";
     }
@@ -112,4 +135,12 @@ export function getAttribution(): Partial<Attribution> {
   if (!stored) return {};
   const { ts: _ts, ...fields } = stored;
   return fields;
+}
+
+/** True when this visitor's stored attribution is a Google Ads click. */
+export function isGoogleAdsVisitor(): boolean {
+  const a = getAttribution();
+  if (a.gclid || a.gbraid || a.wbraid) return true;
+  return (a.utm_source ?? "").toLowerCase().includes("google") &&
+    ["cpc", "ppc", "paid", "paidsearch"].includes((a.utm_medium ?? "").toLowerCase());
 }

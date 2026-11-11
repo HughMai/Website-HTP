@@ -91,7 +91,7 @@ export function Hero() {
             >
               Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
-                Lắp Xong Mới Thanh Toán
+                Trả Đủ Vào Ngày Lắp Đặt
               </span>
             </motion.h1>
 

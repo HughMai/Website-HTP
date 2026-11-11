@@ -85,6 +85,13 @@
     animation-play-state: paused;
   }
 
+  /* Bảng giá pages: a one-off rise on first paint (hero tiles) or on re-filter. CSS only, so it
+     runs without JavaScript too; --rise-delay staggers siblings. */
+  .bg-rise-in {
+    animation: bg-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
   /* Skip-to-content. Off-screen until focused, then pinned top-left so the
      first Tab on any page jumps past the nav. 44px tall for the tap target. */
   .skip-link {
@@ -111,6 +118,41 @@
   }
 }
 
+@keyframes bg-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Bảng giá pages: scroll entrances. Everything is visible by default; components/bang-gia/Rise
+   only lowers elements still below the fold, then raises each once as it enters. The lowered
+   state stays readable (60% opacity), so a fast scroll or a missed observer never shows a hole. */
+[data-rise] {
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--rise-delay, 0ms);
+}
+[data-rise][data-rise-hidden] {
+  opacity: 0.6;
+  transform: translateY(28px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-rise][data-rise-hidden] {
+    opacity: 1;
+    transform: none;
+  }
+  .bg-rise-in {
+    animation: none;
+  }
+}
+
 /* Motion-sensitive visitors get two permanently sliding marquees otherwise.
    Hover-pause does not help them, and it does nothing at all on touch. */
 @media (prefers-reduced-motion: reduce) {
@@ -132,7 +174,7 @@
 /* Printing never fires the scroll observers that reveal these sections, so a
    printed or PDF'd page loses their content entirely. Force them visible. */
 @media print {
-  #gioi-thieu *, #quy-trinh *, #danh-gia *, #lien-he * {
+  #gioi-thieu *, #quy-trinh *, #danh-gia *, #lien-he *, [data-rise][data-rise-hidden] {
     opacity: 1 !important;
     transform: none !important;
   }

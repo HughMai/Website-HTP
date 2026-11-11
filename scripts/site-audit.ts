@@ -13,6 +13,7 @@ const PAGES = [
   { path: "/bao-gia-cua-cuon-can-tho", label: "Báo Giá Cửa Cuốn" },
   { path: "/bang-gia-cua-keo-can-tho", label: "Bảng Giá Cửa Kéo" },
   { path: "/bang-gia-cua-nhom-kinh-can-tho", label: "Bảng Giá Cửa Nhôm Kính" },
+  { path: "/bang-gia-phu-kien-can-tho", label: "Bảng Giá Motor & Phụ Kiện" },
 ];
 
 interface PageAudit {
