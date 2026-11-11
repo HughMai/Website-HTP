@@ -28,7 +28,7 @@ const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xu�
 export const metadata: Metadata = {
   title: "Phụ Kiện Cửa Cuốn Cần Thơ — Motor, Remote",
   description:
-    "Phụ kiện cửa cuốn Cần Thơ — motor 300–500kg, bình lưu điện, remote, khóa ngang, còi báo động. Hàng chính hãng, lắp và thay tận nơi cho mọi thương hiệu cửa. Gọi: 0913 574 077.",
+    "Phụ kiện cửa cuốn Cần Thơ — motor 300–500kg, bình lưu điện, remote, khóa ngang, còi báo động. Hàng chính hãng, lắp và thay tận nơi cho mọi thương hiệu cửa. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/phu-kien-cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/phu-kien-cua-cuon-can-tho`,
     title: "Phụ Kiện Cửa Cuốn Cần Thơ — Motor, Bình Lưu Điện, Remote, Khóa",
     description:
-      "Motor, bình lưu điện, remote và khóa cửa cuốn chính hãng tại Cần Thơ. Thay tận nơi cho mọi thương hiệu. Gọi: 0913 574 077.",
+      "Motor, bình lưu điện, remote và khóa cửa cuốn chính hãng tại Cần Thơ. Thay tận nơi cho mọi thương hiệu. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [
       { url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" },

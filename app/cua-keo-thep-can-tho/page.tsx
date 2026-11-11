@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Kéo Thép Cần Thơ — Chống Đột Nhập",
   description:
-    "Cửa kéo thép tại Cần Thơ — công nghệ Đức, chống đột nhập cao, phù hợp mặt tiền kinh doanh. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0913 574 077.",
+    "Cửa kéo thép tại Cần Thơ — công nghệ Đức, chống đột nhập cao, phù hợp mặt tiền kinh doanh. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-keo-thep-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-keo-thep-can-tho`,
     title: "Cửa Kéo Thép Cần Thơ — Chống Đột Nhập",
     description:
-      "Cửa kéo thép công nghệ Đức tại Cần Thơ. Chống đột nhập cao. Bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa kéo thép công nghệ Đức tại Cần Thơ. Chống đột nhập cao. Bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },

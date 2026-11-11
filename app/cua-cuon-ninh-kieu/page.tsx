@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt",
   description:
-    "Cửa cuốn Ninh Kiều Cần Thơ — lắp đặt nhà phố, mặt tiền kinh doanh, căn hộ trung tâm. Khảo sát miễn phí, lắp xong trong ngày, bảo hành chính hãng. Gọi: 0913 574 077.",
+    "Cửa cuốn Ninh Kiều Cần Thơ — lắp đặt nhà phố, mặt tiền kinh doanh, căn hộ trung tâm. Khảo sát miễn phí, lắp xong trong ngày, bảo hành chính hãng. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-cuon-ninh-kieu` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-ninh-kieu`,
     title: "Cửa Cuốn Ninh Kiều Cần Thơ — Lắp Đặt",
     description:
-      "Cửa cuốn Ninh Kiều — lắp nhà phố mặt tiền, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa cuốn Ninh Kiều — lắp nhà phố mặt tiền, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -83,7 +83,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Ninh Kiều giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Ninh Kiều từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0913 574 077 để được khảo sát và báo giá miễn phí tận nơi.",
+      "Giá cửa cuốn tại Ninh Kiều từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0963 021 639 để được khảo sát và báo giá miễn phí tận nơi.",
   },
   {
     question: "Nhà phố mặt tiền Ninh Kiều nên chọn cửa cuốn gì?",

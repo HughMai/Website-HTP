@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Lắp Đặt Cửa Cuốn Cần Thơ — Trọn Gói",
   description:
-    "Lắp đặt cửa cuốn tại Cần Thơ — nhôm Đức, thép tĩnh điện, inox, tôle. Thi công trọn gói, bảo hành chính hãng, có mặt trong ngày. Báo giá miễn phí: 0913 574 077.",
+    "Lắp đặt cửa cuốn tại Cần Thơ — nhôm Đức, thép tĩnh điện, inox, tôle. Thi công trọn gói, bảo hành chính hãng, có mặt trong ngày. Báo giá miễn phí: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/lap-dat-cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/lap-dat-cua-cuon-can-tho`,
     title: "Lắp Đặt Cửa Cuốn Cần Thơ — Trọn Gói",
     description:
-      "Lắp đặt cửa cuốn nhôm, thép, inox tại Cần Thơ. Thi công trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Lắp đặt cửa cuốn nhôm, thép, inox tại Cần Thơ. Thi công trọn gói, bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },

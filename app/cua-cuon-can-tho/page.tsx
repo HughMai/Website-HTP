@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
   description:
-    "Cửa cuốn Cần Thơ — xưởng sản xuất và lắp đặt tại Bình Thủy từ 2005, hơn 500 công trình. Đủ loại: nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, inox. Khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0913 574 077.",
+    "Cửa cuốn Cần Thơ — xưởng sản xuất và lắp đặt tại Bình Thủy từ 2005, hơn 500 công trình. Đủ loại: nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, inox. Khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-can-tho`,
     title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
     description:
-      "Xưởng cửa cuốn tại Cần Thơ từ 2005. Đủ loại cửa cuốn, khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0913 574 077.",
+      "Xưởng cửa cuốn tại Cần Thơ từ 2005. Đủ loại cửa cuốn, khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -116,7 +116,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Cần Thơ giá bao nhiêu một mét vuông?",
     answer:
-      "Giá cửa cuốn tại Cần Thơ phụ thuộc vào loại nan (nhôm, thép, tấm liền, song ngang), kích thước mặt tiền và loại motor đi kèm. Vì mỗi công trình một kích thước nên chúng tôi khảo sát và báo giá miễn phí tận nơi, chốt giá trước khi làm. Gọi 0913 574 077 để nhận báo giá trong ngày.",
+      "Giá cửa cuốn tại Cần Thơ phụ thuộc vào loại nan (nhôm, thép, tấm liền, song ngang), kích thước mặt tiền và loại motor đi kèm. Vì mỗi công trình một kích thước nên chúng tôi khảo sát và báo giá miễn phí tận nơi, chốt giá trước khi làm. Gọi 0963 021 639 để nhận báo giá trong ngày.",
   },
   {
     question: "Nên chọn cửa cuốn nhôm hay cửa cuốn thép?",

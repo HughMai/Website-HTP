@@ -107,7 +107,7 @@ export default function OGImage() {
           235-237 Vo Van Kiet, Binh Thuy, Can Tho
         </div>
         <div style={{ color: "#60A5FA", fontSize: 20, marginTop: 8, fontWeight: 600 }}>
-          0913 574 077
+          0963 021 639
         </div>
 
         {/* Bottom accent */}

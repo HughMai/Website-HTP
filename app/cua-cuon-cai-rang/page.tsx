@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Cái Răng Cần Thơ — Nhà Phố & Kho Xưởng",
   description:
-    "Cửa cuốn Cái Răng Cần Thơ — lắp đặt nhà phố, kho hàng, nhà xưởng khu vực Cái Răng. Khảo sát miễn phí, lắp trong ngày, bảo hành chính hãng. Gọi: 0913 574 077.",
+    "Cửa cuốn Cái Răng Cần Thơ — lắp đặt nhà phố, kho hàng, nhà xưởng khu vực Cái Răng. Khảo sát miễn phí, lắp trong ngày, bảo hành chính hãng. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-cuon-cai-rang` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-cai-rang`,
     title: "Cửa Cuốn Cái Răng Cần Thơ — Lắp Đặt Nhà Phố & Kho Xưởng, Bảo Hành Chính Hãng",
     description:
-      "Cửa cuốn Cái Răng — nhà phố, kho xưởng, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa cuốn Cái Răng — nhà phố, kho xưởng, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -82,7 +82,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Cái Răng giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Cái Răng từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0913 574 077 để được khảo sát và báo giá miễn phí tận nơi tại Cái Răng.",
+      "Giá cửa cuốn tại Cái Răng từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0963 021 639 để được khảo sát và báo giá miễn phí tận nơi tại Cái Răng.",
   },
   {
     question: "Kho hàng tại Cái Răng nên dùng cửa cuốn gì?",

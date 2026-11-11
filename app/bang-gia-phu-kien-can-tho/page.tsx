@@ -27,7 +27,7 @@ const PAGE = `${siteUrl}/bang-gia-phu-kien-can-tho`;
 export const metadata: Metadata = {
   title: "Giá Motor & Phụ Kiện Cửa Cuốn Cần Thơ",
   description:
-    "Bảng giá motor cửa cuốn 300–500kg, motor cửa Úc, bình tích điện và khóa ngang tại Cần Thơ. Chưa VAT. Gọi 0913 574 077.",
+    "Bảng giá motor cửa cuốn 300–500kg, motor cửa Úc, bình tích điện và khóa ngang tại Cần Thơ. Chưa VAT. Gọi 0963 021 639.",
   alternates: { canonical: PAGE },
   openGraph: {
     type: "website",

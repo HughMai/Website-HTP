@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     url: PAGE,
     title: "Bảng Giá Cửa Nhôm Kính Cần Thơ 2026",
-    description: "Giá cửa nhôm kính Cần Thơ — nhôm Việt, nhập, Maxpro, kính bản lề sàn, lan can. Chưa VAT. Gọi: 0913 574 077.",
+    description: "Giá cửa nhôm kính Cần Thơ — nhôm Việt, nhập, Maxpro, kính bản lề sàn, lan can. Chưa VAT. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },

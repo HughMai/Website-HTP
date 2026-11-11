@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
   description:
-    "Cửa kéo Cần Thơ — thép công nghệ Đức, nhôm cao cấp, inox SUS 304. Phù hợp mặt tiền kinh doanh, chống đột nhập hiệu quả. Lắp đặt trong ngày, bảo hành chính hãng. Gọi: 0913 574 077.",
+    "Cửa kéo Cần Thơ — thép công nghệ Đức, nhôm cao cấp, inox SUS 304. Phù hợp mặt tiền kinh doanh, chống đột nhập hiệu quả. Lắp đặt trong ngày, bảo hành chính hãng. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-keo-can-tho` },
   openGraph: {
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-keo-can-tho`,
     title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
     description:
-      "Cửa kéo thép, nhôm, inox tại Cần Thơ. Chống đột nhập, bền bỉ. Gọi: 0913 574 077.",
+      "Cửa kéo thép, nhôm, inox tại Cần Thơ. Chống đột nhập, bền bỉ. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -105,7 +105,7 @@ const faqItems = [
   {
     question: "Cửa kéo Cần Thơ giá bao nhiêu?",
     answer:
-      "Cửa kéo tính giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo thép có bảng giá theo độ dày (U 6 zem đến 1.6 ly), loại có lá hoặc không lá — xem bảng giá cửa kéo Cần Thơ. Cửa kéo nhôm và inox báo giá theo mẫu. Cửa từ 5m² đến dưới 8m² cộng thêm 20.000đ/m², dưới 5m² cộng thêm 40.000đ/m². Liên hệ 0913 574 077 để được báo giá chính xác.",
+      "Cửa kéo tính giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo thép có bảng giá theo độ dày (U 6 zem đến 1.6 ly), loại có lá hoặc không lá — xem bảng giá cửa kéo Cần Thơ. Cửa kéo nhôm và inox báo giá theo mẫu. Cửa từ 5m² đến dưới 8m² cộng thêm 20.000đ/m², dưới 5m² cộng thêm 40.000đ/m². Liên hệ 0963 021 639 để được báo giá chính xác.",
   },
   {
     question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào phù hợp hơn?",

@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành Chính Hãng",
   description:
-    "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang. Nhôm cao cấp, kính cách âm cách nhiệt. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
+    "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang. Nhôm cao cấp, kính cách âm cách nhiệt. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-nhom-kinh-can-tho` },
   openGraph: {
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-nhom-kinh-can-tho`,
     title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành Chính Hãng",
     description:
-      "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can. Bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can. Bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -105,7 +105,7 @@ const faqItems = [
   {
     question: "Cửa nhôm kính Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000–6.000.000đ, cửa đi 2 cánh từ 6.000.000–11.000.000đ. Mặt dựng và lan can tính theo m². Liên hệ 0913 574 077 để được báo giá chính xác sau khảo sát.",
+      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000–6.000.000đ, cửa đi 2 cánh từ 6.000.000–11.000.000đ. Mặt dựng và lan can tính theo m². Liên hệ 0963 021 639 để được báo giá chính xác sau khảo sát.",
   },
   {
     question: "Cửa nhôm kính có chống nóng không?",

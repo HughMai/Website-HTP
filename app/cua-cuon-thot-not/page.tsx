@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi",
   description:
-    "Cửa cuốn Thốt Nốt Cần Thơ — lắp đặt nhà phố, kho xưởng tại Thốt Nốt và các xã lân cận. Đến tận nơi, bảo hành chính hãng. Gọi ngay: 0913 574 077.",
+    "Cửa cuốn Thốt Nốt Cần Thơ — lắp đặt nhà phố, kho xưởng tại Thốt Nốt và các xã lân cận. Đến tận nơi, bảo hành chính hãng. Gọi ngay: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-cuon-thot-not` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-thot-not`,
     title: "Cửa Cuốn Thốt Nốt Cần Thơ — Lắp Đặt Tận Nơi, Bảo Hành Chính Hãng",
     description:
-      "Cửa cuốn Thốt Nốt — đến tận nơi, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa cuốn Thốt Nốt — đến tận nơi, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -92,7 +92,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Thốt Nốt giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Thốt Nốt từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0913 574 077 để được khảo sát và báo giá tận nơi.",
+      "Giá cửa cuốn tại Thốt Nốt từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0963 021 639 để được khảo sát và báo giá tận nơi.",
   },
   {
     question: "Khu vực Thốt Nốt gần sông nên chọn cửa cuốn gì?",

@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức",
   description:
-    "Cửa cuốn nhôm tại Cần Thơ — công nghệ Đức, nhôm đùn dày 0.8–1.2mm, vận hành êm tuyệt đối. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0913 574 077.",
+    "Cửa cuốn nhôm tại Cần Thơ — công nghệ Đức, nhôm đùn dày 0.8–1.2mm, vận hành êm tuyệt đối. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0963 021 639.",
   alternates: { canonical: `${siteUrl}/cua-cuon-nhom-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-nhom-can-tho`,
     title: "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức",
     description:
-      "Cửa cuốn nhôm công nghệ Đức tại Cần Thơ. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
+      "Cửa cuốn nhôm công nghệ Đức tại Cần Thơ. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0963 021 639.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },

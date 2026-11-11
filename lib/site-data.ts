@@ -5,7 +5,7 @@ export const SITE = {
   // "Công ty Nhôm Kính Hưng Thành Phát Door" (hungthanhphatdoor.com).
   legalName: "Công ty TNHH SX - TM - DV Hưng Thành Phát",
   tagline: "Giải Pháp Cửa Cao Cấp Cho Mọi Công Trình",
-  hotlines: ["0913 574 077", "0945 042 345"] as const,
+  hotlines: ["0963 021 639", "0913 574 077"] as const,
   email: "hungthanhphat6688@gmail.com",
   address: "235 - 237 (281 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
   mapQuery:
