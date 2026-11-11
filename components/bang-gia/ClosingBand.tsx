@@ -36,7 +36,7 @@ export function ClosingBand({
               Thợ đến đo tận nơi, báo giá trong ngày
             </h2>
             <p className="mt-5 max-w-[34rem] text-xl leading-relaxed text-white/90">
-              Lắp xong, nghiệm thu rồi mới thanh toán.{" "}
+              Đặt cọc 30%, lắp đặt xong mới thanh toán.{" "}
               <a
                 href={TEL}
                 className="whitespace-nowrap font-semibold text-white underline decoration-amber-400 decoration-4 underline-offset-[6px] transition hover:text-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
@@ -55,8 +55,7 @@ export function ClosingBand({
               .
             </p>
             <p className="mt-6 max-w-[34rem] text-base leading-relaxed text-white/85">
-              Khảo sát, đo đạc miễn phí nội thành Cần Thơ; số đo thực tế tại công trình là số chốt. Bồi
-              thường 200% nếu dùng sai vật liệu đã cam kết. {SITE.workingHours}.
+              Khảo sát, đo đạc miễn phí nội thành Cần Thơ; số đo thực tế tại công trình là số chốt. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng. {SITE.workingHours}.
             </p>
           </div>
           <div className="lg:col-span-5" data-rise>

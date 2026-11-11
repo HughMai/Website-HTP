@@ -85,8 +85,8 @@ const advantages = [
   },
   {
     icon: ShieldCheck,
-    title: "Bảo hành — bồi thường 200% nếu sai vật liệu",
-    desc: "Bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất, sửa miễn phí tại nhà. Nếu dùng sai chủng loại so với cam kết — bồi thường 200% giá trị hợp đồng.",
+    title: "Bảo hành — bồi thường 100% nếu sai vật tư",
+    desc: "Bảo hành theo kỳ hạn tiêu chuẩn nhà sản xuất, sửa miễn phí tại nhà. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.",
   },
 ];
 
@@ -384,7 +384,7 @@ export default function CuaCuonNhomCanTho() {
               Đừng Lắp Cửa Thép Rồi Hối Hận Sau 3 Năm
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Cửa cuốn nhôm đắt hơn ban đầu — nhưng không gỉ, không ồn, motor bền gấp đôi. Khảo sát tại nhà miễn phí, trả đủ vào ngày lắp đặt.
+              Cửa cuốn nhôm đắt hơn ban đầu — nhưng không gỉ, không ồn, motor bền gấp đôi. Khảo sát tại nhà miễn phí. Đặt cọc 30%, lắp đặt xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

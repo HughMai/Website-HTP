@@ -301,7 +301,7 @@ export default function CuaCuonNinhKieu() {
               Lắp Cửa Cuốn Tại Ninh Kiều — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, tư vấn tại chỗ, trả đủ vào ngày lắp đặt. Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
+              Khảo sát miễn phí, tư vấn tại chỗ. Đặt cọc 30%, lắp đặt xong mới thanh toán. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

@@ -85,13 +85,13 @@ const reasons = [
   },
   {
     icon: ShieldCheck,
-    title: "Bồi thường 200% nếu sai vật liệu đã cam kết",
-    desc: "Vật tư ghi rõ trong hợp đồng. Nếu dùng sai so với cam kết, chúng tôi bồi thường 200% giá trị phần vật tư đó.",
+    title: "Bồi thường 100% nếu sai vật tư đã cam kết",
+    desc: "Vật tư ghi rõ trong hợp đồng. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.",
   },
   {
     icon: HandCoins,
-    title: "Trả đủ vào ngày lắp đặt",
-    desc: "Đặt cọc khi chốt đơn, phần còn lại thanh toán vào ngày giao hoặc lắp đặt. Khảo sát và báo giá miễn phí tận nơi trước khi bạn quyết định.",
+    title: "Đặt cọc 30%, lắp đặt xong mới thanh toán",
+    desc: "Đặt cọc 30% khi chốt hợp đồng, lắp đặt xong nghiệm thu hài lòng mới thanh toán. Khảo sát và báo giá miễn phí tận nơi trước khi bạn quyết định.",
   },
 ];
 
@@ -426,8 +426,8 @@ export default function CuaCuonCanTho() {
               Khảo Sát Và Báo Giá Miễn Phí — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Giá báo trước khi làm, không phát sinh. Trả đủ vào ngày lắp đặt.
-              Bồi thường 200% nếu dùng sai vật liệu đã cam kết trong hợp đồng.
+              Giá báo trước khi làm, không phát sinh. Đặt cọc 30%, lắp đặt xong mới thanh toán.
+              Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               {SITE.hotlines.map((h, i) => (

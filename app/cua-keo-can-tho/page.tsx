@@ -184,7 +184,7 @@ export default function CuaKeoCanTho() {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Chọn Đúng Chất Liệu Theo Ngân Sách — Lắp Trong Ngày, Bồi Thường 200% Nếu Sai Vật Liệu
+                Chọn Đúng Chất Liệu Theo Ngân Sách — Lắp Trong Ngày, Bồi Thường 100% Nếu Sai Vật Tư
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
@@ -359,8 +359,8 @@ export default function CuaKeoCanTho() {
               Lắp Đúng Loại, Đúng Vật Liệu — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, báo giá tận nơi, trả đủ vào ngày lắp đặt.
-              Bồi thường 200% nếu dùng sai chất liệu đã cam kết trong hợp đồng.
+              Khảo sát miễn phí, báo giá tận nơi. Đặt cọc 30%, lắp đặt xong mới thanh toán.
+              Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

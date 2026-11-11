@@ -23,8 +23,8 @@ const item = {
 const pillars = [
   {
     icon: Award,
-    title: "Đúng vật liệu cam kết — bồi thường 200% nếu sai",
-    body: "Mỗi bộ cửa đều có CO/CQ chứng nhận xuất xứ. Sai một chi tiết nhỏ — bồi thường gấp đôi giá trị hợp đồng. Không có ngoại lệ.",
+    title: "Đúng vật tư cam kết — bồi thường 100% nếu sai",
+    body: "Mỗi bộ cửa đều có CO/CQ chứng nhận xuất xứ. Sai vật tư đã cam kết — HTP bồi thường 100% giá trị hợp đồng. Không có ngoại lệ.",
   },
   {
     icon: Wrench,
@@ -33,8 +33,8 @@ const pillars = [
   },
   {
     icon: Sparkles,
-    title: "Lắp xong mới trả tiền — không lo bị ép",
-    body: "Chúng tôi không nhận trước toàn bộ. Chạy thử, kiểm tra hài lòng, ký nghiệm thu — rồi mới thanh toán. Đơn giản vậy thôi.",
+    title: "Đặt cọc 30%, lắp đặt xong mới thanh toán",
+    body: "Đặt cọc 30% khi chốt hợp đồng. Chạy thử, kiểm tra hài lòng, ký nghiệm thu — lắp đặt hoàn chỉnh mới thanh toán phần còn lại.",
   },
 ];
 

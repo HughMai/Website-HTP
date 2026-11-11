@@ -383,8 +383,8 @@ export default function LapDatCuaCuonCanTho() {
               Gọi Ngay — Lắp Xong Hôm Nay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, báo giá chi tiết trước khi làm, trả đủ vào ngày lắp đặt.
-              Bồi thường 200% nếu dùng sai vật liệu cam kết.
+              Khảo sát miễn phí, báo giá chi tiết trước khi làm. Đặt cọc 30%, lắp đặt xong mới thanh toán.
+              Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

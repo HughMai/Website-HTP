@@ -28,9 +28,9 @@ const steps = [
   {
     number: "04",
     icon: ShieldCheck,
-    title: "Nghiệm Thu — Rồi Mới Thanh Toán",
+    title: "Nghiệm Thu & Thanh Toán",
     description:
-      "Chạy thử toàn hệ thống trước mặt bạn, ký nghiệm thu, rồi mới thanh toán. Bồi thường 200% nếu sai vật liệu cam kết.",
+      "Chạy thử toàn hệ thống trước mặt bạn, ký nghiệm thu rồi mới thanh toán. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.",
   },
 ];
 
@@ -82,8 +82,8 @@ export function Process() {
             4 bước đơn giản — từ tư vấn đến bàn giao.
           </h2>
           <p className="mt-2 text-sm font-medium text-amber-300 md:mt-3">
-            Bồi thường 200% tổng giá trị hợp đồng nếu sử dụng không đúng chủng
-            loại, thương hiệu đã cam kết.
+            Đặt cọc 30%, lắp đặt xong mới thanh toán. Sai vật tư đã cam kết, HTP
+            bồi thường 100% giá trị hợp đồng.
           </p>
         </motion.div>
 

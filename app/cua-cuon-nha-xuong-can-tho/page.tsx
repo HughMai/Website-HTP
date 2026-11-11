@@ -307,8 +307,8 @@ export default function CuaCuonNhaXuongCanTho() {
               Dây Chuyền Không Dừng — Lắp Ngoài Giờ Sản Xuất
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, thi công cuối tuần hoặc ca đêm theo lịch nhà máy. Lắp xong
-              mới thanh toán — bồi thường 200% nếu dùng sai vật liệu cam kết.
+              Khảo sát miễn phí, thi công cuối tuần hoặc ca đêm theo lịch nhà máy. Đặt cọc 30%, lắp đặt xong
+              mới thanh toán — Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

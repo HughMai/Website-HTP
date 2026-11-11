@@ -14,7 +14,7 @@ export function CtaBand({
   subtitle = "Gửi số điện thoại — thợ khảo sát gọi lại trong ít phút, tư vấn miễn phí.",
   source,
   id,
-  paymentLine = "Đặt cọc khi chốt đơn, trả đủ vào ngày lắp đặt",
+  paymentLine = "Đặt cọc 30%, lắp đặt xong mới thanh toán",
 }: {
   title?: string;
   subtitle?: string;
@@ -74,7 +74,7 @@ export function CtaBand({
             <ul className="mt-4 space-y-2 border-t border-white/12 pt-4">
               {[
                 paymentLine,
-                "Bồi thường 200% nếu dùng sai vật liệu đã cam kết",
+                "Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-2 text-sm text-white/75">
                   <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" aria-hidden />

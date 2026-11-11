@@ -33,7 +33,7 @@ export interface NhomKinh { group: string; rows: { mau: string; gia: Gia }[] }
 /** Dòng chưa có trong CRM (htp/gia_them.py). key = tole_son_tinh_dien | tole_sieu_truong | song_ngang_thep */
 export interface SanPhamThem { key: string; name: string; rows: { mau: string; gia: Gia }[] }
 
-export const APPLIED_FROM: string = "10/11/2026";
+export const APPLIED_FROM: string = "11/11/2026";
 
 export const NAN_DUC: MauNan[] = [
   {
@@ -448,31 +448,31 @@ export const NHOM_KINH: NhomKinh[] = [
     "rows": [
       {
         "mau": "Cửa đi 1.2ly",
-        "gia": 2200000
-      },
-      {
-        "mau": "Cửa đi 1.4ly",
-        "gia": 2400000
-      },
-      {
-        "mau": "Cửa đi 2.0ly",
-        "gia": 2600000
-      },
-      {
-        "mau": "Cửa sổ 1.2ly",
         "gia": 2100000
       },
       {
-        "mau": "Cửa sổ 1.4ly",
+        "mau": "Cửa đi 1.4ly",
+        "gia": 2200000
+      },
+      {
+        "mau": "Cửa đi 2.0ly",
         "gia": 2300000
       },
       {
+        "mau": "Cửa sổ 1.2ly",
+        "gia": 2000000
+      },
+      {
+        "mau": "Cửa sổ 1.4ly",
+        "gia": 2100000
+      },
+      {
         "mau": "Vách kính 1.2ly",
-        "gia": 1400000
+        "gia": 1200000
       },
       {
         "mau": "Vách kính 1.4ly",
-        "gia": 1500000
+        "gia": 1300000
       }
     ]
   },
@@ -481,15 +481,15 @@ export const NHOM_KINH: NhomKinh[] = [
     "rows": [
       {
         "mau": "Cửa đi 1.4ly",
-        "gia": 2600000
+        "gia": 2400000
       },
       {
         "mau": "Cửa đi 2.0ly",
-        "gia": 2800000
+        "gia": 2500000
       },
       {
         "mau": "Cửa sổ 1.4ly",
-        "gia": 2500000
+        "gia": 2300000
       },
       {
         "mau": "Vách kính 1.4ly",
@@ -519,11 +519,11 @@ export const NHOM_KINH: NhomKinh[] = [
     "rows": [
       {
         "mau": "10 ly",
-        "gia": 1500000
+        "gia": 1250000
       },
       {
         "mau": "12 ly",
-        "gia": 1650000
+        "gia": 1350000
       }
     ]
   },

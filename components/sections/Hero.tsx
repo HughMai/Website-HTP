@@ -21,7 +21,7 @@ const fadeUp = {
 // reversal, the subhead owns speed, and these three own everything else — the
 // hero used to state "500+" and "lắp xong mới thanh toán" twice each.
 const trustChips = [
-  { icon: ShieldCheck, label: "Bồi thường 200% nếu sai vật liệu" },
+  { icon: ShieldCheck, label: "Bồi thường 100% nếu sai vật tư" },
   { icon: Hammer, label: "500+ công trình đã bàn giao" },
   { icon: BadgeCheck, label: "Thợ của xưởng, không qua thầu phụ" },
 ];
