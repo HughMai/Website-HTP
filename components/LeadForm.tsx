@@ -12,6 +12,7 @@ import {
   LeadError,
   LeadHoneypot,
   LeadSuccess,
+  LeadTurnstile,
   useLeadSubmit,
 } from "@/hooks/useLeadSubmit";
 import { cn } from "@/lib/utils";
@@ -46,7 +47,7 @@ export function LeadForm({
   className?: string;
   submitLabel?: string;
 }) {
-  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef } =
+  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef, turnstile } =
     useLeadSubmit(source);
 
   const {
@@ -146,6 +147,7 @@ export function LeadForm({
           {submitLabel}
         </Button>
       </div>
+      <LeadTurnstile turnstile={turnstile} className="mt-2" />
     </form>
   );
 }

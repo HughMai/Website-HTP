@@ -52,6 +52,10 @@ export default defineConfig({
       TELEGRAM_CHAT_ID: "",
       RESEND_API_KEY: "",
       NOTIFY_EMAIL: "",
+      // Turnstile off: a local .env with real keys must not make every test
+      // depend on Cloudflare.
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "",
+      TURNSTILE_SECRET_KEY: "",
     },
   },
 });

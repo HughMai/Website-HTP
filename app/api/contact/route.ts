@@ -8,6 +8,20 @@ const VN_PHONE_RE = /^0(3|5|7|8|9)\d{8}$/;
 // positive here is a lost lead, so this only catches the obviously automated.
 const MIN_FILL_MS = 2500;
 
+// Spam caps. A real customer sends one lead; a script hammering the form at 3am
+// sends dozens. Silent drops past these, same as the other bot gates.
+const IP_WINDOW_MS = 60 * 60 * 1000;
+const IP_MAX_LEADS = 3;
+const REPEAT_WINDOW_MS = 24 * 60 * 60 * 1000;
+const MAX_TRACKED_KEYS = 1000;
+
+// Best effort, in module memory: Vercel's Fluid compute keeps a warm instance
+// serving consecutive requests, which is exactly the burst case. A cold start
+// forgets everything — acceptable, because Turnstile (below) is the real lock
+// and these only cap the volume of whatever still gets past it.
+const ipDeliveries = new Map<string, number[]>();
+const repeatDeliveries = new Map<string, number>();
+
 const schema = z.object({
   name:     z.string().trim().min(2).max(80),
   phone:    z.string().trim().regex(VN_PHONE_RE),
@@ -28,7 +42,11 @@ const schema = z.object({
   // Honeypot. Hidden from real users; bots fill every input they can find.
   website:  z.string().max(200).optional(),
   // Client timestamp of when the form mounted, for the timing gate above.
+  // Optional here only so a missing one reaches the silent drop in POST rather
+  // than a 400 that tells a script what it forgot.
   renderedAt: z.number().int().positive().optional(),
+  // Cloudflare Turnstile token. Required only when TURNSTILE_SECRET_KEY is set.
+  turnstileToken: z.string().trim().max(2048).optional(),
 });
 
 /**
@@ -59,7 +77,96 @@ type Lead = {
   gclid?: string;
   fbclid?: string;
   landing?: string;
+  // Spam signals for the people reading the notification. The lead is still
+  // delivered — these tell the family to verify before calling a stranger.
+  ip: string;
+  country?: string;
+  flags: string[];
 };
+
+function clientIp(req: NextRequest): string {
+  // Vercel overwrites x-forwarded-for with the real client address, so its
+  // first entry can be trusted there.
+  const first = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return first || req.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function prune<V>(map: Map<string, V>): void {
+  // Maps iterate oldest-insert first, so dropping from the front evicts the
+  // stalest keys.
+  for (const key of map.keys()) {
+    if (map.size <= MAX_TRACKED_KEYS) return;
+    map.delete(key);
+  }
+}
+
+function recentFromIp(ip: string, now: number): number[] {
+  return (ipDeliveries.get(ip) ?? []).filter((t) => now - t < IP_WINDOW_MS);
+}
+
+// Same phone AND same message — a re-send. A customer who comes back to add a
+// note ("cửa cuốn 4m") has a different message and still gets through.
+const repeatKey = (phone: string, message?: string) => `${phone}|${message ?? ""}`;
+
+function isRepeat(key: string, now: number): boolean {
+  const last = repeatDeliveries.get(key);
+  return last !== undefined && now - last < REPEAT_WINDOW_MS;
+}
+
+function recordDelivery(ip: string, key: string, now: number): void {
+  repeatDeliveries.delete(key);
+  repeatDeliveries.set(key, now);
+  prune(repeatDeliveries);
+
+  const recent = recentFromIp(ip, now);
+  recent.push(now);
+  ipDeliveries.delete(ip);
+  ipDeliveries.set(ip, recent);
+  prune(ipDeliveries);
+}
+
+async function verifyTurnstile(
+  secret: string,
+  token: string,
+  ip: string
+): Promise<{ ok: boolean; errorCodes?: string[] }> {
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret,
+        response: token,
+        ...(ip !== "unknown" ? { remoteip: ip } : {}),
+      }),
+    });
+    if (!res.ok) return { ok: false, errorCodes: [`http-${res.status}`] };
+    const data = (await res.json()) as { success?: boolean; "error-codes"?: string[] };
+    return { ok: !!data.success, errorCodes: data["error-codes"] };
+  } catch (err) {
+    return { ok: false, errorCodes: [err instanceof Error ? err.message : String(err)] };
+  }
+}
+
+/** The fake leads cluster around 2–3am and some come from abroad. Say so. */
+function spamFlags(now: Date, country?: string): string[] {
+  const flags: string[] = [];
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(now);
+  const hour = Number(parts.find((p) => p.type === "hour")?.value ?? "12");
+  const minute = parts.find((p) => p.type === "minute")?.value ?? "00";
+  if (hour < 5) {
+    flags.push(
+      `🌙 Gửi lúc ${String(hour).padStart(2, "0")}:${minute} sáng — nhắn Zalo xác minh trước khi gọi`
+    );
+  }
+  if (country && country !== "VN") flags.push(`🌍 Gửi từ nước ngoài (${country})`);
+  return flags;
+}
 
 async function notifyViaTelegram(lead: Lead): Promise<Delivery> {
   const channel = "telegram";
@@ -76,12 +183,14 @@ async function notifyViaTelegram(lead: Lead): Promise<Delivery> {
 
   const text =
     `🔔 <b>YÊU CẦU BÁO GIÁ MỚI</b>\n\n` +
+    (lead.flags.length ? lead.flags.map((f) => `<b>${f}</b>`).join("\n") + "\n\n" : "") +
     `👤 <b>Khách hàng:</b> ${lead.name}\n` +
     `📞 <b>Điện thoại:</b> <code>${lead.phone}</code>\n` +
     (lead.email   ? `📧 <b>Email:</b> ${lead.email}\n`     : "") +
     (lead.message ? `💬 <b>Nhu cầu:</b> ${lead.message}\n` : "") +
     (lead.source  ? `📍 <b>Từ trang:</b> ${lead.source}\n` : "") +
-    `\n🕐 ${now}`;
+    `\n🕐 ${now}` +
+    `\n<code>IP ${lead.ip}${lead.country ? ` · ${lead.country}` : ""}</code>`;
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -122,6 +231,7 @@ async function notifyViaEmail(lead: Lead): Promise<Delivery> {
         <p style="margin:4px 0 0;color:#bfdbfe;font-size:13px">Hưng Thành Phát — ${now}</p>
       </div>
       <div style="padding:24px 28px;background:#fff">
+        ${lead.flags.length ? `<div style="margin-bottom:16px;padding:12px 14px;background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;color:#92400e;font-size:14px;font-weight:600">${lead.flags.join("<br/>")}</div>` : ""}
         <table style="width:100%;border-collapse:collapse;font-size:15px">
           ${row("Khách hàng", lead.name, true)}
           ${row("Điện thoại", lead.phone, true)}
@@ -196,42 +306,73 @@ async function notifyViaCRM(lead: Lead): Promise<Delivery> {
 }
 
 export async function POST(req: NextRequest) {
+  // Who sent it, on every log line — the only way to tell a 3am script from a
+  // real customer after the fact.
+  const ip = clientIp(req);
+  const country = req.headers.get("x-vercel-ip-country")?.trim().toUpperCase() || undefined;
+  const meta = { ip, country: country ?? "unknown", userAgent: req.headers.get("user-agent") ?? "" };
+
   let body: unknown;
   try {
     body = await req.json();
   } catch {
+    console.info("[contact] rejected", { reason: "invalid-json", ...meta });
     return NextResponse.json({ error: "Yêu cầu không hợp lệ." }, { status: 400 });
   }
 
   const parsed = schema.safeParse(body);
   if (!parsed.success) {
+    console.info("[contact] rejected", { reason: "invalid-schema", ...meta });
     return NextResponse.json({ error: "Dữ liệu không hợp lệ." }, { status: 400 });
   }
 
   const {
-    name, phone, email, message, source, website, renderedAt,
+    name, phone, email, message, source, website, renderedAt, turnstileToken,
     utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
   } = parsed.data;
 
   // Bot gates. Answer 200 so a script learns nothing from the response, but log
   // the rejection with its reason — otherwise a mis-tuned threshold silently
-  // eats real leads and nothing in the logs says so.
-  if (website) {
-    console.info("[contact] rejected", { reason: "honeypot", source });
+  // eats real leads and nothing in the logs says so. A silent drop never
+  // carries `delivered`, so the browser fires no ad conversion for it.
+  const drop = (reason: string, extra: Record<string, unknown> = {}) => {
+    console.info("[contact] rejected", { reason, source, ...extra, ...meta });
     return NextResponse.json({ ok: true });
-  }
-  if (renderedAt && Date.now() - renderedAt < MIN_FILL_MS) {
-    console.info("[contact] rejected", {
-      reason: "too-fast",
-      elapsedMs: Date.now() - renderedAt,
-      source,
-    });
-    return NextResponse.json({ ok: true });
+  };
+
+  if (website) return drop("honeypot");
+  // Every real form sends this. A script posting straight to the endpoint
+  // usually doesn't — that is how the timing gate used to be skipped.
+  if (!renderedAt) return drop("missing-rendered-at");
+  const now = Date.now();
+  if (now - renderedAt < MIN_FILL_MS) return drop("too-fast", { elapsedMs: now - renderedAt });
+
+  // Turnstile, once keys exist. A failure is a visible 403, not a silent drop:
+  // a real customer can fail it (blocked script, expired token), and a fake
+  // "thank you" would leave them waiting for a call that never comes. The form
+  // shows the hotline and Zalo instead.
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+  if (turnstileSecret) {
+    const verified = turnstileToken
+      ? await verifyTurnstile(turnstileSecret, turnstileToken, ip)
+      : { ok: false, errorCodes: ["missing-token"] };
+    if (!verified.ok) {
+      console.info("[contact] rejected", {
+        reason: "turnstile", errorCodes: verified.errorCodes, source, ...meta,
+      });
+      return NextResponse.json({ error: "Chưa xác minh được." }, { status: 403 });
+    }
   }
 
+  const key = repeatKey(phone, message);
+  if (isRepeat(key, now)) return drop("repeat");
+  if (recentFromIp(ip, now).length >= IP_MAX_LEADS) return drop("ip-limit");
+
+  const flags = spamFlags(new Date(now), country);
   const lead: Lead = {
     name, phone, email, message, source,
     utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
+    ip, country, flags,
   };
 
   const results = await Promise.all([
@@ -263,5 +404,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ ok: true, delivered: results.filter((r) => r.ok).length });
+  // Counted only once something received it, so a total outage (502 above)
+  // never locks the customer out of retrying.
+  recordDelivery(ip, key, now);
+  const delivered = results.filter((r) => r.ok).length;
+  console.info("[contact] accepted", { source, delivered, flags, ...meta });
+  return NextResponse.json({ ok: true, delivered });
 }

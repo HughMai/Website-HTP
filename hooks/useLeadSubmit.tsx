@@ -25,13 +25,15 @@ import { cn } from "@/lib/utils";
  *                                      after submit invites a duplicate lead)
  */
 
-export type LeadErrorKind = "network" | "invalid" | "undelivered" | "server";
+export type LeadErrorKind = "network" | "invalid" | "captcha" | "undelivered" | "server";
 export type LeadStatus = "idle" | "submitting" | "success" | "error";
 
 const ERROR_COPY: Record<LeadErrorKind, string> = {
   network:
     "Mất kết nối khi gửi. Bạn kiểm tra mạng rồi thử lại, hoặc gọi trực tiếp giúp mình nhé.",
   invalid: "Thông tin chưa hợp lệ. Bạn kiểm tra lại họ tên và số điện thoại nhé.",
+  captcha:
+    "Chưa xác minh được trình duyệt. Bạn thử gửi lại, hoặc gọi trực tiếp / nhắn Zalo giúp mình nhé.",
   undelivered:
     "Hệ thống đang bận nên chưa nhận được yêu cầu. Bạn gọi trực tiếp giúp mình nhé.",
   server: "Gửi không thành công. Bạn vui lòng gọi trực tiếp giúp mình nhé.",
@@ -44,11 +46,102 @@ export type LeadPayload = {
   message?: string;
 };
 
+/**
+ * Cloudflare Turnstile — the lock a script can't pick. Inert until
+ * NEXT_PUBLIC_TURNSTILE_SITE_KEY is set (and the server only demands a token
+ * once TURNSTILE_SECRET_KEY is set), so this ships safely before keys exist.
+ *
+ * "interaction-only" keeps it invisible for almost everyone: the token is
+ * fetched in the background while the customer types, and a checkbox appears
+ * only when Cloudflare is unsure. If no token ever arrives, the customer gets
+ * the error panel with the hotline and Zalo, never a dead end.
+ */
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+// Long enough to tick the checkbox if Cloudflare does ask for one.
+const TURNSTILE_WAIT_MS = 20_000;
+
+type TurnstileApi = {
+  render: (el: HTMLElement, options: Record<string, unknown>) => string;
+  reset: (widgetId: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
+
+/** One per form. Lives in a ref: the widget's callbacks fire outside React. */
+export type TurnstileState = {
+  token: string;
+  loadFailed: boolean;
+  widgetId: string | null;
+  waiter: ((token: string | null) => void) | null;
+};
+
+// The homepage mounts four forms; the script must load once, not four times.
+let turnstileLoad: Promise<TurnstileApi> | null = null;
+
+function loadTurnstile(): Promise<TurnstileApi> {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+  turnstileLoad ??= new Promise<TurnstileApi>((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = TURNSTILE_SRC;
+    script.async = true;
+    script.onload = () =>
+      window.turnstile ? resolve(window.turnstile) : reject(new Error("turnstile-missing"));
+    script.onerror = () => {
+      turnstileLoad = null; // let a later mount try again
+      script.remove();
+      reject(new Error("turnstile-load-failed"));
+    };
+    document.head.appendChild(script);
+  });
+  return turnstileLoad;
+}
+
+function settleTurnstile(state: TurnstileState, token: string | null) {
+  state.token = token ?? "";
+  state.waiter?.(token);
+  state.waiter = null;
+}
+
+function turnstileToken(state: TurnstileState): Promise<string | null> {
+  if (state.token) return Promise.resolve(state.token);
+  if (state.loadFailed) return Promise.resolve(null);
+  return new Promise((resolve) => {
+    const timer = window.setTimeout(() => settleTurnstile(state, null), TURNSTILE_WAIT_MS);
+    state.waiter = (token) => {
+      window.clearTimeout(timer);
+      resolve(token);
+    };
+  });
+}
+
+function resetTurnstile(state: TurnstileState) {
+  // Tokens are single-use: every attempt needs a fresh one.
+  state.token = "";
+  if (!state.widgetId) return;
+  try {
+    window.turnstile?.reset(state.widgetId);
+  } catch {
+    /* a widget that is already gone needs no reset */
+  }
+}
+
 export function useLeadSubmit(source: string) {
   // Captured once on mount. The server rejects submissions that arrive
   // implausibly fast after this instant.
   const renderedAt = React.useRef(Date.now());
   const honeypot = React.useRef("");
+  const turnstile = React.useRef<TurnstileState>({
+    token: "",
+    loadFailed: false,
+    widgetId: null,
+    waiter: null,
+  });
 
   const [status, setStatus] = React.useState<LeadStatus>("idle");
   const [errorKind, setErrorKind] = React.useState<LeadErrorKind | null>(null);
@@ -59,6 +152,17 @@ export function useLeadSubmit(source: string) {
       if (status === "submitting") return;
       setStatus("submitting");
       setErrorKind(null);
+
+      let token: string | null = null;
+      if (TURNSTILE_SITE_KEY) {
+        token = await turnstileToken(turnstile.current);
+        if (!token) {
+          resetTurnstile(turnstile.current);
+          setErrorKind("captcha");
+          setStatus("error");
+          return;
+        }
+      }
 
       let res: Response;
       try {
@@ -74,24 +178,36 @@ export function useLeadSubmit(source: string) {
             ...getAttribution(),
             website: honeypot.current,
             renderedAt: renderedAt.current,
+            ...(token ? { turnstileToken: token } : {}),
           }),
         });
       } catch {
         setErrorKind("network");
         setStatus("error");
         return;
+      } finally {
+        if (token) resetTurnstile(turnstile.current);
       }
 
       if (res.ok) {
-        // Report the conversion only on a confirmed 200. Firing on submit would
-        // teach Smart Bidding to chase clicks that never reached the shop.
-        trackLead("form_submit", { source });
+        // Report the conversion only when the server says a channel received
+        // the lead. Firing on submit would teach Smart Bidding to chase clicks
+        // that never reached the shop — and the server's silent spam drops
+        // answer 200 too, just without `delivered`.
+        const body = (await res.json().catch(() => null)) as { delivered?: number } | null;
+        if ((body?.delivered ?? 0) > 0) trackLead("form_submit", { source });
         setStatus("success");
         return;
       }
 
       setErrorKind(
-        res.status === 400 ? "invalid" : res.status === 502 ? "undelivered" : "server"
+        res.status === 400
+          ? "invalid"
+          : res.status === 403
+            ? "captcha"
+            : res.status === 502
+              ? "undelivered"
+              : "server"
       );
       setStatus("error");
     },
@@ -111,7 +227,69 @@ export function useLeadSubmit(source: string) {
     submit,
     dismissError,
     honeypotRef: honeypot,
+    turnstile,
   };
+}
+
+/**
+ * Where the Turnstile widget mounts. Renders nothing without a site key. Its
+ * lifetime is the form's: it unmounts with the form on success, so the widget
+ * is removed rather than left running behind the thank-you panel.
+ */
+export function LeadTurnstile({
+  turnstile,
+  className,
+}: {
+  turnstile: React.MutableRefObject<TurnstileState>;
+  className?: string;
+}) {
+  const el = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const sitekey = TURNSTILE_SITE_KEY;
+    if (!sitekey) return;
+    const state = turnstile.current;
+    // StrictMode mounts, unmounts and remounts; only the surviving mount renders.
+    let cancelled = false;
+
+    loadTurnstile()
+      .then((api) => {
+        if (cancelled || !el.current) return;
+        state.widgetId = api.render(el.current, {
+          sitekey,
+          appearance: "interaction-only",
+          language: "vi",
+          callback: (token: string) => settleTurnstile(state, token),
+          "expired-callback": () => {
+            state.token = "";
+          },
+          // Turnstile retries on its own; this only stops a submit that is
+          // already waiting from spinning for the full timeout.
+          "error-callback": () => settleTurnstile(state, null),
+        });
+      })
+      .catch(() => {
+        if (cancelled) return;
+        state.loadFailed = true;
+        settleTurnstile(state, null);
+      });
+
+    return () => {
+      cancelled = true;
+      if (state.widgetId) {
+        try {
+          window.turnstile?.remove(state.widgetId);
+        } catch {
+          /* already gone */
+        }
+        state.widgetId = null;
+      }
+      state.token = "";
+    };
+  }, [turnstile]);
+
+  if (!TURNSTILE_SITE_KEY) return null;
+  return <div ref={el} className={className} />;
 }
 
 /**
@@ -252,6 +430,19 @@ export function LeadError({
         >
           <Phone className="h-4 w-4" aria-hidden />
           Gọi {hotline}
+        </a>
+        <a
+          href={ZALO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            "inline-flex h-11 items-center rounded-md border px-4 text-sm font-semibold",
+            dark
+              ? "border-white/30 text-white hover:bg-white/10"
+              : "border-brand/20 text-brand hover:bg-brand/5"
+          )}
+        >
+          Nhắn Zalo
         </a>
         <button
           type="button"

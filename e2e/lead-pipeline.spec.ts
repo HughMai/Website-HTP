@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 import { crmReceived, resetCrm } from "./crm-mock";
 
 const VALID = { name: "Nguyễn Văn A", phone: "0901234567" };
@@ -6,6 +6,19 @@ const VALID = { name: "Nguyễn Văn A", phone: "0901234567" };
 // The server rejects submissions faster than this; tests must look human.
 const HUMAN_MS = 3000;
 const humanTimestamp = () => Date.now() - HUMAN_MS;
+
+// The route remembers recent leads per IP and per phone, so each test is a
+// fresh visitor — otherwise one test throttles the next. runId keeps a rerun
+// against a reused server from colliding with the last run's visitors.
+const runId = Date.now() % 65536;
+let seq = 0;
+function visitor() {
+  seq++;
+  return {
+    phone: `09${String(runId).padStart(5, "0")}${String(seq).padStart(3, "0")}`,
+    headers: { "x-forwarded-for": `10.${runId >> 8}.${runId & 255}.${seq}` },
+  };
+}
 
 test.describe("POST /api/contact — server behaviour", () => {
   test.beforeEach(async () => {
@@ -32,15 +45,20 @@ test.describe("POST /api/contact — server behaviour", () => {
   }) => {
     // QuoteEstimator was deleted, and the CRM forward kept building `need` and
     // `size` from the estimate — so every lead arrived with empty strings.
+    const v = visitor();
     const res = await request.post("/api/contact", {
+      headers: v.headers,
       data: {
-        ...VALID,
+        name: VALID.name,
+        phone: v.phone,
         message: "Cần báo giá cửa cuốn 4m",
         source: "Hero trang chủ",
         renderedAt: humanTimestamp(),
       },
     });
     expect(res.ok()).toBe(true);
+    // `delivered` is what tells the browser to fire the ad conversion.
+    expect(await res.json()).toEqual({ ok: true, delivered: 1 });
 
     const got = await crmReceived<{
       name: string;
@@ -50,7 +68,7 @@ test.describe("POST /api/contact — server behaviour", () => {
     }>();
     expect(got).toHaveLength(1);
     expect(got[0].name).toBe(VALID.name);
-    expect(got[0].phone).toBe(VALID.phone);
+    expect(got[0].phone).toBe(v.phone);
     expect(got[0].need).toBe("Cần báo giá cửa cuốn 4m");
     expect(got[0].need).not.toBe("");
     expect(got[0].sourcePage).toBe("Hero trang chủ");
@@ -60,35 +78,100 @@ test.describe("POST /api/contact — server behaviour", () => {
     // Telegram and Resend are unconfigured by the test env, so making the CRM
     // fail leaves nothing that could have received the lead.
     await resetCrm("fail");
-    const res = await request.post("/api/contact", {
-      data: { ...VALID, renderedAt: humanTimestamp() },
-    });
+    const v = visitor();
+    const lead = { name: VALID.name, phone: v.phone, renderedAt: humanTimestamp() };
+    const res = await request.post("/api/contact", { headers: v.headers, data: lead });
     expect(res.status()).toBe(502);
+
+    // Nothing received it, so it must not count against the customer: the
+    // retry after the outage goes through instead of being dropped as a repeat.
+    await resetCrm("ok");
+    const retry = await request.post("/api/contact", { headers: v.headers, data: lead });
+    expect(await retry.json()).toEqual({ ok: true, delivered: 1 });
   });
 
   test("silently drops a honeypot submission without notifying anyone", async ({
     request,
   }) => {
+    const v = visitor();
     const res = await request.post("/api/contact", {
+      headers: v.headers,
       data: {
-        ...VALID,
+        name: VALID.name,
+        phone: v.phone,
         website: "http://spam.example",
         renderedAt: humanTimestamp(),
       },
     });
     // 200 so a bot learns nothing, but nothing is forwarded.
     expect(res.status()).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(await crmReceived()).toHaveLength(0);
   });
 
   test("silently drops a submission that arrives implausibly fast", async ({
     request,
   }) => {
+    const v = visitor();
     const res = await request.post("/api/contact", {
-      data: { ...VALID, renderedAt: Date.now() },
+      headers: v.headers,
+      data: { name: VALID.name, phone: v.phone, renderedAt: Date.now() },
     });
     expect(res.status()).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(await crmReceived()).toHaveLength(0);
+  });
+
+  test("REGRESSION: silently drops a direct POST with no renderedAt", async ({
+    request,
+  }) => {
+    // The timing gate used to be skipped entirely when renderedAt was absent,
+    // which is exactly what a script posting {name, phone} sends.
+    const v = visitor();
+    const res = await request.post("/api/contact", {
+      headers: v.headers,
+      data: { name: VALID.name, phone: v.phone },
+    });
+    expect(res.status()).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(await crmReceived()).toHaveLength(0);
+  });
+
+  test("drops an exact re-send of the same phone, but not a follow-up note", async ({
+    request,
+  }) => {
+    const first = visitor();
+    const second = visitor(); // a different IP, so only the phone matches
+    const send = (headers: Record<string, string>, message?: string) =>
+      request.post("/api/contact", {
+        headers,
+        data: { name: VALID.name, phone: first.phone, message, renderedAt: humanTimestamp() },
+      });
+
+    expect(await (await send(first.headers)).json()).toEqual({ ok: true, delivered: 1 });
+    // Same phone, same (empty) message: someone re-sending a number.
+    expect(await (await send(second.headers)).json()).toEqual({ ok: true });
+    expect(await crmReceived()).toHaveLength(1);
+
+    // The customer scrolls down and adds what they need — that must arrive.
+    const note = await send(second.headers, "Cửa cuốn mặt tiền 4m");
+    expect(await note.json()).toEqual({ ok: true, delivered: 1 });
+    expect(await crmReceived()).toHaveLength(2);
+  });
+
+  test("drops the 4th lead from one IP within the hour", async ({ request }) => {
+    const ip = visitor().headers;
+    const send = () =>
+      request.post("/api/contact", {
+        headers: ip,
+        data: { name: VALID.name, phone: visitor().phone, renderedAt: humanTimestamp() },
+      });
+
+    for (let i = 0; i < 3; i++) {
+      expect(await (await send()).json()).toEqual({ ok: true, delivered: 1 });
+    }
+    expect(await (await send()).json()).toEqual({ ok: true });
+    expect(await crmReceived()).toHaveLength(3);
   });
 });
 
@@ -142,6 +225,55 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
     await expect(nameField).toBeVisible();
     await nameField.click();
     await expect(nameField).toBeFocused();
+  });
+
+  /** Records gtag calls, standing in for the real tag (absent in tests). */
+  async function stubGtag(page: Page) {
+    await page.addInitScript(() => {
+      const calls: unknown[][] = [];
+      Object.assign(window, { __gtagCalls: calls, gtag: (...args: unknown[]) => calls.push(args) });
+    });
+  }
+  const gtagCalls = (page: Page) =>
+    page.evaluate(() => (window as unknown as { __gtagCalls: unknown[][] }).__gtagCalls);
+
+  for (const [label, json, expected] of [
+    ["a delivered lead fires the ad conversion", { ok: true, delivered: 1 }, 1],
+    // The server's silent spam drops look like success to the sender, but the
+    // ad account must not be told a lead arrived.
+    ["a silently dropped lead fires no conversion", { ok: true }, 0],
+  ] as const) {
+    test(label, async ({ page }) => {
+      await stubGtag(page);
+      await page.goto("/");
+      await page.route("**/api/contact", (route) => route.fulfill({ status: 200, json }));
+
+      const hero = page.locator("#trang-chu");
+      await page.waitForTimeout(HUMAN_MS);
+      await fillAndSubmit(hero);
+
+      await expect(hero.getByText("Đã nhận thông tin của bạn!")).toBeVisible();
+      const calls = await gtagCalls(page);
+      expect(calls.filter((c) => c[1] === "form_submit")).toHaveLength(expected);
+    });
+  }
+
+  test("a 403 (failed Turnstile) shows the hotline and Zalo, not a fake thank-you", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.route("**/api/contact", (route) =>
+      route.fulfill({ status: 403, json: { error: "Chưa xác minh được." } })
+    );
+
+    const hero = page.locator("#trang-chu");
+    await page.waitForTimeout(HUMAN_MS);
+    await fillAndSubmit(hero);
+
+    const alert = hero.getByRole("alert");
+    await expect(alert).toContainText("Chưa xác minh được");
+    await expect(alert.getByRole("link", { name: /Gọi/ })).toBeVisible();
+    await expect(alert.getByRole("link", { name: "Nhắn Zalo" })).toBeVisible();
   });
 
   test("hero form shows a persistent thank-you that replaces the form", async ({

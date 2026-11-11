@@ -15,6 +15,7 @@ import {
   LeadError,
   LeadHoneypot,
   LeadSuccess,
+  LeadTurnstile,
   useLeadSubmit,
 } from "@/hooks/useLeadSubmit";
 import { SITE } from "@/lib/site-data";
@@ -55,7 +56,7 @@ const fadeUp = {
 };
 
 export function Contact() {
-  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef } =
+  const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef, turnstile } =
     useLeadSubmit("Form liên hệ trang chủ");
 
   const {
@@ -237,6 +238,7 @@ export function Contact() {
                   )}
                 </div>
 
+                <LeadTurnstile turnstile={turnstile} />
                 <Button
                   type="submit"
                   size="lg"
