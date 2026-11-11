@@ -28,6 +28,8 @@ const ROUTES = [
   "/phu-kien-cua-cuon-can-tho",
   "/bang-gia-cua-keo-can-tho",
   "/bao-gia-cua-cuon-can-tho",
+  "/bang-gia-cua-nhom-kinh-can-tho",
+  "/bang-gia-phu-kien-can-tho",
   "/cong-trinh",
   "/blog",
 ];

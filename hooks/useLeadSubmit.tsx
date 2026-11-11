@@ -44,6 +44,15 @@ export type LeadPayload = {
   message?: string;
 };
 
+function newLeadId(): string {
+  try {
+    if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
+  } catch {
+    /* fall through */
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export function useLeadSubmit(source: string) {
   // Captured once on mount. The server rejects submissions that arrive
   // implausibly fast after this instant.
@@ -60,6 +69,10 @@ export function useLeadSubmit(source: string) {
       setStatus("submitting");
       setErrorKind(null);
 
+      // One id per submission: goes to the CRM (note) and to Google Ads as the
+      // conversion's transaction_id, so the two can be matched later.
+      const leadId = newLeadId();
+
       let res: Response;
       try {
         res = await fetch("/api/contact", {
@@ -72,6 +85,7 @@ export function useLeadSubmit(source: string) {
             // or click-id'd URL. Empty object when they didn't — the CRM then
             // files the lead as a plain website lead.
             ...getAttribution(),
+            lead_id: leadId,
             website: honeypot.current,
             renderedAt: renderedAt.current,
           }),
@@ -85,7 +99,7 @@ export function useLeadSubmit(source: string) {
       if (res.ok) {
         // Report the conversion only on a confirmed 200. Firing on submit would
         // teach Smart Bidding to chase clicks that never reached the shop.
-        trackLead("form_submit", { source });
+        trackLead("form_submit", { source }, leadId);
         setStatus("success");
         return;
       }

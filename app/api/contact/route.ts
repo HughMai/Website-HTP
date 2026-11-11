@@ -23,6 +23,11 @@ const schema = z.object({
   utm_medium:   z.string().trim().max(60).optional(),
   utm_campaign: z.string().trim().max(60).optional(),
   gclid:        z.string().trim().max(200).optional(),
+  gbraid:       z.string().trim().max(200).optional(),
+  wbraid:       z.string().trim().max(200).optional(),
+  // Per-submission id, also sent to Google Ads as the conversion's
+  // transaction_id, so a CRM row and an Ads conversion can be matched 1:1.
+  lead_id:      z.string().trim().max(64).optional(),
   fbclid:       z.string().trim().max(200).optional(),
   landing:      z.string().trim().max(200).optional(),
   // Honeypot. Hidden from real users; bots fill every input they can find.
@@ -57,6 +62,9 @@ type Lead = {
   utm_medium?: string;
   utm_campaign?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
+  lead_id?: string;
   fbclid?: string;
   landing?: string;
 };
@@ -184,6 +192,8 @@ async function notifyViaCRM(lead: Lead): Promise<Delivery> {
         utm_medium: lead.utm_medium ?? "",
         utm_campaign: lead.utm_campaign ?? "",
         note: [lead.email, lead.gclid && `gclid:${lead.gclid}`,
+               lead.gbraid && `gbraid:${lead.gbraid}`, lead.wbraid && `wbraid:${lead.wbraid}`,
+               lead.lead_id && `lead_id:${lead.lead_id}`,
                lead.landing && `landing:${lead.landing}`]
           .filter(Boolean).join(" | "),
       }),
@@ -210,7 +220,7 @@ export async function POST(req: NextRequest) {
 
   const {
     name, phone, email, message, source, website, renderedAt,
-    utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
+    utm_source, utm_medium, utm_campaign, gclid, gbraid, wbraid, lead_id, fbclid, landing,
   } = parsed.data;
 
   // Bot gates. Answer 200 so a script learns nothing from the response, but log
@@ -231,7 +241,7 @@ export async function POST(req: NextRequest) {
 
   const lead: Lead = {
     name, phone, email, message, source,
-    utm_source, utm_medium, utm_campaign, gclid, fbclid, landing,
+    utm_source, utm_medium, utm_campaign, gclid, gbraid, wbraid, lead_id, fbclid, landing,
   };
 
   const results = await Promise.all([

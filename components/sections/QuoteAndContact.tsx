@@ -183,7 +183,8 @@ export function QuoteAndContact() {
                 </Button>
 
                 <p className="text-center text-sm text-brand/70">
-                  Bằng việc gửi yêu cầu, bạn đồng ý để Hưng Thành Phát liên hệ qua số điện thoại đã cung cấp.
+                  Bằng việc gửi yêu cầu, bạn đồng ý để Hưng Thành Phát liên hệ qua số điện thoại đã cung cấp. Xem{" "}
+                  <a href="/chinh-sach-bao-mat" className="underline underline-offset-2">chính sách bảo mật</a>.
                 </p>
               </form>
               )}

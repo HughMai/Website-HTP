@@ -146,6 +146,13 @@ export function LeadForm({
           {submitLabel}
         </Button>
       </div>
+      <p className={cn("mt-2 text-sm", dark ? "text-white/60" : "text-brand/60")}>
+        Gửi số điện thoại là đồng ý để Hưng Thành Phát gọi lại báo giá. Xem{" "}
+        <a href="/chinh-sach-bao-mat" className="underline underline-offset-2">
+          chính sách bảo mật
+        </a>
+        .
+      </p>
     </form>
   );
 }
