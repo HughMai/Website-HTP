@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Ô Môn Cần Thơ — Kho Xưởng, Nhà Phố",
   description:
-    "Cửa cuốn Ô Môn Cần Thơ — lắp đặt nhà xưởng, khu công nghiệp và nhà phố tại Ô Môn. Cửa cuốn khổ lớn chuyên công nghiệp. Gọi ngay: 0945 042 345.",
+    "Cửa cuốn Ô Môn Cần Thơ — lắp đặt nhà xưởng, khu công nghiệp và nhà phố tại Ô Môn. Cửa cuốn khổ lớn chuyên công nghiệp. Gọi ngay: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-cuon-o-mon` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-o-mon`,
     title: "Cửa Cuốn Ô Môn Cần Thơ — Lắp Đặt Kho Xưởng & Nhà Phố, Bảo Hành Chính Hãng",
     description:
-      "Cửa cuốn Ô Môn — chuyên kho xưởng khu công nghiệp, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0945 042 345.",
+      "Cửa cuốn Ô Môn — chuyên kho xưởng khu công nghiệp, khảo sát miễn phí, bảo hành chính hãng. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -81,7 +81,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhà xưởng Ô Môn giá bao nhiêu?",
     answer:
-      "Cửa cuốn khổ lớn cho nhà xưởng tại Ô Môn từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor công nghiệp và VAT. Liên hệ 0945 042 345 để được khảo sát và báo giá tận nơi.",
+      "Cửa cuốn khổ lớn cho nhà xưởng tại Ô Môn từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor công nghiệp và VAT. Liên hệ 0913 574 077 để được khảo sát và báo giá tận nơi.",
   },
   {
     question: "Cửa cuốn khổ lớn cho nhà xưởng có thể rộng tối đa bao nhiêu?",

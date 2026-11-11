@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
-import { FOOTER_LINK_GROUPS, HOTLINE_ROLES, MAIN_NAV, SITE } from "@/lib/site-data";
+import { FOOTER_LINK_GROUPS, HOTLINE_ROLES, MAIN_NAV, SITE, ZALO_URL } from "@/lib/site-data";
 
 const sitemapLinks = FOOTER_LINK_GROUPS.flatMap((g) => [...g.links]);
 
@@ -52,7 +52,7 @@ export function Footer() {
               <Facebook className="h-4 w-4" />
             </a>
             <a
-              href="https://zalo.me/0945042345"
+              href={ZALO_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Liên hệ qua Zalo"
@@ -197,6 +197,9 @@ export function Footer() {
           <p>
             © {year} {SITE.brand}. Mọi quyền được bảo lưu.
           </p>
+          <Link href="/chinh-sach-bao-mat" className="inline-flex min-h-[44px] items-center transition hover:text-white">
+            Chính sách bảo mật
+          </Link>
           <p>Được thiết kế & phát triển tận tâm tại Việt Nam.</p>
         </div>
       </div>

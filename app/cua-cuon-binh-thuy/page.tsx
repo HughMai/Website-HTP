@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt",
   description:
-    "Cửa cuốn Bình Thủy Cần Thơ — showroom tại 235 Võ Văn Kiệt, Bình Thủy. Lắp đặt trong ngày, khảo sát miễn phí, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
+    "Cửa cuốn Bình Thủy Cần Thơ — showroom tại 235 Võ Văn Kiệt, Bình Thủy. Lắp đặt trong ngày, khảo sát miễn phí, bảo hành chính hãng. Gọi ngay: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-cuon-binh-thuy` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-binh-thuy`,
     title: "Cửa Cuốn Bình Thủy Cần Thơ — Lắp Đặt",
     description:
-      "Cửa cuốn Bình Thủy — showroom tại chỗ, lắp trong ngày, bảo hành chính hãng. Gọi: 0945 042 345.",
+      "Cửa cuốn Bình Thủy — showroom tại chỗ, lắp trong ngày, bảo hành chính hãng. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -82,7 +82,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Bình Thủy giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Bình Thủy từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0945 042 345 để được khảo sát và báo giá miễn phí tận nơi tại Bình Thủy.",
+      "Giá cửa cuốn tại Bình Thủy từ 500.000đ/m² (tole Đài Loan) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0913 574 077 để được khảo sát và báo giá miễn phí tận nơi tại Bình Thủy.",
   },
   {
     question: "Hưng Thành Phát Door có showroom tại Bình Thủy không?",
@@ -300,7 +300,7 @@ export default function CuaCuonBinhThuy() {
               Lắp Cửa Cuốn Tại Bình Thủy — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, có mặt trong 2 giờ, lắp xong mới thanh toán.
+              Khảo sát miễn phí, có mặt trong 2 giờ, trả đủ vào ngày lắp đặt.
               Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

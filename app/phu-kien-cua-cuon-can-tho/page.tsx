@@ -15,6 +15,8 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
+import { BINH_TICH_DIEN, MOTOR, PHU_KIEN } from "@/lib/bang-gia-data";
+import { formatGia } from "@/lib/bang-gia-specs";
 import { SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
@@ -26,7 +28,7 @@ const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xu�
 export const metadata: Metadata = {
   title: "Phụ Kiện Cửa Cuốn Cần Thơ — Motor, Remote",
   description:
-    "Phụ kiện cửa cuốn Cần Thơ — motor 300–500kg, bình lưu điện, remote, khóa ngang, còi báo động. Hàng chính hãng, lắp và thay tận nơi cho mọi thương hiệu cửa. Gọi: 0945 042 345.",
+    "Phụ kiện cửa cuốn Cần Thơ — motor 300–500kg, bình lưu điện, remote, khóa ngang, còi báo động. Hàng chính hãng, lắp và thay tận nơi cho mọi thương hiệu cửa. Gọi: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/phu-kien-cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/phu-kien-cua-cuon-can-tho`,
     title: "Phụ Kiện Cửa Cuốn Cần Thơ — Motor, Bình Lưu Điện, Remote, Khóa",
     description:
-      "Motor, bình lưu điện, remote và khóa cửa cuốn chính hãng tại Cần Thơ. Thay tận nơi cho mọi thương hiệu. Gọi: 0945 042 345.",
+      "Motor, bình lưu điện, remote và khóa cửa cuốn chính hãng tại Cần Thơ. Thay tận nơi cho mọi thương hiệu. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [
       { url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" },
@@ -42,19 +44,29 @@ export const metadata: Metadata = {
   },
 };
 
-// Prices mirror the cửa cuốn price list so the two pages cannot drift apart.
-// Source of truth stays /bao-gia-cua-cuon-can-tho — this page links there.
-const motorTable = [
-  { spec: "Motor + Remote 300kg", price: "3.300.000", use: "Cửa nhà phố khổ thường, dưới ~12m²" },
-  { spec: "Motor + Remote 400kg", price: "3.500.000", use: "Cửa mặt tiền kinh doanh" },
-  { spec: "Motor + Remote 500kg", price: "4.000.000", use: "Cửa khổ rộng, cửa tấm liền nặng" },
-  { spec: "Motor + Remote Cửa Úc", price: "4.500.000", use: "Hệ cửa Úc, vận hành êm nhất" },
-];
+// Prices come from the CRM export (lib/bang-gia-data.ts) — the same rows as the price page
+// /bang-gia-phu-kien-can-tho, so the two pages cannot drift apart. Nothing typed by hand.
+const motorTable = MOTOR.map((m) => ({ spec: m.name, price: formatGia(m.gia), use: m.dienTich }));
 
 const accessoryTable = [
-  { spec: "Khóa ngang cửa cuốn tole", price: "350.000" },
-  { spec: "Khóa ngang cửa cuốn Úc", price: "450.000" },
+  // Bình tích điện YH / SH: the print catalog leaves their price blank, so the web says "Liên hệ".
+  ...BINH_TICH_DIEN.map((b) => ({
+    spec: `Bình tích điện ${b.loai}`,
+    price: b.gia !== null ? `${formatGia(b.gia)} đ/bộ` : "Liên hệ",
+  })),
+  ...PHU_KIEN.map((p) => ({
+    spec: `${p.name} ${p.key === "khoa_uc" ? "cửa cuốn Úc" : "cửa cuốn tole"}`,
+    price: `${formatGia(p.gia)} đ/${p.donVi}`,
+  })),
 ];
+
+/** "cửa dưới 12m² dùng motor 300kg, cửa 12m² đến dưới 14,5m² dùng motor 400kg, …" */
+const motorTiers = MOTOR.filter((m) => m.sucNang !== null)
+  .map((m) => `${m.dienTich.charAt(0).toLowerCase()}${m.dienTich.slice(1)} dùng motor ${m.sucNang}`)
+  .join(", ");
+
+const motorFrom = formatGia(Math.min(...MOTOR.map((m) => m.gia)));
+const motorTo = formatGia(Math.max(...MOTOR.map((m) => m.gia)));
 
 const parts = [
   {
@@ -101,12 +113,13 @@ const faqItems = [
   {
     question: "Thay motor cửa cuốn ở Cần Thơ giá bao nhiêu?",
     answer:
-      "Motor kèm remote từ 3.300.000đ (loại 300kg) đến 4.500.000đ (hệ cửa Úc), chưa bao gồm VAT và công lắp đặt. Giá phụ thuộc tải trọng cánh cửa, nên chúng tôi đo trọng lượng thực tế trước khi báo giá. Xem đầy đủ tại trang báo giá cửa cuốn hoặc gọi 0945 042 345.",
+      `Motor kèm remote từ ${motorFrom}đ (loại 300kg) đến ${motorTo}đ (hệ cửa Úc), chưa bao gồm VAT và công lắp đặt. Giá phụ thuộc tải trọng cánh cửa, nên chúng tôi đo trọng lượng thực tế trước khi báo giá. Xem đầy đủ tại trang bảng giá motor & phụ kiện hoặc gọi ${SITE.hotlines[0]}.`,
   },
   {
     question: "Motor cửa cuốn loại nào phù hợp với nhà tôi?",
-    answer:
-      "Chọn theo trọng lượng cánh cửa chứ không theo diện tích. Cửa nhà phố khổ thường dùng motor 300kg; mặt tiền kinh doanh thường 400kg; cửa khổ rộng hoặc cửa tấm liền cần 500kg trở lên. Lắp motor thiếu tải là nguyên nhân phổ biến nhất khiến cửa hỏng sớm.",
+    // Same rule the CRM uses to pick the tier (pricing.resolve_motor_label) — by area, because a
+    // bigger door is a heavier door. The old copy said "not by area", contradicting the price page.
+    answer: `Tải motor chọn theo diện tích cửa, vì cửa càng rộng, càng cao thì cánh càng nặng: ${motorTiers}. Cửa nan dày hoặc tấm liền nặng hơn thường thì chúng tôi kiểm tra trọng lượng thực tế trước khi chốt. Lắp motor thiếu tải là nguyên nhân phổ biến nhất khiến cửa hỏng sớm.`,
   },
   {
     question: "Cửa cuốn không phải do Hưng Thành Phát lắp có thay phụ kiện được không?",
@@ -217,7 +230,7 @@ export default function PhuKienCuaCuonCanTho() {
                 variant="outline"
                 className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand"
               >
-                <Link href="/bao-gia-cua-cuon-can-tho">
+                <Link href="/bang-gia-phu-kien-can-tho">
                   Xem bảng giá đầy đủ
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
@@ -295,13 +308,13 @@ export default function PhuKienCuaCuonCanTho() {
             </div>
 
             <div>
-              <h3 className="mb-3 font-semibold text-brand">Khóa ngang</h3>
+              <h3 className="mb-3 font-semibold text-brand">Bình tích điện &amp; khóa ngang</h3>
               <div className="overflow-x-auto rounded-xl border">
                 <table className="w-full min-w-[320px] text-sm">
                   <thead className="bg-muted">
                     <tr>
                       <th className="px-4 py-3 text-left font-semibold">Phụ kiện</th>
-                      <th className="px-4 py-3 text-right font-semibold">Giá (đ/bộ)</th>
+                      <th className="px-4 py-3 text-right font-semibold">Giá</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y bg-white">
@@ -320,15 +333,14 @@ export default function PhuKienCuaCuonCanTho() {
               <p className="mb-1 font-semibold">Lưu ý</p>
               <ul className="list-inside list-disc space-y-1 text-amber-800">
                 <li>Giá chưa bao gồm VAT và công lắp đặt</li>
-                <li>Bình lưu điện báo giá riêng theo dung lượng và loại cửa</li>
                 <li>{WARRANTY}</li>
                 <li>
                   Giá có thể thay đổi theo thời điểm — xem{" "}
                   <Link
-                    href="/bao-gia-cua-cuon-can-tho"
+                    href="/bang-gia-phu-kien-can-tho"
                     className="font-semibold underline underline-offset-2"
                   >
-                    bảng giá cửa cuốn đầy đủ
+                    bảng giá motor &amp; phụ kiện đầy đủ
                   </Link>{" "}
                   hoặc gọi để nhận giá cập nhật
                 </li>

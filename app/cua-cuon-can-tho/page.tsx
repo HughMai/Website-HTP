@@ -13,7 +13,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
   description:
-    "Cửa cuốn Cần Thơ — xưởng sản xuất và lắp đặt tại Bình Thủy từ 2005, hơn 500 công trình. Đủ loại: nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, inox. Khảo sát miễn phí, lắp xong mới thanh toán. Gọi: 0945 042 345.",
+    "Cửa cuốn Cần Thơ — xưởng sản xuất và lắp đặt tại Bình Thủy từ 2005, hơn 500 công trình. Đủ loại: nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, inox. Khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-can-tho`,
     title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
     description:
-      "Xưởng cửa cuốn tại Cần Thơ từ 2005. Đủ loại cửa cuốn, khảo sát miễn phí, lắp xong mới thanh toán. Gọi: 0945 042 345.",
+      "Xưởng cửa cuốn tại Cần Thơ từ 2005. Đủ loại cửa cuốn, khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -90,8 +90,8 @@ const reasons = [
   },
   {
     icon: HandCoins,
-    title: "Lắp xong mới thanh toán",
-    desc: "Không yêu cầu đặt cọc trước toàn bộ. Khảo sát và báo giá miễn phí tận nơi trước khi bạn quyết định.",
+    title: "Trả đủ vào ngày lắp đặt",
+    desc: "Đặt cọc khi chốt đơn, phần còn lại thanh toán vào ngày giao hoặc lắp đặt. Khảo sát và báo giá miễn phí tận nơi trước khi bạn quyết định.",
   },
 ];
 
@@ -109,14 +109,14 @@ const steps = [
   { n: "01", title: "Gọi hoặc nhắn Zalo", desc: "Mô tả sơ bộ mặt tiền và nhu cầu. Chúng tôi tư vấn loại cửa phù hợp trước khi tới." },
   { n: "02", title: "Khảo sát & báo giá miễn phí", desc: "Đo đạc tận nơi, chốt kích thước và vật tư. Báo giá rõ ràng trước khi làm — không phát sinh." },
   { n: "03", title: "Sản xuất tại xưởng", desc: "Cắt và gia công đúng kích thước công trình tại xưởng Bình Thủy." },
-  { n: "04", title: "Lắp đặt & bàn giao", desc: "Đội thợ lắp đặt, chạy thử, hướng dẫn sử dụng. Lắp xong mới thanh toán." },
+  { n: "04", title: "Lắp đặt & bàn giao", desc: "Đội thợ lắp đặt, chạy thử, hướng dẫn sử dụng. Trả đủ vào ngày lắp đặt." },
 ];
 
 const faqItems = [
   {
     question: "Cửa cuốn Cần Thơ giá bao nhiêu một mét vuông?",
     answer:
-      "Giá cửa cuốn tại Cần Thơ phụ thuộc vào loại nan (nhôm, thép, tấm liền, song ngang), kích thước mặt tiền và loại motor đi kèm. Vì mỗi công trình một kích thước nên chúng tôi khảo sát và báo giá miễn phí tận nơi, chốt giá trước khi làm. Gọi 0945 042 345 để nhận báo giá trong ngày.",
+      "Giá cửa cuốn tại Cần Thơ phụ thuộc vào loại nan (nhôm, thép, tấm liền, song ngang), kích thước mặt tiền và loại motor đi kèm. Vì mỗi công trình một kích thước nên chúng tôi khảo sát và báo giá miễn phí tận nơi, chốt giá trước khi làm. Gọi 0913 574 077 để nhận báo giá trong ngày.",
   },
   {
     question: "Nên chọn cửa cuốn nhôm hay cửa cuốn thép?",
@@ -204,7 +204,7 @@ export default function CuaCuonCanTho() {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Cuốn Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Xưởng Thật, Giá Báo Trước, Lắp Xong Mới Thanh Toán
+                Xưởng Thật, Giá Báo Trước, Trả Đủ Vào Ngày Lắp Đặt
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
@@ -426,7 +426,7 @@ export default function CuaCuonCanTho() {
               Khảo Sát Và Báo Giá Miễn Phí — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Giá báo trước khi làm, không phát sinh. Lắp xong mới thanh toán.
+              Giá báo trước khi làm, không phát sinh. Trả đủ vào ngày lắp đặt.
               Bồi thường 200% nếu dùng sai vật liệu đã cam kết trong hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Lan Can Nhôm Kính Cần Thơ — Cầu Thang, Ban Công",
   description:
-    "Lan can nhôm kính Cần Thơ — cầu thang, ban công, sân thượng. Kính cường lực an toàn, khung nhôm bền bỉ, thẩm mỹ cao. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0945 042 345.",
+    "Lan can nhôm kính Cần Thơ — cầu thang, ban công, sân thượng. Kính cường lực an toàn, khung nhôm bền bỉ, thẩm mỹ cao. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/lan-can-nhom-kinh-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/lan-can-nhom-kinh-can-tho`,
     title: "Lan Can Nhôm Kính Cần Thơ — Cầu Thang, Ban Công, Sân Thượng",
     description:
-      "Lan can nhôm kính Cần Thơ — kính cường lực, khung nhôm cao cấp. Gọi: 0945 042 345.",
+      "Lan can nhôm kính Cần Thơ — kính cường lực, khung nhôm cao cấp. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -334,7 +334,7 @@ export default function LanCanNhomKinhCanTho() {
               Cầu Thang Nhà Bạn Xứng Đáng Nhìn Khác Hơn
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, gia công theo số đo thực tế, lắp xong mới thanh toán.
+              Khảo sát miễn phí, gia công theo số đo thực tế, trả đủ vào ngày lắp đặt.
               Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

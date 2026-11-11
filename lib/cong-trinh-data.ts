@@ -34,7 +34,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "Đường 30/4, X. Tân Hòa",
     "date": "01/06/2026",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại Đường 30/4, X. Tân Hòa. Thời gian hoàn thành: 01/06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại Đường 30/4, X. Tân Hòa. Thời gian hoàn thành: 01/06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk02-lan-can-kinh-30-4-tan-hoa/01.jpg",
     "images": [
       "/cong-trinh/nk02-lan-can-kinh-30-4-tan-hoa/01.jpg",
@@ -48,7 +48,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "15 Hẻm 220 CMT8, Bùi Hữu Nghĩa, Bình Thủy",
     "date": "13/01/2026",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại 15 Hẻm 220 CMT8, Bùi Hữu Nghĩa, Bình Thủy. Thời gian hoàn thành: 13/01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại 15 Hẻm 220 CMT8, Bùi Hữu Nghĩa, Bình Thủy. Thời gian hoàn thành: 13/01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk03-lan-can-cmt8-binh-thuy/01.jpg",
     "images": [
       "/cong-trinh/nk03-lan-can-cmt8-binh-thuy/01.jpg",
@@ -62,7 +62,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "369 Nguyễn Văn Cừ, An Hòa, Ninh Kiều",
     "date": "29/11/2024",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại 369 Nguyễn Văn Cừ, An Hòa, Ninh Kiều. Thời gian hoàn thành: 29/11/2024. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công tại 369 Nguyễn Văn Cừ, An Hòa, Ninh Kiều. Thời gian hoàn thành: 29/11/2024. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk10-369-nguyen-van-cu-thang-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk10-369-nguyen-van-cu-thang-kinh/01.jpg",
@@ -81,7 +81,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "",
     "date": "",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk12-nha-2tang-lan-can-sat/01.jpg",
     "images": [
       "/cong-trinh/nk12-nha-2tang-lan-can-sat/01.jpg"
@@ -94,7 +94,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "",
     "date": "",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk21-lan-can-cong-decor-vang/01.jpg",
     "images": [
       "/cong-trinh/nk21-lan-can-cong-decor-vang/01.jpg",
@@ -108,7 +108,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "",
     "date": "",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk31-biet-thu-trang-lan-can/01.jpg",
     "images": [
       "/cong-trinh/nk31-biet-thu-trang-lan-can/01.jpg",
@@ -122,7 +122,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "",
     "date": "",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk36-lan-can-ban-cong-go/01.jpg",
     "images": [
       "/cong-trinh/nk36-lan-can-ban-cong-go/01.jpg"
@@ -135,7 +135,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Lan can & cầu thang kính",
     "location": "",
     "date": "",
-    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình lan can & cầu thang kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk47-lan-can-thang-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk47-lan-can-thang-kinh/01.jpg",
@@ -149,7 +149,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk11-cong-nhom-xam/01.jpg",
     "images": [
       "/cong-trinh/nk11-cong-nhom-xam/01.jpg"
@@ -162,7 +162,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk15-nha-kinh-vong-xanh/01.jpg",
     "images": [
       "/cong-trinh/nk15-nha-kinh-vong-xanh/01.jpg",
@@ -176,7 +176,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk26-vach-wc-compact/01.jpg",
     "images": [
       "/cong-trinh/nk26-vach-wc-compact/01.jpg"
@@ -189,7 +189,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk29-nha-pho-cong-den/01.jpg",
     "images": [
       "/cong-trinh/nk29-nha-pho-cong-den/01.jpg"
@@ -202,7 +202,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk32-phong-tam-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk32-phong-tam-kinh/01.jpg",
@@ -216,7 +216,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk33-cua-vach-kinh-lap/01.jpg",
     "images": [
       "/cong-trinh/nk33-cua-vach-kinh-lap/01.jpg",
@@ -230,7 +230,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk44-ve-sinh-vach-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk44-ve-sinh-vach-kinh/01.jpg"
@@ -243,7 +243,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "06/2026",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p08-nha-2tang-cong-den/01.jpg",
     "images": [
       "/cong-trinh/p08-nha-2tang-cong-den/01.jpg",
@@ -257,7 +257,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "06/2026",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p18-cc-trang-vach-ton/01.jpg",
     "images": [
       "/cong-trinh/p18-cc-trang-vach-ton/01.jpg",
@@ -272,7 +272,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p21-nha-cong-luoi-trang/01.jpg",
     "images": [
       "/cong-trinh/p21-nha-cong-luoi-trang/01.jpg"
@@ -285,7 +285,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p34-cc-kem-cong-luoi/01.jpg",
     "images": [
       "/cong-trinh/p34-cc-kem-cong-luoi/01.jpg"
@@ -298,7 +298,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p37-nha-be-tong-cong-vom/01.jpg",
     "images": [
       "/cong-trinh/p37-nha-be-tong-cong-vom/01.jpg",
@@ -312,7 +312,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "nhà sang",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công tại nhà sang. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công tại nhà sang. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p52-cong-nhom-duc/01.jpg",
     "images": [
       "/cong-trinh/p52-cong-nhom-duc/01.jpg",
@@ -327,7 +327,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p57-keo-kem-cong-do/01.jpg",
     "images": [
       "/cong-trinh/p57-keo-kem-cong-do/01.jpg"
@@ -340,7 +340,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cổng, vách & phòng tắm",
     "location": "",
     "date": "",
-    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cổng, vách & phòng tắm do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p64-cua-luoi-nhom/01.jpg",
     "images": [
       "/cong-trinh/p64-cua-luoi-nhom/01.jpg",
@@ -355,7 +355,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p01-cc-nan-bac/01.jpg",
     "images": [
       "/cong-trinh/p01-cc-nan-bac/01.jpg"
@@ -368,7 +368,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p02-cc-kem-tiled/01.jpg",
     "images": [
       "/cong-trinh/p02-cc-kem-tiled/01.jpg",
@@ -382,7 +382,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "06/2026",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p05-cc-kem-tuong-xam/01.jpg",
     "images": [
       "/cong-trinh/p05-cc-kem-tuong-xam/01.jpg",
@@ -396,7 +396,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p07-cc-kem-san-gach/01.jpg",
     "images": [
       "/cong-trinh/p07-cc-kem-san-gach/01.jpg"
@@ -409,7 +409,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p12-xuong-cc-trang-gach/01.jpg",
     "images": [
       "/cong-trinh/p12-xuong-cc-trang-gach/01.jpg",
@@ -424,7 +424,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p14-xuong-cc-trang-xe452/01.jpg",
     "images": [
       "/cong-trinh/p14-xuong-cc-trang-xe452/01.jpg",
@@ -439,7 +439,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p16-shop-tru-do-gas/01.jpg",
     "images": [
       "/cong-trinh/p16-shop-tru-do-gas/01.jpg",
@@ -453,7 +453,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p17-xuong-cc-xanh-build/01.jpg",
     "images": [
       "/cong-trinh/p17-xuong-cc-xanh-build/01.jpg",
@@ -470,7 +470,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p19-cc-trang-san-da/01.jpg",
     "images": [
       "/cong-trinh/p19-cc-trang-san-da/01.jpg",
@@ -487,7 +487,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "công trình đập phá",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại công trình đập phá. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại công trình đập phá. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p20-cc-kem-dap-pha/01.jpg",
     "images": [
       "/cong-trinh/p20-cc-kem-dap-pha/01.jpg",
@@ -504,7 +504,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p22-cc-kem-xe-hong/01.jpg",
     "images": [
       "/cong-trinh/p22-cc-kem-xe-hong/01.jpg"
@@ -517,7 +517,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p24-cc-xam-duc-lo/01.jpg",
     "images": [
       "/cong-trinh/p24-cc-xam-duc-lo/01.jpg"
@@ -530,7 +530,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p28-cc-kem-duc-lo-nt/01.jpg",
     "images": [
       "/cong-trinh/p28-cc-kem-duc-lo-nt/01.jpg"
@@ -543,7 +543,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p29-shop-vang-khai-truong-28-1/01.jpg",
     "images": [
       "/cong-trinh/p29-shop-vang-khai-truong-28-1/01.jpg"
@@ -556,7 +556,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "01/2026",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Thời gian hoàn thành: 01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Thời gian hoàn thành: 01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p30-cc-kem-0126/01.jpg",
     "images": [
       "/cong-trinh/p30-cc-kem-0126/01.jpg"
@@ -569,7 +569,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p31-xuong-cc-xanh/01.jpg",
     "images": [
       "/cong-trinh/p31-xuong-cc-xanh/01.jpg",
@@ -584,7 +584,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p38-nha-tho-gach-cc-kem/01.jpg",
     "images": [
       "/cong-trinh/p38-nha-tho-gach-cc-kem/01.jpg",
@@ -598,7 +598,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p40-xuong-cc-xanh-toys/01.jpg",
     "images": [
       "/cong-trinh/p40-xuong-cc-xanh-toys/01.jpg",
@@ -613,7 +613,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p44-cc-kem-tuong-xam2/01.jpg",
     "images": [
       "/cong-trinh/p44-cc-kem-tuong-xam2/01.jpg"
@@ -626,7 +626,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "cửa cuốn xám",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn xám. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn xám. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p51-vinh-long-tx-binh-minh/01.jpg",
     "images": [
       "/cong-trinh/p51-vinh-long-tx-binh-minh/01.jpg"
@@ -639,7 +639,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p58-cc-xanh-hem/01.jpg",
     "images": [
       "/cong-trinh/p58-cc-xanh-hem/01.jpg",
@@ -653,7 +653,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "cửa cuốn xanh",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn xanh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn xanh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p59-service-cc-xanh/01.jpg",
     "images": [
       "/cong-trinh/p59-service-cc-xanh/01.jpg"
@@ -666,7 +666,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "cửa cuốn tan đục lỗ",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn tan đục lỗ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công tại cửa cuốn tan đục lỗ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p60-garage-cc-tan/01.jpg",
     "images": [
       "/cong-trinh/p60-garage-cc-tan/01.jpg"
@@ -679,7 +679,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p62-nha-trang-cc-kem/01.jpg",
     "images": [
       "/cong-trinh/p62-nha-trang-cc-kem/01.jpg"
@@ -692,7 +692,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p63-nha-be-tong-cc-kem/01.jpg",
     "images": [
       "/cong-trinh/p63-nha-be-tong-cc-kem/01.jpg"
@@ -705,7 +705,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa cuốn",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg",
     "images": [
       "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg"
@@ -718,7 +718,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p06-shop-vang-0966653334/01.jpg",
     "images": [
       "/cong-trinh/p06-shop-vang-0966653334/01.jpg"
@@ -731,7 +731,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p09-bap-kids/01.jpg",
     "images": [
       "/cong-trinh/p09-bap-kids/01.jpg",
@@ -747,7 +747,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "05/2026",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Thời gian hoàn thành: 05/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Thời gian hoàn thành: 05/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p10-nha-2tang-keo-xanh/01.jpg",
     "images": [
       "/cong-trinh/p10-nha-2tang-keo-xanh/01.jpg"
@@ -760,7 +760,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "VLXD Linh",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công tại VLXD Linh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công tại VLXD Linh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p23-keo-xanh-vlxd-linh/01.jpg",
     "images": [
       "/cong-trinh/p23-keo-xanh-vlxd-linh/01.jpg"
@@ -773,7 +773,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p39-shop-keo-kem-oto/01.jpg",
     "images": [
       "/cong-trinh/p39-shop-keo-kem-oto/01.jpg"
@@ -786,7 +786,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "cửa kéo vàng",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công tại cửa kéo vàng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công tại cửa kéo vàng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p50-vinh-long-binh-minh-keo-vang/01.jpg",
     "images": [
       "/cong-trinh/p50-vinh-long-binh-minh-keo-vang/01.jpg",
@@ -801,7 +801,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p53-keo-xanh-kinh/01.jpg",
     "images": [
       "/cong-trinh/p53-keo-xanh-kinh/01.jpg"
@@ -814,7 +814,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p54-nha-xanh-keo-xanh/01.jpg",
     "images": [
       "/cong-trinh/p54-nha-xanh-keo-xanh/01.jpg",
@@ -828,7 +828,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p55-keo-trang-chau-cay/01.jpg",
     "images": [
       "/cong-trinh/p55-keo-trang-chau-cay/01.jpg"
@@ -841,7 +841,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p56-keo-xanh-via-he/01.jpg",
     "images": [
       "/cong-trinh/p56-keo-xanh-via-he/01.jpg",
@@ -855,7 +855,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p66-nha-keo-xanh-soi/01.jpg",
     "images": [
       "/cong-trinh/p66-nha-keo-xanh-soi/01.jpg"
@@ -868,7 +868,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p69-day-keo-xanh-xuong/01.jpg",
     "images": [
       "/cong-trinh/p69-day-keo-xanh-xuong/01.jpg"
@@ -881,7 +881,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "Kim Đồng, TT Một Ngàn, Châu Thành A, Hậu Giang",
     "date": "06/01/2026",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại Kim Đồng, TT Một Ngàn, Châu Thành A, Hậu Giang. Thời gian hoàn thành: 06/01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại Kim Đồng, TT Một Ngàn, Châu Thành A, Hậu Giang. Thời gian hoàn thành: 06/01/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk04-nhom-gia-go-hau-giang/01.jpg",
     "images": [
       "/cong-trinh/nk04-nhom-gia-go-hau-giang/01.jpg"
@@ -894,7 +894,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "525/8 Nguyễn Thị Tạo, Long Hòa, Bình Thủy",
     "date": "28/10/2025",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại 525/8 Nguyễn Thị Tạo, Long Hòa, Bình Thủy. Thời gian hoàn thành: 28/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại 525/8 Nguyễn Thị Tạo, Long Hòa, Bình Thủy. Thời gian hoàn thành: 28/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk05-nguyen-thi-tao-binh-thuy/01.jpg",
     "images": [
       "/cong-trinh/nk05-nguyen-thi-tao-binh-thuy/01.jpg",
@@ -908,7 +908,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "Đường Số 1B, Hưng Thạnh, Cái Răng",
     "date": "28/10/2025",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại Đường Số 1B, Hưng Thạnh, Cái Răng. Thời gian hoàn thành: 28/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại Đường Số 1B, Hưng Thạnh, Cái Răng. Thời gian hoàn thành: 28/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk06-duong-1b-cai-rang/01.jpg",
     "images": [
       "/cong-trinh/nk06-duong-1b-cai-rang/01.jpg",
@@ -922,7 +922,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk13-lap-cua-nha-gach/01.jpg",
     "images": [
       "/cong-trinh/nk13-lap-cua-nha-gach/01.jpg"
@@ -935,7 +935,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk14-shopfront-kinh-xam/01.jpg",
     "images": [
       "/cong-trinh/nk14-shopfront-kinh-xam/01.jpg"
@@ -948,7 +948,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk16-biet-thu-kinh-hien-dai/01.jpg",
     "images": [
       "/cong-trinh/nk16-biet-thu-kinh-hien-dai/01.jpg",
@@ -962,7 +962,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk17-toa-nha-vang-cong/01.jpg",
     "images": [
       "/cong-trinh/nk17-toa-nha-vang-cong/01.jpg",
@@ -981,7 +981,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk18-shopfront-kinh-ladder/01.jpg",
     "images": [
       "/cong-trinh/nk18-shopfront-kinh-ladder/01.jpg"
@@ -994,7 +994,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "cửa gỗ + cửa sổ nhôm",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại cửa gỗ + cửa sổ nhôm. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại cửa gỗ + cửa sổ nhôm. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk22-dinh-hoi-truong-vang/01.jpg",
     "images": [
       "/cong-trinh/nk22-dinh-hoi-truong-vang/01.jpg",
@@ -1013,7 +1013,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk23-cua-nhom-kinh-doi-xam/01.jpg",
     "images": [
       "/cong-trinh/nk23-cua-nhom-kinh-doi-xam/01.jpg",
@@ -1027,7 +1027,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk25-shophouse-vang-khung-nhom/01.jpg",
     "images": [
       "/cong-trinh/nk25-shophouse-vang-khung-nhom/01.jpg",
@@ -1041,7 +1041,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk27-nha-kinh-be-nuoc/01.jpg",
     "images": [
       "/cong-trinh/nk27-nha-kinh-be-nuoc/01.jpg"
@@ -1054,7 +1054,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk30-cua-4-canh-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk30-cua-4-canh-kinh/01.jpg"
@@ -1067,7 +1067,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk34-cua-kinh-hoa-van-den/01.jpg",
     "images": [
       "/cong-trinh/nk34-cua-kinh-hoa-van-den/01.jpg",
@@ -1082,7 +1082,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk35-cua-nhom-lua-hoa-van/01.jpg",
     "images": [
       "/cong-trinh/nk35-cua-nhom-lua-hoa-van/01.jpg",
@@ -1096,7 +1096,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk37-shopfront-kinh-phan-chieu/01.jpg",
     "images": [
       "/cong-trinh/nk37-shopfront-kinh-phan-chieu/01.jpg"
@@ -1109,7 +1109,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk38-cua-nhom-4-canh-xam/01.jpg",
     "images": [
       "/cong-trinh/nk38-cua-nhom-4-canh-xam/01.jpg"
@@ -1122,7 +1122,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk42-cua-so-nhom-can/01.jpg",
     "images": [
       "/cong-trinh/nk42-cua-so-nhom-can/01.jpg"
@@ -1135,7 +1135,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk43-lap-cua-so-mo-quay/01.jpg",
     "images": [
       "/cong-trinh/nk43-lap-cua-so-mo-quay/01.jpg"
@@ -1148,7 +1148,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk45-noi-that-kinh-lung/01.jpg",
     "images": [
       "/cong-trinh/nk45-noi-that-kinh-lung/01.jpg",
@@ -1163,7 +1163,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk46-shopfront-kinh-lau/01.jpg",
     "images": [
       "/cong-trinh/nk46-shopfront-kinh-lau/01.jpg",
@@ -1177,7 +1177,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "mặt kính, văn phòng",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại mặt kính, văn phòng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại mặt kính, văn phòng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk49-toa-nha-co-co-kinh/01.jpg",
     "images": [
       "/cong-trinh/nk49-toa-nha-co-co-kinh/01.jpg",
@@ -1194,7 +1194,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "shopfront kính (ALCOREST)",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại shopfront kính (ALCOREST). Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại shopfront kính (ALCOREST). Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk50-bao-viet-bank-alcorest/01.jpg",
     "images": [
       "/cong-trinh/nk50-bao-viet-bank-alcorest/01.jpg",
@@ -1209,7 +1209,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk51-toa-nha-trang-hoa-van/01.jpg",
     "images": [
       "/cong-trinh/nk51-toa-nha-trang-hoa-van/01.jpg",
@@ -1223,7 +1223,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "cửa/cửa sổ nhôm kính (nội thất)",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại cửa/cửa sổ nhôm kính (nội thất). Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại cửa/cửa sổ nhôm kính (nội thất). Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p11-nha-nhom-kinh-nt/01.jpg",
     "images": [
       "/cong-trinh/p11-nha-nhom-kinh-nt/01.jpg",
@@ -1239,7 +1239,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p26-shop-kinh-cai-tao/01.jpg",
     "images": [
       "/cong-trinh/p26-shop-kinh-cai-tao/01.jpg"
@@ -1252,7 +1252,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p33-shophouse-be-tong-build/01.jpg",
     "images": [
       "/cong-trinh/p33-shophouse-be-tong-build/01.jpg",
@@ -1269,7 +1269,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "bếp + cửa nhôm kính",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại bếp + cửa nhôm kính. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại bếp + cửa nhôm kính. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p36-nha-bep-nhom-kinh/01.jpg",
     "images": [
       "/cong-trinh/p36-nha-bep-nhom-kinh/01.jpg",
@@ -1285,7 +1285,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "thợ trên thang",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại thợ trên thang. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công tại thợ trên thang. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p43-nt-tho-thang/01.jpg",
     "images": [
       "/cong-trinh/p43-nt-tho-thang/01.jpg"
@@ -1298,7 +1298,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Cửa nhôm kính",
     "location": "",
     "date": "",
-    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa nhôm kính do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p68-toa-nha-m-mai-vom/01.jpg",
     "images": [
       "/cong-trinh/p68-toa-nha-m-mai-vom/01.jpg",
@@ -1312,7 +1312,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p03-xuong-khung-thep/01.jpg",
     "images": [
       "/cong-trinh/p03-xuong-khung-thep/01.jpg",
@@ -1327,7 +1327,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "",
     "date": "12/2025",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Thời gian hoàn thành: 12/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Thời gian hoàn thành: 12/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p25-xuong-trong-1225/01.jpg",
     "images": [
       "/cong-trinh/p25-xuong-trong-1225/01.jpg"
@@ -1340,7 +1340,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p27-xuong-khung-thep-dat/01.jpg",
     "images": [
       "/cong-trinh/p27-xuong-khung-thep-dat/01.jpg"
@@ -1353,7 +1353,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p32-xuong-build-ton/01.jpg",
     "images": [
       "/cong-trinh/p32-xuong-build-ton/01.jpg",
@@ -1368,7 +1368,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p41-xuong-cot-thep-ruong/01.jpg",
     "images": [
       "/cong-trinh/p41-xuong-cot-thep-ruong/01.jpg"
@@ -1381,7 +1381,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "garage ô tô, Cần Thơ",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công tại garage ô tô, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công tại garage ô tô, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p42-lieu-van-garage/01.jpg",
     "images": [
       "/cong-trinh/p42-lieu-van-garage/01.jpg",
@@ -1399,7 +1399,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Nhà xưởng & công trình lớn",
     "location": "ĐT 937B, Thạnh Trị, Sóc Trăng",
     "date": "",
-    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công tại ĐT 937B, Thạnh Trị, Sóc Trăng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình nhà xưởng & công trình lớn do Hưng Thành Phát thi công tại ĐT 937B, Thạnh Trị, Sóc Trăng. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p45-soc-trang-937b/01.jpg",
     "images": [
       "/cong-trinh/p45-soc-trang-937b/01.jpg",
@@ -1414,7 +1414,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "66 Đường Số 10, P. Hưng Phú, Cần Thơ",
     "date": "22/06/2026",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại 66 Đường Số 10, P. Hưng Phú, Cần Thơ. Thời gian hoàn thành: 22/06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại 66 Đường Số 10, P. Hưng Phú, Cần Thơ. Thời gian hoàn thành: 22/06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk01-hai-nam-so-10-hung-phu/01.jpg",
     "images": [
       "/cong-trinh/nk01-hai-nam-so-10-hung-phu/01.jpg"
@@ -1427,7 +1427,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "P. Trường Lạc, Ô Môn, Cần Thơ",
     "date": "04/10/2025",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại P. Trường Lạc, Ô Môn, Cần Thơ. Thời gian hoàn thành: 04/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại P. Trường Lạc, Ô Môn, Cần Thơ. Thời gian hoàn thành: 04/10/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk07-rach-ba-se-o-mon/01.jpg",
     "images": [
       "/cong-trinh/nk07-rach-ba-se-o-mon/01.jpg",
@@ -1447,7 +1447,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "12/08/2025",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 12/08/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 12/08/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk08-218-dong-van-cong/01.jpg",
     "images": [
       "/cong-trinh/nk08-218-dong-van-cong/01.jpg",
@@ -1462,7 +1462,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "09/04/2025",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 09/04/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 09/04/2025. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk09-hem-577-30-4-hung-loi/01.jpg",
     "images": [
       "/cong-trinh/nk09-hem-577-30-4-hung-loi/01.jpg",
@@ -1477,7 +1477,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk19-day-nha-pho-hanh-lang/01.jpg",
     "images": [
       "/cong-trinh/nk19-day-nha-pho-hanh-lang/01.jpg"
@@ -1490,7 +1490,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk20-nha-cua-vom-tron/01.jpg",
     "images": [
       "/cong-trinh/nk20-nha-cua-vom-tron/01.jpg"
@@ -1503,7 +1503,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk24-nha-pho-hien-go/01.jpg",
     "images": [
       "/cong-trinh/nk24-nha-pho-hien-go/01.jpg"
@@ -1516,7 +1516,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk28-nha-pho-trang-goc-canh/01.jpg",
     "images": [
       "/cong-trinh/nk28-nha-pho-trang-goc-canh/01.jpg",
@@ -1530,7 +1530,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk39-day-nha-pho-tho-a/01.jpg",
     "images": [
       "/cong-trinh/nk39-day-nha-pho-tho-a/01.jpg",
@@ -1544,7 +1544,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk40-nha-cao-tho/01.jpg",
     "images": [
       "/cong-trinh/nk40-nha-cao-tho/01.jpg",
@@ -1558,7 +1558,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk41-day-nha-pho-tho-b/01.jpg",
     "images": [
       "/cong-trinh/nk41-day-nha-pho-tho-b/01.jpg",
@@ -1572,7 +1572,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/nk48-nha-pho-trang-3tang/01.jpg",
     "images": [
       "/cong-trinh/nk48-nha-pho-trang-3tang/01.jpg"
@@ -1585,7 +1585,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "06/2026",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 06/2026. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p04-nha-3tang-bat-soc/01.jpg",
     "images": [
       "/cong-trinh/p04-nha-3tang-bat-soc/01.jpg",
@@ -1601,7 +1601,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "P. Bình Thủy, Cần Thơ",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại P. Bình Thủy, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại P. Bình Thủy, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p13-tung-lam-binh-thuy/01.jpg",
     "images": [
       "/cong-trinh/p13-tung-lam-binh-thuy/01.jpg"
@@ -1614,7 +1614,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p15-431-mau-than/01.jpg",
     "images": [
       "/cong-trinh/p15-431-mau-than/01.jpg",
@@ -1628,7 +1628,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "QL80, H. Vĩnh Thạnh",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại QL80, H. Vĩnh Thạnh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại QL80, H. Vĩnh Thạnh. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p35-banh-kem-uyen-u/01.jpg",
     "images": [
       "/cong-trinh/p35-banh-kem-uyen-u/01.jpg"
@@ -1641,7 +1641,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p46-luong-dinh-cua/01.jpg",
     "images": [
       "/cong-trinh/p46-luong-dinh-cua/01.jpg",
@@ -1656,7 +1656,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "Đường Số 10, Cần Thơ",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại Đường Số 10, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại Đường Số 10, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p47-tra-noc-2-duong-so-10/01.jpg",
     "images": [
       "/cong-trinh/p47-tra-noc-2-duong-so-10/01.jpg",
@@ -1672,7 +1672,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p48-nguyen-van-linh/01.jpg",
     "images": [
       "/cong-trinh/p48-nguyen-van-linh/01.jpg",
@@ -1690,7 +1690,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "09/2024",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 09/2024. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Thời gian hoàn thành: 09/2024. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p49-duong-so-1-0924/01.jpg",
     "images": [
       "/cong-trinh/p49-duong-so-1-0924/01.jpg"
@@ -1703,7 +1703,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p61-di-ghe-cong-trinh/01.jpg",
     "images": [
       "/cong-trinh/p61-di-ghe-cong-trinh/01.jpg",
@@ -1717,7 +1717,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "Q. Ninh Kiều, Cần Thơ",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công tại Q. Ninh Kiều, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công tại Q. Ninh Kiều, Cần Thơ. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p65-phong-ldtbxh-ninh-kieu/01.jpg",
     "images": [
       "/cong-trinh/p65-phong-ldtbxh-ninh-kieu/01.jpg"
@@ -1730,7 +1730,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/project-01-cua-cuon-kem-so-534/01.jpg",
     "images": [
       "/cong-trinh/project-01-cua-cuon-kem-so-534/01.jpg",
@@ -1746,7 +1746,7 @@ export const CONG_TRINH: CongTrinh[] = [
     "categoryLabel": "Khác",
     "location": "",
     "date": "",
-    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0945 042 345 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình khác do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0913 574 077 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/project-02-cua-cuon-xam-gop-icloud/01.jpg",
     "images": [
       "/cong-trinh/project-02-cua-cuon-xam-gop-icloud/01.jpg",

@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức",
   description:
-    "Cửa cuốn nhôm tại Cần Thơ — công nghệ Đức, nhôm đùn dày 0.8–1.2mm, vận hành êm tuyệt đối. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0945 042 345.",
+    "Cửa cuốn nhôm tại Cần Thơ — công nghệ Đức, nhôm đùn dày 0.8–1.2mm, vận hành êm tuyệt đối. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-cuon-nhom-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-nhom-can-tho`,
     title: "Cửa Cuốn Nhôm Cần Thơ — Công Nghệ Đức",
     description:
-      "Cửa cuốn nhôm công nghệ Đức tại Cần Thơ. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0945 042 345.",
+      "Cửa cuốn nhôm công nghệ Đức tại Cần Thơ. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -192,7 +192,7 @@ export default function CuaCuonNhomCanTho() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Nhôm đùn dày 0.8–1.2mm theo tiêu chuẩn Đức — êm hơn cửa thép 60%, không gỉ
-              dù mưa nắng nhiều năm. Lắp trọn gói tại Cần Thơ, lắp xong mới thanh toán.
+              dù mưa nắng nhiều năm. Lắp trọn gói tại Cần Thơ, trả đủ vào ngày lắp đặt.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -384,7 +384,7 @@ export default function CuaCuonNhomCanTho() {
               Đừng Lắp Cửa Thép Rồi Hối Hận Sau 3 Năm
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Cửa cuốn nhôm đắt hơn ban đầu — nhưng không gỉ, không ồn, motor bền gấp đôi. Khảo sát tại nhà miễn phí, lắp xong mới thanh toán.
+              Cửa cuốn nhôm đắt hơn ban đầu — nhưng không gỉ, không ồn, motor bền gấp đôi. Khảo sát tại nhà miễn phí, trả đủ vào ngày lắp đặt.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

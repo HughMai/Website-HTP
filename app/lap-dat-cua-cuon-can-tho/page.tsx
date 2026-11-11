@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Lắp Đặt Cửa Cuốn Cần Thơ — Trọn Gói",
   description:
-    "Lắp đặt cửa cuốn tại Cần Thơ — nhôm Đức, thép tĩnh điện, inox, tôle. Thi công trọn gói, bảo hành chính hãng, có mặt trong ngày. Báo giá miễn phí: 0945 042 345.",
+    "Lắp đặt cửa cuốn tại Cần Thơ — nhôm Đức, thép tĩnh điện, inox, tôle. Thi công trọn gói, bảo hành chính hãng, có mặt trong ngày. Báo giá miễn phí: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/lap-dat-cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/lap-dat-cua-cuon-can-tho`,
     title: "Lắp Đặt Cửa Cuốn Cần Thơ — Trọn Gói",
     description:
-      "Lắp đặt cửa cuốn nhôm, thép, inox tại Cần Thơ. Thi công trọn gói, bảo hành chính hãng. Gọi: 0945 042 345.",
+      "Lắp đặt cửa cuốn nhôm, thép, inox tại Cần Thơ. Thi công trọn gói, bảo hành chính hãng. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -383,7 +383,7 @@ export default function LapDatCuaCuonCanTho() {
               Gọi Ngay — Lắp Xong Hôm Nay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, báo giá chi tiết trước khi làm, lắp xong mới thanh toán.
+              Khảo sát miễn phí, báo giá chi tiết trước khi làm, trả đủ vào ngày lắp đặt.
               Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

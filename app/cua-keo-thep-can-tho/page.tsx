@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Kéo Thép Cần Thơ — Chống Đột Nhập",
   description:
-    "Cửa kéo thép tại Cần Thơ — công nghệ Đức, chống đột nhập cao, phù hợp mặt tiền kinh doanh. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0945 042 345.",
+    "Cửa kéo thép tại Cần Thơ — công nghệ Đức, chống đột nhập cao, phù hợp mặt tiền kinh doanh. Lắp đặt trọn gói, bảo hành chính hãng. Báo giá miễn phí: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-keo-thep-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-keo-thep-can-tho`,
     title: "Cửa Kéo Thép Cần Thơ — Chống Đột Nhập",
     description:
-      "Cửa kéo thép công nghệ Đức tại Cần Thơ. Chống đột nhập cao. Bảo hành chính hãng. Gọi: 0945 042 345.",
+      "Cửa kéo thép công nghệ Đức tại Cần Thơ. Chống đột nhập cao. Bảo hành chính hãng. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -346,7 +346,7 @@ export default function CuaKeoThepCanTho() {
               Bảo Mật Mặt Tiền Kinh Doanh — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát tại nhà miễn phí — báo giá trong ngày — lắp xong mới thanh toán. Bồi thường 200% nếu dùng sai vật liệu cam kết.
+              Khảo sát tại nhà miễn phí — báo giá trong ngày — trả đủ vào ngày lắp đặt. Bồi thường 200% nếu dùng sai vật liệu cam kết.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
