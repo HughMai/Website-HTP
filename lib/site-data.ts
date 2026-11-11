@@ -5,7 +5,7 @@ export const SITE = {
   // "Công ty Nhôm Kính Hưng Thành Phát Door" (hungthanhphatdoor.com).
   legalName: "Công ty TNHH SX - TM - DV Hưng Thành Phát",
   tagline: "Giải Pháp Cửa Cao Cấp Cho Mọi Công Trình",
-  hotlines: ["0945 042 345", "0913 574 077"] as const,
+  hotlines: ["0913 574 077", "0945 042 345"] as const,
   email: "hungthanhphat6688@gmail.com",
   address: "235 - 237 (281 Cũ) Võ Văn Kiệt, Bình Thủy, Cần Thơ, Vietnam",
   mapQuery:
@@ -27,8 +27,8 @@ export const NAV_LINKS = [
 
 export type NavId = (typeof NAV_LINKS)[number]["id"];
 
-// Zalo chat target — the number customers already message the shop on.
-export const ZALO_URL = "https://zalo.me/0945042345";
+// Zalo chat target — Dad's Zalo, the main contact since 10/11/2026.
+export const ZALO_URL = "https://zalo.me/0913574077";
 
 // Hotlines split by what the caller wants, so they reach the right person first
 // try instead of being passed around. Rendered in the Footer and the /lien-he block.
@@ -108,6 +108,7 @@ export const MAIN_NAV: NavItem[] = [
       { href: "/bao-gia-cua-cuon-can-tho", label: "Báo Giá Cửa Cuốn" },
       { href: "/bang-gia-cua-keo-can-tho", label: "Bảng Giá Cửa Kéo" },
       { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Bảng Giá Nhôm Kính" },
+      { href: "/bang-gia-phu-kien-can-tho", label: "Bảng Giá Motor & Phụ Kiện" },
     ],
   },
   {
@@ -163,6 +164,7 @@ export const FOOTER_LINK_GROUPS = [
       { href: "/bao-gia-cua-cuon-can-tho", label: "Báo Giá Cửa Cuốn" },
       { href: "/bang-gia-cua-keo-can-tho", label: "Bảng Giá Cửa Kéo" },
       { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Bảng Giá Nhôm Kính" },
+      { href: "/bang-gia-phu-kien-can-tho", label: "Bảng Giá Motor & Phụ Kiện" },
     ],
   },
   {

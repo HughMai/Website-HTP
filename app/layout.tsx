@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s | HTP Door",
   },
   description:
-    "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 21+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0945 042 345.",
+    "Hưng Thành Phát Door — chuyên thi công cửa cuốn, cửa nhôm kính & cửa kéo tại Cần Thơ. 21+ năm kinh nghiệm, 500+ công trình, bảo hành chính hãng. Gọi ngay: 0913 574 077.",
   keywords: [
     "cửa cuốn Cần Thơ",
     "cửa nhôm kính Cần Thơ",
@@ -121,7 +121,7 @@ const jsonLd = {
   image: `${siteUrl}/og-image.png`,
   sameAs: [
     "https://www.facebook.com/104890471381054",
-    "https://zalo.me/0945042345",
+    "https://zalo.me/0913574077",
     // Google Maps listing — links website entity to GBP Knowledge Panel
     "https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z/data=!3m1!4b1!4m6!3m5!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.048473!4d105.7574147!16s%2Fg%2F11lwgjdghy",
   ],

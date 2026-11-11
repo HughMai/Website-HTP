@@ -37,7 +37,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 | Projects | 500+ công trình |
 | Customers | 1000+ khách hàng |
 | Warranty | **Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất** (ONLY phrasing — never quote year counts) |
-| Hotlines | 0945 042 345 · 0913 574 077 |
+| Hotlines | 0913 574 077 (chính, từ 10/11/2026) · 0945 042 345 |
 | Email | hungthanhphatdoor@gmail.com |
 
 **Products**: Cửa cuốn · Cửa nhôm kính · Cửa kéo · Motor & phụ kiện

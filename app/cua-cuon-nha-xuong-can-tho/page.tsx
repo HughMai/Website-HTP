@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Cửa Cuốn Nhà Xưởng Cần Thơ — Khổ Lớn, Chịu Tải",
   description:
-    "Cửa cuốn nhà xưởng, kho hàng Cần Thơ — khổ rộng 4–12m, thép sơn tĩnh điện, tole Đài Loan, chịu tải nặng. Motor công nghiệp, bảo hành chính hãng. Gọi: 0945 042 345.",
+    "Cửa cuốn nhà xưởng, kho hàng Cần Thơ — khổ rộng 4–12m, thép sơn tĩnh điện, tole Đài Loan, chịu tải nặng. Motor công nghiệp, bảo hành chính hãng. Gọi: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/cua-cuon-nha-xuong-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/cua-cuon-nha-xuong-can-tho`,
     title: "Cửa Cuốn Nhà Xưởng Cần Thơ — Khổ Lớn, Chịu Tải, Bền Bỉ",
     description:
-      "Cửa cuốn nhà xưởng, kho hàng Cần Thơ — khổ lớn, motor công nghiệp. Gọi: 0945 042 345.",
+      "Cửa cuốn nhà xưởng, kho hàng Cần Thơ — khổ lớn, motor công nghiệp. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },

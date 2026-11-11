@@ -1,103 +1,163 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { CtaBand } from "@/components/sections/CtaBand";
-import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site-data";
+import { ClosingBand } from "@/components/bang-gia/ClosingBand";
+import { FaqCards } from "@/components/bang-gia/FaqCards";
+import { NanCatalogue } from "@/components/bang-gia/NanCatalogue";
+import { Rise } from "@/components/bang-gia/Rise";
+import { SongNgangList } from "@/components/bang-gia/SongNgangList";
+import { SpecimenMosaic, type Specimen } from "@/components/bang-gia/SpecimenMosaic";
+import {
+  FIELD,
+  HeroActions,
+  HeroIndex,
+  NoScriptStyle,
+  PriceHero,
+  PriceMenu,
+  SHOWROOM,
+  ShowroomFigure,
+  SlatHeading,
+  WARRANTY,
+  minGia,
+  type MenuGroup,
+} from "@/components/bang-gia/parts";
+import {
+  APPLIED_FROM,
+  NAN_DUC,
+  SONG_NGANG,
+  TAM_LIEN,
+  TOLE_THEM,
+  UC_SWATCHES,
+} from "@/lib/bang-gia-data";
+import {
+  NAN_SPECS,
+  NHU_CAU,
+  SONG_NGANG_DUNG_CHO,
+  SONG_NGANG_SPECS,
+  TAM_LIEN_SPECS,
+  formatGia,
+  nanAnchor,
+} from "@/lib/bang-gia-specs";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
+const PAGE = `${siteUrl}/bao-gia-cua-cuon-can-tho`;
 
 export const metadata: Metadata = {
   title: "Báo Giá Cửa Cuốn Cần Thơ 2026 — Giá Gốc",
-  description:
-    "Bảng giá cửa cuốn Cần Thơ 2026 — tole Đài Loan, công nghệ Đức, Inox, CN Úc. Giá tính theo m², motor và phụ kiện riêng. Chưa bao gồm VAT. Gọi báo giá: 0945 042 345.",
-  alternates: { canonical: `${siteUrl}/bao-gia-cua-cuon-can-tho` },
+  description: `Giá cửa cuốn Cần Thơ 2026: ${NAN_DUC.length} mẫu nan nhôm Đức chụp mẫu thật, tole Đài Loan, siêu trường, Inox 304, song ngang, cửa Úc. Đã gồm công lắp, chưa VAT.`,
+  alternates: { canonical: PAGE },
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    url: `${siteUrl}/bao-gia-cua-cuon-can-tho`,
+    url: PAGE,
     title: "Báo Giá Cửa Cuốn Cần Thơ 2026 — Giá Gốc",
-    description: "Bảng giá cửa cuốn tole, nhôm Đức, Inox tại Cần Thơ. Chưa VAT. Gọi: 0945 042 345.",
+    description: "Giá từng mẫu cửa cuốn nan nhôm Đức, tole, song ngang, Inox, cửa Úc tại Cần Thơ. Ảnh mẫu nan thật. Chưa VAT.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
 };
 
+// ── Derived from the CRM data ────────────────────────────────────────────────
 
-const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất";
+const vnd = (n: number) => `${formatGia(n)}đ`;
+/** "Cửa cuốn tole Đài Loan" → "Tole Đài Loan" — the section heading already says cửa cuốn. */
+const short = (name: string) => {
+  const s = name.replace(/^Cửa cuốn\s+/i, "");
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+/** "0.6mm (6 dem)" → "6 zem · 0.6mm", the same order the CRM rows use. */
+const doDay = (mau: string) => {
+  const m = mau.match(/^([\d.]+mm)\s*\((.+)\)$/);
+  return m ? `${m[2].replace(/\bdem\b/, "zem")} · ${m[1]}` : mau;
+};
 
-const cuaCuonTables = [
-  {
-    title: "Cửa Cuốn Tole Màu",
-    unit: "đ/m² (cửa từ 8m² trở lên)",
-    rows: [
-      { spec: "Tole 6 zem", price: "500.000" },
-      { spec: "Tole 8 zem", price: "560.000" },
-      { spec: "Tole 1 ly",  price: "780.000" },
-    ],
-    note: "Cửa dưới 8m² cộng thêm 20.000–50.000 đ/m²",
-  },
-  {
-    title: "Cửa Cuốn Inox",
-    unit: "đ/m² (cửa từ 8m² trở lên)",
-    rows: [
-      { spec: "Inox 6 zem", price: "1.700.000" },
-      { spec: "Inox 8 zem", price: "1.900.000" },
-    ],
-    note: "Cửa dưới 8m² cộng thêm theo thực tế",
-  },
-  {
-    title: "Cửa Cuốn Công Nghệ Đức",
-    unit: "đ/m²",
-    rows: [
-      { spec: "Mã KV 380R", price: "1.450.000" },
-      { spec: "Mã KV 422R", price: "1.750.000" },
-      { spec: "Mã KV 468R", price: "2.150.000" },
-      { spec: "Mã CT 5222R", price: "2.200.000" },
-      { spec: "Mã MT 5222R", price: "2.300.000" },
-    ],
-    note: "Giá tính theo diện tích cửa thực tế sau khi khảo sát",
-  },
-  {
-    title: "Cửa Cuốn Công Nghệ Úc",
-    unit: "đ/m²",
-    rows: [
-      { spec: "Tole màu 5.2 zem",       price: "700.000" },
-      { spec: "Tole màu 5.2 zem Blusc", price: "900.000" },
-    ],
-    note: "Cửa Úc cộng thêm 600đ/bộ phụ kiện",
-  },
+const TU = {
+  nan: minGia(NAN_DUC.map((m) => m.gia)),
+  tamLien: minGia([...TAM_LIEN, ...TOLE_THEM].flatMap((t) => t.rows.map((r) => r.gia))),
+  songNgang: minGia(SONG_NGANG.flatMap((t) => t.rows.map((r) => r.gia))),
+};
+
+const TAM_LIEN_GROUPS: MenuGroup[] = [
+  ...TAM_LIEN.map((t) => {
+    const s = TAM_LIEN_SPECS[t.key];
+    return {
+      id: `tam-lien-${t.key}`,
+      name: short(t.name),
+      unit: "đ/m²",
+      desc: s?.moTa,
+      dungCho: s?.goiYChung,
+      rows: t.rows.map((r) => ({ name: t.key === "uc" ? r.label : `${r.label} · ${r.mm}`, sub: s?.goiY[r.mau], gia: r.gia })),
+      swatches:
+        t.key === "uc" && UC_SWATCHES.length > 0
+          ? {
+              caption: "Ảnh chụp mẫu tole Úc thật",
+              photos: UC_SWATCHES.map((src, i) => ({ src, alt: `Mẫu tole cửa cuốn Úc chụp thật, màu ${i + 1}` })),
+            }
+          : undefined,
+    };
+  }),
+  ...TOLE_THEM.map((t) => {
+    const s = TAM_LIEN_SPECS[t.key];
+    return {
+      id: `tam-lien-${t.key}`,
+      name: short(t.name),
+      unit: "đ/m²",
+      desc: s?.moTa,
+      dungCho: s?.goiYChung,
+      rows: t.rows.map((r) => ({ name: doDay(r.mau), sub: s?.goiY[r.mau], gia: r.gia })),
+    };
+  }),
 ];
 
-const motorTable = [
-  { spec: "Motor + Remote 300kg", price: "3.300.000" },
-  { spec: "Motor + Remote 400kg", price: "3.500.000" },
-  { spec: "Motor + Remote 500kg", price: "4.000.000" },
-  { spec: "Motor + Remote Cửa Úc", price: "4.500.000" },
-];
+const SONG_NGANG_GROUPS = SONG_NGANG.map((g) => {
+  const s = SONG_NGANG_SPECS[g.key];
+  return {
+    key: g.key,
+    vatLieu: s?.vatLieu ?? short(g.name),
+    rows: g.rows.map((r) => ({ mau: r.mau, gia: r.gia, sub: s?.goiY[r.mau] })),
+    // No photo of a song ngang door yet: the catalog's AI render, labelled "Minh họa".
+    image: { src: `/bang-gia/minh-hoa/${g.key}.webp`, alt: `cửa cuốn song ngang ${(s?.vatLieu ?? "").toLowerCase()}` },
+  };
+});
 
-const accessoryTable = [
-  { spec: "Khóa ngang cửa cuốn tole",  price: "350.000" },
-  { spec: "Khóa ngang cửa cuốn Úc",    price: "450.000" },
-];
+const specimen = (code: string): Specimen => {
+  const m = NAN_DUC.find((n) => n.code === code);
+  if (!m) throw new Error(`Không có mẫu nan ${code} trong bang-gia-data.ts`);
+  return { code, brand: m.brand, src: (m.goc ?? m.mat) as string, href: `#${nanAnchor(code)}`, field: FIELD[m.brand] ?? "bg-brand-50" };
+};
 
 const faqItems = [
   {
-    question: "Giá cửa cuốn Cần Thơ tính như thế nào?",
-    answer: "Giá cửa cuốn tính theo m² diện tích cửa (chiều rộng × chiều cao). Motor, remote và phụ kiện tính riêng. Cửa dưới 8m² cộng thêm phụ phí. Giá trên chưa bao gồm VAT.",
+    tab: "Cộng thêm",
+    question: "Ngoài đơn giá trong bảng, còn tính thêm gì?",
+    answer:
+      "Đơn giá đã gồm vật tư và công lắp đặt. Tính thêm: VAT 10%; motor, bình tích điện, khóa ngang nếu bạn chọn (xem bảng giá motor & phụ kiện). Khảo sát, đo đạc nội thành Cần Thơ miễn phí.",
   },
   {
-    question: "Motor có bắt buộc phải mua kèm không?",
-    answer: "Không bắt buộc nếu bạn muốn cửa vận hành thủ công. Tuy nhiên phần lớn khách hàng chọn lắp motor để tiện sử dụng. Motor được báo giá riêng theo tải trọng cửa.",
+    tab: "Nan hay tole",
+    question: "Nên chọn nan nhôm hay tole tấm liền?",
+    answer: `Nan nhôm có khe thoáng (trừ mẫu kín như OT70, AL70), nhiều mẫu và độ dày, giá từ ${vnd(TU.nan ?? 0)}/m². Tole tấm liền kín, giá từ ${vnd(TU.tamLien ?? 0)}/m², hợp nhà kho, ki-ốt, cửa phụ. Cửa Úc là tấm tole liền khối chạy êm, motor giấu trong trục cuốn.`,
   },
   {
-    question: "Giá đã bao gồm lắp đặt chưa?",
-    answer: "Giá trên là giá vật tư. Chi phí lắp đặt được tính riêng và thông báo sau khi khảo sát thực tế. Liên hệ để được báo giá trọn gói.",
+    tab: "Ký hiệu",
+    question: "Gioong, lông nheo và khe thoáng là gì?",
+    answer:
+      "Gioong (ron) và lông nheo là dải cao su hoặc lông nằm giữa các nan, giúp cửa chạy êm và bớt ồn; mẫu có chữ R cuối mã thường có. Khe thoáng là lỗ dập trên nan để gió và ánh sáng vào khi cửa đóng; mẫu kín không có lỗ nên riêng tư hơn.",
   },
   {
-    question: "Bảo hành cửa cuốn như thế nào?",
+    tab: "Song ngang",
+    question: "Cửa song ngang khác cửa cuốn kín thế nào?",
+    answer:
+      "Song ngang là các thanh thép sơn tĩnh điện (mắc võng, song vuông) cuốn lên như cửa cuốn. Đóng lại vẫn nhìn xuyên qua và thông gió, nên hợp trung tâm thương mại, ngân hàng.",
+  },
+  {
+    tab: "Liên hệ",
+    question: "Dòng ghi “Liên hệ” là sao?",
+    answer: `Là dòng chưa niêm yết giá trên web. Nhắn Zalo hoặc gọi để có giá theo khổ cửa của bạn; mẫu thật có ở showroom ${SHOWROOM} để xem trước.`,
+  },
+  {
+    tab: "Bảo hành",
+    question: "Bảo hành cửa cuốn thế nào?",
     answer: `${WARRANTY}. Trong thời gian bảo hành, chúng tôi sửa chữa miễn phí tại nơi lắp đặt.`,
   },
 ];
@@ -107,7 +167,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "FAQPage",
-      "@id": `${siteUrl}/bao-gia-cua-cuon-can-tho#faq`,
+      "@id": `${PAGE}#faq`,
       mainEntity: faqItems.map((item) => ({
         "@type": "Question",
         name: item.question,
@@ -118,7 +178,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Trang Chủ", item: siteUrl },
-        { "@type": "ListItem", position: 2, name: "Báo Giá Cửa Cuốn Cần Thơ", item: `${siteUrl}/bao-gia-cua-cuon-can-tho` },
+        { "@type": "ListItem", position: 2, name: "Báo Giá Cửa Cuốn Cần Thơ", item: PAGE },
       ],
     },
   ],
@@ -130,209 +190,108 @@ export default function BaoGiaCuaCuonCanTho() {
       <Navbar />
       <main id="main">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <NoScriptStyle />
+        <Rise />
 
-        {/* Hero */}
-        <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
-          <div className="container text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Giá thật — không phụ phí ẩn — 2025
-            </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Bảng Giá Cửa Cuốn Cần Thơ 2025 —{" "}
-              <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Giá Thật, Không Phụ Phí Ẩn
-              </span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Giá niêm yết rõ từng hạng mục — vật tư, motor, phụ kiện tính riêng, VAT ghi rõ.
-              Không có “giá bẫy” rồi cộng thêm sau khi ký hợp đồng.
+        <PriceHero
+          title="Bảng giá cửa cuốn Cần Thơ"
+          lead={`Giá từng mẫu theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`}
+          aside={
+            <SpecimenMosaic
+              cycle={["VIS 50R", "KV468R", "X205R", "AL-VIP50"].map(specimen)}
+              tiles={["KV380R", "B7", "MT502R", "AL75"].map(specimen)}
+            />
+          }
+        >
+          <HeroIndex
+            label="Giá khởi điểm, đ/m²"
+            items={[
+              { href: "#nan-nhom-duc", name: "Nan nhôm công nghệ Đức", gia: TU.nan },
+              { href: "#tam-lien", name: "Tấm liền: tole, Úc, Inox", gia: TU.tamLien },
+              { href: "#song-ngang", name: "Song ngang thép", gia: TU.songNgang },
+            ]}
+            others={[
+              { href: "/bang-gia-phu-kien-can-tho", label: "Motor & phụ kiện" },
+              { href: "/bang-gia-cua-keo-can-tho", label: "Cửa kéo" },
+              { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Nhôm kính" },
+            ]}
+          />
+          <HeroActions />
+        </PriceHero>
+
+        {/* Nan nhôm công nghệ Đức — the specimen catalogue */}
+        <section id="nan-nhom-duc" aria-labelledby="nan-nhom-duc-title" className="scroll-mt-20 py-20 md:py-28">
+          <div className="container">
+            <SlatHeading id="nan-nhom-duc-title" title="Nan nhôm công nghệ Đức" meta={`${NAN_DUC.length} mẫu · đ/m²`} />
+            <p className="mt-8 max-w-[60ch] text-xl leading-relaxed text-brand" data-rise>
+              Mẫu nan thật ở showroom, chụp cùng một góc: ô trên là biên dạng nan, dải dưới là mặt nan với chữ in
+              và lỗ thoáng.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
-                <Button size="lg" className="bg-white text-brand hover:bg-white/90">
-                  <Phone className="h-4 w-4" /> Gọi báo giá: {SITE.hotlines[0]}
-                </Button>
-              </a>
-              <Link href="#nhan-bao-gia">
-                <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  Gửi yêu cầu báo giá
-                </Button>
-              </Link>
+            <NanCatalogue models={NAN_DUC} specs={NAN_SPECS} needs={NHU_CAU} />
+            <div className="mt-12 max-w-[72ch] space-y-1.5 text-sm leading-relaxed text-slate-600" data-rise>
+              {NAN_DUC.some((m) => m.gia === null) && (
+                <p>Mẫu ghi “Liên hệ báo giá” là hàng đặt riêng: nhắn Zalo hoặc gọi để báo giá theo đơn.</p>
+              )}
+              <p>
+                Kovidoor là dòng cửa cuốn công nghệ Đức của Mitadoor. Thông số theo công bố của nhà sản xuất và chữ in
+                trên nan; độ dày có dung sai khoảng ±8%.
+              </p>
             </div>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
-              <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}
+          </div>
+        </section>
+
+        {/* Tấm liền — prices like a menu */}
+        <section id="tam-lien" aria-labelledby="tam-lien-title" className="scroll-mt-20 py-20 md:py-28">
+          <div className="container">
+            <SlatHeading
+              id="tam-lien-title"
+              title="Cửa cuốn tấm liền"
+              meta={`${TAM_LIEN.length + TOLE_THEM.length} dòng · đ/m²`}
+            />
+            <PriceMenu
+              intro="Một tấm tole liền khối, kín gió, giá theo độ dày. Dày hơn thì làm được cửa rộng hơn."
+              photo={{
+                src: "/cong-trinh/p31-xuong-cc-xanh/01.jpg",
+                alt: "Cửa cuốn xanh khổ lớn do Hưng Thành Phát lắp cho nhà xưởng",
+                caption: "Cửa cuốn nhà xưởng, công trình HTP.",
+              }}
+              groups={TAM_LIEN_GROUPS}
+            />
+          </div>
+        </section>
+
+        {/* Song ngang — list with drawn profiles */}
+        <section id="song-ngang" aria-labelledby="song-ngang-title" className="scroll-mt-20 bg-slate-50 py-20 md:py-28">
+          <div className="container">
+            <SlatHeading
+              id="song-ngang-title"
+              title="Cửa cuốn song ngang"
+              meta={`${SONG_NGANG.reduce((n, g) => n + g.rows.length, 0)} kiểu`}
+            />
+            <p className="mt-8 max-w-[60ch] text-xl leading-relaxed text-brand" data-rise>
+              Thanh thép sơn tĩnh điện cuốn lên như cửa cuốn; đóng lại vẫn thông gió và nhìn xuyên qua. Nên dùng cho:{" "}
+              {SONG_NGANG_DUNG_CHO.toLowerCase()}.
             </p>
+            <SongNgangList groups={SONG_NGANG_GROUPS} />
           </div>
         </section>
 
-        {/* Price tables */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-3xl space-y-10">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Bảng Giá Cửa Cuốn</h2>
-              <p className="mt-3 text-sm text-muted-foreground">Giá tính theo m² — chưa bao gồm motor, phụ kiện và VAT</p>
-            </div>
-
-            {cuaCuonTables.map((table) => (
-              <div key={table.title}>
-                <h3 className="mb-1 font-semibold text-brand">{table.title}</h3>
-                <p className="mb-3 text-sm text-muted-foreground">Đơn vị: {table.unit}</p>
-                <div className="overflow-hidden rounded-xl border">
-                  <table className="w-full text-sm">
-                    <thead className="bg-muted">
-                      <tr>
-                        <th className="px-4 py-3 text-left font-semibold">Loại</th>
-                        <th className="px-4 py-3 text-right font-semibold">Đơn giá (đ/m²)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y">
-                      {table.rows.map((row) => (
-                        <tr key={row.spec}>
-                          <td className="px-4 py-3">{row.spec}</td>
-                          <td className="px-4 py-3 text-right font-medium">{row.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">* {table.note}</p>
-              </div>
-            ))}
+        {/* FAQ — index cards */}
+        <section aria-labelledby="hoi-dap-title" className="py-20 md:py-28">
+          <div className="container">
+            <SlatHeading id="hoi-dap-title" title="Câu hỏi thường gặp" />
+            <FaqCards group="faq-cua-cuon" items={faqItems} aside={<ShowroomFigure />} />
           </div>
         </section>
 
-        {/* Motor & accessories */}
-        <section className="bg-muted/30 py-16 md:py-20">
-          <div className="container max-w-3xl space-y-8">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Motor & Phụ Kiện</h2>
-              <p className="mt-3 text-sm text-muted-foreground">Giá tính theo bộ — chọn motor phù hợp tải trọng cửa</p>
-            </div>
-
-            <div>
-              <h3 className="mb-3 font-semibold text-brand">Motor + Remote</h3>
-              <div className="overflow-hidden rounded-xl border">
-                <table className="w-full text-sm">
-                  <thead className="bg-muted">
-                    <tr>
-                      <th className="px-4 py-3 text-left font-semibold">Loại motor</th>
-                      <th className="px-4 py-3 text-right font-semibold">Giá (đ/bộ)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {motorTable.map((row) => (
-                      <tr key={row.spec}>
-                        <td className="px-4 py-3">{row.spec}</td>
-                        <td className="px-4 py-3 text-right font-medium">{row.price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="mb-3 font-semibold text-brand">Phụ Kiện</h3>
-              <div className="overflow-hidden rounded-xl border">
-                <table className="w-full text-sm">
-                  <thead className="bg-muted">
-                    <tr>
-                      <th className="px-4 py-3 text-left font-semibold">Phụ kiện</th>
-                      <th className="px-4 py-3 text-right font-semibold">Giá (đ/bộ)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {accessoryTable.map((row) => (
-                      <tr key={row.spec}>
-                        <td className="px-4 py-3">{row.spec}</td>
-                        <td className="px-4 py-3 text-right font-medium">{row.price}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">
-              <p className="font-semibold mb-1">Lưu ý quan trọng</p>
-              <ul className="space-y-1 list-disc list-inside text-amber-800">
-                <li>Giá trên chưa bao gồm VAT</li>
-                <li>Cửa dưới 8m² cộng thêm 20.000–50.000 đ/m²</li>
-                <li>Chi phí lắp đặt và vận chuyển tính riêng</li>
-                <li>{WARRANTY}</li>
-                <li>Giá có thể thay đổi theo thời điểm — liên hệ để nhận giá cập nhật nhất</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <CtaBand id="nhan-bao-gia" source="Báo giá cửa cuốn" />
-
-        {/* FAQ */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-3xl">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Câu Hỏi Thường Gặp</h2>
-            </div>
-            <div className="space-y-4">
-              {faqItems.map((item) => (
-                <div key={item.question} className="rounded-xl border bg-card p-6">
-                  <h3 className="mb-2 font-semibold">{item.question}</h3>
-                  <p className="text-sm text-muted-foreground">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Other price pages */}
-        <section className="bg-muted/30 py-12">
-          <div className="container max-w-3xl">
-            <p className="mb-5 text-center text-sm font-semibold uppercase tracking-wider text-brand/60">Xem thêm bảng giá</p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Link href="/bang-gia-cua-keo-can-tho" className="flex items-center justify-between rounded-xl border bg-background p-5 hover:bg-brand/5">
-                <div>
-                  <p className="font-semibold text-brand">Bảng Giá Cửa Kéo</p>
-                  <p className="text-sm text-muted-foreground">Cửa kéo có láu & không láu</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-brand" />
-              </Link>
-              <Link href="/bang-gia-cua-nhom-kinh-can-tho" className="flex items-center justify-between rounded-xl border bg-background p-5 hover:bg-brand/5">
-                <div>
-                  <p className="font-semibold text-brand">Bảng Giá Cửa Nhôm Kính</p>
-                  <p className="text-sm text-muted-foreground">Nhôm Việt, nhôm nhập, Maxpro, lan can</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-brand" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="bg-brand py-16 md:py-20">
-          <div className="container text-center">
-            <h2 className="text-2xl font-semibold text-white md:text-3xl">Nhận Báo Giá Trọn Gói — Không Phụ Phí Ẩn</h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Kỹ thuật viên đến đo đạc tại nhà miễn phí, báo giá chi tiết từng hạng mục. Lắp xong mới thanh toán.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
-                <Button size="lg" className="bg-white text-brand hover:bg-white/90">
-                  <Phone className="h-4 w-4" /> {SITE.hotlines[0]}
-                </Button>
-              </a>
-              <a href={`tel:${SITE.hotlines[1].replace(/\s/g, "")}`}>
-                <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  <Phone className="h-4 w-4" /> {SITE.hotlines[1]}
-                </Button>
-              </a>
-            </div>
-            <p className="mt-6 flex items-center justify-center gap-2 text-sm text-white/70">
-              <MapPin className="h-4 w-4 shrink-0" />{SITE.address}
-            </p>
-          </div>
-        </section>
+        <ClosingBand
+          source="Báo giá cửa cuốn"
+          photos={[
+            { src: "/cong-trinh/p22-cc-kem-xe-hong/01.jpg", alt: "Cửa cuốn màu kem Hưng Thành Phát lắp cho nhà phố" },
+            { src: "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg", alt: "Cửa cuốn khổ lớn Hưng Thành Phát lắp cho nhà xưởng" },
+            { src: "/cong-trinh/p24-cc-xam-duc-lo/01.jpg", alt: "Cửa cuốn nan xám có lỗ thoáng do Hưng Thành Phát lắp" },
+          ]}
+        />
       </main>
       <Footer />
     </>

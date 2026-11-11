@@ -12,7 +12,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 export const metadata: Metadata = {
   title: "Sửa Chữa Cửa Cuốn & Nhôm Kính Cần Thơ",
   description:
-    "Sửa chữa cửa cuốn, cửa kéo, cửa nhôm kính tại Cần Thơ — motor cháy, lệch ray, kính vỡ, bản lề lỏng. Đến tận nơi trong ngày, báo giá minh bạch. Gọi: 0945 042 345.",
+    "Sửa chữa cửa cuốn, cửa kéo, cửa nhôm kính tại Cần Thơ — motor cháy, lệch ray, kính vỡ, bản lề lỏng. Đến tận nơi trong ngày, báo giá minh bạch. Gọi: 0913 574 077.",
   alternates: { canonical: `${siteUrl}/sua-chua-cua-cuon-can-tho` },
   openGraph: {
     type: "website",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/sua-chua-cua-cuon-can-tho`,
     title: "Sửa Chữa Cửa Cuốn & Nhôm Kính Cần Thơ",
     description:
-      "Sửa cửa cuốn, cửa kéo, nhôm kính tại Cần Thơ. Đến tận nơi trong ngày. Gọi: 0945 042 345.",
+      "Sửa cửa cuốn, cửa kéo, nhôm kính tại Cần Thơ. Đến tận nơi trong ngày. Gọi: 0913 574 077.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -225,7 +225,7 @@ const faqItems = [
   {
     question: "Cửa cuốn không lên được — nguyên nhân là gì?",
     answer:
-      "Cửa cuốn không lên thường do 4 nguyên nhân chính: (1) Motor cháy hoặc bị kẹt — nhấn nút không có phản hồi; (2) Remote mất lập trình — nhấn remote đèn không nháy; (3) Lò xo gãy — cửa nặng bất thường dù motor còn chạy; (4) Mất điện và bình lưu điện hết. Gọi 0945 042 345 để kỹ thuật viên chẩn đoán chính xác trong ngày.",
+      "Cửa cuốn không lên thường do 4 nguyên nhân chính: (1) Motor cháy hoặc bị kẹt — nhấn nút không có phản hồi; (2) Remote mất lập trình — nhấn remote đèn không nháy; (3) Lò xo gãy — cửa nặng bất thường dù motor còn chạy; (4) Mất điện và bình lưu điện hết. Gọi 0913 574 077 để kỹ thuật viên chẩn đoán chính xác trong ngày.",
   },
   {
     question: "Sửa cửa kéo thép bị kẹt ray mất bao lâu?",
@@ -510,7 +510,7 @@ export default function SuaChuaCuaCanTho() {
           </div>
         </section>
 
-        <CtaBand source="Sửa chữa cửa cuốn" />
+        <CtaBand source="Sửa chữa cửa cuốn" paymentLine="Báo giá trước khi sửa, sửa xong mới thanh toán" />
 
         {/* FAQ */}
         <section className="py-16 md:py-24">
