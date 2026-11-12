@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AlertTriangle, AppWindow, ArrowRight, BatteryCharging, Bolt, CheckCircle2, Clock, Droplet, KeyRound, Link2, Lock, MapPin, Phone, RadioTower, RefreshCw, Rows3, Ruler, Settings, Waves, Wind, Wrench, Zap } from "lucide-react";
+import { AlertTriangle, AppWindow, ArrowRight, BatteryCharging, Bolt, CheckCircle2, Clock, Droplet, KeyRound, Link2, Lock, MapPin, MessageCircle, Phone, RadioTower, RefreshCw, Rows3, Ruler, Settings, Waves, Wind, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site-data";
+import { SITE, ZALO_URL } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
@@ -337,39 +337,43 @@ export default function SuaChuaCuaCanTho() {
           <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Cửa hỏng không chờ được — kỹ thuật viên đến trong ngày
+              Cửa hỏng không chờ được — thợ có mặt trong ngày
             </span>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
               Cửa Hỏng Không Chờ Được —{" "}
-              <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
-                Kỹ Thuật Viên Có Mặt Trong Ngày, Sửa Xong Mới Thanh Toán
+              <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
+                Kỹ Thuật Viên Có Mặt Nhanh, Sửa Xong Mới Thanh Toán
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Motor cháy lúc 8 giờ tối, cửa kẹt buổi sáng không mở được, kính vỡ cần thay gấp
+              Motor cháy lúc tối, cửa kẹt buổi sáng không mở được, kính vỡ cần thay gấp
               — Hưng Thành Phát có mặt trong ngày. Báo giá trước khi sửa, sửa xong mới thanh toán.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
-                <Button size="lg" className="bg-white text-brand hover:bg-white/90">
+                <Button size="lg" className="bg-amber-400 font-bold text-brand hover:bg-amber-300">
                   <Phone className="h-4 w-4" />
-                  Gọi {SITE.hotlines[0]}
+                  Gọi thợ ngay {SITE.hotlines[0]}
                 </Button>
               </a>
-              <a href={`tel:${SITE.hotlines[1].replace(/\s/g, "")}`}>
+              <a
+                href={`${ZALO_URL}?text=${encodeURIComponent("Chào Hưng Thành Phát, cửa nhà tôi bị sự cố cần sửa gấp: ")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand"
+                  className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-brand"
                 >
-                  <Phone className="h-4 w-4" />
-                  Gọi {SITE.hotlines[1]}
+                  <MessageCircle className="h-4 w-4 text-sky-300" />
+                  Nhắn Zalo — gửi ảnh cửa
                 </Button>
               </a>
             </div>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
-              <Clock className="h-3.5 w-3.5" />
-              {SITE.workingHours} — Có mặt trong ngày
+            <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/70">
+              <Clock className="h-3.5 w-3.5 text-amber-300" />
+              {SITE.workingHours} — Có mặt trong ngày nội thành Cần Thơ
             </p>
           </div>
         </section>
@@ -510,7 +514,12 @@ export default function SuaChuaCuaCanTho() {
           </div>
         </section>
 
-        <CtaBand source="Sửa chữa cửa cuốn" paymentLine="Báo giá trước khi sửa, sửa xong mới thanh toán" />
+        <CtaBand
+          source="Sửa chữa cửa cuốn"
+          title="Cửa bị sự cố? Cần thợ kiểm tra ngay?"
+          subtitle="Gửi số Zalo hoặc gọi hotline — thợ kỹ thuật tư vấn bắt bệnh và báo giá trước khi sửa."
+          paymentLine="Báo giá trước khi sửa, sửa xong mới thanh toán"
+        />
 
         {/* FAQ */}
         <section className="py-16 md:py-24">
@@ -583,19 +592,23 @@ export default function SuaChuaCuaCanTho() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
-                <Button size="lg" className="bg-white text-brand hover:bg-white/90">
+                <Button size="lg" className="bg-amber-400 font-bold text-brand hover:bg-amber-300">
                   <Phone className="h-4 w-4" />
-                  {SITE.hotlines[0]}
+                  Gọi thợ {SITE.hotlines[0]}
                 </Button>
               </a>
-              <a href={`tel:${SITE.hotlines[1].replace(/\s/g, "")}`}>
+              <a
+                href={`${ZALO_URL}?text=${encodeURIComponent("Chào Hưng Thành Phát, cửa nhà tôi bị sự cố cần sửa: ")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand"
+                  className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-brand"
                 >
-                  <Phone className="h-4 w-4" />
-                  Gọi {SITE.hotlines[1]}
+                  <MessageCircle className="h-4 w-4 text-sky-300" />
+                  Nhắn Zalo — gửi ảnh cửa
                 </Button>
               </a>
             </div>

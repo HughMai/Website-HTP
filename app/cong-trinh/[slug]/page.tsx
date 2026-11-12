@@ -10,6 +10,7 @@ import {
   ChevronRight,
   ArrowLeft,
   FileText,
+  MessageCircle,
 } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
@@ -18,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { ProjectGallery } from "@/components/cong-trinh/ProjectGallery";
 import { CongTrinhCard } from "@/components/cong-trinh/CongTrinhCard";
 import { CONG_TRINH, getCongTrinh, relatedCongTrinh } from "@/lib/cong-trinh-data";
-import { SITE } from "@/lib/site-data";
+import { SITE, ZALO_URL } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
@@ -50,6 +51,9 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
   if (!p) notFound();
   const related = relatedCongTrinh(p.slug);
   const primary = SITE.hotlines[0];
+  const zaloQuoteUrl = `${ZALO_URL}?text=${encodeURIComponent(
+    `Chào Hưng Thành Phát, tôi muốn hỏi giá làm bộ cửa giống công trình: ${p.title} (${siteUrl}/cong-trinh/${p.slug})`
+  )}`;
 
   const info: [string, string][] = [
     ["Loại cửa / hạng mục", p.categoryLabel],
@@ -129,6 +133,25 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
           <div className="container grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
             <div className="min-w-0">
               <p className="text-base leading-relaxed text-brand/75">{p.description}</p>
+              {/* Quick actions for mobile & tablet before gallery */}
+              <div className="mt-4 flex flex-wrap gap-2.5 lg:hidden">
+                <a
+                  href={zaloQuoteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#0068FF] px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-[#0055d4] active:scale-95"
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden />
+                  Hỏi giá mẫu này qua Zalo
+                </a>
+                <a
+                  href={`tel:${primary.replace(/\s/g, "")}`}
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-semibold text-brand transition hover:bg-brand/10 active:scale-95"
+                >
+                  <Phone className="h-4 w-4" aria-hidden />
+                  Gọi {primary}
+                </a>
+              </div>
               <h2 className="mb-4 mt-8 text-xs font-bold uppercase tracking-[0.12em] text-brand">
                 Hình thực tế tại công trình
               </h2>
@@ -151,10 +174,16 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
               <div className="rounded-2xl bg-brand p-5 text-white shadow-lg">
                 <h2 className="text-base font-semibold">Cần công trình tương tự?</h2>
                 <p className="mt-1 text-sm text-white/75">
-                  Nhận tư vấn &amp; báo giá miễn phí cho công trình của bạn.
+                  Nhận tư vấn &amp; báo giá nhanh theo kích thước công trình của bạn.
                 </p>
-                <div className="mt-4 grid gap-2">
-                  <Button asChild className="bg-white text-brand hover:bg-white/90">
+                <div className="mt-4 grid gap-2.5">
+                  <Button asChild className="bg-[#0068FF] font-bold text-white hover:bg-[#0055d4]">
+                    <a href={zaloQuoteUrl} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="h-4 w-4" aria-hidden />
+                      Nhắn Zalo hỏi giá mẫu này
+                    </a>
+                  </Button>
+                  <Button asChild className="bg-white font-semibold text-brand hover:bg-white/90">
                     <a href={`tel:${primary.replace(/\s/g, "")}`}>
                       <Phone className="h-4 w-4" aria-hidden /> Gọi {primary}
                     </a>
@@ -162,10 +191,10 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
                   <Button
                     asChild
                     variant="outline"
-                    className="border-white/40 text-white hover:bg-white hover:text-brand"
+                    className="border-white/30 bg-white/5 text-white hover:bg-white hover:text-brand"
                   >
                     <Link href="#nhan-bao-gia">
-                      <FileText className="h-4 w-4" aria-hidden /> Nhận báo giá
+                      <FileText className="h-4 w-4" aria-hidden /> Nhận báo giá qua web
                     </Link>
                   </Button>
                 </div>
@@ -198,6 +227,7 @@ export default function CongTrinhDetail({ params }: { params: { slug: string } }
           id="nhan-bao-gia"
           source={`Công trình: ${p.title}`}
           title="Muốn một công trình như thế này?"
+          subtitle="Ghi số Zalo để nhận báo giá và tư vấn kỹ thuật chính xác theo kích thước mặt tiền của bạn."
         />
       </main>
       <Footer />
