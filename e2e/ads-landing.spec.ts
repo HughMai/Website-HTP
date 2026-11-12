@@ -343,7 +343,8 @@ test.describe("Google Ads sitelink pages — desktop", () => {
   test("price pages keep the two-column hero, and their mid-page button asks for the price list", async ({ page }) => {
     await page.goto("/lp/bang-gia-cua-keo-can-tho");
     await expect(page.locator('section[aria-labelledby="lp-title"] figure')).toBeVisible();
-    await page.locator('[data-track="lp_prices"]').getByRole("button", { name: "Nhận bảng giá qua Zalo" }).click();
+    await expect(page.locator('#nhan-bao-gia button[type="submit"]')).toHaveText("Nhận bảng giá");
+    await page.locator('[data-track="lp_prices"]').getByRole("button", { name: "Nhận bảng giá" }).click();
     const sheet = page.getByRole("dialog");
     await expect(sheet).toContainText("Ghi số Zalo để nhận bảng giá đầy đủ");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();

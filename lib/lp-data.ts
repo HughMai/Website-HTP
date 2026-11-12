@@ -224,10 +224,12 @@ const faqWarranty = (what: string) => ({
 // The price sitelink pages (bảng giá cửa cuốn, cửa kéo, nhôm kính). The catalog the Zalo
 // bot sends (Enki/htp/catalog/catalog-htp.pdf via zalo-bot /send-catalog) carries the
 // retail price tables for cửa cuốn, motor, cửa kéo, nhôm kính and lan can, so "bảng giá
-// đầy đủ" is what arrives.
+// đầy đủ" is what arrives. The button is "Nhận bảng giá", not the plan's "Nhận bảng giá qua
+// Zalo": the longer label squeezed the field on desktop until its placeholder was cut off,
+// and the title above it already says Zalo.
 const PRICE_FORM: LpForm = {
   title: "Ghi số Zalo để nhận bảng giá đầy đủ",
-  submitLabel: "Nhận bảng giá qua Zalo",
+  submitLabel: "Nhận bảng giá",
 };
 
 const STEP_QUOTE = { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." };
@@ -689,7 +691,8 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "bang-gia-cua-keo-can-tho",
     keyword: "Bảng Giá Cửa Kéo Cần Thơ",
-    promise: "Đã Gồm Vật Tư Và Lắp Đặt",
+    // Non-breaking spaces keep the two-syllable words whole on a 360px phone.
+    promise: "Đã Gồm Vật Tư Và Lắp Đặt",
     description: `Giá cửa kéo thép niêm yết theo m², từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)}, đã gồm vật tư và công lắp đặt, chưa VAT. Báo giá rõ từng mục trước khi làm; đặt cọc 30%, lắp xong mới thanh toán.`,
     intro:
       "Cửa kéo thép làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Giá tính theo m² diện tích cửa (rộng × cao); thợ đo tận nơi, báo giá rõ từng mục trước khi làm.",
@@ -883,7 +886,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     intro:
       "Cửa kéo kẹt ray, nặng tay, lệch bánh xe, khóa ngang không chốt được — kỹ thuật viên Hưng Thành Phát chỉnh ray, thay bánh xe (con lăn) tại chỗ, thường xong trong 30–60 phút. Báo giá trước khi sửa.",
     priceTeaser: `Chỉnh ray từ ${rangeFrom(KEO_REPAIR_ROWS[0])} · thay con lăn từ ${rangeFrom(KEO_REPAIR_ROWS[1])}`,
-    zaloLabel: "Nhắn Zalo — gửi video cửa đang kẹt",
+    zaloLabel: "Nhắn Zalo — gửi video cửa",
     hero: job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ Hưng Thành Phát tại công trình", "Thợ Hưng Thành Phát bên bộ cửa kéo màu kem"),
     photos: {
       title: "Thợ và cửa kéo của Hưng Thành Phát",
@@ -917,13 +920,13 @@ const SITELINK_PAGES: AdLandingPage[] = [
     ...REPAIR,
     slug: "remote-binh-luu-dien-cua-cuon-can-tho",
     keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ",
-    promise: "Cài Lại Remote Tận Nhà, Thay Bình Bị Chai",
+    promise: "Cài Lại Remote Tận Nhà, Thay Bình Bị Chai",
     description:
       "Remote không ăn, mất điện là cửa đứng im — bên em cài lại remote và thay bình lưu điện tận nhà, cả cửa không do bên em lắp. Báo giá trước, sửa xong mới thanh toán.",
     intro:
       "Remote phải bấm nhiều lần hoặc không ăn, mất điện là cửa đứng im vì bình lưu điện đã chai — kỹ thuật viên Hưng Thành Phát đến tận nhà cài lại remote, thay bình, cả cửa không do bên em lắp.",
     priceTeaser: `Cài lại remote từ ${rangeFrom(REMOTE_ROWS[0])} · thay bình từ ${rangeFrom(REMOTE_ROWS[1])}`,
-    zaloLabel: "Nhắn Zalo — gửi ảnh hộp motor, remote",
+    zaloLabel: "Nhắn Zalo — gửi ảnh remote",
     hero: jobImage(
       "p19-cc-trang-san-da",
       "02.jpg",
@@ -969,7 +972,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     intro:
       "Motor cháy, nóng bất thường, kêu to, cửa chạy chậm hoặc khựng giữa chừng — kỹ thuật viên Hưng Thành Phát đến tận nơi trong ngày, kiểm tra cuộn dây, tụ điện, bo mạch và báo giá trước khi sửa.",
     priceTeaser: `Sửa motor từ ${rangeFrom(MOTOR_REPAIR_ROWS[0])} · thay motor mới từ ${rangeFrom(MOTOR_REPAIR_ROWS[1])}`,
-    zaloLabel: "Nhắn Zalo — gửi video cửa đang lỗi",
+    zaloLabel: "Nhắn Zalo — gửi video cửa",
     hero: jobImage(
       "p19-cc-trang-san-da",
       "03.jpg",
