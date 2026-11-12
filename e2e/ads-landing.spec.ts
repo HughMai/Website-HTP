@@ -16,7 +16,28 @@ const PAGES = [
   { path: "/lp/sua-cua-cuon-can-tho", keyword: "Sửa Cửa Cuốn Cần Thơ", price: "300.000", form: false },
 ];
 
+// The ten sitelink pages (Enki/htp/ads/sitelink-landing-plan-2026-11-12.md). `first` is the
+// section the sitelink promised, which must sit directly under the hero; `mirror` lists the
+// site pages whose prices each table row must match (`labels`: hand-mirrored tables, where
+// the row label must match too).
+const SITELINK_PAGES = [
+  { path: "/lp/bang-gia-cua-cuon-can-tho", keyword: "Bảng Giá Cửa Cuốn Cần Thơ", price: "500.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bao-gia-cua-cuon-can-tho", "/bang-gia-phu-kien-can-tho"] },
+  { path: "/lp/cua-cuon-nhom-khe-thoang-can-tho", keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ", price: "1.450.000", form: true, first: "lp-cong-trinh", mirror: ["/bao-gia-cua-cuon-can-tho"] },
+  { path: "/lp/cua-cuon-nha-xuong-can-tho", keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ", price: "800.000", form: true, first: "lp-cong-trinh", mirror: ["/bao-gia-cua-cuon-can-tho", "/bang-gia-phu-kien-can-tho"] },
+  { path: "/lp/bang-gia-cua-keo-can-tho", keyword: "Bảng Giá Cửa Kéo Cần Thơ", price: "540.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bang-gia-cua-keo-can-tho"] },
+  { path: "/lp/cua-keo-thep-can-tho", keyword: "Cửa Kéo Thép Cần Thơ", price: "540.000", form: true, first: "lp-cong-trinh", mirror: ["/bang-gia-cua-keo-can-tho"] },
+  { path: "/lp/lan-can-cau-thang-kinh-can-tho", keyword: "Lan Can, Cầu Thang Kính Cần Thơ", price: "1.950.000", form: true, first: "lp-cong-trinh", mirror: ["/bang-gia-cua-nhom-kinh-can-tho"], labels: true },
+  { path: "/lp/bang-gia-nhom-kinh-can-tho", keyword: "Bảng Giá Nhôm Kính Cần Thơ", price: "1.200.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bang-gia-cua-nhom-kinh-can-tho"] },
+  { path: "/lp/sua-cua-keo-can-tho", keyword: "Sửa Cửa Kéo Cần Thơ", price: "150.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
+  { path: "/lp/remote-binh-luu-dien-cua-cuon-can-tho", keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ", price: "100.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
+  { path: "/lp/sua-motor-cua-cuon-can-tho", keyword: "Sửa Motor Cửa Cuốn Cần Thơ", price: "300.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
+];
+
+const ALL_AD_PAGES = [...PAGES, ...SITELINK_PAGES];
+
 const PHONE = { width: 360, height: 740 };
+
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 test.describe("Google Ads landing pages", () => {
   test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
@@ -141,14 +162,14 @@ test.describe("Google Ads landing pages", () => {
   });
 
   test("only real customer reviews run on ad pages — never the family's own", async ({ page }) => {
-    for (const p of PAGES) {
+    for (const p of ALL_AD_PAGES) {
       await page.goto(p.path);
       await expect(page.locator("main")).not.toContainText("Mai Hugh");
     }
   });
 
   test("no warranty year counts on ad pages (CLAUDE.md hard rule)", async ({ page }) => {
-    for (const p of PAGES) {
+    for (const p of ALL_AD_PAGES) {
       await page.goto(p.path);
       // Open every FAQ so collapsed answers are in innerText too.
       await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
@@ -230,6 +251,102 @@ test.describe("Google Ads landing pages — desktop", () => {
     await expect(sheet).toContainText("đánh giá Google");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
     await expect(sheet).toBeInViewport({ ratio: 1 });
+  });
+});
+
+// One page per Google Ads sitelink: the H1 is the text the visitor tapped, and the first
+// thing under the hero is what that sitelink promised.
+test.describe("Google Ads sitelink pages", () => {
+  test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
+
+  for (const p of SITELINK_PAGES) {
+    test(`${p.path}: sitelink text in the H1, the ask on the first screen, the promised section first`, async ({ page }) => {
+      const res = await page.goto(p.path);
+      expect(res?.status()).toBe(200);
+
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator("h1")).toHaveText(new RegExp(`^${escapeRe(p.keyword)}`));
+      await expect(page).toHaveTitle(new RegExp(`^${escapeRe(p.keyword)}`));
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+
+      // The one ask, inside the first 360×740 screen: the Zalo field and its button on
+      // install and price pages, the hero's call button on repair pages.
+      const ask = p.form
+        ? ['#nhan-bao-gia input[type="tel"]', '#nhan-bao-gia button[type="submit"]']
+        : ['[data-track="lp_hero"] a[href^="tel:"]'];
+      for (const selector of ask) {
+        const box = await page.locator(selector).boundingBox();
+        expect(box, selector).not.toBeNull();
+        expect(box!.y + box!.height, `${selector} must be on the first screen`).toBeLessThanOrEqual(PHONE.height);
+      }
+      if (p.form) await expect(page.locator('[data-track="lp_hero"] #nhan-bao-gia form')).toHaveCount(1);
+      else await expect(page.locator("main form")).toHaveCount(0);
+
+      // The section the sitelink promised comes straight after the hero.
+      const sections = page.locator("main > section");
+      await expect(sections.nth(0)).toHaveAttribute("aria-labelledby", "lp-title");
+      await expect(sections.nth(1)).toHaveAttribute("aria-labelledby", p.first);
+      // Price-led pages hide the hero photo on phones, so the table is the first scroll.
+      if (p.first === "lp-bang-gia") {
+        await expect(page.locator('section[aria-labelledby="lp-title"] figure')).toBeHidden();
+      }
+      await expect(page.locator("main")).toContainText(p.price);
+
+      // The price pages promise the full price list, because the catalog the bot sends has it.
+      if (p.priceForm) await expect(page.locator("#nhan-bao-gia")).toContainText("Ghi số Zalo để nhận bảng giá đầy đủ");
+
+      // No site menu and no footer link groups: the footer's only links are the hotlines and
+      // the privacy policy.
+      await expect(page.locator('a[href="/san-pham"], a[href="/cong-trinh"], a[href="/"]')).toHaveCount(0);
+      await expect(page.locator("nav")).toHaveCount(0);
+      const footerLinks = await page.locator("footer a").evaluateAll((as) => as.map((a) => a.getAttribute("href") ?? ""));
+      expect(footerLinks.length).toBeGreaterThan(0);
+      for (const href of footerLinks) expect(href).toMatch(/^tel:|^\/chinh-sach-bao-mat$/);
+
+      // Real job photos, labelled as such.
+      await expect(page.locator("#lp-cong-trinh ~ p")).toContainText("không phải ảnh mẫu");
+      await expect(page.locator('#lp-cong-trinh').locator("xpath=..").locator('img[src*="cong-trinh"]')).toHaveCount(4);
+    });
+
+    test(`${p.path}: every price row matches ${p.mirror.join(" + ")}`, async ({ page }) => {
+      await page.goto(p.path);
+      await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
+      const rows = await page.locator("#lp-bang-gia ~ * table tbody tr").evaluateAll((trs) =>
+        trs.map((tr) => [...tr.children].map((c) => (c.textContent ?? "").trim()))
+      );
+      expect(rows.length).toBeGreaterThan(1);
+
+      let site = "";
+      for (const path of p.mirror) {
+        await page.goto(path);
+        site += (await page.locator("body").textContent()) ?? "";
+      }
+      for (const [label, ...prices] of rows) {
+        if (p.labels) expect(site, `"${label}" is missing from ${p.mirror}`).toContain(label);
+        for (const price of prices.filter((x) => x !== "Liên hệ")) {
+          // "100.000 – 300.000 đ" on a repair row; "1.450.000" on a catalog row.
+          expect(site, `"${label}: ${price}" no longer matches ${p.mirror}`).toContain(price.replace(/\s*đ.*$/, ""));
+        }
+      }
+    });
+  }
+
+  test("sitelink pages stay out of the sitemap", async ({ request }) => {
+    const xml = await (await request.get("/sitemap.xml")).text();
+    for (const p of SITELINK_PAGES) expect(xml).not.toContain(p.path);
+  });
+});
+
+test.describe("Google Ads sitelink pages — desktop", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  test("price pages keep the two-column hero, and their mid-page button asks for the price list", async ({ page }) => {
+    await page.goto("/lp/bang-gia-cua-keo-can-tho");
+    await expect(page.locator('section[aria-labelledby="lp-title"] figure')).toBeVisible();
+    await page.locator('[data-track="lp_prices"]').getByRole("button", { name: "Nhận bảng giá qua Zalo" }).click();
+    const sheet = page.getByRole("dialog");
+    await expect(sheet).toContainText("Ghi số Zalo để nhận bảng giá đầy đủ");
+    await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
   });
 });
 
