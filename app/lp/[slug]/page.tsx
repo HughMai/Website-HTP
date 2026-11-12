@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { AdLanding } from "@/components/lp/AdLanding";
 import { AD_LANDING_PAGES, getAdLanding } from "@/lib/lp-data";
 
-// Google Ads landing pages, one per ad group. Content: lib/lp-data.ts.
-// Only the four slugs below exist; anything else under /lp is a 404.
+// Google Ads landing pages: one per ad group, plus one per sitelink. Content: lib/lp-data.ts.
+// Only the slugs listed there exist; anything else under /lp is a 404.
 export const dynamicParams = false;
 
 export function generateStaticParams() {

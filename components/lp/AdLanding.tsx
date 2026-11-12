@@ -30,6 +30,8 @@ import { cn } from "@/lib/utils";
  *
  * Order: logo-only header → headline + price + ask → 3 promises → how it works →
  * reviews → real photos → prices → objections (FAQ) → final ask + showroom → NAP.
+ * Sitelink pages set `lead`, which moves prices (or photos, then prices) up to sit
+ * directly under the headline: the first thing below it is what the sitelink promised.
  * No site menu, no footer link farm, no map iframe, no floating rail: every link that
  * isn't a way to reach the shop is a paid click leaving.
  *
@@ -149,7 +151,9 @@ function HoursLine({ className }: { className?: string }) {
 
 /** The Zalo-number form as a white card: the one bright box on the navy hero. */
 function FormCard({ page }: { page: AdLandingPage }) {
-  return <ZaloQuoteCard id={FORM_ID} track="lp_form" source={`lp_${page.slug}`} proof={page.proof} />;
+  return (
+    <ZaloQuoteCard id={FORM_ID} track="lp_form" source={`lp_${page.slug}`} proof={page.proof} form={page.form} />
+  );
 }
 
 /** Call + Zalo under the form card: outlined, so the form's button stays the one amber block. */
@@ -221,18 +225,26 @@ function Hero({ page }: { page: AdLandingPage }) {
             </>
           )}
         </div>
-        <figure className="mt-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center">
+        {/* Price-led pages hide the photo below lg:, so the first scroll on a phone lands on
+            the price table the visitor tapped for. */}
+        <figure
+          className={cn(
+            "mt-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center",
+            page.lead === "prices" && "hidden lg:block"
+          )}
+        >
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5 lg:aspect-[4/5]">
             {/* Install pages: lazy, because on phones the form fills the first screen and this
                 photo sits below it, so it must not take bandwidth from the page's JS on slow
                 4G (on desktop it is in view at first layout, so lazy still starts at once).
                 Repair page: eager, because its shorter hero puts the photo on the first
-                phone screen, where it becomes the largest paint. */}
+                phone screen, where it becomes the largest paint. Price-led pages: lazy, so
+                phones, where the photo is hidden, never download it. */}
             <Image
               src={page.hero.src}
               alt={page.hero.alt}
               fill
-              loading={page.form ? "lazy" : "eager"}
+              loading={page.form || page.lead === "prices" ? "lazy" : "eager"}
               sizes="(min-width: 1024px) 40vw, 100vw"
               quality={85}
               className="object-cover"
@@ -558,17 +570,26 @@ function MiniFooter() {
   );
 }
 
+/** Body sections in page order. `lead` moves the section the sitelink promised to the top;
+ *  a photo-led page brings its prices up right behind the photos. */
+function bodySections(page: AdLandingPage) {
+  const promises = <Promises key="promises" page={page} />;
+  const steps = <Steps key="steps" page={page} />;
+  const reviews = <Reviews key="reviews" page={page} />;
+  const photos = <Photos key="photos" page={page} />;
+  const prices = <Prices key="prices" page={page} />;
+  if (page.lead === "prices") return [prices, promises, steps, reviews, photos];
+  if (page.lead === "photos") return [photos, prices, promises, steps, reviews];
+  return [promises, steps, reviews, photos, prices];
+}
+
 export function AdLanding({ page }: { page: AdLandingPage }) {
   return (
     <div className="bg-white text-brand">
       <TopBar />
       <main id="main">
         <Hero page={page} />
-        <Promises page={page} />
-        <Steps page={page} />
-        <Reviews page={page} />
-        <Photos page={page} />
-        <Prices page={page} />
+        {bodySections(page)}
         <Faq page={page} />
         <Closing page={page} />
       </main>

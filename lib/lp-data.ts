@@ -1,6 +1,7 @@
 import {
   APPLIED_FROM,
   CUA_KEO,
+  MOTOR,
   NAN_DUC,
   NHOM_KINH,
   SONG_NGANG,
@@ -8,7 +9,7 @@ import {
   TOLE_THEM,
   type Gia,
 } from "@/lib/bang-gia-data";
-import { formatGia } from "@/lib/bang-gia-specs";
+import { KEO_NHOM_DAY, NAN_SPECS, PHU_KIEN_DUNG_CHO, TAM_LIEN_SPECS, formatGia } from "@/lib/bang-gia-specs";
 import { CONG_TRINH } from "@/lib/cong-trinh-data";
 import { REVIEWS, type Review } from "@/lib/reviews";
 
@@ -24,13 +25,28 @@ import { REVIEWS, type Review } from "@/lib/reviews";
  *  - Prices are computed from bang-gia-data.ts, so a catalog update reaches these pages.
  *  - Reviews are real Google reviews. The family's own ("Mai Hugh") never runs on a page
  *    that paid traffic lands on.
+ *
+ * The ten sitelink pages (Enki/htp/ads/sitelink-landing-plan-2026-11-12.md) add one rule:
+ * the H1 is the sitelink text the visitor tapped, and `lead` puts the section that
+ * sitelink promised (prices or job photos) directly under the hero.
  */
 
 export type LpSlug =
   | "cua-cuon-can-tho"
   | "cua-keo-can-tho"
   | "cua-nhom-kinh-can-tho"
-  | "sua-cua-cuon-can-tho";
+  | "sua-cua-cuon-can-tho"
+  // Sitelink pages
+  | "bang-gia-cua-cuon-can-tho"
+  | "cua-cuon-nhom-khe-thoang-can-tho"
+  | "cua-cuon-nha-xuong-can-tho"
+  | "bang-gia-cua-keo-can-tho"
+  | "cua-keo-thep-can-tho"
+  | "lan-can-cau-thang-kinh-can-tho"
+  | "bang-gia-nhom-kinh-can-tho"
+  | "sua-cua-keo-can-tho"
+  | "remote-binh-luu-dien-cua-cuon-can-tho"
+  | "sua-motor-cua-cuon-can-tho";
 
 export type LpPhoto = { src: string; alt: string; caption: string };
 
@@ -62,6 +78,10 @@ export type AdLandingPage = {
   /** The Zalo-number form, top of the page and again at the end. Left off the repair
    *  page: a broken door is an emergency, and an emergency calls. */
   form?: LpForm;
+  /** The section the sitelink promised, rendered directly under the hero. "prices" also
+   *  hides the hero photo on phones, so the table is what the first scroll shows;
+   *  "photos" pulls the prices up behind the photos. Unset: the default order. */
+  lead?: "prices" | "photos";
   stepsTitle: string;
   steps: { title: string; body: string }[];
   faq: { q: string; a: string }[];
@@ -114,6 +134,18 @@ function tamLien(key: "dai_loan" | "uc" | "inox") {
   if (!g) throw new Error(`lp-data: no TAM_LIEN group "${key}"`);
   return g.rows.map((r) => r.gia);
 }
+
+/** Rows of a hand-mirrored table, by label. Throws at build time if a label is gone. */
+function pick(table: string[][], ...labels: string[]): string[][] {
+  return labels.map((label) => {
+    const row = table.find((r) => r[0] === label);
+    if (!row) throw new Error(`lp-data: no row "${label}"`);
+    return row;
+  });
+}
+
+/** "100.000 – 300.000 đ" → "100.000đ", the low end of a repair range. */
+const rangeFrom = (row: string[]) => `${row[1].split(" – ")[0]}đ`;
 
 function nhomKinh(group: string, prefix?: string): number {
   const g = NHOM_KINH.find((x) => x.group === group);
@@ -189,6 +221,103 @@ const faqWarranty = (what: string) => ({
   a: `Hưng Thành Phát Door bảo hành ${what} theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, bên em sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.`,
 });
 
+// The price sitelink pages (bảng giá cửa cuốn, cửa kéo, nhôm kính). The catalog the Zalo
+// bot sends (Enki/htp/catalog/catalog-htp.pdf via zalo-bot /send-catalog) carries the
+// retail price tables for cửa cuốn, motor, cửa kéo, nhôm kính and lan can, so "bảng giá
+// đầy đủ" is what arrives.
+const PRICE_FORM: LpForm = {
+  title: "Ghi số Zalo để nhận bảng giá đầy đủ",
+  submitLabel: "Nhận bảng giá qua Zalo",
+};
+
+const STEP_QUOTE = { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." };
+
+const cuonSteps = (detail: string) => [
+  stepOne(detail),
+  STEP_QUOTE,
+  { title: "Làm tại xưởng Bình Thủy", body: "Cửa cắt đúng kích thước tại xưởng, không phải chờ hàng từ TP.HCM." },
+  { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tại chỗ khoảng 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
+];
+
+const keoSteps = (detail: string) => [
+  stepOne(detail),
+  STEP_QUOTE,
+  { title: "Làm tại xưởng Bình Thủy", body: "Cửa gia công đúng kích thước tại xưởng của Hưng Thành Phát." },
+  { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tiêu chuẩn mất 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
+];
+
+const nkSteps = (detail: string) => [
+  stepOne(detail),
+  STEP_QUOTE,
+  { title: "Gia công tại xưởng", body: "Khoảng 3–5 ngày làm việc sau khi chốt đơn." },
+  { title: "Lắp, chạy thử, nghiệm thu", body: "Cửa đi, cửa sổ tiêu chuẩn lắp trong 1–2 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+];
+
+const INSTALL_STEPS_TITLE = "4 bước, từ báo giá đến lúc thanh toán";
+
+// Repair: the promises, steps and shared FAQ of /lp/sua-cua-cuon-can-tho, used by every
+// repair page (sửa cửa cuốn, sửa cửa kéo, remote & bình lưu điện, sửa motor).
+const REPAIR_PROMISES = {
+  title: "Biết giá trước khi thợ đụng vào cửa",
+  lead: "Ba điều bên em giữ với mọi lần sửa.",
+  items: [
+    {
+      title: "Báo giá trước",
+      body: "Kỹ thuật viên kiểm tra, báo giá từng hạng mục rồi mới sửa. Không phát sinh ẩn.",
+    },
+    {
+      title: "Sửa xong mới thanh toán",
+      body: "Cửa chạy lại bình thường rồi anh/chị mới trả tiền.",
+    },
+    {
+      title: "Không tính phí đi lại",
+      body: "Ở tất cả quận, huyện Cần Thơ. Chỉ tính tiền theo hạng mục sửa thực tế.",
+    },
+  ],
+};
+
+const REPAIR_STEPS_TITLE = "4 bước, từ cuộc gọi đến khi cửa chạy lại";
+const REPAIR_STEPS = [
+  { title: "Gọi hoặc nhắn Zalo", body: "Tả lỗi, gửi video cửa nếu được để kỹ thuật viên mang đúng phụ tùng." },
+  { title: "Có mặt trong ngày", body: "Kỹ thuật viên kiểm tra và báo giá từng hạng mục trước khi sửa." },
+  { title: "Sửa tại chỗ", body: "Mang theo phụ tùng phổ biến, phần lớn sự cố xử lý xong ngay lần đến." },
+  { title: "Cửa chạy rồi mới trả tiền", body: "Anh/chị kiểm tra cửa chạy bình thường rồi mới thanh toán." },
+];
+
+const REPAIR_PROOF = quote("Tien My Vo", "Nhân viên hỗ trợ nhiệt tình, cần sửa chữa cũng nhanh chóng.");
+
+const REPAIR_PRICE_LEAD =
+  "Giá tại Cần Thơ. Kỹ thuật viên kiểm tra và báo giá chính xác trước khi sửa — không phát sinh thêm.";
+const REPAIR_PRICE_NOTE = "Không tính phí đi lại trong Cần Thơ.";
+
+const FAQ_MOTOR_REPAIR = {
+  q: "Sửa motor cửa cuốn hết bao nhiêu?",
+  a: "Sửa motor từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng. Nếu phải thay motor mới, từ 1.500.000 đến 4.000.000 đồng. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+};
+
+const FAQ_WONT_OPEN = {
+  q: "Cửa cuốn không lên được — do đâu?",
+  a: "Thường do 4 nguyên nhân: (1) motor cháy hoặc kẹt — nhấn nút không phản hồi; (2) remote mất lập trình — nhấn remote đèn không nháy; (3) lò xo gãy — cửa nặng bất thường dù motor còn chạy; (4) mất điện và bình lưu điện hết. Gọi để kỹ thuật viên chẩn đoán trong ngày.",
+};
+
+const REPAIR_FAQ = [
+  {
+    q: "Có sửa cửa không do Hưng Thành Phát lắp không?",
+    a: "Có. Bên em sửa tất cả loại cửa cuốn, cửa kéo, cửa nhôm kính — bất kể thương hiệu hay nơi mua.",
+  },
+  {
+    q: "Có tính phí đi lại không?",
+    a: "Không. Bên em phục vụ toàn bộ quận, huyện Cần Thơ — Bình Thủy, Ninh Kiều, Cái Răng, Ô Môn, Thốt Nốt và các huyện ngoại thành — không tính phí đi lại. Chi phí chỉ tính theo hạng mục sửa thực tế.",
+  },
+  {
+    q: "Linh kiện thay mới có bảo hành không?",
+    a: "Có. Linh kiện thay mới được bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.",
+  },
+];
+
+// Reviews on the sitelink pages: two short ones, to keep the page near 300 words.
+const SHORT_REVIEWS: Review[] = [review("Tien My Vo"), review("Thắng Võ Minh")];
+
 // ── prices, all from bang-gia-data.ts ────────────────────────────────────────
 
 const CUON = {
@@ -245,7 +374,637 @@ const SUA_NHOM_KINH: string[][] = [
   ["Thay tay nắm / tay gạt", "100.000 – 350.000 đ"],
 ];
 
-// ── the four pages ───────────────────────────────────────────────────────────
+// ── price tables and FAQ shared by more than one page ────────────────────────
+
+const CUON_TABLE: LpPriceTable = {
+  head: ["Loại cửa cuốn", "Giá từ (đ/m²)"],
+  rows: [
+    ["Tole Đài Loan (tấm liền)", formatGia(CUON.daiLoan)],
+    ["Cửa cuốn công nghệ Úc", formatGia(CUON.uc)],
+    ["Tole siêu trường", formatGia(CUON.sieuTruong)],
+    ["Song ngang, mắc võng thép", formatGia(CUON.songNgang)],
+    ["Nhôm công nghệ Đức", formatGia(CUON.nhomDuc)],
+    ["Inox SUS 304", formatGia(CUON.inox)],
+  ],
+};
+
+const MOTOR_FROM = Math.min(...MOTOR.map((m) => m.gia));
+
+/** "300kg · cửa dưới 12m²", "Cửa Úc · cửa cuốn công nghệ Úc, mọi kích thước". */
+const MOTOR_TABLE: LpPriceTable = {
+  head: ["Motor + remote", "đ/bộ"],
+  rows: MOTOR.map((m) => [
+    `${m.sucNang ?? "Cửa Úc"} · ${m.dienTich.charAt(0).toLowerCase()}${m.dienTich.slice(1)}`,
+    formatGia(m.gia),
+  ]),
+};
+
+/** "cửa dưới 12m² dùng motor 300kg, …" — the CRM's rule, as on /phu-kien-cua-cuon-can-tho. */
+const MOTOR_TIERS = MOTOR.filter((m) => m.sucNang !== null)
+  .map((m) => `${m.dienTich.charAt(0).toLowerCase()}${m.dienTich.slice(1)} dùng motor ${m.sucNang}`)
+  .join(", ");
+
+const KEO_TABLE: LpPriceTable = {
+  head: ["Độ dày thép", "Không lá", "Có lá"],
+  rows: CUA_KEO.map((r) => [`${r.label} (${r.mm})`, cell(r.khongLa), cell(r.coLa)]),
+};
+const KEO_NOTE =
+  "Cửa từ 5 đến dưới 8 m² cộng 20.000đ/m²; dưới 5 m² cộng 40.000đ/m². Cửa kéo nhôm và inox báo giá theo mẫu.";
+
+const NK_TABLES: LpPriceTable[] = NHOM_KINH.map((g, i) => ({
+  head: [g.group, "đ/m²"],
+  rows: g.rows.map((r) => [r.mau, cell(r.gia)]),
+  collapsed: i >= 2,
+}));
+
+/** Lan can rows of the catalog, named as on /bang-gia-cua-nhom-kinh-can-tho ("Tay nhôm 3D 2 × 2"). */
+const LAN_CAN = (NHOM_KINH.find((g) => g.group === "Lan can cầu thang")?.rows ?? []).map((r) => [
+  r.mau.replace(/\*/g, " × "),
+  cell(r.gia),
+]);
+const LAN_CAN_TU = lowest(
+  NHOM_KINH.find((g) => g.group === "Lan can cầu thang")?.rows.map((r) => r.gia) ?? [],
+  "lan can cầu thang"
+);
+
+// Cửa cuốn nhôm khe thoáng: every nan in the catalog except the closed ones (OT70, AL70),
+// grouped by brand. The slot type comes from NAN_SPECS (printed on the nan or the maker's page).
+const KHE_THOANG = NAN_DUC.filter((n) => {
+  const s = NAN_SPECS[n.code];
+  if (!s) throw new Error(`lp-data: no NAN_SPECS for ${n.code}`);
+  return !/kín/i.test(s.kieu);
+});
+const KHE_THOANG_TU = lowest(KHE_THOANG.map((n) => n.gia), "nan khe thoáng");
+const KHE_THOANG_TABLES: LpPriceTable[] = ["Kovidoor", "Mitadoor", "Alumdoor", "OneDoor"].map((brand, i) => ({
+  head: [`Nan ${brand}`, "đ/m²"],
+  rows: KHE_THOANG.filter((n) => n.brand === brand)
+    .sort((a, b) => (a.gia ?? Infinity) - (b.gia ?? Infinity))
+    .map((n) => [`${n.code} · ${NAN_SPECS[n.code].kieu.toLowerCase()}`, cell(n.gia)]),
+  collapsed: i > 0,
+}));
+
+const FAQ_CUON_PRICE = {
+  q: "Cửa cuốn giá bao nhiêu một mét vuông?",
+  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}, inox SUS 304 từ ${perM2(CUON.inox)}. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí.`,
+};
+
+const FAQ_MOTOR_TIER = {
+  q: "Cửa nhà tôi dùng motor loại nào?",
+  a: `Tải motor chọn theo diện tích cửa, vì cửa càng rộng, càng cao thì cánh càng nặng: ${MOTOR_TIERS}. Cửa cuốn công nghệ Úc dùng motor riêng. Motor kèm remote, tính theo bộ, chưa VAT.`,
+};
+
+const FAQ_KEO_PRICE = {
+  q: "Cửa kéo giá bao nhiêu?",
+  a: `Cửa kéo thép tính theo m² diện tích cửa (rộng × cao): từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)} tùy độ dày và loại có lá hay không lá, đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo nhôm và inox báo giá theo mẫu.`,
+};
+
+const FAQ_KEO_TIME = {
+  q: "Lắp cửa kéo mất bao lâu?",
+  a: "Lắp đặt cửa kéo tiêu chuẩn mất 3–5 giờ. Đội kỹ thuật có mặt trong ngày tại tất cả quận, huyện Cần Thơ.",
+};
+
+const FAQ_KEO_LA = {
+  q: "Cửa kéo có lá và không lá khác nhau thế nào?",
+  a: "Cửa có lá có thêm lá tole phủ kín giữa các thanh U: cửa đóng là che được tầm nhìn, chặn chuột và bụi. Cửa không lá chỉ có khung U và nhíp, nên khóa cửa rồi gió và ánh sáng vẫn vào nhà; giá thấp hơn cửa có lá.",
+};
+
+const FAQ_KEO_DAY = {
+  q: "Nên chọn thanh U dày bao nhiêu?",
+  a: KEO_NHOM_DAY.map((b) => `${b.tieuDe}: ${b.goiY.charAt(0).toLowerCase()}${b.goiY.slice(1)}.`).join(" "),
+};
+
+const FAQ_NK_PRICE = {
+  q: "Cửa nhôm kính giá bao nhiêu?",
+  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, nhôm Việt: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Nhôm nhập và Maxpro cao hơn — xem bảng giá phía trên. Giá đã gồm công lắp đặt, cửa nhôm đã gồm kính trắng 8 ly, chưa VAT.`,
+};
+
+const FAQ_NK_VIET_NHAP = {
+  q: "Nhôm Việt và nhôm nhập khác nhau thế nào?",
+  a: "Nhôm nhập có bề mặt xử lý tốt hơn, ít cong vênh hơn. Nhôm Việt giá thấp hơn, hợp công trình không đòi hỏi cao. Cả hai đều có nhiều độ dày — xem bảng giá phía trên; thợ tư vấn loại hợp ngân sách khi đến đo.",
+};
+
+const FAQ_NK_TIME = {
+  q: "Bao lâu thì lắp xong?",
+  a: "Gia công tại xưởng khoảng 3–5 ngày làm việc sau khi chốt đơn. Cửa đi và cửa sổ tiêu chuẩn lắp trong 1–2 ngày; mặt dựng lớn hoặc lan can nhiều tầng 3–7 ngày.",
+};
+
+const FAQ_CUON_EXTRA = {
+  q: "Ngoài giá theo m², còn tính thêm gì?",
+  a: "Đơn giá đã gồm vật tư và công lắp đặt. Tính thêm: VAT 10%; motor, bình tích điện, khóa ngang nếu anh/chị chọn. Khảo sát, đo đạc nội thành Cần Thơ miễn phí.",
+};
+
+const FAQ_KEO_CALC = {
+  q: "Giá cửa kéo tính như thế nào?",
+  a: `Giá tính theo m² diện tích cửa (chiều rộng × chiều cao), đã gồm vật tư và công lắp đặt, chưa VAT 10%. ${KEO_NOTE}`,
+};
+
+const keoPrices = (title: string) => ({
+  title,
+  lead: `Giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
+  tables: [KEO_TABLE],
+  note: `${KEO_NOTE} Dòng ghi “Liên hệ” là hàng đặt riêng.`,
+});
+
+/** "1.0mm (1 ly)" → "1 ly · 1.0mm", the order the CRM rows use. */
+const doDay = (mau: string) => mau.replace(/^([\d.]+mm)\s*\((.+)\)$/, "$2 · $1");
+const SIEU_TRUONG = TOLE_THEM.find((x) => x.key === "tole_sieu_truong")?.rows ?? [];
+const DAI_LOAN = TAM_LIEN.find((x) => x.key === "dai_loan")?.rows ?? [];
+const MOTOR_500 = MOTOR.find((m) => m.sucNang === "500kg");
+if (!MOTOR_500) throw new Error("lp-data: no 500kg motor");
+
+const REMOTE_ROWS = pick(SUA_CUON, "Sửa / lập trình lại remote", "Thay bình lưu điện");
+const MOTOR_REPAIR_ROWS = pick(SUA_CUON, "Sửa motor (cuộn dây, tụ, bo mạch)", "Thay motor nhập khẩu mới");
+const KEO_REPAIR_ROWS = pick(SUA_KEO, "Chỉnh / nắn ray lệch", "Thay con lăn (1 bộ)");
+
+/** The rest of the cửa cuốn repair list, folded, under a repair page's own rows. */
+const otherCuonRepairs = (shown: string[][]): LpPriceTable => ({
+  head: ["Sửa cửa cuốn khác", "Giá tham khảo"],
+  rows: SUA_CUON.filter((r) => !shown.includes(r)),
+  collapsed: true,
+});
+
+/** What every repair page shares: one call button, the repair promises and steps. */
+const REPAIR = {
+  promises: REPAIR_PROMISES,
+  proof: REPAIR_PROOF,
+  reviews: SHORT_REVIEWS,
+  lead: "prices" as const,
+  stepsTitle: REPAIR_STEPS_TITLE,
+  steps: REPAIR_STEPS,
+};
+
+// ── the ten sitelink pages ───────────────────────────────────────────────────
+// H1 = the sitelink text + its description line. First section = what the sitelink promised.
+
+const SITELINK_PAGES: AdLandingPage[] = [
+  {
+    slug: "bang-gia-cua-cuon-can-tho",
+    keyword: "Bảng Giá Cửa Cuốn Cần Thơ",
+    promise: "Niêm Yết Theo m², Motor Tính Riêng",
+    description: `Giá cửa cuốn niêm yết theo m², áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}. Đã gồm vật tư và công lắp, chưa VAT. Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ.`,
+    intro:
+      "Hưng Thành Phát sản xuất và lắp đặt cửa cuốn tại Cần Thơ từ 2005. Bảng dưới là giá niêm yết; thợ đo tận nơi và báo giá đúng kích thước nhà anh/chị, miễn phí.",
+    priceTeaser: `Từ ${perM2(CUON.daiLoan)} · motor + remote từ ${formatGia(MOTOR_FROM)}đ/bộ`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
+    hero: jobImage(
+      "project-01-cua-cuon-kem-so-534",
+      "03.jpg",
+      "Cửa cuốn kem mặt tiền",
+      "Cửa cuốn màu kem lắp cho mặt tiền nhà phố"
+    ),
+    lead: "prices",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa cuốn bên em đã lắp",
+      items: [
+        job("p29-shop-vang-khai-truong-28-1", "Cửa cuốn shop — ngày khai trương 28/1/2026"),
+        job("p01-cc-nan-bac", "Cửa cuốn nan nhôm bạc"),
+        job("p59-service-cc-xanh", "Cửa cuốn tấm liền xanh"),
+        job("p31-xuong-cc-xanh", "Cửa cuốn nhà xưởng khổ lớn"),
+      ],
+    },
+    prices: {
+      title: "Bảng giá cửa cuốn",
+      lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT 10%. Áp dụng từ ${APPLIED_FROM}.`,
+      tables: [CUON_TABLE, MOTOR_TABLE],
+      note: "Motor + remote tính theo bộ, chưa VAT. Bình tích điện và khóa ngang tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
+    },
+    form: PRICE_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
+    faq: [FAQ_CUON_PRICE, FAQ_CUON_EXTRA, FAQ_MOTOR_TIER, FAQ_DEPOSIT, FAQ_MATERIALS, FAQ_LATE, faqWarranty("cả cửa và motor")],
+    closing: "Bảng giá cửa cuốn Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    slug: "cua-cuon-nhom-khe-thoang-can-tho",
+    keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ",
+    promise: "Công Nghệ Đức, Chạy Êm, Thoáng Gió",
+    description: `${KHE_THOANG.length} mẫu nan nhôm công nghệ Đức có khe thoáng — Kovidoor, Mitadoor, Alumdoor, OneDoor — giá từ ${perM2(KHE_THOANG_TU)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí.`,
+    intro:
+      "Khe thoáng là lỗ dập trên nan nhôm: cửa đóng rồi gió và ánh sáng vẫn vào nhà. Mẫu có gioong hoặc lông nheo giữa các nan chạy êm, bớt ồn. Thợ đo tận nơi và báo giá miễn phí.",
+    priceTeaser: `${KHE_THOANG.length} mẫu nan khe thoáng · từ ${perM2(KHE_THOANG_TU)}`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
+    hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
+    lead: "photos",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa cuốn khe thoáng bên em đã lắp",
+      items: [
+        job("p24-cc-xam-duc-lo", "Nan khe thoáng màu xám"),
+        job("p28-cc-kem-duc-lo-nt", "Nan khe thoáng màu kem"),
+        job("p60-garage-cc-tan", "Cửa garage — thợ đang lắp"),
+        job("p02-cc-kem-tiled", "Shophouse — thợ đang lắp"),
+      ],
+    },
+    prices: {
+      title: "Giá cửa cuốn nhôm khe thoáng",
+      lead: `Giá theo m² từng mẫu nan, đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
+      tables: KHE_THOANG_TABLES,
+      note: `Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.`,
+    },
+    form: INSTALL_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn mẫu nan hợp ngân sách."),
+    faq: [
+      {
+        q: "Khe thoáng, gioong, lông nheo là gì?",
+        a: "Khe thoáng là lỗ dập trên nan để gió và ánh sáng vào khi cửa đóng; mẫu kín không có lỗ nên riêng tư hơn. Gioong (ron) và lông nheo là dải cao su hoặc lông nằm giữa các nan, giúp cửa chạy êm và bớt ồn; mẫu có chữ R cuối mã thường có.",
+      },
+      {
+        q: "Nên chọn nan dày bao nhiêu?",
+        a: "Nhà ở, garage: nan dày 1.0–1.5mm là đủ cho cửa đến khoảng 16m² (rộng 4m × cao 4m). Nhà sát đường lớn chọn mẫu có lông nheo hoặc gioong chống ồn. Cửa rộng trên 6m chọn nan dày, chân dày để thân cửa không võng.",
+      },
+      FAQ_DEPOSIT,
+      FAQ_MATERIALS,
+      FAQ_LATE,
+      faqWarranty("cả cửa và motor"),
+    ],
+    closing: "Cửa cuốn nhôm khe thoáng Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    slug: "cua-cuon-nha-xuong-can-tho",
+    keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ",
+    promise: "Khổ Lớn Cho Kho, Xưởng",
+    description: `Cửa cuốn khổ lớn cho nhà xưởng, kho hàng, làm tại xưởng Bình Thủy từ 2005. Tole siêu trường từ ${perM2(CUON.sieuTruong)}, tole Đài Loan từ ${perM2(CUON.daiLoan)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí.`,
+    intro: `Cửa cuốn cho nhà xưởng, kho hàng, garage xe tải — làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Motor chọn theo diện tích cửa: ${MOTOR_500.dienTich.toLowerCase()} dùng motor ${MOTOR_500.sucNang}.`,
+    priceTeaser: `Tole siêu trường từ ${perM2(CUON.sieuTruong)} · tole Đài Loan từ ${perM2(CUON.daiLoan)}`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước cửa",
+    hero: job("p31-xuong-cc-xanh", "Cửa cuốn xanh nhà xưởng", "Cửa cuốn tole xanh khổ lớn lắp cho nhà xưởng"),
+    lead: "photos",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa cuốn nhà xưởng bên em đã lắp",
+      items: [
+        job("p67-xuong-cc-xanh-lon", "Hai cửa cuốn xanh khổ lớn"),
+        job("p12-xuong-cc-trang-gach", "Nhà xưởng cửa cuốn trắng"),
+        jobImage("p14-xuong-cc-trang-xe452", "02.jpg", "Nhà xưởng — thợ đang lắp"),
+        job("p40-xuong-cc-xanh-toys", "Nhà xưởng cửa cuốn xanh"),
+      ],
+    },
+    prices: {
+      title: "Giá cửa cuốn nhà xưởng",
+      lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
+      tables: [
+        { head: ["Tole siêu trường", "đ/m²"], rows: SIEU_TRUONG.map((r) => [doDay(r.mau), cell(r.gia)]) },
+        { head: ["Tole Đài Loan", "đ/m²"], rows: DAI_LOAN.map((r) => [`${r.label} · ${r.mm}`, cell(r.gia)]) },
+        { ...MOTOR_TABLE, collapsed: true },
+      ],
+      note: `Tole Đài Loan 8 zem dùng cho ${TAM_LIEN_SPECS.dai_loan.goiY["8zem"].toLowerCase().replace(": ", ", hợp ")}. Motor và bình tích điện tính riêng. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.`,
+    },
+    form: INSTALL_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: [
+      stepOne("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn loại tole và motor."),
+      STEP_QUOTE,
+      { title: "Gia công tại xưởng Bình Thủy", body: "Khoảng 3–5 ngày sau khi chốt đơn." },
+      { title: "Lắp, chạy thử, nghiệm thu", body: "Cửa dưới 6m lắp trong 1 ngày, cửa khổ lớn 1–2 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+    ],
+    faq: [
+      {
+        q: "Cửa cuốn nhà xưởng giá bao nhiêu?",
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, tole siêu trường từ ${perM2(CUON.sieuTruong)}, đã gồm vật tư và công lắp đặt, chưa VAT. Motor + remote ${MOTOR_500.sucNang} cho ${MOTOR_500.dienTich.toLowerCase()}: ${formatGia(MOTOR_500.gia)}đ/bộ. Thợ đo tận nơi và báo giá trọn gói, miễn phí.`,
+      },
+      FAQ_MOTOR_TIER,
+      {
+        q: "Mất điện thì cửa có mở được không?",
+        a: `Có, nếu lắp bình tích điện: ${PHU_KIEN_DUNG_CHO.binh.charAt(0).toLowerCase()}${PHU_KIEN_DUNG_CHO.binh.slice(1)}. Bên em khuyên lắp bình cho nhà xưởng sản xuất liên tục.`,
+      },
+      {
+        q: "Bao lâu thì lắp xong?",
+        a: "Gia công tại xưởng khoảng 3–5 ngày. Cửa dưới 6m thi công 1 ngày, cửa khổ lớn 1–2 ngày. Có thể thi công ngoài giờ sản xuất theo yêu cầu.",
+      },
+      FAQ_DEPOSIT,
+      FAQ_MATERIALS,
+      FAQ_LATE,
+      faqWarranty("cả cửa và motor"),
+    ],
+    closing: "Cửa cuốn nhà xưởng Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    slug: "bang-gia-cua-keo-can-tho",
+    keyword: "Bảng Giá Cửa Kéo Cần Thơ",
+    promise: "Đã Gồm Vật Tư Và Lắp Đặt",
+    description: `Giá cửa kéo thép niêm yết theo m², từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)}, đã gồm vật tư và công lắp đặt, chưa VAT. Báo giá rõ từng mục trước khi làm; đặt cọc 30%, lắp xong mới thanh toán.`,
+    intro:
+      "Cửa kéo thép làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Giá tính theo m² diện tích cửa (rộng × cao); thợ đo tận nơi, báo giá rõ từng mục trước khi làm.",
+    priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
+    hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
+    lead: "prices",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa kéo bên em đã lắp",
+      items: [
+        job("p55-keo-trang-chau-cay", "Cửa kéo trắng nhà phố"),
+        job("p39-shop-keo-kem-oto", "Cửa kéo kem mặt tiền shop"),
+        job("p69-day-keo-xanh-xuong", "Dãy cửa kéo nhà xưởng"),
+        job("p50-vinh-long-binh-minh-keo-vang", "Cửa kéo vàng — Bình Minh, Vĩnh Long"),
+      ],
+    },
+    prices: keoPrices("Bảng giá cửa kéo thép"),
+    form: PRICE_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
+    faq: [FAQ_KEO_CALC, FAQ_KEO_LA, FAQ_KEO_DAY, FAQ_KEO_TIME, FAQ_DEPOSIT, FAQ_LATE, faqWarranty("cửa kéo")],
+    closing: "Bảng giá cửa kéo Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    // The sitelink says "Cửa kéo thép Đài Loan"; nothing the site shows calls its cửa kéo
+    // "Đài Loan" (only a code comment in bang-gia-specs.ts), so the H1 leaves the word out.
+    slug: "cua-keo-thep-can-tho",
+    keyword: "Cửa Kéo Thép Cần Thơ",
+    promise: "Không Cần Motor, Đóng Mở Bằng Tay",
+    description: `Cửa kéo thép cho mặt tiền nhà phố và tiệm, đóng mở bằng tay, không cần motor. Giá từ ${perM2(KEO_TU)}, đã gồm vật tư và công lắp; lắp tiêu chuẩn 3–5 giờ.`,
+    intro:
+      "Cửa kéo thép cho mặt tiền nhà phố và tiệm, làm tại xưởng Bình Thủy từ 2005. Đóng mở bằng tay, không cần motor, nên không lo mất điện. Lắp tiêu chuẩn mất 3–5 giờ.",
+    priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
+    hero: job("p56-keo-xanh-via-he", "Cửa kéo thép mặt tiền", "Hai bộ cửa kéo thép lắp cho mặt tiền nhà phố"),
+    lead: "photos",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa kéo thép bên em đã lắp",
+      items: [
+        job("p06-shop-vang-0966653334", "Cửa kéo vàng — mặt tiền tiệm"),
+        job("p54-nha-xanh-keo-xanh", "Cửa kéo xanh — nhà phố"),
+        job("p66-nha-keo-xanh-soi", "Dãy cửa kéo xanh"),
+        job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ đang lắp"),
+      ],
+    },
+    prices: keoPrices("Giá cửa kéo thép"),
+    form: INSTALL_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
+    faq: [
+      {
+        q: "Cửa kéo thép có cần motor không?",
+        a: "Không. Cửa kéo thép thường vận hành bằng tay: không motor, không mạch điện, nên mất điện vẫn đóng mở bình thường.",
+      },
+      FAQ_KEO_PRICE,
+      FAQ_KEO_LA,
+      FAQ_KEO_DAY,
+      FAQ_KEO_TIME,
+      FAQ_DEPOSIT,
+      FAQ_LATE,
+      faqWarranty("cửa kéo"),
+    ],
+    closing: "Cửa kéo thép Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    slug: "lan-can-cau-thang-kinh-can-tho",
+    keyword: "Lan Can, Cầu Thang Kính Cần Thơ",
+    promise: "Kính Cường Lực, Thi Công Trọn Gói",
+    description: `Lan can kính cầu thang, ban công: kính cường lực 8–12mm, gia công theo số đo thực tế, lắp trọn gói tại Cần Thơ. Từ ${formatGia(LAN_CAN_TU)}đ/m² mặt lan can. Đặt cọc 30%, lắp xong mới thanh toán.`,
+    intro:
+      "Lan can kính cho cầu thang và ban công: kính cường lực 8–12mm, tay vịn gỗ hoặc nhôm. Bên em đo tận nơi, gia công theo số đo thực tế tại xưởng và lắp hoàn thiện.",
+    priceTeaser: `Từ ${formatGia(LAN_CAN_TU)}đ/m² mặt lan can · kính cường lực 8–12mm`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh cầu thang",
+    hero: jobImage(
+      "nk10-369-nguyen-van-cu-thang-kinh",
+      "03.jpg",
+      "Cầu thang kính cong — An Hòa, Ninh Kiều · 29/11/2024",
+      "Cầu thang xoắn lan can kính tay vịn gỗ do Hưng Thành Phát lắp"
+    ),
+    lead: "photos",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Lan can kính bên em đã lắp",
+      items: [
+        jobImage("nk03-lan-can-cmt8-binh-thuy", "02.jpg", "Cầu thang kính — Bùi Hữu Nghĩa, Bình Thủy · 13/01/2026"),
+        job("nk47-lan-can-thang-kinh", "Lan can kính cầu thang, tay vịn gỗ"),
+        job("nk21-lan-can-cong-decor-vang", "Lan can kính cong"),
+        job("nk36-lan-can-ban-cong-go", "Lan can kính ban công"),
+      ],
+    },
+    prices: {
+      title: "Giá lan can kính cầu thang",
+      lead: `Giá theo m² mặt lan can, đã gồm công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
+      tables: [{ head: ["Kiểu tay vịn", "đ/m²"], rows: LAN_CAN }],
+      note: "Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.",
+    },
+    form: INSTALL_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: [
+      stepOne("Gửi thêm ảnh cầu thang hoặc ban công nếu có."),
+      STEP_QUOTE,
+      { title: "Gia công tại xưởng", body: "2–3 ngày, theo số đo thực tế tại công trình." },
+      { title: "Lắp, nghiệm thu", body: "Lắp tại công trình trong 1 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+    ],
+    faq: [
+      {
+        q: "Lan can kính giá bao nhiêu?",
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can: ${LAN_CAN.map(([k, v]) => `${k.charAt(0).toLowerCase()}${k.slice(1)} ${v}đ`).join("; ")}. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí.`,
+      },
+      {
+        q: "Kính lan can có an toàn không?",
+        a: "Bên em dùng kính cường lực 8–12mm. Khi vỡ, kính cường lực vỡ thành hạt nhỏ, không thành mảnh sắc.",
+      },
+      {
+        q: "Bao lâu thì làm xong?",
+        a: "Thường 3–5 ngày làm việc từ khi đo đến khi lắp xong: 1 ngày khảo sát và đo, 2–3 ngày gia công tại xưởng, 1 ngày lắp tại công trình.",
+      },
+      {
+        q: "Có làm lan can theo thiết kế riêng không?",
+        a: "Có. Bên em gia công theo bản vẽ hoặc yêu cầu riêng: tay vịn đơn, có thanh đứng, kính ốp toàn phần, hoặc kết hợp nhôm và kính.",
+      },
+      FAQ_DEPOSIT,
+      FAQ_MATERIALS,
+      FAQ_LATE,
+      faqWarranty("lan can kính"),
+    ],
+    closing: "Lan can, cầu thang kính Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    slug: "bang-gia-nhom-kinh-can-tho",
+    keyword: "Bảng Giá Nhôm Kính Cần Thơ",
+    promise: "Đo Và Báo Giá Tận Nơi Miễn Phí",
+    description: `Giá cửa nhôm kính niêm yết theo m², áp dụng từ ${APPLIED_FROM}: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Đã gồm công lắp và kính trắng 8 ly, chưa VAT. Thợ đo và báo giá tận nơi, miễn phí.`,
+    intro:
+      "Bảng dưới là giá niêm yết theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Giá đúng kích thước nhà anh/chị: thợ đến đo và báo giá tận nơi, miễn phí.",
+    priceTeaser: `Vách kính từ ${perM2(NK.vach)} · cửa sổ từ ${perM2(NK.so)}`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước",
+    hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
+    lead: "prices",
+    promises: THREE_DUNG,
+    proof: INSTALL_PROOF,
+    reviews: SHORT_REVIEWS,
+    photos: {
+      title: "Cửa nhôm kính bên em đã lắp",
+      items: [
+        job("nk30-cua-4-canh-kinh", "Cửa đi nhôm kính 4 cánh"),
+        job("nk42-cua-so-nhom-can", "Cửa sổ nhôm kính"),
+        job("nk18-shopfront-kinh-ladder", "Vách kính mặt tiền cửa hàng"),
+        job("nk13-lap-cua-nha-gach", "Thợ đang lắp cửa nhôm kính"),
+      ],
+    },
+    prices: {
+      title: "Bảng giá nhôm kính",
+      lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
+      tables: NK_TABLES,
+      note: "Nhôm Việt: kính mờ cộng 70.000đ/m². Cửa nhôm kính không cộng phụ phí cửa nhỏ. Thợ đo tận nơi và báo giá miễn phí.",
+    },
+    form: PRICE_FORM,
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
+    faq: [
+      FAQ_NK_PRICE,
+      {
+        q: "Muốn dùng loại kính khác thì tính sao?",
+        a: "Giá cửa nhôm đã gồm kính trắng 8 ly. Kính mờ cộng 70.000đ/m² (nhôm Việt). Kính cường lực, kính hộp, kính phản quang báo giá riêng theo công trình.",
+      },
+      FAQ_NK_VIET_NHAP,
+      FAQ_NK_TIME,
+      FAQ_DEPOSIT,
+      FAQ_MATERIALS,
+      FAQ_LATE,
+      faqWarranty("cửa nhôm kính"),
+    ],
+    closing: "Bảng giá nhôm kính Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    ...REPAIR,
+    slug: "sua-cua-keo-can-tho",
+    keyword: "Sửa Cửa Kéo Cần Thơ",
+    promise: "Chỉnh Ray, Thay Bánh Xe Tại Chỗ",
+    description:
+      "Cửa kéo kẹt ray, lệch bánh xe, khóa ngang lỏng — kỹ thuật viên chỉnh ray, thay con lăn tại chỗ, thường xong trong 30–60 phút. Báo giá trước khi sửa, sửa xong mới thanh toán.",
+    intro:
+      "Cửa kéo kẹt ray, nặng tay, lệch bánh xe, khóa ngang không chốt được — kỹ thuật viên Hưng Thành Phát chỉnh ray, thay bánh xe (con lăn) tại chỗ, thường xong trong 30–60 phút. Báo giá trước khi sửa.",
+    priceTeaser: `Chỉnh ray từ ${rangeFrom(KEO_REPAIR_ROWS[0])} · thay con lăn từ ${rangeFrom(KEO_REPAIR_ROWS[1])}`,
+    zaloLabel: "Nhắn Zalo — gửi video cửa đang kẹt",
+    hero: job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ Hưng Thành Phát tại công trình", "Thợ Hưng Thành Phát bên bộ cửa kéo màu kem"),
+    photos: {
+      title: "Thợ và cửa kéo của Hưng Thành Phát",
+      items: [
+        job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền"),
+        job("p55-keo-trang-chau-cay", "Cửa kéo trắng nhà phố"),
+        job("p39-shop-keo-kem-oto", "Cửa kéo kem mặt tiền shop"),
+        job("p53-keo-xanh-kinh", "Cửa kéo xanh cạnh cửa kính"),
+      ],
+    },
+    prices: {
+      title: "Giá sửa cửa kéo",
+      lead: REPAIR_PRICE_LEAD,
+      tables: [{ head: ["Sửa cửa kéo", "Giá tham khảo"], rows: SUA_KEO }],
+      note: REPAIR_PRICE_NOTE,
+    },
+    faq: [
+      {
+        q: "Sửa cửa kéo kẹt ray mất bao lâu?",
+        a: "Ray lệch hoặc con lăn kẹt thường xử lý trong 30–60 phút. Kỹ thuật viên chỉnh ray tại chỗ, thay con lăn nếu cần. Nếu phải hàn gia cố khung thì thêm 1–2 giờ tùy mức độ.",
+      },
+      {
+        q: "Cửa kéo kẹt, nặng tay — do đâu?",
+        a: "Thường do ray cong vì va đập hoặc mối hàn yếu, con lăn mòn hoặc bụi bẩn tích tụ, hoặc thanh U bị uốn cong làm cửa không đóng thẳng. Kỹ thuật viên kiểm tra và báo giá từng hạng mục trước khi sửa.",
+      },
+      ...REPAIR_FAQ,
+    ],
+    closing: "Sửa cửa kéo Cần Thơ — báo giá trước, sửa xong mới trả tiền",
+  },
+  {
+    ...REPAIR,
+    slug: "remote-binh-luu-dien-cua-cuon-can-tho",
+    keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ",
+    promise: "Cài Lại Remote Tận Nhà, Thay Bình Bị Chai",
+    description:
+      "Remote không ăn, mất điện là cửa đứng im — bên em cài lại remote và thay bình lưu điện tận nhà, cả cửa không do bên em lắp. Báo giá trước, sửa xong mới thanh toán.",
+    intro:
+      "Remote phải bấm nhiều lần hoặc không ăn, mất điện là cửa đứng im vì bình lưu điện đã chai — kỹ thuật viên Hưng Thành Phát đến tận nhà cài lại remote, thay bình, cả cửa không do bên em lắp.",
+    priceTeaser: `Cài lại remote từ ${rangeFrom(REMOTE_ROWS[0])} · thay bình từ ${rangeFrom(REMOTE_ROWS[1])}`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh hộp motor, remote",
+    hero: jobImage(
+      "p19-cc-trang-san-da",
+      "02.jpg",
+      "Cửa cuốn kem lắp trong nhà",
+      "Cửa cuốn màu kem lắp trong nhà, motor gắn ở đầu trục cuốn"
+    ),
+    photos: {
+      title: "Thợ và công trình của Hưng Thành Phát",
+      items: [
+        job("p05-cc-kem-tuong-xam", "Thợ Hưng Thành Phát tại công trình"),
+        jobImage("p20-cc-kem-dap-pha", "04.jpg", "Thợ lắp cửa cuốn mặt tiền"),
+        job("p60-garage-cc-tan", "Cửa cuốn garage — thợ đang lắp"),
+        job("p28-cc-kem-duc-lo-nt", "Cửa cuốn khe thoáng kem"),
+      ],
+    },
+    prices: {
+      title: "Giá cài remote, thay bình lưu điện",
+      lead: REPAIR_PRICE_LEAD,
+      tables: [{ head: ["Remote, bình lưu điện", "Giá tham khảo"], rows: REMOTE_ROWS }, otherCuonRepairs(REMOTE_ROWS)],
+      note: REPAIR_PRICE_NOTE,
+    },
+    faq: [
+      {
+        q: "Mất remote cửa cuốn thì làm sao?",
+        a: "Bên em cài mã remote mới cho phần lớn dòng motor phổ biến tại Cần Thơ. Nếu remote cũ bị mất chứ không phải hỏng, nên xóa mã cũ khi cài remote mới để người nhặt được không mở được cửa.",
+      },
+      {
+        q: "Sao biết bình lưu điện đã chai?",
+        a: "Bình còn tốt cho cửa đóng mở được nhiều lượt khi cúp điện (thường 5–10 lần, tùy dung lượng bình). Bình đã chai thường chỉ còn một hai lượt, hoặc mất điện là cửa đứng im — đó là lúc cần thay.",
+      },
+      FAQ_WONT_OPEN,
+      ...REPAIR_FAQ,
+    ],
+    closing: "Remote, bình lưu điện cửa cuốn Cần Thơ — báo giá trước khi làm",
+  },
+  {
+    ...REPAIR,
+    slug: "sua-motor-cua-cuon-can-tho",
+    keyword: "Sửa Motor Cửa Cuốn Cần Thơ",
+    promise: "Thợ Đến Tận Nơi, Báo Giá Trước",
+    description:
+      "Motor cháy, yếu, kêu to hoặc cửa chạy khựng — kỹ thuật viên đến tận nơi trong ngày, kiểm tra cuộn dây, tụ, bo mạch và báo giá trước khi sửa. Sửa xong mới thanh toán.",
+    intro:
+      "Motor cháy, nóng bất thường, kêu to, cửa chạy chậm hoặc khựng giữa chừng — kỹ thuật viên Hưng Thành Phát đến tận nơi trong ngày, kiểm tra cuộn dây, tụ điện, bo mạch và báo giá trước khi sửa.",
+    priceTeaser: `Sửa motor từ ${rangeFrom(MOTOR_REPAIR_ROWS[0])} · thay motor mới từ ${rangeFrom(MOTOR_REPAIR_ROWS[1])}`,
+    zaloLabel: "Nhắn Zalo — gửi video cửa đang lỗi",
+    hero: jobImage(
+      "p19-cc-trang-san-da",
+      "03.jpg",
+      "Thợ Hưng Thành Phát hoàn thiện cửa cuốn",
+      "Hai thợ Hưng Thành Phát trên thang, hoàn thiện cửa cuốn màu kem trong nhà"
+    ),
+    photos: {
+      title: "Thợ và công trình của Hưng Thành Phát",
+      items: [
+        job("p05-cc-kem-tuong-xam", "Thợ Hưng Thành Phát tại công trình"),
+        jobImage("p20-cc-kem-dap-pha", "04.jpg", "Thợ lắp cửa cuốn mặt tiền"),
+        jobImage("p14-xuong-cc-trang-xe452", "02.jpg", "Nhà xưởng — thợ đang lắp"),
+        job("p01-cc-nan-bac", "Cửa cuốn nan nhôm bạc"),
+      ],
+    },
+    prices: {
+      title: "Giá sửa, thay motor cửa cuốn",
+      lead: REPAIR_PRICE_LEAD,
+      tables: [{ head: ["Sửa, thay motor", "Giá tham khảo"], rows: MOTOR_REPAIR_ROWS }, otherCuonRepairs(MOTOR_REPAIR_ROWS)],
+      note: REPAIR_PRICE_NOTE,
+    },
+    faq: [
+      FAQ_MOTOR_REPAIR,
+      {
+        q: "Motor kêu to, nóng, cửa chạy chậm — do đâu?",
+        a: "Thường do motor thiếu tải so với cánh cửa (chạy nóng, mòn nhông, hỏng sớm), hoặc lò xo cân bằng đã yếu làm cửa nặng bất thường, motor quá tải. Kỹ thuật viên kiểm tra cuộn dây, tụ điện, bo mạch và báo giá trước khi sửa.",
+      },
+      FAQ_WONT_OPEN,
+      ...REPAIR_FAQ,
+    ],
+    closing: "Sửa motor cửa cuốn Cần Thơ — báo giá trước khi sửa",
+  },
+];
+
+// ── the pages ────────────────────────────────────────────────────────────────
 
 export const AD_LANDING_PAGES: AdLandingPage[] = [
   {
@@ -279,34 +1038,14 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     prices: {
       title: "Giá cửa cuốn niêm yết",
       lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [
-        {
-          head: ["Loại cửa cuốn", "Giá từ (đ/m²)"],
-          rows: [
-            ["Tole Đài Loan (tấm liền)", formatGia(CUON.daiLoan)],
-            ["Cửa cuốn công nghệ Úc", formatGia(CUON.uc)],
-            ["Tole siêu trường", formatGia(CUON.sieuTruong)],
-            ["Song ngang, mắc võng thép", formatGia(CUON.songNgang)],
-            ["Nhôm công nghệ Đức", formatGia(CUON.nhomDuc)],
-            ["Inox SUS 304", formatGia(CUON.inox)],
-          ],
-        },
-      ],
+      tables: [CUON_TABLE],
       note: "Motor và bình tích điện tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
     },
     form: INSTALL_FORM,
-    stepsTitle: "4 bước, từ báo giá đến lúc thanh toán",
-    steps: [
-      stepOne("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
-      { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." },
-      { title: "Làm tại xưởng Bình Thủy", body: "Cửa cắt đúng kích thước tại xưởng, không phải chờ hàng từ TP.HCM." },
-      { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tại chỗ khoảng 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
-    ],
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
     faq: [
-      {
-        q: "Cửa cuốn giá bao nhiêu một mét vuông?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}, inox SUS 304 từ ${perM2(CUON.inox)}. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí.`,
-      },
+      FAQ_CUON_PRICE,
       FAQ_DEPOSIT,
       FAQ_MATERIALS,
       FAQ_LATE,
@@ -347,36 +1086,20 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     prices: {
       title: "Giá cửa kéo thép niêm yết",
       lead: `Giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [
-        {
-          head: ["Độ dày thép", "Không lá", "Có lá"],
-          rows: CUA_KEO.map((r) => [`${r.label} (${r.mm})`, cell(r.khongLa), cell(r.coLa)]),
-        },
-      ],
-      note: "Cửa từ 5 đến dưới 8 m² cộng 20.000đ/m²; dưới 5 m² cộng 40.000đ/m². Cửa kéo nhôm và inox báo giá theo mẫu.",
+      tables: [KEO_TABLE],
+      note: KEO_NOTE,
     },
     form: INSTALL_FORM,
-    stepsTitle: "4 bước, từ báo giá đến lúc thanh toán",
-    steps: [
-      stepOne("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn thép, nhôm hay inox hợp ngân sách."),
-      { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." },
-      { title: "Làm tại xưởng Bình Thủy", body: "Cửa gia công đúng kích thước tại xưởng của Hưng Thành Phát." },
-      { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tiêu chuẩn mất 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
-    ],
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn thép, nhôm hay inox hợp ngân sách."),
     faq: [
-      {
-        q: "Cửa kéo giá bao nhiêu?",
-        a: `Cửa kéo thép tính theo m² diện tích cửa (rộng × cao): từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)} tùy độ dày và loại có lá hay không lá, đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo nhôm và inox báo giá theo mẫu.`,
-      },
+      FAQ_KEO_PRICE,
       FAQ_DEPOSIT,
       {
         q: "Cửa kéo thép hay cửa kéo nhôm?",
         a: "Cửa kéo nhôm nhẹ hơn, không gỉ sét nhưng giá cao hơn 20–30%. Cửa kéo thép bền hơn về cơ học, giá thấp hơn, phụ kiện phổ biến dễ thay. Cả hai đều hợp mặt tiền kinh doanh.",
       },
-      {
-        q: "Lắp cửa kéo mất bao lâu?",
-        a: "Lắp đặt cửa kéo tiêu chuẩn mất 3–5 giờ. Đội kỹ thuật có mặt trong ngày tại tất cả quận, huyện Cần Thơ.",
-      },
+      FAQ_KEO_TIME,
       FAQ_MATERIALS,
       FAQ_LATE,
       faqWarranty("cửa kéo"),
@@ -408,35 +1131,17 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     prices: {
       title: "Giá nhôm kính niêm yết",
       lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
-      tables: NHOM_KINH.map((g, i) => ({
-        head: [g.group, "đ/m²"],
-        rows: g.rows.map((r) => [r.mau, cell(r.gia)]),
-        collapsed: i >= 2,
-      })),
+      tables: NK_TABLES,
       note: "Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
     },
     form: INSTALL_FORM,
-    stepsTitle: "4 bước, từ báo giá đến lúc thanh toán",
-    steps: [
-      stepOne("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
-      { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." },
-      { title: "Gia công tại xưởng", body: "Khoảng 3–5 ngày làm việc sau khi chốt đơn." },
-      { title: "Lắp, chạy thử, nghiệm thu", body: "Cửa đi, cửa sổ tiêu chuẩn lắp trong 1–2 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
-    ],
+    stepsTitle: INSTALL_STEPS_TITLE,
+    steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
     faq: [
-      {
-        q: "Cửa nhôm kính giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, nhôm Việt: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Nhôm nhập và Maxpro cao hơn — xem bảng giá phía trên. Giá đã gồm công lắp đặt, cửa nhôm đã gồm kính trắng 8 ly, chưa VAT.`,
-      },
+      FAQ_NK_PRICE,
       FAQ_DEPOSIT,
-      {
-        q: "Nhôm Việt và nhôm nhập khác nhau thế nào?",
-        a: "Nhôm nhập có bề mặt xử lý tốt hơn, ít cong vênh hơn. Nhôm Việt giá thấp hơn, hợp công trình không đòi hỏi cao. Cả hai đều có nhiều độ dày — xem bảng giá phía trên; thợ tư vấn loại hợp ngân sách khi đến đo.",
-      },
-      {
-        q: "Bao lâu thì lắp xong?",
-        a: "Gia công tại xưởng khoảng 3–5 ngày làm việc sau khi chốt đơn. Cửa đi và cửa sổ tiêu chuẩn lắp trong 1–2 ngày; mặt dựng lớn hoặc lan can nhiều tầng 3–7 ngày.",
-      },
+      FAQ_NK_VIET_NHAP,
+      FAQ_NK_TIME,
       FAQ_MATERIALS,
       FAQ_LATE,
       faqWarranty("cửa nhôm kính"),
@@ -454,25 +1159,8 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     priceTeaser: `Sửa remote từ ${SUA_CUON[0][1].split(" – ")[0]}đ · sửa motor từ ${SUA_CUON[3][1].split(" – ")[0]}đ`,
     zaloLabel: "Nhắn Zalo — gửi video cửa đang lỗi",
     hero: job("p19-cc-trang-san-da", "Cửa cuốn trắng — thợ đang hoàn thiện", "Thợ đứng thang hoàn thiện cửa cuốn trắng trong nhà"),
-    promises: {
-      title: "Biết giá trước khi thợ đụng vào cửa",
-      lead: "Ba điều bên em giữ với mọi lần sửa.",
-      items: [
-        {
-          title: "Báo giá trước",
-          body: "Kỹ thuật viên kiểm tra, báo giá từng hạng mục rồi mới sửa. Không phát sinh ẩn.",
-        },
-        {
-          title: "Sửa xong mới thanh toán",
-          body: "Cửa chạy lại bình thường rồi anh/chị mới trả tiền.",
-        },
-        {
-          title: "Không tính phí đi lại",
-          body: "Ở tất cả quận, huyện Cần Thơ. Chỉ tính tiền theo hạng mục sửa thực tế.",
-        },
-      ],
-    },
-    proof: quote("Tien My Vo", "Nhân viên hỗ trợ nhiệt tình, cần sửa chữa cũng nhanh chóng."),
+    promises: REPAIR_PROMISES,
+    proof: REPAIR_PROOF,
     reviews: [review("Tien My Vo"), review("Thắng Võ Minh"), review("Cương Trương Kim")],
     photos: {
       title: "Thợ và công trình của Hưng Thành Phát",
@@ -485,46 +1173,21 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     },
     prices: {
       title: "Giá sửa tham khảo",
-      lead: "Giá tại Cần Thơ. Kỹ thuật viên kiểm tra và báo giá chính xác trước khi sửa — không phát sinh thêm.",
+      lead: REPAIR_PRICE_LEAD,
       tables: [
         { head: ["Sửa cửa cuốn", "Giá tham khảo"], rows: SUA_CUON },
         { head: ["Sửa cửa kéo", "Giá tham khảo"], rows: SUA_KEO, collapsed: true },
         { head: ["Sửa cửa nhôm kính", "Giá tham khảo"], rows: SUA_NHOM_KINH, collapsed: true },
       ],
-      note: "Không tính phí đi lại trong Cần Thơ.",
+      note: REPAIR_PRICE_NOTE,
     },
     // No form: someone whose door is stuck calls. The page is one big call button.
-    stepsTitle: "4 bước, từ cuộc gọi đến khi cửa chạy lại",
-    steps: [
-      { title: "Gọi hoặc nhắn Zalo", body: "Tả lỗi, gửi video cửa nếu được để kỹ thuật viên mang đúng phụ tùng." },
-      { title: "Có mặt trong ngày", body: "Kỹ thuật viên kiểm tra và báo giá từng hạng mục trước khi sửa." },
-      { title: "Sửa tại chỗ", body: "Mang theo phụ tùng phổ biến, phần lớn sự cố xử lý xong ngay lần đến." },
-      { title: "Cửa chạy rồi mới trả tiền", body: "Anh/chị kiểm tra cửa chạy bình thường rồi mới thanh toán." },
-    ],
-    faq: [
-      {
-        q: "Sửa motor cửa cuốn hết bao nhiêu?",
-        a: "Sửa motor từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng. Nếu phải thay motor mới, từ 1.500.000 đến 4.000.000 đồng. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
-      },
-      {
-        q: "Cửa cuốn không lên được — do đâu?",
-        a: "Thường do 4 nguyên nhân: (1) motor cháy hoặc kẹt — nhấn nút không phản hồi; (2) remote mất lập trình — nhấn remote đèn không nháy; (3) lò xo gãy — cửa nặng bất thường dù motor còn chạy; (4) mất điện và bình lưu điện hết. Gọi để kỹ thuật viên chẩn đoán trong ngày.",
-      },
-      {
-        q: "Có sửa cửa không do Hưng Thành Phát lắp không?",
-        a: "Có. Bên em sửa tất cả loại cửa cuốn, cửa kéo, cửa nhôm kính — bất kể thương hiệu hay nơi mua.",
-      },
-      {
-        q: "Có tính phí đi lại không?",
-        a: "Không. Bên em phục vụ toàn bộ quận, huyện Cần Thơ — Bình Thủy, Ninh Kiều, Cái Răng, Ô Môn, Thốt Nốt và các huyện ngoại thành — không tính phí đi lại. Chi phí chỉ tính theo hạng mục sửa thực tế.",
-      },
-      {
-        q: "Linh kiện thay mới có bảo hành không?",
-        a: "Có. Linh kiện thay mới được bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.",
-      },
-    ],
+    stepsTitle: REPAIR_STEPS_TITLE,
+    steps: REPAIR_STEPS,
+    faq: [FAQ_MOTOR_REPAIR, FAQ_WONT_OPEN, ...REPAIR_FAQ],
     closing: "Cửa hỏng không chờ được — gọi ngay",
   },
+  ...SITELINK_PAGES,
 ];
 
 export function getAdLanding(slug: string): AdLandingPage | undefined {

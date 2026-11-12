@@ -1,7 +1,7 @@
 import { LeadForm } from "@/components/LeadForm";
 import { ProofLine } from "@/components/lp/Proof";
 import { ZaloStickyBar } from "@/components/ZaloStickyBar";
-import { INSTALL_FORM, INSTALL_PROOF, type LpProof } from "@/lib/lp-data";
+import { INSTALL_FORM, INSTALL_PROOF, type LpForm, type LpProof } from "@/lib/lp-data";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,6 +20,7 @@ export function ZaloQuoteCard({
   id,
   track = "hero_form",
   proof = INSTALL_PROOF,
+  form = INSTALL_FORM,
   sticky = true,
   className,
 }: {
@@ -27,6 +28,8 @@ export function ZaloQuoteCard({
   id?: string;
   track?: string;
   proof?: LpProof;
+  /** Title and button label. The price ad pages say "bảng giá" instead of "báo giá". */
+  form?: LpForm;
   /** Also pin the field to the bottom of the screen once this card scrolls away. */
   sticky?: boolean;
   className?: string;
@@ -45,9 +48,9 @@ export function ZaloQuoteCard({
         )}
       >
         <h2 id={titleId} className="text-balance text-xl font-semibold leading-snug tracking-tight">
-          {INSTALL_FORM.title}
+          {form.title}
         </h2>
-        <LeadForm source={source} tone="light" submitLabel={INSTALL_FORM.submitLabel} className="mt-3" />
+        <LeadForm source={source} tone="light" submitLabel={form.submitLabel} className="mt-3" />
         <ProofLine proof={proof} tone="light" className="mt-4 border-t border-brand/10 pt-3" />
       </section>
       {sticky && (
