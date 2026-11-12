@@ -294,7 +294,7 @@ const REPAIR_PRICE_NOTE = "Không tính phí đi lại trong Cần Thơ.";
 
 const FAQ_MOTOR_REPAIR = {
   q: "Sửa motor cửa cuốn hết bao nhiêu?",
-  a: "Sửa motor từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng. Nếu phải thay motor mới, từ 1.500.000 đến 4.000.000 đồng. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+  a: "Sửa motor từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng. Nếu phải thay motor mới (kèm remote), từ 3.300.000 đến 5.500.000 đồng theo bảng giá. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
 };
 
 const FAQ_WONT_OPEN = {
@@ -356,8 +356,8 @@ const SUA_CUON: string[][] = [
   ["Chỉnh ray, con lăn lệch", "200.000 – 500.000 đ"],
   ["Thay lò xo cân bằng", "300.000 – 700.000 đ"],
   ["Sửa motor (cuộn dây, tụ, bo mạch)", "300.000 – 1.500.000 đ"],
-  ["Thay motor nhập khẩu mới", "1.500.000 – 4.000.000 đ"],
-  ["Thay bình lưu điện", "400.000 – 900.000 đ"],
+  ["Thay motor mới (kèm remote)", "3.300.000 – 5.500.000 đ"],
+  ["Thay bình lưu điện", "Liên hệ"],
   ["Thay dây cuốn", "200.000 – 600.000 đ"],
 ];
 const SUA_KEO: string[][] = [
@@ -447,7 +447,7 @@ const KHE_THOANG_TABLES: LpPriceTable[] = ["Kovidoor", "Mitadoor", "Alumdoor", "
 
 const FAQ_CUON_PRICE = {
   q: "Cửa cuốn giá bao nhiêu một mét vuông?",
-  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}, inox SUS 304 từ ${perM2(CUON.inox)}. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí.`,
+  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}, inox SUS 304 từ ${perM2(CUON.inox)}. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
 };
 
 const FAQ_MOTOR_TIER = {
@@ -515,7 +515,7 @@ const MOTOR_500 = MOTOR.find((m) => m.sucNang === "500kg");
 if (!MOTOR_500) throw new Error("lp-data: no 500kg motor");
 
 const REMOTE_ROWS = pick(SUA_CUON, "Sửa / lập trình lại remote", "Thay bình lưu điện");
-const MOTOR_REPAIR_ROWS = pick(SUA_CUON, "Sửa motor (cuộn dây, tụ, bo mạch)", "Thay motor nhập khẩu mới");
+const MOTOR_REPAIR_ROWS = pick(SUA_CUON, "Sửa motor (cuộn dây, tụ, bo mạch)", "Thay motor mới (kèm remote)");
 const KEO_REPAIR_ROWS = pick(SUA_KEO, "Chỉnh / nắn ray lệch", "Thay con lăn (1 bộ)");
 
 /** The rest of the cửa cuốn repair list, folded, under a repair page's own rows. */
@@ -545,7 +545,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     promise: "Niêm Yết Theo m², Motor Tính Riêng",
     description: `Giá cửa cuốn niêm yết theo m², áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}. Đã gồm vật tư và công lắp, chưa VAT. Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ.`,
     intro:
-      "Hưng Thành Phát sản xuất và lắp đặt cửa cuốn tại Cần Thơ từ 2005. Bảng dưới là giá niêm yết; thợ đo tận nơi và báo giá đúng kích thước nhà anh/chị, miễn phí.",
+      "Hưng Thành Phát sản xuất và lắp đặt cửa cuốn tại Cần Thơ từ 2005. Bảng dưới là giá niêm yết; thợ đo tận nơi và báo giá đúng kích thước nhà anh/chị, miễn phí nội thành Cần Thơ.",
     priceTeaser: `Từ ${perM2(CUON.daiLoan)} · motor + remote từ ${formatGia(MOTOR_FROM)}đ/bộ`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: jobImage(
@@ -571,7 +571,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       title: "Bảng giá cửa cuốn",
       lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT 10%. Áp dụng từ ${APPLIED_FROM}.`,
       tables: [CUON_TABLE, MOTOR_TABLE],
-      note: "Motor + remote tính theo bộ, chưa VAT. Bình tích điện và khóa ngang tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
+      note: "Motor + remote tính theo bộ, chưa VAT. Bình tích điện và khóa ngang tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -583,9 +583,9 @@ const SITELINK_PAGES: AdLandingPage[] = [
     slug: "cua-cuon-nhom-khe-thoang-can-tho",
     keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ",
     promise: "Công Nghệ Đức, Chạy Êm, Thoáng Gió",
-    description: `${KHE_THOANG.length} mẫu nan nhôm công nghệ Đức có khe thoáng — Kovidoor, Mitadoor, Alumdoor, OneDoor — giá từ ${perM2(KHE_THOANG_TU)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí.`,
+    description: `${KHE_THOANG.length} mẫu nan nhôm công nghệ Đức có khe thoáng — Kovidoor, Mitadoor, Alumdoor, OneDoor — giá từ ${perM2(KHE_THOANG_TU)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí nội thành Cần Thơ.`,
     intro:
-      "Khe thoáng là lỗ dập trên nan nhôm: cửa đóng rồi gió và ánh sáng vẫn vào nhà. Mẫu có gioong hoặc lông nheo giữa các nan chạy êm, bớt ồn. Thợ đo tận nơi và báo giá miễn phí.",
+      "Khe thoáng là lỗ dập trên nan nhôm: cửa đóng rồi gió và ánh sáng vẫn vào nhà. Mẫu có gioong hoặc lông nheo giữa các nan chạy êm, bớt ồn. Thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     priceTeaser: `${KHE_THOANG.length} mẫu nan khe thoáng · từ ${perM2(KHE_THOANG_TU)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
@@ -606,7 +606,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       title: "Giá cửa cuốn nhôm khe thoáng",
       lead: `Giá theo m² từng mẫu nan, đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
       tables: KHE_THOANG_TABLES,
-      note: `Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.`,
+      note: `Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
     form: INSTALL_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -631,7 +631,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     slug: "cua-cuon-nha-xuong-can-tho",
     keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ",
     promise: "Khổ Lớn Cho Kho, Xưởng",
-    description: `Cửa cuốn khổ lớn cho nhà xưởng, kho hàng, làm tại xưởng Bình Thủy từ 2005. Tole siêu trường từ ${perM2(CUON.sieuTruong)}, tole Đài Loan từ ${perM2(CUON.daiLoan)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí.`,
+    description: `Cửa cuốn khổ lớn cho nhà xưởng, kho hàng, làm tại xưởng Bình Thủy từ 2005. Tole siêu trường từ ${perM2(CUON.sieuTruong)}, tole Đài Loan từ ${perM2(CUON.daiLoan)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí nội thành Cần Thơ.`,
     intro: `Cửa cuốn cho nhà xưởng, kho hàng, garage xe tải — làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Motor chọn theo diện tích cửa: ${MOTOR_500.dienTich.toLowerCase()} dùng motor ${MOTOR_500.sucNang}.`,
     priceTeaser: `Tole siêu trường từ ${perM2(CUON.sieuTruong)} · tole Đài Loan từ ${perM2(CUON.daiLoan)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước cửa",
@@ -657,7 +657,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         { head: ["Tole Đài Loan", "đ/m²"], rows: DAI_LOAN.map((r) => [`${r.label} · ${r.mm}`, cell(r.gia)]) },
         { ...MOTOR_TABLE, collapsed: true },
       ],
-      note: `Tole Đài Loan 8 zem dùng cho ${TAM_LIEN_SPECS.dai_loan.goiY["8zem"].toLowerCase().replace(": ", ", hợp ")}. Motor và bình tích điện tính riêng. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.`,
+      note: `Tole Đài Loan 8 zem dùng cho ${TAM_LIEN_SPECS.dai_loan.goiY["8zem"].toLowerCase().replace(": ", ", hợp ")}. Motor và bình tích điện tính riêng. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
     form: INSTALL_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -670,7 +670,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     faq: [
       {
         q: "Cửa cuốn nhà xưởng giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, tole siêu trường từ ${perM2(CUON.sieuTruong)}, đã gồm vật tư và công lắp đặt, chưa VAT. Motor + remote ${MOTOR_500.sucNang} cho ${MOTOR_500.dienTich.toLowerCase()}: ${formatGia(MOTOR_500.gia)}đ/bộ. Thợ đo tận nơi và báo giá trọn gói, miễn phí.`,
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, tole siêu trường từ ${perM2(CUON.sieuTruong)}, đã gồm vật tư và công lắp đặt, chưa VAT. Motor + remote ${MOTOR_500.sucNang} cho ${MOTOR_500.dienTich.toLowerCase()}: ${formatGia(MOTOR_500.gia)}đ/bộ. Thợ đo tận nơi và báo giá trọn gói, miễn phí nội thành Cần Thơ.`,
       },
       FAQ_MOTOR_TIER,
       {
@@ -795,7 +795,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       title: "Giá lan can kính cầu thang",
       lead: `Giá theo m² mặt lan can, đã gồm công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
       tables: [{ head: ["Kiểu tay vịn", "đ/m²"], rows: LAN_CAN }],
-      note: "Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí.",
+      note: "Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: INSTALL_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -808,7 +808,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     faq: [
       {
         q: "Lan can kính giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can: ${LAN_CAN.map(([k, v]) => `${k.charAt(0).toLowerCase()}${k.slice(1)} ${v}đ`).join("; ")}. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí.`,
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can: ${LAN_CAN.map(([k, v]) => `${k.charAt(0).toLowerCase()}${k.slice(1)} ${v}đ`).join("; ")}. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
       },
       {
         q: "Kính lan can có an toàn không?",
@@ -832,10 +832,10 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "bang-gia-nhom-kinh-can-tho",
     keyword: "Bảng Giá Nhôm Kính Cần Thơ",
-    promise: "Đo Và Báo Giá Tận Nơi Miễn Phí",
-    description: `Giá cửa nhôm kính niêm yết theo m², áp dụng từ ${APPLIED_FROM}: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Đã gồm công lắp và kính trắng 8 ly, chưa VAT. Thợ đo và báo giá tận nơi, miễn phí.`,
+    promise: "Đo, Báo Giá Miễn Phí Nội Thành",
+    description: `Giá cửa nhôm kính niêm yết theo m², áp dụng từ ${APPLIED_FROM}: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Đã gồm công lắp và kính trắng 8 ly, chưa VAT. Thợ đo và báo giá tận nơi, miễn phí nội thành Cần Thơ.`,
     intro:
-      "Bảng dưới là giá niêm yết theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Giá đúng kích thước nhà anh/chị: thợ đến đo và báo giá tận nơi, miễn phí.",
+      "Bảng dưới là giá niêm yết theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Giá đúng kích thước nhà anh/chị: thợ đến đo và báo giá tận nơi, miễn phí nội thành Cần Thơ.",
     priceTeaser: `Vách kính từ ${perM2(NK.vach)} · cửa sổ từ ${perM2(NK.so)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước",
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
@@ -856,7 +856,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       title: "Bảng giá nhôm kính",
       lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
       tables: NK_TABLES,
-      note: "Nhôm Việt: kính mờ cộng 70.000đ/m². Cửa nhôm kính không cộng phụ phí cửa nhỏ. Thợ đo tận nơi và báo giá miễn phí.",
+      note: "Nhôm Việt: kính mờ cộng 70.000đ/m². Cửa nhôm kính không cộng phụ phí cửa nhỏ. Thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -925,7 +925,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       "Remote không ăn, mất điện là cửa đứng im — bên em cài lại remote và thay bình lưu điện tận nhà, cả cửa không do bên em lắp. Báo giá trước, sửa xong mới thanh toán.",
     intro:
       "Remote phải bấm nhiều lần hoặc không ăn, mất điện là cửa đứng im vì bình lưu điện đã chai — kỹ thuật viên Hưng Thành Phát đến tận nhà cài lại remote, thay bình, cả cửa không do bên em lắp.",
-    priceTeaser: `Cài lại remote từ ${rangeFrom(REMOTE_ROWS[0])} · thay bình từ ${rangeFrom(REMOTE_ROWS[1])}`,
+    priceTeaser: `Cài lại remote từ ${rangeFrom(REMOTE_ROWS[0])} · bình lưu điện báo giá theo loại`,
     zaloLabel: "Nhắn Zalo — gửi ảnh remote",
     hero: jobImage(
       "p19-cc-trang-san-da",
@@ -1042,7 +1042,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       title: "Giá cửa cuốn niêm yết",
       lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
       tables: [CUON_TABLE],
-      note: "Motor và bình tích điện tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
+      note: "Motor và bình tích điện tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: INSTALL_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,
@@ -1135,7 +1135,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       title: "Giá nhôm kính niêm yết",
       lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
       tables: NK_TABLES,
-      note: "Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí.",
+      note: "Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: INSTALL_FORM,
     stepsTitle: INSTALL_STEPS_TITLE,

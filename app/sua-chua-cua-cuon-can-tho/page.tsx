@@ -174,8 +174,8 @@ const pricingGroups = [
       { item: "Chỉnh ray, con lăn lệch", range: "200.000 – 500.000 đ" },
       { item: "Thay lò xo cân bằng", range: "300.000 – 700.000 đ" },
       { item: "Sửa motor (cuộn dây, tụ, bo mạch)", range: "300.000 – 1.500.000 đ" },
-      { item: "Thay motor nhập khẩu mới", range: "1.500.000 – 4.000.000 đ" },
-      { item: "Thay bình lưu điện", range: "400.000 – 900.000 đ" },
+      { item: "Thay motor mới (kèm remote)", range: "3.300.000 – 5.500.000 đ" },
+      { item: "Thay bình lưu điện", range: "Liên hệ" },
       { item: "Thay dây cuốn", range: "200.000 – 600.000 đ" },
     ],
   },
@@ -220,7 +220,7 @@ const faqItems = [
   {
     question: "Sửa cửa cuốn bị lỗi motor hết bao nhiêu tiền?",
     answer:
-      "Chi phí sửa motor cửa cuốn tại Cần Thơ dao động từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng hóc. Nếu cần thay motor mới, chi phí từ 1.500.000 đến 4.000.000 đồng. Chúng tôi báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+      "Chi phí sửa motor cửa cuốn tại Cần Thơ dao động từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng hóc. Nếu cần thay motor mới (kèm remote), chi phí từ 3.300.000 đến 5.500.000 đồng theo bảng giá. Chúng tôi báo giá miễn phí trước khi sửa, không phát sinh thêm.",
   },
   {
     question: "Cửa cuốn không lên được — nguyên nhân là gì?",
