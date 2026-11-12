@@ -90,7 +90,7 @@ export const MAIN_NAV: NavItem[] = [
         href: "/cua-nhom-kinh-can-tho",
         label: "Nhôm Kính",
         icon: "nhom-kinh",
-        desc: "Cửa đi, cửa sổ, lan can, mặt dựng — từ 1.400.000đ/m²",
+        desc: "Cửa đi, cửa sổ, lan can, mặt dựng — từ 1.200.000đ/m²",
       },
       {
         href: "/phu-kien-cua-cuon-can-tho",
@@ -247,7 +247,7 @@ export const PRODUCT_CATEGORIES = [
     id: "cua-nhom-kinh",
     name: "Cửa Nhôm Kính",
     tagline: "Sang trọng – Cách âm – Cách nhiệt vượt trội",
-    priceFrom: "từ 1.400.000đ/m²",
+    priceFrom: "từ 1.200.000đ/m²",
     pageLink: { href: "/cua-nhom-kinh-can-tho", label: "Xem Cửa Nhôm Kính Cần Thơ" },
     showcase: [
       { slug: "nk23-cua-nhom-kinh-doi-xam", label: "Cửa đi nhôm kính 2 cánh" },
