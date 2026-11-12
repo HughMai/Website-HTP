@@ -4,6 +4,7 @@ import { ArrowRight, Clock, Factory, MapPin, Phone, Trophy, Wrench, Zap } from "
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -175,7 +176,8 @@ export default function CuaCuonCaiRang() {
               Chuyên lắp cửa cuốn nhà phố, kho hàng và nhà xưởng tại Cái Răng — khảo sát miễn phí,
               tư vấn đúng loại, bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ZaloQuoteCard source="Cửa cuốn Cái Răng · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}

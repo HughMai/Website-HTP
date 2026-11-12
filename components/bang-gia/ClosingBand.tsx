@@ -59,8 +59,8 @@ export function ClosingBand({
             </p>
           </div>
           <div className="lg:col-span-5" data-rise>
-            <p className="mb-4 text-base font-semibold">Hoặc để lại số, thợ gọi lại:</p>
-            <LeadForm source={source} tone="dark" submitLabel="Gửi" />
+            <p className="mb-4 text-base font-semibold">Hoặc ghi số Zalo để nhận báo giá ngay lập tức:</p>
+            <LeadForm source={source} tone="dark" />
           </div>
         </div>
       </div>

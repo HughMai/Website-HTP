@@ -4,6 +4,7 @@ import { Phone, Clock, MapPin, ArrowRight, ShieldCheck, Factory, HandCoins } fro
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
@@ -211,7 +212,8 @@ export default function CuaCuonCanTho() {
               Đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. 21+ năm, hơn 500 công trình.
               Cửa cắt đúng kích thước ngay tại xưởng Bình Thủy — không chờ hàng chuyển từ TP.HCM.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ZaloQuoteCard source="Cửa cuốn Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}

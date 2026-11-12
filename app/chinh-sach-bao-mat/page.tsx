@@ -37,7 +37,7 @@ const sections: { h: string; p: (string | string[])[] }[] = [
     h: "2. Thông tin chúng tôi thu thập",
     p: [
       [
-        "Khi bạn gửi form báo giá: họ tên, số điện thoại, email (nếu có) và nội dung yêu cầu.",
+        "Khi bạn gửi form báo giá: số điện thoại (số Zalo), và họ tên, email, nội dung yêu cầu nếu bạn ghi; với form chỉ ghi số Zalo, tên lấy từ hồ sơ Zalo của bạn.",
         "Khi bạn gọi điện hoặc nhắn Zalo: số điện thoại, tên Zalo và nội dung trao đổi.",
         "Khi bạn xem website: trang đã xem, thiết bị, trình duyệt, vị trí gần đúng (theo thành phố) và mã nhấp quảng cáo nếu bạn đến từ quảng cáo Google, qua cookie và công cụ đo lường của Google.",
       ],
@@ -47,6 +47,7 @@ const sections: { h: string; p: (string | string[])[] }[] = [
     h: "3. Chúng tôi dùng thông tin để làm gì",
     p: [
       [
+        "Gửi catalog và báo giá qua Zalo tới số bạn ghi, ngay khi bạn bấm Nhận báo giá.",
         "Liên hệ lại, khảo sát, báo giá và thực hiện đơn hàng bạn yêu cầu.",
         "Chăm sóc sau lắp đặt và bảo hành.",
         "Đo lường xem khách biết đến chúng tôi qua kênh nào (ví dụ quảng cáo Google) để chi tiêu quảng cáo hợp lý.",
@@ -62,7 +63,7 @@ const sections: { h: string; p: (string | string[])[] }[] = [
         "Vercel: máy chủ lưu trữ website.",
         "Telegram và Resend: chuyển thông báo yêu cầu báo giá đến điện thoại và email của gia đình chủ cửa hàng.",
         "Hệ thống quản lý khách hàng nội bộ của Hưng Thành Phát.",
-        "Zalo (VNG) khi bạn chủ động nhắn tin qua Zalo.",
+        "Zalo (VNG): khi bạn nhắn tin qua Zalo, và khi chúng tôi gửi catalog, báo giá qua Zalo tới số bạn ghi trên form.",
       ],
       "Một số nhà cung cấp trên đặt máy chủ ngoài Việt Nam, nên thông tin có thể được xử lý ở nước ngoài.",
     ],

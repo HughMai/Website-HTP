@@ -4,6 +4,7 @@ import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, 
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
@@ -191,7 +192,8 @@ export default function CuaKeoCanTho() {
               Thép hộp mạ kẽm giá thấp hơn 20–30% so với nhôm, bảo mật tương đương — phần lớn
               chủ kinh doanh Cần Thơ chọn thép. Tư vấn thật, không upsell loại đắt hơn nếu không cần thiết.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ZaloQuoteCard source="Cửa kéo Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}

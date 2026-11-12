@@ -4,6 +4,7 @@ import { ArrowRight, Clock, Construction, Lock, MapPin, Phone, ShieldCheck, Spar
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
@@ -196,17 +197,13 @@ export default function CuaNhomKinhCanTho() {
               Đường phố ồn ào bên ngoài trở thành tiếng thì thầm khi đóng cửa nhôm kính. Kính
               Low-E giảm nhiệt 40–60%, profile nhôm bền 20+ năm không gỉ. Thi công trọn gói tại Cần Thơ.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ZaloQuoteCard source="Cửa nhôm kính · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}
                 </Button>
               </a>
-              <Link href="#nhan-bao-gia">
-                <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  Báo giá miễn phí
-                </Button>
-              </Link>
             </div>
             <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
               <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}

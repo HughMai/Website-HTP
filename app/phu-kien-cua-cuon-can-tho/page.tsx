@@ -14,6 +14,7 @@ import {
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
 import { BINH_TICH_DIEN, MOTOR, PHU_KIEN } from "@/lib/bang-gia-data";
 import { formatGia } from "@/lib/bang-gia-specs";
@@ -217,7 +218,8 @@ export default function PhuKienCuaCuonCanTho() {
               Hàng chính hãng, chọn đúng tải trọng cửa, lắp và thay tận nơi trong
               ngày. Khảo sát miễn phí trước khi báo giá.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <ZaloQuoteCard source="Phụ kiện cửa cuốn Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="bg-white text-brand hover:bg-white/90">
                 <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                   <Phone className="h-4 w-4" aria-hidden />

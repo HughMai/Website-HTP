@@ -116,8 +116,8 @@ const jsonLd = {
   logo: {
     "@type": "ImageObject",
     "@id": `${siteUrl}/#logo`,
-    url: `${siteUrl}/logo.svg`,
-    contentUrl: `${siteUrl}/logo.svg`,
+    url: `${siteUrl}/logo-htp-door.png`,
+    contentUrl: `${siteUrl}/logo-htp-door.png`,
   },
   image: `${siteUrl}/og-image.png`,
   sameAs: [

@@ -62,9 +62,9 @@ export function CtaBand({
 
           <div className="rounded-2xl border border-white/12 bg-white/[0.06] p-5 backdrop-blur md:p-6">
             <p className="mb-3 text-sm font-semibold text-white">
-              Hoặc để lại thông tin, mình gọi lại:
+              Hoặc ghi số Zalo để nhận báo giá ngay lập tức:
             </p>
-            <LeadForm source={source} tone="dark" submitLabel="Gửi" />
+            <LeadForm source={source} tone="dark" />
             <p className="mt-3 text-sm text-white/55">
               Khảo sát và báo giá miễn phí trong nội ô Cần Thơ.
             </p>

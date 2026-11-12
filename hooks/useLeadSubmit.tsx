@@ -40,10 +40,12 @@ const ERROR_COPY: Record<LeadErrorKind, string> = {
 };
 
 export type LeadPayload = {
-  name: string;
+  // Optional only on the one-field Zalo form, which sends catalog: true.
+  name?: string;
   phone: string;
   email?: string;
   message?: string;
+  catalog?: boolean;
 };
 
 /**
@@ -140,6 +142,9 @@ function newLeadId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+/** Fired on window after any form on the page delivers a lead. */
+export const LEAD_SENT_EVENT = "htp:lead-sent";
+
 export function useLeadSubmit(source: string) {
   // Captured once on mount. The server rejects submissions that arrive
   // implausibly fast after this instant.
@@ -210,6 +215,8 @@ export function useLeadSubmit(source: string) {
         // Ads as transaction_id so a conversion can be matched to its CRM lead.
         const body = (await res.json().catch(() => null)) as { delivered?: number } | null;
         if ((body?.delivered ?? 0) > 0) trackLead("form_submit", { source }, leadId);
+        // Tells the sticky Zalo bar (ZaloStickyBar) a lead is in, so it stops asking.
+        window.dispatchEvent(new CustomEvent(LEAD_SENT_EVENT, { detail: { source } }));
         setStatus("success");
         return;
       }

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { SITE, ZALO_URL } from "@/lib/site-data";
 
 function ZaloIcon() {
@@ -99,6 +100,11 @@ export function FloatingContact() {
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
+
+  // Google Ads landing pages (/lp/*) carry their own asks; this rail's map button
+  // would send a paid visitor off the page.
+  const pathname = usePathname();
+  if (pathname?.startsWith("/lp/")) return null;
 
   return (
     // Desktop only — on mobile the same three actions live in StickyCallBar,

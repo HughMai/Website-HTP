@@ -74,6 +74,25 @@ test.describe("POST /api/contact — server behaviour", () => {
     expect(got[0].sourcePage).toBe("Hero trang chủ");
   });
 
+  test("a Zalo-only lead (no name) reaches the CRM flagged for the catalog", async ({ request }) => {
+    const v = visitor();
+    const res = await request.post("/api/contact", {
+      headers: v.headers,
+      data: { phone: v.phone, message: "Nhận catalog & báo giá qua Zalo", catalog: true, renderedAt: humanTimestamp() },
+    });
+    expect(await res.json()).toEqual({ ok: true, delivered: 1 });
+    const got = await crmReceived<{ name: string; phone: string; catalog: boolean }>();
+    expect(got).toHaveLength(1);
+    expect(got[0]).toMatchObject({ phone: v.phone, catalog: true, name: "Khách Zalo (web)" });
+  });
+
+  test("a lead with no name and no catalog flag is still rejected", async ({ request }) => {
+    const res = await request.post("/api/contact", {
+      data: { phone: VALID.phone, renderedAt: humanTimestamp() },
+    });
+    expect(res.status()).toBe(400);
+  });
+
   test("answers 502 when every channel fails", async ({ request }) => {
     // Telegram and Resend are unconfigured by the test env, so making the CRM
     // fail leaves nothing that could have received the lead.
@@ -186,10 +205,13 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
    * survives submission — on success the <form> is replaced by the
    * confirmation panel, so scoping to the form itself would go stale.
    */
+  // LeadForm is the one-field "Ghi số Zalo để nhận báo giá ngay" form.
+  const ZALO_FIELD = "Số Zalo của anh/chị";
+  const SENT = "Đang gửi catalog và báo giá qua Zalo";
+
   async function fillAndSubmit(section: Locator) {
     const form = section.locator("form").first();
-    await form.getByPlaceholder("Họ và tên").fill(VALID.name);
-    await form.getByPlaceholder("Số điện thoại").fill(VALID.phone);
+    await form.getByPlaceholder(ZALO_FIELD).fill(VALID.phone);
     await form.locator('button[type="submit"]').click();
   }
 
@@ -220,11 +242,11 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
       }
     }
 
-    // And the visible name field must be genuinely clickable, not covered.
-    const nameField = page.locator("#trang-chu").getByPlaceholder("Họ và tên");
-    await expect(nameField).toBeVisible();
-    await nameField.click();
-    await expect(nameField).toBeFocused();
+    // And the visible Zalo field must be genuinely clickable, not covered.
+    const zaloField = page.locator("#trang-chu").getByPlaceholder(ZALO_FIELD);
+    await expect(zaloField).toBeVisible();
+    await zaloField.click();
+    await expect(zaloField).toBeFocused();
   });
 
   /** Records gtag calls, standing in for the real tag (absent in tests). */
@@ -252,7 +274,7 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
       await page.waitForTimeout(HUMAN_MS);
       await fillAndSubmit(hero);
 
-      await expect(hero.getByText("Đã nhận thông tin của bạn!")).toBeVisible();
+      await expect(hero.getByText(SENT)).toBeVisible();
       const calls = await gtagCalls(page);
       expect(calls.filter((c) => c[1] === "form_submit")).toHaveLength(expected);
     });
@@ -289,12 +311,14 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
     await page.waitForTimeout(HUMAN_MS);
     await fillAndSubmit(hero);
 
-    const confirmation = hero.getByText("Đã nhận thông tin của bạn!");
+    const confirmation = hero.getByText(SENT);
     await expect(confirmation).toBeVisible();
+    // The one setting that can stop the catalog arriving, said up front.
+    await expect(hero.getByRole("status")).toContainText("nhận tin nhắn từ người lạ");
 
     // The old behaviour was a toast plus a blanked form, which invited the
     // same customer to submit twice. The hero's fields must be gone entirely.
-    await expect(hero.getByPlaceholder("Họ và tên")).toHaveCount(0);
+    await expect(hero.getByPlaceholder(ZALO_FIELD)).toHaveCount(0);
 
     // And it must still be there long after a toast would have expired.
     await page.waitForTimeout(6000);
@@ -341,12 +365,32 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
     const hero = page.locator("#trang-chu");
     await page.waitForTimeout(HUMAN_MS);
     const form = hero.locator("form").first();
-    await form.getByPlaceholder("Họ và tên").fill(VALID.name);
-    await form.getByPlaceholder("Số điện thoại").fill(VALID.phone);
+    await form.getByPlaceholder(ZALO_FIELD).fill(VALID.phone);
     await form.locator('button[type="submit"]').click({ clickCount: 2, delay: 30 });
 
-    await expect(hero.getByText("Đã nhận thông tin của bạn!")).toBeVisible();
+    await expect(hero.getByText(SENT)).toBeVisible();
     expect(calls).toBe(1);
+  });
+
+  test("the Zalo form asks for the catalog: number only, normalised, catalog: true", async ({ page }) => {
+    await page.goto("/");
+    let sent: Record<string, unknown> | null = null;
+    await page.route("**/api/contact", async (route) => {
+      sent = route.request().postDataJSON();
+      await route.fulfill({ status: 200, json: { ok: true, delivered: 1 } });
+    });
+
+    const hero = page.locator("#trang-chu");
+    await page.waitForTimeout(HUMAN_MS);
+    const form = hero.locator("form").first();
+    // People type spaces and dots; the form must not reject a real number.
+    await form.getByPlaceholder(ZALO_FIELD).fill("0901 234.567");
+    await form.locator('button[type="submit"]').click();
+
+    await expect(hero.getByText(SENT)).toBeVisible();
+    await expect(hero.getByRole("status")).toContainText("0901 234 567");
+    expect(sent).toMatchObject({ phone: "0901234567", catalog: true });
+    expect(sent).not.toHaveProperty("name");
   });
 
   test("a landing-page form captures leads too", async ({ page }) => {
@@ -355,16 +399,16 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
       route.fulfill({ status: 200, json: { ok: true, delivered: 1 } })
     );
 
-    // Landing pages carry exactly one form (the CTA band), so page-level
-    // locators are unambiguous here in a way they are not on the homepage.
-    await expect(page.locator("form")).toHaveCount(1);
+    // Landing pages carry three forms: the Zalo card in the hero (12/11/2026), the
+    // same field as a bottom bar once the card scrolls away, and the CTA band lower
+    // down. The hero one is the one most visitors see.
+    await expect(page.locator("form")).toHaveCount(3);
     await page.waitForTimeout(HUMAN_MS);
 
-    const form = page.locator("form").first();
-    await form.getByPlaceholder("Họ và tên").fill(VALID.name);
-    await form.getByPlaceholder("Số điện thoại").fill(VALID.phone);
+    const form = page.locator('[data-track="hero_form"] form');
+    await form.getByPlaceholder(ZALO_FIELD).fill(VALID.phone);
     await form.locator('button[type="submit"]').click();
 
-    await expect(page.getByText("Đã nhận thông tin của bạn!")).toBeVisible();
+    await expect(page.getByText(SENT)).toBeVisible();
   });
 });

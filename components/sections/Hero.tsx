@@ -106,7 +106,7 @@ export function Hero() {
             {/* Primary capture — above the fold, two fields */}
             <motion.div variants={fadeUp} custom={3} className="mt-7">
               <p className="mb-2 text-sm font-semibold text-white">
-                Để lại số — thợ gọi lại trong ít phút:
+                Ghi số Zalo để nhận báo giá ngay lập tức:
               </p>
               <LeadForm source="Hero trang chủ" tone="dark" />
               <p className="mt-2 text-sm text-white/55">

@@ -104,7 +104,7 @@ const articleSchema = {
   publisher: {
     "@type": "Organization",
     name: SITE.brand,
-    logo: { "@type": "ImageObject", url: `${siteUrl}/logo.svg` },
+    logo: { "@type": "ImageObject", url: `${siteUrl}/logo-htp-door.png` },
   },
   datePublished: "2026-05-14",
   dateModified: "2026-05-14",

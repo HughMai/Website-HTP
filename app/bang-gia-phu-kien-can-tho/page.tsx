@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { ClosingBand } from "@/components/bang-gia/ClosingBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { MotorPicker } from "@/components/bang-gia/MotorPicker";
 import { Rise } from "@/components/bang-gia/Rise";
@@ -157,7 +158,8 @@ export default function BangGiaPhuKienCanTho() {
               { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Nhôm kính" },
             ]}
           />
-          <HeroActions />
+          <ZaloQuoteCard source="Bảng giá motor & phụ kiện · đầu trang" className="mt-8 max-w-md" />
+          <HeroActions className="mt-5" />
         </PriceHero>
 
         <section id="motor" aria-labelledby="motor-title" className="scroll-mt-20 py-20 md:py-28">

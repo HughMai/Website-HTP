@@ -4,6 +4,7 @@ import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Sparkle
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site-data";
 
@@ -183,17 +184,13 @@ export default function LanCanNhomKinhCanTho() {
               Hàng xóm dùng sắt sơn — phải sơn lại mỗi 2 năm. Bạn lắp nhôm kính một lần —
               20 năm sau vẫn sáng bóng, không gỉ, không cần sơn lại. Gia công theo số đo thực tế, lắp trọn gói.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ZaloQuoteCard source="Lan can nhôm kính · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
                   <Phone className="h-4 w-4" /> Gọi {SITE.hotlines[0]}
                 </Button>
               </a>
-              <Link href="#nhan-bao-gia">
-                <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  Báo giá miễn phí
-                </Button>
-              </Link>
             </div>
             <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
               <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}

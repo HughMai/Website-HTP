@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -14,6 +13,7 @@ import {
   Phone,
   Settings,
 } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -107,33 +107,10 @@ export function Navbar() {
           )}
           aria-label="Về trang chủ"
         >
-          <span className="inline-flex items-center rounded-full bg-brand p-1 shadow-sm transition-all">
-            <Image
-              src="/logo.svg"
-              alt={`${SITE.brand} — Logo`}
-              width={44}
-              height={44}
-              priority
-              className="h-10 w-10 md:h-11 md:w-11"
-            />
-          </span>
-          <span className="flex flex-col text-left leading-tight">
-            <span
-              className={cn(
-                "text-xs font-bold tracking-tight transition-colors md:text-sm",
-                scrolled ? "text-brand" : "text-white"
-              )}
-            >
-              {SITE.brand}
-            </span>
-            <span
-              className={cn(
-                "hidden text-[10px] font-medium uppercase tracking-[0.14em] transition-colors md:block",
-                scrolled ? "text-brand/70" : "text-white/65"
-              )}
-            >
-              Cần Thơ · Từ {SITE.foundedYear}
-            </span>
+          {/* The HTP DOOR wordmark carries the name. It is drawn on white, so it sits on a
+              white tile over the navy bar (and blends in once the bar turns white). */}
+          <span className="inline-flex items-center rounded-lg bg-white px-1.5 py-0.5 shadow-sm">
+            <Logo height={44} alt={`${SITE.brand} — Logo`} className="h-10 w-auto md:h-11" />
           </span>
         </Link>
 

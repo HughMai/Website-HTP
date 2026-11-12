@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { ClosingBand } from "@/components/bang-gia/ClosingBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { NanCatalogue } from "@/components/bang-gia/NanCatalogue";
 import { Rise } from "@/components/bang-gia/Rise";
@@ -216,7 +217,8 @@ export default function BaoGiaCuaCuonCanTho() {
               { href: "/bang-gia-cua-nhom-kinh-can-tho", label: "Nhôm kính" },
             ]}
           />
-          <HeroActions />
+          <ZaloQuoteCard source="Báo giá cửa cuốn · đầu trang" className="mt-8 max-w-md" />
+          <HeroActions className="mt-5" />
         </PriceHero>
 
         {/* Nan nhôm công nghệ Đức — the specimen catalogue */}

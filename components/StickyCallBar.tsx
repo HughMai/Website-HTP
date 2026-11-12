@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { MapPin, MessageCircle, Phone } from "lucide-react";
 import { SITE, ZALO_URL } from "@/lib/site-data";
 
@@ -11,6 +12,10 @@ import { SITE, ZALO_URL } from "@/lib/site-data";
  */
 export function StickyCallBar() {
   const primaryHotline = SITE.hotlines[0];
+  // Google Ads landing pages (/lp/*) render their own bar (components/lp/LpStickyBar),
+  // which repeats that page's one ask and has no map button sending a paid visitor away.
+  const pathname = usePathname();
+  if (pathname?.startsWith("/lp/")) return null;
 
   return (
     <>
@@ -19,7 +24,8 @@ export function StickyCallBar() {
 
       {/* data-track: LeadClickTracker reports the call/Zalo taps below. */}
       <div
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-brand/10 bg-white/95 backdrop-blur md:hidden"
+        // Steps aside while the Zalo field bar (ZaloStickyBar) is up; that bar has its own call button.
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-brand/10 bg-white/95 backdrop-blur md:hidden [[data-zalo-bar=on]_&]:hidden"
         data-track="sticky_bar"
       >
         <div className="grid grid-cols-3 divide-x divide-brand/10">

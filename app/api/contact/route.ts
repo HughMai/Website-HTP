@@ -22,9 +22,18 @@ const MAX_TRACKED_KEYS = 1000;
 const ipDeliveries = new Map<string, number[]>();
 const repeatDeliveries = new Map<string, number>();
 
+// The name shown in Telegram and the CRM when a Zalo-catalog lead gives only a
+// number. The CRM swaps it for the customer's Zalo display name once the bot
+// finds them.
+const CATALOG_LEAD_NAME = "Khách Zalo (web)";
+
 const schema = z.object({
-  name:     z.string().trim().min(2).max(80),
+  // Required, except on the one-field "Ghi số Zalo" form (catalog: true).
+  name:     z.preprocess((val) => (val === "" ? undefined : val), z.string().trim().min(2).max(80).optional()),
   phone:    z.string().trim().regex(VN_PHONE_RE),
+  // The visitor asked for the catalog on Zalo (LeadForm). The CRM has the
+  // Zalo bot send it straight away; see product/htp-crm app.py _deliver_catalog.
+  catalog:  z.boolean().optional(),
   email:    z.preprocess((val) => (val === "" ? undefined : val), z.string().email().optional()),
   message:  z.preprocess((val) => (val === "" ? undefined : val), z.string().trim().max(500).optional()),
   // Which page the lead came from, e.g. "Hero trang chủ" or "/cua-cuon-o-mon".
@@ -52,7 +61,7 @@ const schema = z.object({
   renderedAt: z.number().int().positive().optional(),
   // Cloudflare Turnstile token. Required only when TURNSTILE_SECRET_KEY is set.
   turnstileToken: z.string().trim().max(2048).optional(),
-});
+}).refine((d) => d.catalog || !!d.name, { path: ["name"] });
 
 /**
  * Every notification channel reports explicitly instead of relying on throw.
@@ -74,6 +83,7 @@ type Lead = {
   email?: string;
   message?: string;
   source?: string;
+  catalog?: boolean;
   // Ad attribution. Only the CRM consumes these — Telegram and email are read
   // by people, and a utm string in a phone notification is noise.
   utm_source?: string;
@@ -295,6 +305,7 @@ async function notifyViaCRM(lead: Lead): Promise<Delivery> {
         // does not silently change meaning.
         need: lead.message ?? "",
         sourcePage: lead.source ?? "",
+        catalog: !!lead.catalog,
         // store.attribution_from_utm() turns these into customers.source +
         // customers.source_detail, which is the only way CAC per campaign can
         // be answered later. Absent for organic visitors; the CRM defaults.
@@ -337,9 +348,10 @@ export async function POST(req: NextRequest) {
   }
 
   const {
-    name, phone, email, message, source, website, renderedAt, turnstileToken,
+    phone, email, message, source, catalog, website, renderedAt, turnstileToken,
     utm_source, utm_medium, utm_campaign, gclid, gbraid, wbraid, lead_id, fbclid, landing,
   } = parsed.data;
+  const name = parsed.data.name ?? CATALOG_LEAD_NAME;
 
   // Bot gates. Answer 200 so a script learns nothing from the response, but log
   // the rejection with its reason — otherwise a mis-tuned threshold silently
@@ -380,7 +392,7 @@ export async function POST(req: NextRequest) {
 
   const flags = spamFlags(new Date(now), country);
   const lead: Lead = {
-    name, phone, email, message, source,
+    name, phone, email, message, source, catalog,
     utm_source, utm_medium, utm_campaign, gclid, gbraid, wbraid, lead_id, fbclid, landing,
     ip, country, flags,
   };

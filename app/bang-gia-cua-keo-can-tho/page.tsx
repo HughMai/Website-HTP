@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { ClosingBand } from "@/components/bang-gia/ClosingBand";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { Rise } from "@/components/bang-gia/Rise";
 import {
@@ -202,7 +203,8 @@ export default function BangGiaCuaKeoCanTho() {
               { href: "/bang-gia-phu-kien-can-tho", label: "Motor & phụ kiện" },
             ]}
           />
-          <HeroActions />
+          <ZaloQuoteCard source="Bảng giá cửa kéo · đầu trang" className="mt-8 max-w-md" />
+          <HeroActions className="mt-5" />
         </PriceHero>
 
         {/* Cửa kéo — prices like a menu: one column per type, one row per thickness */}

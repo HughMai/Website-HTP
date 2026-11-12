@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Facebook, MapPin } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { FOOTER_LINK_GROUPS, HOTLINE_ROLES, MAIN_NAV, SITE, ZALO_URL } from "@/lib/site-data";
 
 const sitemapLinks = FOOTER_LINK_GROUPS.flatMap((g) => [...g.links]);
@@ -24,17 +24,12 @@ export function Footer() {
       </span>
       <div className="container grid grid-cols-2 gap-x-6 gap-y-7 py-8 md:gap-10 md:py-16 lg:grid-cols-4">
         <div className="col-span-2 md:col-span-1">
+          {/* Wordmark on a white tile (it is drawn on white); the name stays as text for NAP. */}
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand p-1">
-              <Image
-                src="/logo.svg"
-                alt={`${SITE.brand} — Logo`}
-                width={44}
-                height={44}
-                className="h-10 w-10"
-              />
+            <span className="inline-flex items-center rounded-lg bg-white px-2 py-1">
+              <Logo height={52} alt="" className="h-[52px] w-auto" />
             </span>
-            <p className="text-base font-semibold text-white">{SITE.brand}</p>
+            <p className="sr-only">{SITE.brand}</p>
           </div>
           <p className="mt-3 text-sm leading-relaxed text-white/65">
             Đơn vị tiên phong trong lĩnh vực cung cấp và lắp đặt cửa cuốn, cửa
