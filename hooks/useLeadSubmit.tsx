@@ -81,6 +81,7 @@ export type TurnstileState = {
   loadFailed: boolean;
   widgetId: string | null;
   waiter: ((token: string | null) => void) | null;
+  onReset?: () => void;
 };
 
 // The homepage mounts four forms; the script must load once, not four times.
@@ -125,6 +126,7 @@ function turnstileToken(state: TurnstileState): Promise<string | null> {
 function resetTurnstile(state: TurnstileState) {
   // Tokens are single-use: every attempt needs a fresh one.
   state.token = "";
+  state.onReset?.();
   if (!state.widgetId) return;
   try {
     window.turnstile?.reset(state.widgetId);
@@ -260,11 +262,14 @@ export function useLeadSubmit(source: string) {
 export function LeadTurnstile({
   turnstile,
   className,
+  autoCollapse = true,
 }: {
   turnstile: React.MutableRefObject<TurnstileState>;
   className?: string;
+  autoCollapse?: boolean;
 }) {
   const el = React.useRef<HTMLDivElement>(null);
+  const [verified, setVerified] = React.useState(false);
 
   React.useEffect(() => {
     const sitekey = TURNSTILE_SITE_KEY;
@@ -273,6 +278,10 @@ export function LeadTurnstile({
     // StrictMode mounts, unmounts and remounts; only the surviving mount renders.
     let cancelled = false;
 
+    state.onReset = () => {
+      if (!cancelled) setVerified(false);
+    };
+
     loadTurnstile()
       .then((api) => {
         if (cancelled || !el.current) return;
@@ -280,13 +289,25 @@ export function LeadTurnstile({
           sitekey,
           appearance: "interaction-only",
           language: "vi",
-          callback: (token: string) => settleTurnstile(state, token),
+          callback: (token: string) => {
+            settleTurnstile(state, token);
+            if (!cancelled) {
+              // Hide/collapse once verified so the "Thành công!" box disappears immediately
+              window.setTimeout(() => {
+                if (!cancelled) setVerified(true);
+              }, 500);
+            }
+          },
           "expired-callback": () => {
             state.token = "";
+            if (!cancelled) setVerified(false);
           },
           // Turnstile retries on its own; this only stops a submit that is
           // already waiting from spinning for the full timeout.
-          "error-callback": () => settleTurnstile(state, null),
+          "error-callback": () => {
+            settleTurnstile(state, null);
+            if (!cancelled) setVerified(false);
+          },
         });
       })
       .catch(() => {
@@ -297,6 +318,7 @@ export function LeadTurnstile({
 
     return () => {
       cancelled = true;
+      state.onReset = undefined;
       if (state.widgetId) {
         try {
           window.turnstile?.remove(state.widgetId);
@@ -310,7 +332,19 @@ export function LeadTurnstile({
   }, [turnstile]);
 
   if (!TURNSTILE_SITE_KEY) return null;
-  return <div ref={el} className={className} />;
+  return (
+    <div
+      className={cn(
+        "transition-all duration-300 ease-in-out",
+        className,
+        autoCollapse && verified
+          ? "max-h-0 opacity-0 overflow-hidden pointer-events-none mt-0 mb-0 py-0"
+          : "max-h-28 opacity-100"
+      )}
+    >
+      <div ref={el} />
+    </div>
+  );
 }
 
 /**
