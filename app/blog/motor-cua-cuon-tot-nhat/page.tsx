@@ -30,7 +30,7 @@ const motors = [
   {
     brand: "Somfy",
     origin: "Pháp",
-    priceRange: "3.500.000 – 8.000.000đ",
+    priceRange: "từ 3.500.000đ",
     noiseLevel: "Cực kỳ êm",
     durability: "15–20 năm",
     warranty: "3–5 năm",
@@ -42,7 +42,7 @@ const motors = [
   {
     brand: "CAME",
     origin: "Ý",
-    priceRange: "2.800.000 – 6.000.000đ",
+    priceRange: "từ 2.800.000đ",
     noiseLevel: "Rất êm",
     durability: "12–18 năm",
     warranty: "2–3 năm",
@@ -54,7 +54,7 @@ const motors = [
   {
     brand: "Nice",
     origin: "Ý",
-    priceRange: "1.800.000 – 4.500.000đ",
+    priceRange: "từ 1.800.000đ",
     noiseLevel: "Êm",
     durability: "10–15 năm",
     warranty: "2 năm",
@@ -66,7 +66,7 @@ const motors = [
   {
     brand: "B&D (Công Nghệ Úc)",
     origin: "Úc",
-    priceRange: "2.200.000 – 5.000.000đ",
+    priceRange: "từ 2.200.000đ",
     noiseLevel: "Rất êm",
     durability: "12–15 năm",
     warranty: "3 năm",
@@ -78,7 +78,7 @@ const motors = [
   {
     brand: "Motor Đài Loan",
     origin: "Đài Loan",
-    priceRange: "600.000 – 1.500.000đ",
+    priceRange: "từ 600.000đ",
     noiseLevel: "Có tiếng ồn nhẹ",
     durability: "5–8 năm",
     warranty: "1 năm",
@@ -129,7 +129,7 @@ const faqSchema = {
       name: "Motor cửa cuốn bao nhiêu tiền?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Motor cửa cuốn có giá từ 600.000đ (Đài Loan) đến 8.000.000đ (Somfy cao cấp). Motor Nice phổ biến nhất trong khoảng 1.800.000–3.000.000đ. Giá chưa bao gồm công lắp đặt và phụ kiện.",
+        text: "Motor cửa cuốn có giá từ 600.000đ (Đài Loan), tùy hãng và tải trọng. Giá chưa bao gồm công lắp đặt và phụ kiện; bảng giá motor từng loại gửi qua Zalo.",
       },
     },
     {

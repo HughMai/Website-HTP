@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { MauNan } from "@/lib/bang-gia-data";
-import { formatGia, nanAnchor, type NanSpec } from "@/lib/bang-gia-specs";
+import { HiddenPrice } from "@/components/PriceGate";
+import { nanAnchor, type NanSpec } from "@/lib/bang-gia-specs";
 import { ZALO_URL } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { FIELD } from "./parts";
@@ -21,7 +22,16 @@ import { FIELD } from "./parts";
  *
  * Photos are HTP's own shots of the samples in the showroom (Enki/htp/catalog/anh-mau).
  */
-export function NanCard({ mau, spec }: { mau: MauNan; spec?: NanSpec }) {
+/** A slat model without its price: the card renders inside a client component, whose props
+ *  are written into the page's HTML, so the figure is dropped before it gets there. */
+export type NanCardModel = Omit<MauNan, "gia"> & { priced: boolean };
+
+export function toNanCardModel(m: MauNan): NanCardModel {
+  const { gia, ...rest } = m;
+  return { ...rest, priced: gia !== null };
+}
+
+export function NanCard({ mau, spec }: { mau: NanCardModel; spec?: NanSpec }) {
   const hero = mau.goc ?? mau.mat;
   const face = mau.goc ? mau.mat : null;
   const all: [string, string | undefined][] = [
@@ -72,9 +82,9 @@ export function NanCard({ mau, spec }: { mau: MauNan; spec?: NanSpec }) {
           </p>
         </div>
         {/* The rule under the price closes the heading block; the specs below it read as one list. */}
-        {mau.gia !== null ? (
+        {mau.priced ? (
           <p className="mt-1 border-b border-brand-100 pb-3 text-xl font-semibold tabular-nums text-brand">
-            {formatGia(mau.gia)} <span className="text-base font-normal text-slate-600">đ/m²</span>
+            <HiddenPrice /> <span className="text-base font-normal text-slate-600">đ/m²</span>
           </p>
         ) : (
           <div className="mt-0.5 border-b border-brand-100 pb-1.5">

@@ -17,10 +17,11 @@ import {
   SlatHeading,
   WARRANTY,
   minGia,
-  priceText,
+  RowPrice,
   type MenuGroup,
   type MenuRow,
 } from "@/components/bang-gia/parts";
+import { PriceGate } from "@/components/PriceGate";
 import { APPLIED_FROM, NHOM_KINH, type Gia } from "@/lib/bang-gia-data";
 import { KINH_CUONG_LUC, KINH_GOI_Y, NHOM_DAY_GOI_Y } from "@/lib/bang-gia-specs";
 import { SITE } from "@/lib/site-data";
@@ -78,15 +79,15 @@ const NHOM_GROUPS: MenuGroup[] = [
     name: "Cửa đi",
     unit: "đ/m²",
     rows: rowsOf("Cửa đi"),
-    notes: ["Nhôm Việt: kính mờ cộng 70.000 đ/m²."],
+    notes: ["Nhôm Việt: kính mờ tính thêm theo m²."],
   },
-  { id: "cua-so", name: "Cửa sổ", unit: "đ/m²", rows: rowsOf("Cửa sổ"), notes: ["Nhôm Việt: kính mờ cộng 70.000 đ/m²."] },
+  { id: "cua-so", name: "Cửa sổ", unit: "đ/m²", rows: rowsOf("Cửa sổ"), notes: ["Nhôm Việt: kính mờ tính thêm theo m²."] },
   {
     id: "vach-kinh",
     name: "Vách kính",
     unit: "đ/m²",
     rows: rowsOf("Vách kính"),
-    notes: ["Nhôm Việt: kính hộp nan đồng cộng 1.100.000 đ/m²."],
+    notes: ["Nhôm Việt: kính hộp nan đồng tính thêm theo m²."],
   },
   {
     id: "maxpro",
@@ -121,7 +122,7 @@ const faqItems = [
     tab: "Kính",
     question: "Muốn dùng loại kính khác thì tính sao?",
     answer:
-      "Giá cửa nhôm đã gồm kính trắng 8 ly. Kính mờ cộng 70.000 đ/m² (nhôm Việt). Kính cường lực, kính hộp, kính phản quang báo giá riêng theo công trình.",
+      "Giá cửa nhôm đã gồm kính trắng 8 ly. Kính mờ (nhôm Việt) tính thêm theo m², ghi trong bảng giá gửi qua Zalo. Kính cường lực, kính hộp, kính phản quang báo giá riêng theo công trình.",
   },
   {
     tab: "Phụ phí",
@@ -183,7 +184,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
 
         <PriceHero
           title="Bảng giá cửa nhôm kính Cần Thơ"
-          lead={`Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`}
+          lead={`Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}. Giá từng mẫu gửi qua Zalo trong 1–2 phút.`}
           aside={
             <ProductPicker
               items={[
@@ -257,6 +258,7 @@ export default function BangGiaCuaNhomKinhCanTho() {
               }}
               groups={NHOM_GROUPS}
             />
+            <PriceGate source="Bảng giá cửa nhôm kính · dưới bảng" className="mt-14 max-w-3xl" />
           </div>
         </section>
 
@@ -285,10 +287,13 @@ export default function BangGiaCuaNhomKinhCanTho() {
                   {LAN_CAN.map((r) => (
                     <li key={r.name} className="flex items-baseline justify-between gap-4">
                       <span className="text-base font-semibold text-brand">{r.name}</span>
-                      <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">{priceText(r.gia)}</span>
+                      <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">
+                        <RowPrice gia={r.gia} />
+                      </span>
                     </li>
                   ))}
                 </ul>
+                <PriceGate source="Bảng giá cửa nhôm kính · lan can" className="mt-10" />
               </div>
             </div>
           </div>

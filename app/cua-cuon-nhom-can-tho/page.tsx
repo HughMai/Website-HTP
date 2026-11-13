@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, CloudRain, Lock, MapPin, Palette, Phone, Scale, ShieldCheck, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -108,7 +109,7 @@ const faqItems = [
   {
     question: "Cửa cuốn nhôm Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn nhôm tại Cần Thơ dao động từ 3.800.000 đến 13.000.000 đồng tùy kích thước và loại nhôm. Giá đã bao gồm motor, phụ kiện và nhân công lắp đặt. Liên hệ để được báo giá chính xác theo kích thước thực tế.",
+      "Giá cửa cuốn nhôm tại Cần Thơ từ 3.800.000 đồng, tùy kích thước và loại nhôm. Giá đã bao gồm motor, phụ kiện và nhân công lắp đặt. Liên hệ để được báo giá chính xác theo kích thước thực tế.",
   },
   {
     question: "Cửa cuốn nhôm có bền hơn cửa cuốn thép không?",
@@ -285,7 +286,9 @@ export default function CuaCuonNhomCanTho() {
                   {pricing.map((row) => (
                     <tr key={row.size}>
                       <td className="px-4 py-3">{row.size}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                      <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -294,6 +297,7 @@ export default function CuaCuonNhomCanTho() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               * Giá tham khảo cho cửa cuốn nhôm tiêu chuẩn kèm motor nhập khẩu. Giá chính xác sau khi khảo sát thực tế.
             </p>
+            <PriceGate source="Cửa cuốn nhôm Đức · bảng giá" className="mt-8" />
             <div className="mt-6 text-center">
               <Link href="/bao-gia-cua-cuon-can-tho">
                 <Button variant="outline" className="gap-2">

@@ -114,7 +114,7 @@ const faqItems = [
   {
     question: "Chi phí lắp cửa cuốn nhôm Cần Thơ khoảng bao nhiêu?",
     answer:
-      "Chi phí lắp đặt cửa cuốn nhôm tại Cần Thơ dao động từ 3.500.000 đến 8.000.000 đồng tùy kích thước và loại motor. Giá bao gồm vật tư và nhân công. Liên hệ để được báo giá chính xác.",
+      "Chi phí lắp đặt cửa cuốn nhôm tại Cần Thơ từ 3.500.000 đồng, tùy kích thước và loại motor. Giá bao gồm vật tư và nhân công. Liên hệ để được báo giá chính xác.",
   },
   {
     question: "Có cần cắt tường hay đục tường để lắp cửa cuốn không?",

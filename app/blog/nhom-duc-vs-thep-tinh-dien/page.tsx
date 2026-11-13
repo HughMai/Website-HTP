@@ -41,8 +41,8 @@ const comparison = [
   },
   {
     criteria: "Giá thành",
-    nhom: "Cao hơn thép 60–100%. Mã KV 380R từ 1.450.000đ/m², mã CT 5222R từ 2.200.000đ/m².",
-    thep: "Thấp hơn nhôm đáng kể. Tole 6 zem từ 500.000đ/m², tole 1 ly từ 780.000đ/m².",
+    nhom: "Cao hơn thép 60–100%. Nan nhôm Đức từ 1.450.000đ/m².",
+    thep: "Thấp hơn nhôm đáng kể. Tole thép từ 500.000đ/m².",
     winner: "thep",
   },
   {

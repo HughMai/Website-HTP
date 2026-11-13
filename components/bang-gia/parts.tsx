@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { MessageCircle, Phone } from "lucide-react";
+import { HiddenPrice } from "@/components/PriceGate";
 import type { Gia } from "@/lib/bang-gia-data";
 import { formatGia } from "@/lib/bang-gia-specs";
 import { SITE, ZALO_URL } from "@/lib/site-data";
@@ -88,8 +89,10 @@ export const FIELD: Record<string, string> = {
   OneDoor: "bg-[#EEF1F4]",
 };
 
-export function priceText(g: Gia): string {
-  return g !== null ? formatGia(g) : "Liên hệ";
+/** A row's own price: gated (components/PriceGate.tsx). The family's "từ" price in the
+ *  hero (HeroIndex) is the one figure left on the page. */
+export function RowPrice({ gia }: { gia: Gia }) {
+  return gia !== null ? <HiddenPrice /> : <>Liên hệ</>;
 }
 
 /**
@@ -315,7 +318,7 @@ export function PriceMenu({
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-base font-semibold text-brand">{r.name}</span>
                     <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">
-                      {priceText(r.gia)}
+                      <RowPrice gia={r.gia} />
                     </span>
                   </div>
                   {r.sub && <p className="mt-0.5 max-w-[40ch] text-base leading-snug text-slate-600">{r.sub}</p>}

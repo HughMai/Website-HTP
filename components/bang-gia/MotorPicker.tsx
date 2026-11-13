@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import type { Gia, Motor } from "@/lib/bang-gia-data";
-import { formatGia } from "@/lib/bang-gia-specs";
-import { H2 } from "./parts";
+import { HiddenPrice } from "@/components/PriceGate";
+import type { Motor } from "@/lib/bang-gia-data";
 
 const vn = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",");
 const clamp = (n: number) => Math.min(12, Math.max(0.5, Math.round(n * 10) / 10));
@@ -69,10 +68,15 @@ function Stepper({ label, value, onChange }: { label: string; value: number; onC
 
 /**
  * The phụ kiện page's one live thing: door width × height → area → the motor tier the CRM
- * itself would pick (thresholds exported from pricing.resolve_motor_label) and its price.
+ * itself would pick (thresholds exported from pricing.resolve_motor_label). Its price is gated
+ * like every row's (components/PriceGate.tsx), so the tiers come in without one.
  * Hidden without JavaScript; the full tier list sits right below it on the page.
  */
-export function MotorPicker({ motors, binh }: { motors: Motor[]; binh: Gia }) {
+/** A motor tier without its price: this is a client component, so its props are written
+ *  into the page's HTML (see components/PriceGate.tsx). */
+export type MotorTier = Omit<Motor, "gia">;
+
+export function MotorPicker({ motors }: { motors: MotorTier[] }) {
   const [w, setW] = useState(3.5);
   const [h, setH] = useState(3);
   const [uc, setUc] = useState(false);
@@ -101,18 +105,16 @@ export function MotorPicker({ motors, binh }: { motors: Motor[]; binh: Gia }) {
       </div>
       {tier && (
         <div className="mt-5 bg-brand-50 p-5" aria-live="polite">
-          <p className={`tabular-nums ${H2}`}>
-            {formatGia(tier.gia)} <span className="text-base font-normal">đ/bộ</span>
+          <p className="text-xl font-semibold">{tier.name}</p>
+          <p className="mt-1 text-base text-slate-600">
+            <HiddenPrice className="text-brand" /> đ/bộ · giá trong bảng giá gửi qua Zalo
           </p>
-          <p className="mt-1 text-xl font-semibold">{tier.name}</p>
           <p className="mt-3 text-base">
             Cửa {vn(w)} × {vn(h)} m = <span className="font-semibold tabular-nums">{vn(area)} m²</span>.{" "}
             {uc ? "Cửa Úc dùng motor riêng, mọi kích thước." : `${tier.dienTich}.`}
           </p>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">
-            {binh !== null
-              ? `Cần mở cửa khi cúp điện: thêm bình tích điện ${formatGia(binh)} đ/bộ.`
-              : "Cần mở cửa khi cúp điện: thêm bình tích điện (loại YH hoặc SH), gọi để báo giá."}
+            Cần mở cửa khi cúp điện: thêm bình tích điện (loại YH hoặc SH), tính riêng theo bộ.
           </p>
         </div>
       )}

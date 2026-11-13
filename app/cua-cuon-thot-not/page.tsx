@@ -93,7 +93,7 @@ const faqItems = [
   {
     question: "Cửa cuốn Thốt Nốt giá bao nhiêu?",
     answer:
-      "Giá cửa cuốn tại Thốt Nốt từ 500.000đ/m² (tole thép tĩnh điện) đến 2.300.000đ/m² (nhôm công nghệ Đức), chưa bao gồm motor và VAT. Liên hệ 0963 021 639 để được khảo sát và báo giá tận nơi.",
+      "Giá cửa cuốn tại Thốt Nốt từ 500.000đ/m² (tole thép tĩnh điện), chưa bao gồm motor và VAT; giá từng dòng trong bảng giá gửi qua Zalo. Liên hệ 0963 021 639 để được khảo sát và báo giá tận nơi.",
   },
   {
     question: "Khu vực Thốt Nốt gần sông nên chọn cửa cuốn gì?",

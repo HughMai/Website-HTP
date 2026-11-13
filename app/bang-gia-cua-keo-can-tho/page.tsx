@@ -4,6 +4,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { ClosingBand } from "@/components/bang-gia/ClosingBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
+import { PriceGate } from "@/components/PriceGate";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { Rise } from "@/components/bang-gia/Rise";
 import {
@@ -158,7 +159,7 @@ export default function BangGiaCuaKeoCanTho() {
 
         <PriceHero
           title="Bảng giá cửa kéo Cần Thơ"
-          lead={`Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`}
+          lead={`Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}. Giá từng độ dày gửi qua Zalo trong 1–2 phút.`}
           aside={
             <figure>
               {/* Two portrait shots, same size, so the whole door shows. Captions say nothing about the type. */}
@@ -240,6 +241,7 @@ export default function BangGiaCuaKeoCanTho() {
                 <p>Dòng ghi “Liên hệ” là hàng đặt riêng: nhắn Zalo hoặc gọi để báo giá theo đơn.</p>
               )}
             </div>
+            <PriceGate source="Bảng giá cửa kéo · dưới bảng" className="mt-10 max-w-3xl" />
           </div>
         </section>
 

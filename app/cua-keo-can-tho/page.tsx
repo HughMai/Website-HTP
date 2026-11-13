@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
@@ -106,7 +107,7 @@ const faqItems = [
   {
     question: "Cửa kéo Cần Thơ giá bao nhiêu?",
     answer:
-      "Cửa kéo tính giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo thép có bảng giá theo độ dày (U 6 zem đến 1.6 ly), loại có lá hoặc không lá — xem bảng giá cửa kéo Cần Thơ. Cửa kéo nhôm và inox báo giá theo mẫu. Cửa từ 5m² đến dưới 8m² cộng thêm 20.000đ/m², dưới 5m² cộng thêm 40.000đ/m². Liên hệ 0963 021 639 để được báo giá chính xác.",
+      "Cửa kéo tính giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo thép có bảng giá theo độ dày (U 6 zem đến 1.6 ly), loại có lá hoặc không lá — xem bảng giá cửa kéo Cần Thơ. Cửa kéo nhôm và inox báo giá theo mẫu. Cửa nhỏ dưới 8m² có phụ phí theo m², ghi rõ trên báo giá. Ghi số Zalo để nhận bảng giá đầy đủ, hoặc gọi 0963 021 639 để được báo giá chính xác.",
   },
   {
     question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào phù hợp hơn?",
@@ -277,7 +278,9 @@ export default function CuaKeoCanTho() {
                   {pricing.map((row) => (
                     <tr key={row.size}>
                       <td className="px-4 py-3">{row.size}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                      <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -286,6 +289,7 @@ export default function CuaKeoCanTho() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               * Giá tham khảo cửa kéo thép tiêu chuẩn, chưa bao gồm VAT.
             </p>
+            <PriceGate source="Cửa kéo Cần Thơ · bảng giá" className="mt-8" />
           </div>
         </section>
 

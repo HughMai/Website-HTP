@@ -4,6 +4,7 @@ import { H2 } from "@/components/bang-gia/parts";
 import { LeadForm } from "@/components/LeadForm";
 import { Logo } from "@/components/Logo";
 import { LpStickyBar } from "@/components/lp/LpStickyBar";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Checks, ProofLine, Stars } from "@/components/lp/Proof";
 import { QuoteButton } from "@/components/lp/QuoteSheet";
@@ -35,7 +36,11 @@ import { cn } from "@/lib/utils";
  * once among the real job photos (a "wall", never a carousel). Section headings carry
  * the point on their own, for the visitor who reads only headings.
  *
- * Order: logo-only header → hero → [what the sitelink promised] → proof wall → 3 ĐÚNG →
+ * Prices are gated (13/11): the hero's teaser keeps one "từ" price; the tables keep their
+ * rows with each price hidden, and a PriceGate under them sends the full list by Zalo
+ * (repairs: call). The header, with its call button, is sticky.
+ *
+ * Order: sticky logo + call header → hero → [what the sitelink promised] → proof wall → 3 ĐÚNG →
  * 3 steps → prices → FAQ → final ask + showroom → NAP. No site menu, no footer link farm,
  * no map iframe, no floating rail: every link that isn't a way to reach the shop is a
  * paid click leaving.
@@ -124,19 +129,23 @@ function CtaRow({ page, track }: { page: AdLandingPage; track: string }) {
 
 function TopBar() {
   // Logo and phone, nothing else: the logo links nowhere. White, because the logo is
-  // drawn on white (brown and gold) and turns muddy on the navy.
+  // drawn on white (brown and gold) and turns muddy on the navy. Sticky (Hughie, 13/11):
+  // the call button stays on screen the whole way down, on every page and every width,
+  // whatever the bottom bar is doing.
   return (
-    <header className="border-b border-brand/10 bg-white" data-track="lp_topbar">
+    <header
+      className="sticky top-0 z-30 border-b border-brand/10 bg-white/95 backdrop-blur"
+      data-track="lp_topbar"
+    >
       <div className="container flex h-16 items-center justify-between gap-3">
         <Logo height={52} />
         <a
           href={TEL}
-          className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full border border-brand/20 px-4 text-sm font-semibold text-brand transition-colors hover:bg-brand-50"
+          className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-amber-400 px-4 text-sm font-bold text-brand transition-colors hover:bg-amber-300"
           aria-label={`Gọi ${HOTLINE}`}
         >
           <Phone className="h-4 w-4" aria-hidden />
-          <span className="hidden min-[420px]:inline">{HOTLINE}</span>
-          <span className="min-[420px]:hidden">Gọi</span>
+          {HOTLINE}
         </a>
       </div>
     </header>
@@ -416,8 +425,9 @@ function PriceTable({ table }: { table: LpPriceTable }) {
                     {c}
                   </th>
                 ) : (
-                  <td key={i} className="whitespace-nowrap px-4 py-3 text-right font-semibold tabular-nums text-brand">
-                    {c}
+                  // Every column after the name is a price: gated (components/PriceGate.tsx).
+                  <td key={i} className="whitespace-nowrap px-4 py-3 text-right font-semibold text-brand">
+                    <HiddenPrice />
                   </td>
                 )
               )}
@@ -434,7 +444,7 @@ function PriceTable({ table }: { table: LpPriceTable }) {
   return (
     <details className="group mt-3 rounded-xl border border-brand/10 bg-white">
       <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-sm font-semibold text-brand [&::-webkit-details-marker]:hidden">
-        Xem giá {table.head[0].charAt(0).toLowerCase() + table.head[0].slice(1)}
+        Xem các dòng {table.head[0].charAt(0).toLowerCase() + table.head[0].slice(1)}
         <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
       </summary>
       <div className="px-2 pb-2">{grid}</div>
@@ -454,7 +464,13 @@ function Prices({ page }: { page: AdLandingPage }) {
           <PriceTable key={t.head[0]} table={t} />
         ))}
         <p className="mt-4 text-sm leading-relaxed text-slate-600">{page.prices.note}</p>
-        <CtaRow page={page} track="lp_prices" />
+        {/* The hero keeps the one "từ" price; each row's price is behind this ask, on every
+            width (it replaces the desktop-only CtaRow here). */}
+        <PriceGate
+          source={`lp_${page.slug} · bảng giá`}
+          kind={page.form ? "install" : "repair"}
+          className="mt-6"
+        />
       </div>
     </section>
   );

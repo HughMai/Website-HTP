@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { MauNan } from "@/lib/bang-gia-data";
 import type { NanSpec, NhuCau } from "@/lib/bang-gia-specs";
 import { cn } from "@/lib/utils";
-import { NanCard } from "./NanCard";
+import { NanCard, type NanCardModel } from "./NanCard";
 
 type Need = { key: NhuCau; ten: string; goiY: string; mau: string[] };
 
@@ -19,7 +18,8 @@ export function NanCatalogue({
   needs,
   after,
 }: {
-  models: MauNan[];
+  /** Without prices (toNanCardModel): this is a client component, its props go into the HTML. */
+  models: NanCardModel[];
   specs: Record<string, NanSpec>;
   needs: Need[];
   /** Extra grid cell after the cards ("Mẫu khác"), spans the rest of the last row. */

@@ -345,6 +345,9 @@ test.describe("Google Ads sitelink pages", () => {
       await expect(page.locator('#lp-cong-trinh').locator("xpath=..").locator('img[src*="cong-trinh"]')).toHaveCount(4);
     });
 
+    // Since 13/11 the prices themselves are gated on both sides, so what is left to keep in
+    // step is the rows: each hand-mirrored label must still exist on the site page, and
+    // every price cell must be hidden ("Liên hệ" rows excepted).
     test(`${p.path}: every price row matches ${p.mirror.join(" + ")}`, async ({ page }) => {
       await page.goto(p.path);
       await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
@@ -360,10 +363,7 @@ test.describe("Google Ads sitelink pages", () => {
       }
       for (const [label, ...prices] of rows) {
         if (p.labels) expect(site, `"${label}" is missing from ${p.mirror}`).toContain(label);
-        for (const price of prices.filter((x) => x !== "Liên hệ")) {
-          // "100.000 – 300.000 đ" on a repair row; "1.450.000" on a catalog row.
-          expect(site, `"${label}: ${price}" no longer matches ${p.mirror}`).toContain(price.replace(/\s*đ.*$/, ""));
-        }
+        for (const price of prices) expect(["Liên hệ", "Giá gửi qua Zalo"], `"${label}: ${price}"`).toContain(price);
       }
     });
   }
@@ -381,10 +381,75 @@ test.describe("Google Ads sitelink pages — desktop", () => {
     await page.goto("/lp/bang-gia-cua-keo-can-tho");
     await expect(page.locator('section[aria-labelledby="lp-title"] figure')).toBeVisible();
     await expect(page.locator('#nhan-bao-gia button[type="submit"]')).toHaveText("Nhận bảng giá");
-    await page.locator('[data-track="lp_prices"]').getByRole("button", { name: "Nhận bảng giá" }).click();
+    await page.locator('[data-track="lp_photos"]').getByRole("button", { name: "Nhận bảng giá" }).click();
     const sheet = page.getByRole("dialog");
     await expect(sheet).toContainText("Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
+  });
+});
+
+// Prices are gated (13/11/2026): one "từ" price per family stays; every row's own price
+// is hidden and goes out by Zalo (install) or on the phone (repair). The number must not
+// be anywhere in the HTML, not just invisible.
+const VND = /\d{1,3}(?:\.\d{3}){1,2}/;
+
+test.describe("Gated prices", () => {
+  test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
+
+  for (const p of ALL_AD_PAGES) {
+    test(`${p.path}: the price table hides every row's price and asks under it`, async ({ page }) => {
+      await page.goto(p.path);
+      const prices = page.locator('section[aria-labelledby="lp-bang-gia"]');
+      await expect(prices.locator("tbody [data-hidden-price]").first()).toBeAttached();
+      for (const cell of await prices.locator("tbody td").allTextContents()) expect(cell).not.toMatch(VND);
+      const gate = prices.locator("[data-price-gate]");
+      await expect(gate).toBeVisible();
+      if (p.form) await expect(gate.getByRole("button", { name: "Nhận bảng giá" })).toBeVisible();
+      else await expect(gate.getByRole("link", { name: /^Gọi / })).toBeVisible();
+    });
+  }
+
+  test("the ad page header, with its call button, stays on screen to the bottom", async ({ page }) => {
+    await page.goto("/lp/cua-cuon-can-tho");
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    const call = page.locator('[data-track="lp_topbar"] a[href^="tel:"]');
+    await expect(call).toBeInViewport();
+    expect((await call.boundingBox())!.y).toBeLessThan(80);
+  });
+
+  const SITE_PRICE_PAGES = [
+    "/bao-gia-cua-cuon-can-tho",
+    "/bang-gia-cua-keo-can-tho",
+    "/bang-gia-cua-nhom-kinh-can-tho",
+    "/bang-gia-phu-kien-can-tho",
+    "/phu-kien-cua-cuon-can-tho",
+    "/cua-keo-can-tho",
+    "/cua-keo-thep-can-tho",
+    "/cua-cuon-nhom-can-tho",
+    "/cua-nhom-kinh-can-tho",
+    "/lan-can-nhom-kinh-can-tho",
+    "/sua-chua-cua-cuon-can-tho",
+  ];
+  for (const path of SITE_PRICE_PAGES) {
+    test(`${path}: rows show no price, a gate sits under the prices`, async ({ page }) => {
+      await page.goto(path);
+      await expect(page.locator("[data-hidden-price]").first()).toBeAttached();
+      await expect(page.locator("[data-price-gate]").first()).toBeVisible();
+      // Below the hero, a figure may only appear as a "từ" starting price.
+      const body = await page
+        .locator("main > section")
+        .evaluateAll((els) => els.slice(1).map((e) => (e as HTMLElement).innerText).join("\n"));
+      for (const m of body.matchAll(new RegExp(VND.source, "g"))) {
+        expect(body.slice(Math.max(0, m.index! - 4), m.index), `"${m[0]}" on ${path}`).toMatch(/từ\s$/i);
+      }
+    });
+  }
+
+  test("the slat catalogue's client data carries no prices", async ({ page }) => {
+    const res = await page.goto("/bao-gia-cua-cuon-can-tho");
+    const html = await res!.text();
+    expect(html).not.toMatch(/\\?"gia\\?":\s*\d/);
+    expect(html).not.toMatch(/\\?"priced\\?":\s*(?!true|false)/);
   });
 });
 

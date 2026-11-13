@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Sparkles, Waves, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -100,7 +101,7 @@ const faqItems = [
   {
     question: "Lan can nhôm kính Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá lan can nhôm kính tại Cần Thơ từ 1.500.000 đến 3.500.000 đồng mỗi mét dài, tùy loại (cầu thang, ban công, sân thượng) và độ dày kính. Chưa bao gồm VAT. Liên hệ để được báo giá sau khảo sát thực tế.",
+      "Giá lan can nhôm kính tại Cần Thơ từ 1.500.000 đồng mỗi mét dài, tùy loại (cầu thang, ban công, sân thượng) và độ dày kính. Chưa bao gồm VAT. Liên hệ để được báo giá sau khảo sát thực tế.",
   },
   {
     question: "Kính lan can có an toàn không khi bị va đập mạnh?",
@@ -259,7 +260,9 @@ export default function LanCanNhomKinhCanTho() {
                   {pricing.map((row) => (
                     <tr key={row.item}>
                       <td className="px-4 py-3">{row.item}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                      <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -268,6 +271,7 @@ export default function LanCanNhomKinhCanTho() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               * Giá chính xác sau khi khảo sát và đo đạc thực tế.
             </p>
+            <PriceGate source="Lan can nhôm kính · bảng giá" className="mt-8" />
           </div>
         </section>
 

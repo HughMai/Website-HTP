@@ -1,5 +1,5 @@
 import type { Gia } from "@/lib/bang-gia-data";
-import { H2, Illustration, priceText } from "./parts";
+import { H2, Illustration, RowPrice } from "./parts";
 
 type Kind = "mac-vong" | "tron" | "vuong";
 
@@ -73,7 +73,7 @@ export function SongNgangList({
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-base font-semibold text-brand">{r.mau}</span>
                     <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">
-                      {priceText(r.gia)}
+                      <RowPrice gia={r.gia} />
                     </span>
                   </div>
                   {r.sub && <p className="mt-0.5 text-base leading-snug text-slate-600">{r.sub}</p>}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -98,7 +99,7 @@ const faqItems = [
   {
     question: "Cửa kéo thép Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa kéo thép tại Cần Thơ dao động từ 2.800.000 đến 9.500.000 đồng tùy kích thước và loại thép. Giá đã bao gồm phụ kiện và nhân công lắp đặt. Liên hệ để được báo giá chính xác.",
+      "Giá cửa kéo thép tại Cần Thơ từ 2.800.000 đồng, tùy kích thước và loại thép. Giá đã bao gồm phụ kiện và nhân công lắp đặt. Liên hệ để được báo giá chính xác.",
   },
   {
     question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào tốt hơn?",
@@ -265,7 +266,9 @@ export default function CuaKeoThepCanTho() {
                   {pricing.map((row) => (
                     <tr key={row.size}>
                       <td className="px-4 py-3">{row.size}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                      <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -274,6 +277,7 @@ export default function CuaKeoThepCanTho() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               * Giá tham khảo cho cửa kéo thép tiêu chuẩn. Giá chính xác sau khi khảo sát thực tế.
             </p>
+            <PriceGate source="Cửa kéo thép · bảng giá" className="mt-8" />
           </div>
         </section>
 

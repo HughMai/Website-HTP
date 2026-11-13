@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, Construction, Lock, MapPin, Phone, ShieldCheck, Sparkles, Thermometer, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
@@ -106,7 +107,7 @@ const faqItems = [
   {
     question: "Cửa nhôm kính Cần Thơ giá bao nhiêu?",
     answer:
-      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000–6.000.000đ, cửa đi 2 cánh từ 6.000.000–11.000.000đ. Mặt dựng và lan can tính theo m². Liên hệ 0963 021 639 để được báo giá chính xác sau khảo sát.",
+      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000đ; mặt dựng và lan can tính theo m². Giá từng hệ trong bảng giá gửi qua Zalo. Liên hệ 0963 021 639 để được báo giá chính xác sau khảo sát.",
   },
   {
     question: "Cửa nhôm kính có chống nóng không?",
@@ -278,7 +279,9 @@ export default function CuaNhomKinhCanTho() {
                   {pricing.map((row) => (
                     <tr key={row.system}>
                       <td className="px-4 py-3">{row.system}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                      <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -287,6 +290,7 @@ export default function CuaNhomKinhCanTho() {
             <p className="mt-4 text-center text-xs text-muted-foreground">
               * Giá chưa bao gồm VAT. Liên hệ để được báo giá trọn gói.
             </p>
+            <PriceGate source="Cửa nhôm kính · bảng giá" className="mt-8" />
           </div>
         </section>
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AlertTriangle, AppWindow, ArrowRight, BatteryCharging, Bolt, CheckCircle2, Clock, Droplet, KeyRound, Link2, Lock, MapPin, MessageCircle, Phone, RadioTower, RefreshCw, Rows3, Ruler, Settings, Waves, Wind, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE, ZALO_URL } from "@/lib/site-data";
@@ -220,7 +221,7 @@ const faqItems = [
   {
     question: "Sửa cửa cuốn bị lỗi motor hết bao nhiêu tiền?",
     answer:
-      "Chi phí sửa motor cửa cuốn tại Cần Thơ dao động từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng hóc. Nếu cần thay motor mới (kèm remote), chi phí từ 3.300.000 đến 5.500.000 đồng theo bảng giá. Chúng tôi báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+      "Chi phí sửa motor cửa cuốn tại Cần Thơ từ 300.000 đồng, tùy loại motor và mức độ hỏng hóc; thay motor mới (kèm remote) từ 3.300.000 đồng. Chúng tôi báo giá miễn phí trước khi sửa, không phát sinh thêm.",
   },
   {
     question: "Cửa cuốn không lên được — nguyên nhân là gì?",
@@ -235,7 +236,7 @@ const faqItems = [
   {
     question: "Thay kính cửa nhôm hết bao nhiêu tiền?",
     answer:
-      "Chi phí thay kính cửa nhôm tại Cần Thơ dao động từ 300.000 đến 1.200.000 đồng mỗi tấm tùy kích thước và loại kính (đơn, hộp, cường lực). Chúng tôi đo và cắt kính theo kích thước thực tế tại showroom.",
+      "Chi phí thay kính cửa nhôm tại Cần Thơ từ 300.000 đồng mỗi tấm, tùy kích thước và loại kính (đơn, hộp, cường lực). Chúng tôi đo và cắt kính theo kích thước thực tế tại showroom.",
   },
   {
     question: "Có bảo hành sau khi sửa không?",
@@ -479,7 +480,9 @@ export default function SuaChuaCuaCanTho() {
                       {group.rows.map((row) => (
                         <tr key={row.item}>
                           <td className="px-4 py-3">{row.item}</td>
-                          <td className="px-4 py-3 text-right text-muted-foreground">{row.range}</td>
+                          <td className="px-4 py-3 text-right text-muted-foreground">
+                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                      </td>
                         </tr>
                       ))}
                     </tbody>
@@ -491,6 +494,7 @@ export default function SuaChuaCuaCanTho() {
             <p className="text-center text-xs text-muted-foreground">
               * Giá chưa bao gồm phụ kiện thay thế nếu cần. Kỹ thuật viên báo giá đầy đủ trước khi tiến hành.
             </p>
+            <PriceGate source="Sửa chữa cửa cuốn · bảng giá" kind="repair" className="mx-auto mt-8 max-w-2xl" />
           </div>
         </section>
 

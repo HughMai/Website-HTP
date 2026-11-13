@@ -355,7 +355,7 @@ const REPAIR_PRICE_NOTE = "Không tính phí đi lại trong Cần Thơ.";
 
 const FAQ_MOTOR_REPAIR = {
   q: "Sửa motor cửa cuốn hết bao nhiêu?",
-  a: "Sửa motor từ 300.000 đến 1.500.000 đồng tùy loại motor và mức độ hỏng. Nếu phải thay motor mới (kèm remote), từ 3.300.000 đến 5.500.000 đồng theo bảng giá. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
+  a: "Sửa motor từ 300.000 đồng, tùy loại motor và mức độ hỏng. Nếu phải thay motor mới (kèm remote), từ 3.300.000 đồng. Báo giá miễn phí trước khi sửa, không phát sinh thêm.",
 };
 
 const FAQ_WONT_OPEN = {
@@ -399,7 +399,6 @@ const KEO_TU = lowest(
   CUA_KEO.map((r) => r.khongLa),
   "cửa kéo"
 );
-const KEO_DEN = Math.max(...CUA_KEO.flatMap((r) => [r.coLa, r.khongLa]).filter((x): x is number => x !== null));
 
 const NK = {
   vach: nhomKinh("Nhôm Việt", "Vách kính"),
@@ -515,7 +514,7 @@ const FAQ_MOTOR_TIER = {
 
 const FAQ_KEO_PRICE = {
   q: "Cửa kéo giá bao nhiêu?",
-  a: `Cửa kéo thép tính theo m² diện tích cửa (rộng × cao): từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)} tùy độ dày và loại có lá hay không lá, đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo nhôm và inox báo giá theo mẫu.`,
+  a: `Cửa kéo thép tính theo m² diện tích cửa (rộng × cao), từ ${perM2(KEO_TU)}; giá tăng theo độ dày và loại có lá hay không lá, đã gồm vật tư và công lắp đặt, chưa VAT. Bảng giá từng độ dày gửi qua Zalo. Cửa kéo nhôm và inox báo giá theo mẫu.`,
 };
 
 const FAQ_KEO_TIME = {
@@ -535,12 +534,12 @@ const FAQ_KEO_DAY = {
 
 const FAQ_NK_PRICE = {
   q: "Cửa nhôm kính giá bao nhiêu?",
-  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, nhôm Việt: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Nhôm nhập và Maxpro cao hơn — xem bảng giá phía trên. Giá đã gồm công lắp đặt, cửa nhôm đã gồm kính trắng 8 ly, chưa VAT.`,
+  a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, nhôm Việt: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Nhôm nhập và Maxpro cao hơn; bảng giá đầy đủ gửi qua Zalo. Giá đã gồm công lắp đặt, cửa nhôm đã gồm kính trắng 8 ly, chưa VAT.`,
 };
 
 const FAQ_NK_VIET_NHAP = {
   q: "Nhôm Việt và nhôm nhập khác nhau thế nào?",
-  a: "Nhôm nhập có bề mặt xử lý tốt hơn, ít cong vênh hơn. Nhôm Việt giá thấp hơn, hợp công trình không đòi hỏi cao. Cả hai đều có nhiều độ dày — xem bảng giá phía trên; thợ tư vấn loại hợp ngân sách khi đến đo.",
+  a: "Nhôm nhập có bề mặt xử lý tốt hơn, ít cong vênh hơn. Nhôm Việt giá thấp hơn, hợp công trình không đòi hỏi cao. Cả hai đều có nhiều độ dày; thợ tư vấn loại hợp ngân sách khi đến đo.",
 };
 
 const FAQ_NK_TIME = {
@@ -604,7 +603,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     keyword: "Bảng Giá Cửa Cuốn Cần Thơ",
     promise: "Niêm Yết Theo m², Đã Gồm Công Lắp",
     description: `Giá cửa cuốn niêm yết theo m², áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}. Đã gồm vật tư và công lắp, chưa VAT. Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ.`,
-    sub: "Đã gồm vật tư và công lắp, chưa VAT. Motor tính riêng theo bộ, giá ghi ngay bên dưới.",
+    sub: "Đã gồm vật tư và công lắp, chưa VAT. Motor tính riêng theo bộ, chọn tải theo diện tích cửa.",
     priceTeaser: `Từ ${perM2(CUON.daiLoan)} · motor + remote từ ${formatGia(MOTOR_FROM)}đ/bộ`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: jobImage(
@@ -719,7 +718,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     faq: [
       {
         q: "Cửa cuốn nhà xưởng giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, tole siêu trường từ ${perM2(CUON.sieuTruong)}, đã gồm vật tư và công lắp đặt, chưa VAT. Motor + remote ${MOTOR_500.sucNang} cho ${MOTOR_500.dienTich.toLowerCase()}: ${formatGia(MOTOR_500.gia)}đ/bộ. Thợ đo tận nơi và báo giá trọn gói, miễn phí nội thành Cần Thơ.`,
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, tole siêu trường từ ${perM2(CUON.sieuTruong)}, đã gồm vật tư và công lắp đặt, chưa VAT. Motor + remote tính riêng theo bộ (${MOTOR_500.dienTich.toLowerCase()} dùng motor ${MOTOR_500.sucNang}); giá từng loại trong bảng giá gửi qua Zalo. Thợ đo tận nơi và báo giá trọn gói, miễn phí nội thành Cần Thơ.`,
       },
       FAQ_MOTOR_TIER,
       {
@@ -742,7 +741,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     keyword: "Bảng Giá Cửa Kéo Cần Thơ",
     // Non-breaking spaces keep the two-syllable words whole on a 360px phone.
     promise: "Đã Gồm Vật Tư Và Lắp Đặt",
-    description: `Giá cửa kéo thép niêm yết theo m², từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)}, đã gồm vật tư và công lắp đặt, chưa VAT. Báo giá rõ từng mục trước khi làm; đặt cọc 30%, lắp xong mới thanh toán.`,
+    description: `Giá cửa kéo thép niêm yết theo m², từ ${perM2(KEO_TU)}, đã gồm vật tư và công lắp đặt, chưa VAT. Báo giá rõ từng mục trước khi làm; đặt cọc 30%, lắp xong mới thanh toán.`,
     sub: "Giá theo m² diện tích cửa (rộng × cao), chưa VAT. Thợ đo tận nơi, báo giá rõ từng mục trước khi làm.",
     priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
@@ -844,7 +843,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     faq: [
       {
         q: "Lan can kính giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can: ${LAN_CAN.map(([k, v]) => `${k.charAt(0).toLowerCase()}${k.slice(1)} ${v}đ`).join("; ")}. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can, từ ${formatGia(LAN_CAN_TU)}đ/m² tùy kiểu tay vịn (${LAN_CAN.map(([k]) => `${k.charAt(0).toLowerCase()}${k.slice(1)}`).join(", ")}); giá từng kiểu trong bảng giá gửi qua Zalo. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
       },
       {
         q: "Kính lan can có an toàn không?",

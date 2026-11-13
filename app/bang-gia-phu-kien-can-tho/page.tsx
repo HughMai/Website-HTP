@@ -6,6 +6,7 @@ import { ClosingBand } from "@/components/bang-gia/ClosingBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { MotorPicker } from "@/components/bang-gia/MotorPicker";
+import { PriceGate } from "@/components/PriceGate";
 import { Rise } from "@/components/bang-gia/Rise";
 import {
   HeroActions,
@@ -142,11 +143,15 @@ export default function BangGiaPhuKienCanTho() {
 
         <PriceHero
           title="Bảng giá motor và phụ kiện"
-          lead={`Motor cửa cuốn theo sức nâng, bình tích điện và khóa ngang. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`}
-          aside={<MotorPicker motors={MOTOR} binh={BINH_GIA} />}
+          lead={`Motor cửa cuốn theo sức nâng, bình tích điện và khóa ngang. Chưa VAT, áp dụng từ ${APPLIED_FROM}. Giá từng loại gửi qua Zalo trong 1–2 phút.`}
+          aside={
+            <MotorPicker
+              motors={MOTOR.map((m) => ({ name: m.name, sucNang: m.sucNang, dienTich: m.dienTich, tuM2: m.tuM2, denM2: m.denM2 }))}
+            />
+          }
         >
           <HeroIndex
-            label="Giá"
+            label="Giá khởi điểm"
             items={[
               { href: "#motor-remote", name: "Motor + remote, đ/bộ", gia: minGia(MOTOR.map((m) => m.gia)) },
               { href: "#binh-tich-dien", name: "Bình tích điện, đ/bộ", gia: BINH_GIA },
@@ -188,6 +193,7 @@ export default function BangGiaPhuKienCanTho() {
               }}
               groups={MOTOR_GROUPS}
             />
+            <PriceGate source="Bảng giá motor & phụ kiện · dưới bảng" className="mt-14 max-w-3xl" />
           </div>
         </section>
 

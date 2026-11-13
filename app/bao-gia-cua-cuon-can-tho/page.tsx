@@ -5,6 +5,9 @@ import { ClosingBand } from "@/components/bang-gia/ClosingBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { FaqCards } from "@/components/bang-gia/FaqCards";
 import { NanCatalogue } from "@/components/bang-gia/NanCatalogue";
+import { toNanCardModel } from "@/components/bang-gia/NanCard";
+import { PriceGate } from "@/components/PriceGate";
+import { SITE } from "@/lib/site-data";
 import { Rise } from "@/components/bang-gia/Rise";
 import { SongNgangList } from "@/components/bang-gia/SongNgangList";
 import { SpecimenMosaic, type Specimen } from "@/components/bang-gia/SpecimenMosaic";
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     url: PAGE,
     title: "Báo Giá Cửa Cuốn Cần Thơ 2026 — Giá Gốc",
-    description: "Giá từng mẫu cửa cuốn nan nhôm Đức, tole, song ngang, Inox, cửa Úc tại Cần Thơ. Ảnh mẫu nan thật. Chưa VAT.",
+    description: "Giá khởi điểm cửa cuốn nan nhôm Đức, tole, song ngang, Inox, cửa Úc tại Cần Thơ. Ảnh mẫu nan thật. Bảng giá đầy đủ gửi qua Zalo.",
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -152,9 +155,9 @@ const faqItems = [
       "Song ngang là các thanh thép sơn tĩnh điện (mắc võng, song vuông) cuốn lên như cửa cuốn. Đóng lại vẫn nhìn xuyên qua và thông gió, nên hợp trung tâm thương mại, ngân hàng.",
   },
   {
-    tab: "Liên hệ",
-    question: "Dòng ghi “Liên hệ” là sao?",
-    answer: `Là dòng chưa niêm yết giá trên web. Nhắn Zalo hoặc gọi để có giá theo khổ cửa của bạn; mẫu thật có ở showroom ${SHOWROOM} để xem trước.`,
+    tab: "Giá từng mẫu",
+    question: "Sao web không ghi giá từng mẫu?",
+    answer: `Web ghi giá khởi điểm của từng dòng; giá từng mẫu nằm trong bảng giá gửi qua Zalo. Ghi số Zalo, bảng giá đầy đủ đến trong 1–2 phút, hoặc gọi ${SITE.hotlines[0]}. Mẫu thật có ở showroom ${SHOWROOM} để xem trước.`,
   },
   {
     tab: "Bảo hành",
@@ -196,7 +199,7 @@ export default function BaoGiaCuaCuonCanTho() {
 
         <PriceHero
           title="Bảng giá cửa cuốn Cần Thơ"
-          lead={`Giá từng mẫu theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`}
+          lead={`Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}. Giá từng mẫu gửi qua Zalo trong 1–2 phút.`}
           aside={
             <SpecimenMosaic
               cycle={["VIS 50R", "KV468R", "X205R", "AL-VIP50"].map(specimen)}
@@ -229,7 +232,7 @@ export default function BaoGiaCuaCuonCanTho() {
               Mẫu nan thật ở showroom, chụp cùng một góc: ô trên là biên dạng nan, dải dưới là mặt nan với chữ in
               và lỗ thoáng.
             </p>
-            <NanCatalogue models={NAN_DUC} specs={NAN_SPECS} needs={NHU_CAU} />
+            <NanCatalogue models={NAN_DUC.map(toNanCardModel)} specs={NAN_SPECS} needs={NHU_CAU} />
             <div className="mt-12 max-w-[72ch] space-y-1.5 text-sm leading-relaxed text-slate-600" data-rise>
               {NAN_DUC.some((m) => m.gia === null) && (
                 <p>Mẫu ghi “Liên hệ báo giá” là hàng đặt riêng: nhắn Zalo hoặc gọi để báo giá theo đơn.</p>
@@ -239,6 +242,7 @@ export default function BaoGiaCuaCuonCanTho() {
                 trên nan; độ dày có dung sai khoảng ±8%.
               </p>
             </div>
+            <PriceGate source="Báo giá cửa cuốn · nan nhôm Đức" className="mt-10 max-w-3xl" />
           </div>
         </section>
 
@@ -259,6 +263,7 @@ export default function BaoGiaCuaCuonCanTho() {
               }}
               groups={TAM_LIEN_GROUPS}
             />
+            <PriceGate source="Báo giá cửa cuốn · tấm liền" className="mt-14 max-w-3xl" />
           </div>
         </section>
 
@@ -275,6 +280,7 @@ export default function BaoGiaCuaCuonCanTho() {
               {SONG_NGANG_DUNG_CHO.toLowerCase()}.
             </p>
             <SongNgangList groups={SONG_NGANG_GROUPS} />
+            <PriceGate source="Báo giá cửa cuốn · song ngang" className="mt-14 max-w-3xl" />
           </div>
         </section>
 
