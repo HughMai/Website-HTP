@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { crmReceived, resetCrm } from "./crm-mock";
 
 /*
@@ -38,6 +38,38 @@ const ALL_AD_PAGES = [...PAGES, ...SITELINK_PAGES];
 const PHONE = { width: 360, height: 740 };
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * The 13/11/2026 rebuild (Enki/htp/ads/lp-hormozi-rebuild-2026-11-13.md): Hormozi's Value
+ * Equation, one element per lever, on every ad page.
+ */
+async function expectValueEquation(page: Page, form: boolean) {
+  const hero = page.locator('section[aria-labelledby="lp-title"]');
+  // Perceived likelihood above the fold: the Google score and the job count before the H1.
+  const chip = hero.locator("p").first();
+  await expect(chip).toContainText("đánh giá Google");
+  await expect(chip).toContainText("500+ công trình");
+  const chipBox = (await chip.boundingBox())!;
+  const h1Box = (await page.locator("h1").boundingBox())!;
+  expect(chipBox.y, "the proof line sits above the headline").toBeLessThan(h1Box.y);
+
+  // Risk reversal directly under the ask, starting on the first screen.
+  const checks = form ? page.locator("#nhan-bao-gia [data-checks]") : hero.locator("[data-checks]");
+  await expect(checks).toContainText(form ? "lắp xong mới thanh toán" : "Sửa xong mới thanh toán");
+  const checksBox = (await checks.boundingBox())!;
+  expect(checksBox.y, "the guarantees start on the first screen").toBeLessThan(PHONE.height);
+
+  // Effort: three steps, not four or more.
+  await expect(page.locator("#lp-quy-trinh ~ ol > li")).toHaveCount(3);
+
+  // Stacked proof: every real review on the page at once, no carousel, and the heading is
+  // a customer's own sentence rather than "Khách nói gì".
+  const wall = page.locator("#lp-cong-trinh").locator("xpath=..");
+  await expect(wall.locator("blockquote")).toHaveCount(4);
+  await expect(page.locator("#lp-cong-trinh")).toHaveText(/^“.+”$/);
+  await expect(page.locator("main")).not.toContainText("Khách ở Cần Thơ nói gì");
+  await expect(page.locator("main")).not.toContainText("Câu hỏi khách hay hỏi");
+}
 
 test.describe("Google Ads landing pages", () => {
   test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
@@ -110,6 +142,8 @@ test.describe("Google Ads landing pages", () => {
       const hero = page.locator('section[aria-labelledby="lp-title"]');
       await expect(hero).toContainText("đánh giá Google");
       await expect(hero.locator("blockquote")).toBeVisible();
+
+      await expectValueEquation(page, p.form);
 
       // Scrolled past the hero, the bottom bar slides in with the page's one ask plus a
       // call button, and no map button sending the paid visitor off the page.
@@ -202,7 +236,7 @@ test.describe("Google Ads landing pages", () => {
 
     await page.goto("/lp/cua-cuon-can-tho?utm_source=google&utm_medium=cpc&utm_campaign=cua-cuon");
     const block = page.locator("#nhan-bao-gia");
-    await expect(block).toContainText("Ghi số Zalo để nhận báo giá ngay lập tức");
+    await expect(block).toContainText("Ghi số Zalo, nhận báo giá trong 1–2 phút");
     await block.getByPlaceholder("Số Zalo của anh/chị").fill(phone);
     // The server drops submissions made faster than a human could type.
     await page.waitForTimeout(3200);
@@ -247,7 +281,8 @@ test.describe("Google Ads landing pages — desktop", () => {
     await page.locator('[data-track="lp_steps"]').getByRole("button", { name: "Nhận báo giá ngay" }).click();
     const sheet = page.getByRole("dialog");
     await expect(sheet).toBeVisible();
-    await expect(sheet).toContainText("Ghi số Zalo để nhận báo giá ngay lập tức");
+    await expect(sheet).toContainText("Ghi số Zalo, nhận báo giá trong 1–2 phút");
+    await expect(sheet).toContainText("lắp xong mới thanh toán");
     await expect(sheet).toContainText("đánh giá Google");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
     await expect(sheet).toBeInViewport({ ratio: 1 });
@@ -293,7 +328,9 @@ test.describe("Google Ads sitelink pages", () => {
       await expect(page.locator("main")).toContainText(p.price);
 
       // The price pages promise the full price list, because the catalog the bot sends has it.
-      if (p.priceForm) await expect(page.locator("#nhan-bao-gia")).toContainText("Ghi số Zalo để nhận bảng giá đầy đủ");
+      if (p.priceForm) await expect(page.locator("#nhan-bao-gia")).toContainText("Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút");
+
+      await expectValueEquation(page, p.form);
 
       // No site menu and no footer link groups: the footer's only links are the hotlines and
       // the privacy policy.
@@ -346,7 +383,7 @@ test.describe("Google Ads sitelink pages — desktop", () => {
     await expect(page.locator('#nhan-bao-gia button[type="submit"]')).toHaveText("Nhận bảng giá");
     await page.locator('[data-track="lp_prices"]').getByRole("button", { name: "Nhận bảng giá" }).click();
     const sheet = page.getByRole("dialog");
-    await expect(sheet).toContainText("Ghi số Zalo để nhận bảng giá đầy đủ");
+    await expect(sheet).toContainText("Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
   });
 });

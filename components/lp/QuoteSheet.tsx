@@ -5,7 +5,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import type { LpForm, LpProof } from "@/lib/lp-data";
 import { cn } from "@/lib/utils";
-import { ProofLine } from "./Proof";
+import { Checks, ProofLine } from "./Proof";
 
 /**
  * The install pages' one ask, from anywhere on the page: a button that slides the
@@ -18,12 +18,14 @@ export function QuoteButton({
   slug,
   form,
   proof,
+  checks,
   className,
   tabIndex,
 }: {
   slug: string;
   form: LpForm;
   proof: LpProof;
+  checks?: string[];
   className?: string;
   tabIndex?: number;
 }) {
@@ -52,6 +54,7 @@ export function QuoteButton({
       >
         <SheetTitle className="pr-10 text-xl leading-snug tracking-tight">{form.title}</SheetTitle>
         <LeadForm source={`lp_${slug}`} tone="light" submitLabel={form.submitLabel} className="mt-3" />
+        {checks && <Checks items={checks} tone="light" className="mt-3" />}
         <ProofLine proof={proof} tone="light" className="mt-4 border-t border-brand/10 pt-3" />
       </SheetContent>
     </Sheet>

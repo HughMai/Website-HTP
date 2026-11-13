@@ -5,38 +5,40 @@ import { LeadForm } from "@/components/LeadForm";
 import { Logo } from "@/components/Logo";
 import { LpStickyBar } from "@/components/lp/LpStickyBar";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
-import { ProofLine, Stars } from "@/components/lp/Proof";
+import { Checks, ProofLine, Stars } from "@/components/lp/Proof";
 import { QuoteButton } from "@/components/lp/QuoteSheet";
-import type { AdLandingPage, LpPriceTable } from "@/lib/lp-data";
+import type { AdLandingPage, LpPhoto, LpPriceTable } from "@/lib/lp-data";
+import type { Review } from "@/lib/reviews";
 import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "@/lib/reviews";
-import { SITE, ZALO_URL } from "@/lib/site-data";
+import { SITE, STATS, ZALO_URL } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 /*
- * Google Ads landing page (/lp/<slug>). Content lives in lib/lp-data.ts. Built to the
- * plan in Enki/htp/ads/conversion-plan-2026-11-11.md and the blueprint in
- * Enki/references/landing-page-5-levers.txt.
+ * Google Ads landing page (/lp/<slug>). Content lives in lib/lp-data.ts. Built to
+ * Enki/htp/ads/lp-hormozi-rebuild-2026-11-13.md, on top of the earlier plans
+ * (conversion-plan-2026-11-11.md, sitelink-landing-plan-2026-11-12.md).
  *
- * One page, one ask, repeated:
- *  - Install pages (nobody buys a door in a hurry): the Zalo-number form. It is the
- *    first thing under the headline (ZaloQuoteCard); once that card scrolls away the
- *    same field is pinned to the bottom of the screen (ZaloStickyBar, with a call
- *    button); on desktop the mid-page rows open it in a sheet (QuoteSheet); and it is
- *    there again at the end. Call sits beside it as the second way in.
- *  - The repair page: one big call button. A stuck door is an emergency; no form, and
- *    its bottom bar (LpStickyBar) is call + Zalo.
- * Every ask has the Google rating and one real review sentence directly under it
- * (ProofLine), because that is where the visitor hesitates.
+ * Most of the effort goes above the fold, because that is the only part every visitor
+ * sees. It carries Hormozi's Value Equation, one element per lever:
+ *  - perceived likelihood: the Google rating and the job count before the headline;
+ *  - dream outcome + time delay: the H1 is the search term, then the result and how long
+ *    it takes ("Biết Giá Trước, Lắp Tại Nhà 3–5 Giờ");
+ *  - effort: one sentence on what the visitor no longer has to do, and a one-field form
+ *    that names the wait ("nhận báo giá trong 1–2 phút");
+ *  - risk: the guarantees ticked directly under the button, every time it appears.
  *
- * Order: logo-only header → headline + price + ask → 3 promises → how it works →
- * reviews → real photos → prices → objections (FAQ) → final ask + showroom → NAP.
- * Sitelink pages set `lead`, which moves prices (or photos, then prices) up to sit
- * directly under the headline: the first thing below it is what the sitelink promised.
- * No site menu, no footer link farm, no map iframe, no floating rail: every link that
- * isn't a way to reach the shop is a paid click leaving.
+ * One ask, repeated. Install pages: the Zalo-number form (hero card, bottom bar once it
+ * scrolls away, a sheet from the mid-page rows on desktop, the closing form). Repair
+ * pages: one big call button, because a stuck door calls.
  *
- * On phones the bottom bar carries the ask once the hero is gone, so the mid-page rows
- * only show from md: up.
+ * Below the fold, proof is stacked rather than rationed: every real review on screen at
+ * once among the real job photos (a "wall", never a carousel). Section headings carry
+ * the point on their own, for the visitor who reads only headings.
+ *
+ * Order: logo-only header → hero → [what the sitelink promised] → proof wall → 3 ĐÚNG →
+ * 3 steps → prices → FAQ → final ask + showroom → NAP. No site menu, no footer link farm,
+ * no map iframe, no floating rail: every link that isn't a way to reach the shop is a
+ * paid click leaving.
  *
  * data-track on each CTA group tells GA4 which spot produced a call or Zalo tap
  * (LeadClickTracker reads the nearest data-track).
@@ -46,6 +48,7 @@ const HOTLINE = SITE.hotlines[0];
 const TEL = `tel:${HOTLINE.replace(/\s/g, "")}`;
 const FORM_ID = "nhan-bao-gia";
 const ADDRESS = SITE.address.replace(/,\s*Vietnam$/, "");
+const JOBS = STATS.find((s) => s.label === "Dự Án Hoàn Thành")?.value ?? "500+";
 
 function KeepCityTogether({ text }: { text: string }) {
   const m = text.match(/^(.*?)\s*(Cần Thơ)$/);
@@ -94,13 +97,13 @@ function ZaloButton({ label, tone }: { label: string; tone: "dark" | "light" }) 
   );
 }
 
-/** The page's ask, mid-page. Desktop and tablet only: on a phone the sticky bar has it. */
+/** The page's ask, mid-page. Desktop and tablet only: on a phone the bottom bar has it. */
 function CtaRow({ page, track }: { page: AdLandingPage; track: string }) {
   return (
     <div className="mt-8 hidden gap-3 md:flex md:items-center" data-track={track}>
       {page.form ? (
         <>
-          <QuoteButton slug={page.slug} form={page.form} proof={page.proof} />
+          <QuoteButton slug={page.slug} form={page.form} proof={page.proof} checks={page.checks} />
           <a
             href={TEL}
             className="flex h-12 items-center justify-center gap-2 rounded-full border border-brand/15 bg-white px-6 text-sm font-semibold text-brand transition-colors hover:bg-brand-50"
@@ -124,8 +127,8 @@ function TopBar() {
   // drawn on white (brown and gold) and turns muddy on the navy.
   return (
     <header className="border-b border-brand/10 bg-white" data-track="lp_topbar">
-      <div className="container flex h-[4.5rem] items-center justify-between gap-3">
-        <Logo height={60} />
+      <div className="container flex h-16 items-center justify-between gap-3">
+        <Logo height={52} />
         <a
           href={TEL}
           className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full border border-brand/20 px-4 text-sm font-semibold text-brand transition-colors hover:bg-brand-50"
@@ -149,10 +152,25 @@ function HoursLine({ className }: { className?: string }) {
   );
 }
 
-/** The Zalo-number form as a white card: the one bright box on the navy hero. */
-function FormCard({ page }: { page: AdLandingPage }) {
+/**
+ * Third-party proof before the headline: the visitor's first glance lands on a Google
+ * score and a job count, not on a claim. Plain text, not a link, so it never sends the
+ * paid click off to Maps.
+ */
+function ProofChip() {
   return (
-    <ZaloQuoteCard id={FORM_ID} track="lp_form" source={`lp_${page.slug}`} proof={page.proof} form={page.form} />
+    <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/75">
+      <span className="inline-flex items-center gap-2">
+        <Stars className="h-3.5 w-3.5" />
+        <span>
+          <strong className="font-semibold text-white">{GOOGLE_RATING.score}</strong> · {GOOGLE_RATING.count} đánh giá
+          Google
+        </span>
+      </span>
+      <span>
+        {JOBS} công trình từ {SITE.foundedYear}
+      </span>
+    </p>
   );
 }
 
@@ -183,17 +201,18 @@ function ReachRow() {
 function Hero({ page }: { page: AdLandingPage }) {
   return (
     <section className="bg-brand text-white" aria-labelledby="lp-title">
-      {/* Phones: headline, price, the ask, then the photo, then the intro, so a real door is
-          the first thing the first scroll shows. Desktop: the text column on the left, the
-          photo on the right spanning both rows. */}
-      <div className="container grid pb-10 pt-5 md:pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:grid-rows-[auto_1fr] lg:gap-x-14 lg:pb-16">
-        <div className="lg:col-start-1">
-          {/* Keyword on its own line, then the promise. "Cần Thơ" never splits across lines.
-              30px on phones keeps the promise to two lines, so the ask fits the first screen.
-              The rating moved down to sit under the ask (ProofLine). */}
+      {/* Phones: proof, headline, price, the ask with its guarantees, then the photo, so a
+          real door is the first thing the first scroll shows. Desktop: the text column on
+          the left, the photo on the right. */}
+      <div className="container grid pb-10 pt-4 md:pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-x-14 lg:pb-16">
+        <div>
+          <ProofChip />
+          {/* Keyword on its own line (message match with the search, the ad and the
+              sitelink), then the outcome and how long it takes. "Cần Thơ" never splits.
+              30px on phones keeps the outcome to two lines, so the ask fits the first screen. */}
           <h1
             id="lp-title"
-            className="text-balance text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
+            className="mt-3 text-balance text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
           >
             {/* Plain wrapping here, not balance: "Sửa Cửa Cuốn / Cần Thơ", not "Sửa Cửa / Cuốn Cần Thơ". */}
             <span className="block text-wrap">
@@ -203,12 +222,19 @@ function Hero({ page }: { page: AdLandingPage }) {
             <span className="mt-1 block text-amber-400">{page.promise}</span>
           </h1>
           <p className="mt-3 text-sm font-semibold text-amber-300">{page.priceTeaser}</p>
+          <p className="mt-2 max-w-xl text-[0.9375rem] leading-snug text-white/80">{page.sub}</p>
 
-          {/* The ask comes before the intro: on a phone it has to fit the first screen. */}
-          <div className="mt-5 sm:max-w-md" data-track="lp_hero">
+          <div className="mt-4 sm:max-w-md" data-track="lp_hero">
             {page.form ? (
               <>
-                <FormCard page={page} />
+                <ZaloQuoteCard
+                  id={FORM_ID}
+                  track="lp_form"
+                  source={`lp_${page.slug}`}
+                  proof={page.proof}
+                  form={page.form}
+                  checks={page.checks}
+                />
                 <ReachRow />
               </>
             ) : (
@@ -220,26 +246,22 @@ function Hero({ page }: { page: AdLandingPage }) {
           </div>
           {!page.form && (
             <>
-              <HoursLine className="mt-4" />
+              <Checks items={page.checks} tone="dark" className="mt-4" />
+              <HoursLine className="mt-3" />
               <ProofLine proof={page.proof} tone="dark" className="mt-4" />
             </>
           )}
         </div>
         {/* Price-led pages hide the photo below lg:, so the first scroll on a phone lands on
             the price table the visitor tapped for. */}
-        <figure
-          className={cn(
-            "mt-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center",
-            page.lead === "prices" && "hidden lg:block"
-          )}
-        >
+        <figure className={cn("mt-8 lg:mt-0", page.lead === "prices" && "hidden lg:block")}>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5 lg:aspect-[4/5]">
             {/* Install pages: lazy, because on phones the form fills the first screen and this
                 photo sits below it, so it must not take bandwidth from the page's JS on slow
                 4G (on desktop it is in view at first layout, so lazy still starts at once).
-                Repair page: eager, because its shorter hero puts the photo on the first
-                phone screen, where it becomes the largest paint. Price-led pages: lazy, so
-                phones, where the photo is hidden, never download it. */}
+                Repair pages: eager, because their shorter hero puts the photo near the first
+                phone screen. Price-led pages: lazy, so phones, where it is hidden, never
+                download it. */}
             <Image
               src={page.hero.src}
               alt={page.hero.alt}
@@ -254,7 +276,6 @@ function Hero({ page }: { page: AdLandingPage }) {
             {page.hero.caption} — ảnh tại công trình, không phải ảnh mẫu
           </figcaption>
         </figure>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 lg:col-start-1">{page.intro}</p>
       </div>
     </section>
   );
@@ -287,85 +308,86 @@ function Promises({ page }: { page: AdLandingPage }) {
   );
 }
 
-function Reviews({ page }: { page: AdLandingPage }) {
+function PhotoTile({ photo }: { photo: LpPhoto }) {
   return (
-    <section className="bg-white py-12 md:py-16" aria-labelledby="lp-danh-gia">
-      <div className="container">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 id="lp-danh-gia" className={cn(H2, "text-brand")}>
-              Khách ở Cần Thơ nói gì
-            </h2>
-            <p className="mt-2 flex flex-wrap items-center gap-2 text-base text-slate-600">
-              <Stars />
-              <span>
-                <strong className="font-semibold text-brand">{GOOGLE_RATING.score}</strong> trên Google ·{" "}
-                {GOOGLE_RATING.count} đánh giá
-              </span>
-            </p>
-          </div>
-          <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold text-brand underline underline-offset-4 hover:text-brand/70"
-          >
-            Xem tất cả trên Google Maps
-          </a>
+    <li>
+      <figure>
+        <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-slate-100">
+          <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover" />
         </div>
-        <ul className="mt-8 grid gap-4 md:grid-cols-3">
-          {page.reviews.map((r) => (
-            <li
-              key={r.name}
-              className="flex flex-col rounded-2xl bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)] ring-1 ring-black/5"
-            >
-              <Stars />
-              <blockquote className="mt-3 flex-1 text-base leading-relaxed text-slate-700">
-                &ldquo;{r.body}&rdquo;
-              </blockquote>
-              <p className="mt-4 flex items-center gap-3 text-sm">
-                <span
-                  className={cn(
-                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-bold text-white",
-                    r.color
-                  )}
-                  aria-hidden
-                >
-                  {r.initial}
-                </span>
-                <span>
-                  <span className="block font-semibold text-brand">{r.name}</span>
-                  <span className="text-slate-500">Đánh giá Google · {r.date}</span>
-                </span>
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+        <figcaption className="mt-2 text-sm leading-snug text-slate-600">{photo.caption}</figcaption>
+      </figure>
+    </li>
   );
 }
 
-function Photos({ page }: { page: AdLandingPage }) {
+function ReviewTile({ review }: { review: Review }) {
+  return (
+    // md:self-center: beside a pair of tall photos the card keeps its own height instead of
+    // stretching into an empty box; the larger text reads as a pull quote there.
+    <li className="col-span-2 flex flex-col rounded-2xl bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)] ring-1 ring-black/5 md:self-center md:p-7">
+      <Stars />
+      <blockquote className="mt-3 flex-1 text-base leading-relaxed text-slate-700 md:text-lg">
+        &ldquo;{review.body}&rdquo;
+      </blockquote>
+      <p className="mt-4 flex items-center gap-3 text-sm">
+        <span
+          className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-bold text-white", review.color)}
+          aria-hidden
+        >
+          {review.initial}
+        </span>
+        <span>
+          <span className="block font-semibold text-brand">{review.name}</span>
+          <span className="text-slate-500">Đánh giá Google · {review.date}</span>
+        </span>
+      </p>
+    </li>
+  );
+}
+
+/**
+ * Stacked proof: every real review on screen at once, between pairs of real job photos,
+ * so each pair of doors sits next to a real voice. No carousel: what a carousel hides
+ * mostly goes unseen. The heading is what a customer said, not "Khách nói gì".
+ * Reviews span two columns: on a phone that is a full row under each pair of photos; on
+ * desktop a photo pair and a review share one row.
+ */
+function ProofWall({ page }: { page: AdLandingPage }) {
+  const photos = page.photos.items;
+  const reviews = [...page.reviews];
+  const tiles: JSX.Element[] = [];
+  for (let i = 0; i < photos.length; i += 2) {
+    for (const p of photos.slice(i, i + 2)) tiles.push(<PhotoTile key={p.src} photo={p} />);
+    const r = reviews.shift();
+    if (r) tiles.push(<ReviewTile key={r.name} review={r} />);
+  }
+  for (const r of reviews) tiles.push(<ReviewTile key={r.name} review={r} />);
+
   return (
     <section className="bg-slate-50 py-12 md:py-16" aria-labelledby="lp-cong-trinh">
       <div className="container">
-        <h2 id="lp-cong-trinh" className={cn(H2, "text-brand")}>
-          {page.photos.title}
+        <p className="text-sm font-semibold uppercase tracking-wide text-amber-700">{page.photos.title}</p>
+        <h2 id="lp-cong-trinh" className={cn(H2, "mt-2 max-w-3xl text-balance text-brand")}>
+          &ldquo;{page.wallQuote.quote.replace(/\.$/, "")}&rdquo;
         </h2>
-        <p className="mt-2 text-base text-slate-600">Ảnh chụp tại công trình, không phải ảnh mẫu.</p>
-        <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-          {page.photos.items.map((p) => (
-            <li key={p.src}>
-              <figure>
-                <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-slate-100">
-                  <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover" />
-                </div>
-                <figcaption className="mt-2 text-sm leading-snug text-slate-600">{p.caption}</figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-base text-slate-600">
+          <span>— {page.wallQuote.name}, khách của bên em.</span>
+          <Stars />
+          <span>
+            <strong className="font-semibold text-brand">{GOOGLE_RATING.score}</strong> trên Google · {GOOGLE_RATING.count}{" "}
+            đánh giá · {JOBS} công trình. Ảnh chụp tại công trình, không phải ảnh mẫu.
+          </span>
+        </p>
+        <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">{tiles}</ul>
+        <a
+          href={GOOGLE_REVIEWS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-block text-sm font-semibold text-brand underline underline-offset-4 hover:text-brand/70"
+        >
+          Xem cả {GOOGLE_RATING.count} đánh giá trên Google Maps
+        </a>
         <CtaRow page={page} track="lp_photos" />
       </div>
     </section>
@@ -442,18 +464,18 @@ function Steps({ page }: { page: AdLandingPage }) {
   return (
     <section className="bg-slate-50 py-12 md:py-16" aria-labelledby="lp-quy-trinh">
       <div className="container">
-        <h2 id="lp-quy-trinh" className={cn(H2, "text-brand")}>
+        <h2 id="lp-quy-trinh" className={cn(H2, "max-w-3xl text-balance text-brand")}>
           {page.stepsTitle}
         </h2>
-        {/* A compact list on phones, cards from sm: up. */}
-        <ol className="mt-6 grid gap-5 sm:mt-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+        {/* A compact list on phones, three cards from md: up. */}
+        <ol className="mt-6 grid gap-5 sm:mt-8 md:grid-cols-3 md:gap-4">
           {page.steps.map((s, i) => (
-            <li key={s.title} className="flex gap-4 sm:block sm:rounded-2xl sm:border sm:border-brand/10 sm:p-5">
+            <li key={s.title} className="flex gap-4 md:block md:rounded-2xl md:border md:border-brand/10 md:bg-white md:p-5">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-amber-400">
                 {i + 1}
               </span>
               <div>
-                <h3 className="text-lg font-semibold text-brand sm:mt-3">{s.title}</h3>
+                <h3 className="text-lg font-semibold text-brand md:mt-3">{s.title}</h3>
                 <p className="mt-1 text-base leading-relaxed text-slate-600">{s.body}</p>
               </div>
             </li>
@@ -467,10 +489,10 @@ function Steps({ page }: { page: AdLandingPage }) {
 
 function Faq({ page }: { page: AdLandingPage }) {
   return (
-    <section className="bg-slate-50 py-12 md:py-16" aria-labelledby="lp-hoi-dap">
+    <section className="bg-white py-12 md:py-16" aria-labelledby="lp-hoi-dap">
       <div className="container max-w-3xl">
-        <h2 id="lp-hoi-dap" className={cn(H2, "text-brand")}>
-          Câu hỏi khách hay hỏi
+        <h2 id="lp-hoi-dap" className={cn(H2, "text-balance text-brand")}>
+          {page.faqTitle}
         </h2>
         <div className="mt-6 divide-y divide-brand/10 rounded-2xl border border-brand/10 bg-white">
           {page.faq.map((f) => (
@@ -503,6 +525,7 @@ function Closing({ page }: { page: AdLandingPage }) {
             // The same ask as the top of the page, so nobody scrolls 6,000px back up for it.
             <div className="mt-6 sm:max-w-md" data-track="lp_closing">
               <LeadForm source={`lp_${page.slug}`} tone="dark" submitLabel={page.form.submitLabel} />
+              <Checks items={page.checks} tone="dark" className="mt-4" />
               <ProofLine proof={page.proof} tone="dark" className="mt-5 border-t border-white/10 pt-4" />
               <HoursLine className="mt-3" />
             </div>
@@ -513,6 +536,7 @@ function Closing({ page }: { page: AdLandingPage }) {
                 <CallButton />
                 <ZaloButton label={page.zaloLabel} tone="dark" />
               </div>
+              <Checks items={page.checks} tone="dark" className="mt-4" />
               <ProofLine proof={page.proof} tone="dark" className="mt-5" />
             </>
           )}
@@ -571,16 +595,16 @@ function MiniFooter() {
 }
 
 /** Body sections in page order. `lead` moves the section the sitelink promised to the top;
- *  a photo-led page brings its prices up right behind the photos. */
+ *  a photo-led page brings its prices up right behind the photos. Otherwise proof comes
+ *  first: it is what makes every promise below believable. */
 function bodySections(page: AdLandingPage) {
+  const wall = <ProofWall key="wall" page={page} />;
   const promises = <Promises key="promises" page={page} />;
   const steps = <Steps key="steps" page={page} />;
-  const reviews = <Reviews key="reviews" page={page} />;
-  const photos = <Photos key="photos" page={page} />;
   const prices = <Prices key="prices" page={page} />;
-  if (page.lead === "prices") return [prices, promises, steps, reviews, photos];
-  if (page.lead === "photos") return [photos, prices, promises, steps, reviews];
-  return [promises, steps, reviews, photos, prices];
+  if (page.lead === "prices") return [prices, wall, promises, steps];
+  if (page.lead === "photos") return [wall, prices, promises, steps];
+  return [wall, promises, steps, prices];
 }
 
 export function AdLanding({ page }: { page: AdLandingPage }) {
@@ -595,7 +619,7 @@ export function AdLanding({ page }: { page: AdLandingPage }) {
       </main>
       <MiniFooter />
       {/* Room under the footer so a bottom bar never covers its last line. Install pages
-          get the Zalo field bar from their hero card; the repair page gets call + Zalo. */}
+          get the Zalo field bar from their hero card; repair pages get call + Zalo. */}
       <div className="h-[4.5rem] bg-brand-800 md:hidden" aria-hidden />
       {!page.form && <LpStickyBar />}
     </div>

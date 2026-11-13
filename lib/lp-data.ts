@@ -29,6 +29,12 @@ import { REVIEWS, type Review } from "@/lib/reviews";
  * The ten sitelink pages (Enki/htp/ads/sitelink-landing-plan-2026-11-12.md) add one rule:
  * the H1 is the sitelink text the visitor tapped, and `lead` puts the section that
  * sitelink promised (prices or job photos) directly under the hero.
+ *
+ * The 13/11/2026 rebuild (Enki/htp/ads/lp-hormozi-rebuild-2026-11-13.md) maps Hormozi's
+ * Value Equation onto every page: the H1's second half is the outcome with its time
+ * (dream outcome, time delay), `sub` says what the visitor no longer has to do (effort),
+ * `checks` sit under every ask (risk reversal), and the rating, job count and every real
+ * review are stacked on the page instead of rationed (perceived likelihood).
  */
 
 export type LpSlug =
@@ -62,17 +68,23 @@ export type AdLandingPage = {
   slug: LpSlug;
   /** The ad group's search term. Opens the H1 and the <title>. */
   keyword: string;
-  /** Second half of the H1, after the keyword. */
+  /** Second half of the H1, after the keyword: the outcome, with its time where the site states one. */
   promise: string;
   description: string;
-  intro: string;
+  /** One sentence under the H1: how the outcome happens, and what the visitor doesn't have to do. */
+  sub: string;
   priceTeaser: string;
+  /** Risk reversals, shown as ticks directly under every ask. */
+  checks: string[];
   zaloLabel: string;
   hero: LpPhoto;
   promises: { title: string; lead: string; items: { title: string; body: string }[] };
   /** Proof at the moment of commitment: the rating plus this quote sit under the form. */
   proof: LpProof;
+  /** The proof wall's headline: what a customer actually said, not "khách nói gì". */
+  wallQuote: LpProof;
   reviews: Review[];
+  /** `title` labels the job photos (the proof wall's eyebrow). */
   photos: { title: string; items: LpPhoto[] };
   prices: { title: string; lead: string; tables: LpPriceTable[]; note: string };
   /** The Zalo-number form, top of the page and again at the end. Left off the repair
@@ -83,7 +95,10 @@ export type AdLandingPage = {
    *  "photos" pulls the prices up behind the photos. Unset: the default order. */
   lead?: "prices" | "photos";
   stepsTitle: string;
+  /** Three steps: past four, the job starts to look like work. */
   steps: { title: string; body: string }[];
+  /** States the answer the visitor most wants, rather than "Câu hỏi khách hay hỏi". */
+  faqTitle: string;
   faq: { q: string; a: string }[];
   closing: string;
 };
@@ -197,8 +212,37 @@ export const INSTALL_FORM: LpForm = {
 };
 
 // Under the form the fear is "leave my number and they'll hound me", so the quote
-// answers that, from a real customer.
+// answers that, from a real customer. (A "we won't spam you" line was not used:
+// Aagaard's tests found that word lowered sign-ups even as a reassurance.)
 export const INSTALL_PROOF = quote("Cương Trương Kim", "Chủ cửa hàng tư vấn thật tâm, không ép mua.");
+
+// The ad pages' form names the time the catalog takes to arrive (the Value Equation's
+// time delay: "trong 1–2 phút", from the success message the visitor sees next), where the
+// site-wide INSTALL_FORM above says "ngay lập tức". Both say why the number is wanted.
+const LP_FORM: LpForm = {
+  title: "Ghi số Zalo, nhận báo giá trong 1–2 phút",
+  submitLabel: "Nhận báo giá ngay",
+};
+
+// Risk reversal directly under every ask ("put the guarantee under the button"). Each line
+// is a promise the site already makes; nothing here is new.
+// One line each inside the form card on a 360px phone (34 characters at most).
+const INSTALL_CHECKS = [
+  "Đo, báo giá miễn phí nội thành",
+  "Cọc 30%, lắp xong mới thanh toán",
+  "Sai vật tư, đền 100% hợp đồng",
+];
+const REPAIR_CHECKS = ["Báo giá trước khi sửa", "Sửa xong mới thanh toán", "Không tính phí đi lại trong Cần Thơ"];
+
+// Every real review, on every page: stacked proof, nothing rationed or hidden in a
+// carousel. Phan Thị Hồng Nhung's stays off, as before: it repeats Cương Trương Kim's
+// sentences nearly word for word, and a sharp-eyed visitor would read both as one.
+const INSTALL_REVIEWS: Review[] = [review("Cương Trương Kim"), review("Nhiên Nguyễn"), review("Thắng Võ Minh"), review("Tien My Vo")];
+const REPAIR_REVIEWS: Review[] = [review("Tien My Vo"), review("Thắng Võ Minh"), review("Cương Trương Kim"), review("Nhiên Nguyễn")];
+
+// "Đúng tiến độ" is ĐÚNG HẸN in a customer's own words.
+const INSTALL_WALL = quote("Cương Trương Kim", "Đúng tiến độ, dọn dẹp sạch sẽ sau khi hoàn thành");
+const REPAIR_WALL = quote("Tien My Vo", "Cần sửa chữa cũng nhanh chóng");
 
 /** Step 1 on the install pages is the same ask as the form at the top. */
 const stepOne = (detail: string) => ({
@@ -228,34 +272,49 @@ const faqWarranty = (what: string) => ({
 // Zalo": the longer label squeezed the field on desktop until its placeholder was cut off,
 // and the title above it already says Zalo.
 const PRICE_FORM: LpForm = {
-  title: "Ghi số Zalo để nhận bảng giá đầy đủ",
+  title: "Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút",
   submitLabel: "Nhận bảng giá",
 };
 
-const STEP_QUOTE = { title: "Đo tận nơi, báo giá", body: "Thợ đến đo, báo giá rõ từng mục. Đồng ý thì đặt cọc 30%." };
+const STEP_QUOTE = {
+  title: "Thợ đến đo, báo giá",
+  body: "Đo tận nơi, báo giá rõ từng mục, miễn phí nội thành Cần Thơ. Đồng ý thì đặt cọc 30%.",
+};
+
+/** Step 3 of an install: made at the xưởng, fitted, and only then paid for. */
+const stepPaid = (how: string) => ({
+  title: "Lắp xong mới trả tiền",
+  body: `${how} Chạy thử, nghiệm thu xong mới thanh toán phần còn lại.`,
+});
 
 const cuonSteps = (detail: string) => [
   stepOne(detail),
   STEP_QUOTE,
-  { title: "Làm tại xưởng Bình Thủy", body: "Cửa cắt đúng kích thước tại xưởng, không phải chờ hàng từ TP.HCM." },
-  { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tại chỗ khoảng 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
+  stepPaid("Cửa cắt đúng kích thước tại xưởng Bình Thủy, lắp tại nhà khoảng 3–5 giờ."),
 ];
 
 const keoSteps = (detail: string) => [
   stepOne(detail),
   STEP_QUOTE,
-  { title: "Làm tại xưởng Bình Thủy", body: "Cửa gia công đúng kích thước tại xưởng của Hưng Thành Phát." },
-  { title: "Lắp, chạy thử, nghiệm thu", body: "Lắp tiêu chuẩn mất 3–5 giờ. Nghiệm thu xong mới thanh toán phần còn lại." },
+  stepPaid("Cửa gia công tại xưởng Bình Thủy, lắp tiêu chuẩn mất 3–5 giờ."),
 ];
 
 const nkSteps = (detail: string) => [
   stepOne(detail),
   STEP_QUOTE,
-  { title: "Gia công tại xưởng", body: "Khoảng 3–5 ngày làm việc sau khi chốt đơn." },
-  { title: "Lắp, chạy thử, nghiệm thu", body: "Cửa đi, cửa sổ tiêu chuẩn lắp trong 1–2 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+  stepPaid("Gia công tại xưởng khoảng 3–5 ngày làm việc; cửa đi, cửa sổ tiêu chuẩn lắp trong 1–2 ngày."),
 ];
 
-const INSTALL_STEPS_TITLE = "4 bước, từ báo giá đến lúc thanh toán";
+/** What every install page shares: the guarantees, the proof and the frame around the steps. */
+const INSTALL = {
+  promises: THREE_DUNG,
+  proof: INSTALL_PROOF,
+  wallQuote: INSTALL_WALL,
+  reviews: INSTALL_REVIEWS,
+  checks: INSTALL_CHECKS,
+  stepsTitle: "3 bước, phần của anh/chị chỉ là ghi số Zalo",
+  faqTitle: "Không phải trả hết tiền trước, và những câu khách hay hỏi",
+};
 
 // Repair: the promises, steps and shared FAQ of /lp/sua-cua-cuon-can-tho, used by every
 // repair page (sửa cửa cuốn, sửa cửa kéo, remote & bình lưu điện, sửa motor).
@@ -278,12 +337,14 @@ const REPAIR_PROMISES = {
   ],
 };
 
-const REPAIR_STEPS_TITLE = "4 bước, từ cuộc gọi đến khi cửa chạy lại";
+const REPAIR_STEPS_TITLE = "3 bước, từ cuộc gọi đến khi cửa chạy lại";
 const REPAIR_STEPS = [
   { title: "Gọi hoặc nhắn Zalo", body: "Tả lỗi, gửi video cửa nếu được để kỹ thuật viên mang đúng phụ tùng." },
-  { title: "Có mặt trong ngày", body: "Kỹ thuật viên kiểm tra và báo giá từng hạng mục trước khi sửa." },
-  { title: "Sửa tại chỗ", body: "Mang theo phụ tùng phổ biến, phần lớn sự cố xử lý xong ngay lần đến." },
-  { title: "Cửa chạy rồi mới trả tiền", body: "Anh/chị kiểm tra cửa chạy bình thường rồi mới thanh toán." },
+  { title: "Thợ đến, báo giá trước", body: "Có mặt trong ngày, kiểm tra và báo giá từng hạng mục rồi mới sửa." },
+  {
+    title: "Cửa chạy rồi mới trả tiền",
+    body: "Mang theo phụ tùng phổ biến, phần lớn sự cố xử lý xong ngay lần đến. Cửa chạy bình thường rồi anh/chị mới thanh toán.",
+  },
 ];
 
 const REPAIR_PROOF = quote("Tien My Vo", "Nhân viên hỗ trợ nhiệt tình, cần sửa chữa cũng nhanh chóng.");
@@ -316,9 +377,6 @@ const REPAIR_FAQ = [
     a: "Có. Linh kiện thay mới được bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất.",
   },
 ];
-
-// Reviews on the sitelink pages: two short ones, to keep the page near 300 words.
-const SHORT_REVIEWS: Review[] = [review("Tien My Vo"), review("Thắng Võ Minh")];
 
 // ── prices, all from bang-gia-data.ts ────────────────────────────────────────
 
@@ -525,14 +583,16 @@ const otherCuonRepairs = (shown: string[][]): LpPriceTable => ({
   collapsed: true,
 });
 
-/** What every repair page shares: one call button, the repair promises and steps. */
+/** What every repair page shares: one call button, the repair promises, proof and steps. */
 const REPAIR = {
   promises: REPAIR_PROMISES,
   proof: REPAIR_PROOF,
-  reviews: SHORT_REVIEWS,
-  lead: "prices" as const,
+  wallQuote: REPAIR_WALL,
+  reviews: REPAIR_REVIEWS,
+  checks: REPAIR_CHECKS,
   stepsTitle: REPAIR_STEPS_TITLE,
   steps: REPAIR_STEPS,
+  faqTitle: "Sửa cả cửa không do bên em lắp, và những câu khách hay hỏi",
 };
 
 // ── the ten sitelink pages ───────────────────────────────────────────────────
@@ -542,10 +602,9 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "bang-gia-cua-cuon-can-tho",
     keyword: "Bảng Giá Cửa Cuốn Cần Thơ",
-    promise: "Niêm Yết Theo m², Motor Tính Riêng",
+    promise: "Niêm Yết Theo m², Đã Gồm Công Lắp",
     description: `Giá cửa cuốn niêm yết theo m², áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}. Đã gồm vật tư và công lắp, chưa VAT. Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ.`,
-    intro:
-      "Hưng Thành Phát sản xuất và lắp đặt cửa cuốn tại Cần Thơ từ 2005. Bảng dưới là giá niêm yết; thợ đo tận nơi và báo giá đúng kích thước nhà anh/chị, miễn phí nội thành Cần Thơ.",
+    sub: "Đã gồm vật tư và công lắp, chưa VAT. Motor tính riêng theo bộ, giá ghi ngay bên dưới.",
     priceTeaser: `Từ ${perM2(CUON.daiLoan)} · motor + remote từ ${formatGia(MOTOR_FROM)}đ/bộ`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: jobImage(
@@ -555,9 +614,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       "Cửa cuốn màu kem lắp cho mặt tiền nhà phố"
     ),
     lead: "prices",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa cuốn bên em đã lắp",
       items: [
@@ -574,7 +631,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
       note: "Motor + remote tính theo bộ, chưa VAT. Bình tích điện và khóa ngang tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
     faq: [FAQ_CUON_PRICE, FAQ_CUON_EXTRA, FAQ_MOTOR_TIER, FAQ_DEPOSIT, FAQ_MATERIALS, FAQ_LATE, faqWarranty("cả cửa và motor")],
     closing: "Bảng giá cửa cuốn Cần Thơ — biết giá trước khi làm",
@@ -582,17 +638,14 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "cua-cuon-nhom-khe-thoang-can-tho",
     keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ",
-    promise: "Công Nghệ Đức, Chạy Êm, Thoáng Gió",
+    promise: "Đóng Cửa Vẫn Thoáng Gió, Chạy Êm",
     description: `${KHE_THOANG.length} mẫu nan nhôm công nghệ Đức có khe thoáng — Kovidoor, Mitadoor, Alumdoor, OneDoor — giá từ ${perM2(KHE_THOANG_TU)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí nội thành Cần Thơ.`,
-    intro:
-      "Khe thoáng là lỗ dập trên nan nhôm: cửa đóng rồi gió và ánh sáng vẫn vào nhà. Mẫu có gioong hoặc lông nheo giữa các nan chạy êm, bớt ồn. Thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
+    sub: "Khe thoáng là lỗ dập trên nan nhôm công nghệ Đức. Mẫu có gioong, lông nheo giữa các nan chạy êm, bớt ồn.",
     priceTeaser: `${KHE_THOANG.length} mẫu nan khe thoáng · từ ${perM2(KHE_THOANG_TU)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
     lead: "photos",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa cuốn khe thoáng bên em đã lắp",
       items: [
@@ -608,8 +661,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       tables: KHE_THOANG_TABLES,
       note: `Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn mẫu nan hợp ngân sách."),
     faq: [
       {
@@ -630,16 +682,15 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "cua-cuon-nha-xuong-can-tho",
     keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ",
-    promise: "Khổ Lớn Cho Kho, Xưởng",
+    // "Khổ 3–12m": the range /cua-cuon-nha-xuong-can-tho states.
+    promise: "Khổ 3–12m, Lắp Trong 1–2 Ngày",
     description: `Cửa cuốn khổ lớn cho nhà xưởng, kho hàng, làm tại xưởng Bình Thủy từ 2005. Tole siêu trường từ ${perM2(CUON.sieuTruong)}, tole Đài Loan từ ${perM2(CUON.daiLoan)}, đã gồm vật tư và công lắp. Thợ đo tận nơi, báo giá miễn phí nội thành Cần Thơ.`,
-    intro: `Cửa cuốn cho nhà xưởng, kho hàng, garage xe tải — làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Motor chọn theo diện tích cửa: ${MOTOR_500.dienTich.toLowerCase()} dùng motor ${MOTOR_500.sucNang}.`,
+    sub: "Cho nhà xưởng, kho hàng, garage xe tải, làm tại xưởng Bình Thủy từ 2005. Thi công ngoài giờ sản xuất nếu cần.",
     priceTeaser: `Tole siêu trường từ ${perM2(CUON.sieuTruong)} · tole Đài Loan từ ${perM2(CUON.daiLoan)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước cửa",
     hero: job("p31-xuong-cc-xanh", "Cửa cuốn xanh nhà xưởng", "Cửa cuốn tole xanh khổ lớn lắp cho nhà xưởng"),
     lead: "photos",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa cuốn nhà xưởng bên em đã lắp",
       items: [
@@ -659,13 +710,11 @@ const SITELINK_PAGES: AdLandingPage[] = [
       ],
       note: `Tole Đài Loan 8 zem dùng cho ${TAM_LIEN_SPECS.dai_loan.goiY["8zem"].toLowerCase().replace(": ", ", hợp ")}. Motor và bình tích điện tính riêng. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: [
       stepOne("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn loại tole và motor."),
       STEP_QUOTE,
-      { title: "Gia công tại xưởng Bình Thủy", body: "Khoảng 3–5 ngày sau khi chốt đơn." },
-      { title: "Lắp, chạy thử, nghiệm thu", body: "Cửa dưới 6m lắp trong 1 ngày, cửa khổ lớn 1–2 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+      stepPaid("Gia công tại xưởng Bình Thủy khoảng 3–5 ngày; cửa dưới 6m lắp trong 1 ngày, cửa khổ lớn 1–2 ngày."),
     ],
     faq: [
       {
@@ -694,15 +743,12 @@ const SITELINK_PAGES: AdLandingPage[] = [
     // Non-breaking spaces keep the two-syllable words whole on a 360px phone.
     promise: "Đã Gồm Vật Tư Và Lắp Đặt",
     description: `Giá cửa kéo thép niêm yết theo m², từ ${perM2(KEO_TU)} đến ${perM2(KEO_DEN)}, đã gồm vật tư và công lắp đặt, chưa VAT. Báo giá rõ từng mục trước khi làm; đặt cọc 30%, lắp xong mới thanh toán.`,
-    intro:
-      "Cửa kéo thép làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Giá tính theo m² diện tích cửa (rộng × cao); thợ đo tận nơi, báo giá rõ từng mục trước khi làm.",
+    sub: "Giá theo m² diện tích cửa (rộng × cao), chưa VAT. Thợ đo tận nơi, báo giá rõ từng mục trước khi làm.",
     priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
     lead: "prices",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa kéo bên em đã lắp",
       items: [
@@ -714,7 +760,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     },
     prices: keoPrices("Bảng giá cửa kéo thép"),
     form: PRICE_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
     faq: [FAQ_KEO_CALC, FAQ_KEO_LA, FAQ_KEO_DAY, FAQ_KEO_TIME, FAQ_DEPOSIT, FAQ_LATE, faqWarranty("cửa kéo")],
     closing: "Bảng giá cửa kéo Cần Thơ — biết giá trước khi làm",
@@ -724,17 +769,14 @@ const SITELINK_PAGES: AdLandingPage[] = [
     // "Đài Loan" (only a code comment in bang-gia-specs.ts), so the H1 leaves the word out.
     slug: "cua-keo-thep-can-tho",
     keyword: "Cửa Kéo Thép Cần Thơ",
-    promise: "Không Cần Motor, Đóng Mở Bằng Tay",
+    promise: "Không Cần Motor, Mất Điện Vẫn Mở",
     description: `Cửa kéo thép cho mặt tiền nhà phố và tiệm, đóng mở bằng tay, không cần motor. Giá từ ${perM2(KEO_TU)}, đã gồm vật tư và công lắp; lắp tiêu chuẩn 3–5 giờ.`,
-    intro:
-      "Cửa kéo thép cho mặt tiền nhà phố và tiệm, làm tại xưởng Bình Thủy từ 2005. Đóng mở bằng tay, không cần motor, nên không lo mất điện. Lắp tiêu chuẩn mất 3–5 giờ.",
+    sub: "Đóng mở bằng tay, không motor, không mạch điện. Làm tại xưởng Bình Thủy từ 2005, lắp tiêu chuẩn 3–5 giờ.",
     priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p56-keo-xanh-via-he", "Cửa kéo thép mặt tiền", "Hai bộ cửa kéo thép lắp cho mặt tiền nhà phố"),
     lead: "photos",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa kéo thép bên em đã lắp",
       items: [
@@ -745,8 +787,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       ],
     },
     prices: keoPrices("Giá cửa kéo thép"),
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
     faq: [
       {
@@ -766,10 +807,9 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "lan-can-cau-thang-kinh-can-tho",
     keyword: "Lan Can, Cầu Thang Kính Cần Thơ",
-    promise: "Kính Cường Lực, Thi Công Trọn Gói",
+    promise: "Kính Cường Lực, Trọn Gói 3–5 Ngày",
     description: `Lan can kính cầu thang, ban công: kính cường lực 8–12mm, gia công theo số đo thực tế, lắp trọn gói tại Cần Thơ. Từ ${formatGia(LAN_CAN_TU)}đ/m² mặt lan can. Đặt cọc 30%, lắp xong mới thanh toán.`,
-    intro:
-      "Lan can kính cho cầu thang và ban công: kính cường lực 8–12mm, tay vịn gỗ hoặc nhôm. Bên em đo tận nơi, gia công theo số đo thực tế tại xưởng và lắp hoàn thiện.",
+    sub: "Cầu thang, ban công: kính cường lực 8–12mm, tay vịn gỗ hoặc nhôm, gia công theo số đo thực tế tại xưởng.",
     priceTeaser: `Từ ${formatGia(LAN_CAN_TU)}đ/m² mặt lan can · kính cường lực 8–12mm`,
     zaloLabel: "Nhắn Zalo — gửi ảnh cầu thang",
     hero: jobImage(
@@ -779,9 +819,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
       "Cầu thang xoắn lan can kính tay vịn gỗ do Hưng Thành Phát lắp"
     ),
     lead: "photos",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Lan can kính bên em đã lắp",
       items: [
@@ -797,13 +835,11 @@ const SITELINK_PAGES: AdLandingPage[] = [
       tables: [{ head: ["Kiểu tay vịn", "đ/m²"], rows: LAN_CAN }],
       note: "Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: [
       stepOne("Gửi thêm ảnh cầu thang hoặc ban công nếu có."),
       STEP_QUOTE,
-      { title: "Gia công tại xưởng", body: "2–3 ngày, theo số đo thực tế tại công trình." },
-      { title: "Lắp, nghiệm thu", body: "Lắp tại công trình trong 1 ngày. Nghiệm thu xong mới thanh toán phần còn lại." },
+      stepPaid("Gia công 2–3 ngày theo số đo thực tế, lắp tại công trình trong 1 ngày."),
     ],
     faq: [
       {
@@ -832,17 +868,14 @@ const SITELINK_PAGES: AdLandingPage[] = [
   {
     slug: "bang-gia-nhom-kinh-can-tho",
     keyword: "Bảng Giá Nhôm Kính Cần Thơ",
-    promise: "Đo, Báo Giá Miễn Phí Nội Thành",
+    promise: "Niêm Yết Theo m², Đã Gồm Công Lắp",
     description: `Giá cửa nhôm kính niêm yết theo m², áp dụng từ ${APPLIED_FROM}: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Đã gồm công lắp và kính trắng 8 ly, chưa VAT. Thợ đo và báo giá tận nơi, miễn phí nội thành Cần Thơ.`,
-    intro:
-      "Bảng dưới là giá niêm yết theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Giá đúng kích thước nhà anh/chị: thợ đến đo và báo giá tận nơi, miễn phí nội thành Cần Thơ.",
+    sub: "Cửa nhôm đã gồm kính trắng 8 ly, chưa VAT. Thợ đo và báo giá tận nơi, miễn phí nội thành Cần Thơ.",
     priceTeaser: `Vách kính từ ${perM2(NK.vach)} · cửa sổ từ ${perM2(NK.so)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước",
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
     lead: "prices",
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: SHORT_REVIEWS,
+    ...INSTALL,
     photos: {
       title: "Cửa nhôm kính bên em đã lắp",
       items: [
@@ -859,7 +892,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
       note: "Nhôm Việt: kính mờ cộng 70.000đ/m². Cửa nhôm kính không cộng phụ phí cửa nhỏ. Thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
     steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
     faq: [
       FAQ_NK_PRICE,
@@ -878,13 +910,13 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
+    lead: "prices",
     slug: "sua-cua-keo-can-tho",
     keyword: "Sửa Cửa Kéo Cần Thơ",
-    promise: "Chỉnh Ray, Thay Bánh Xe Tại Chỗ",
+    promise: "Chỉnh Ray, Thay Bánh Xe Tại Chỗ",
     description:
       "Cửa kéo kẹt ray, lệch bánh xe, khóa ngang lỏng — kỹ thuật viên chỉnh ray, thay con lăn tại chỗ, thường xong trong 30–60 phút. Báo giá trước khi sửa, sửa xong mới thanh toán.",
-    intro:
-      "Cửa kéo kẹt ray, nặng tay, lệch bánh xe, khóa ngang không chốt được — kỹ thuật viên Hưng Thành Phát chỉnh ray, thay bánh xe (con lăn) tại chỗ, thường xong trong 30–60 phút. Báo giá trước khi sửa.",
+    sub: "Kẹt ray, nặng tay, lệch bánh xe, khóa ngang không chốt được: thường xong trong 30–60 phút.",
     priceTeaser: `Chỉnh ray từ ${rangeFrom(KEO_REPAIR_ROWS[0])} · thay con lăn từ ${rangeFrom(KEO_REPAIR_ROWS[1])}`,
     zaloLabel: "Nhắn Zalo — gửi video cửa",
     hero: job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ Hưng Thành Phát tại công trình", "Thợ Hưng Thành Phát bên bộ cửa kéo màu kem"),
@@ -918,13 +950,13 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
+    lead: "prices",
     slug: "remote-binh-luu-dien-cua-cuon-can-tho",
     keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ",
     promise: "Cài Lại Remote Tận Nhà, Thay Bình Bị Chai",
     description:
       "Remote không ăn, mất điện là cửa đứng im — bên em cài lại remote và thay bình lưu điện tận nhà, cả cửa không do bên em lắp. Báo giá trước, sửa xong mới thanh toán.",
-    intro:
-      "Remote phải bấm nhiều lần hoặc không ăn, mất điện là cửa đứng im vì bình lưu điện đã chai — kỹ thuật viên Hưng Thành Phát đến tận nhà cài lại remote, thay bình, cả cửa không do bên em lắp.",
+    sub: "Remote bấm không ăn, mất điện là cửa đứng im vì bình đã chai: đến tận nhà, cả cửa không do bên em lắp.",
     priceTeaser: `Cài lại remote từ ${rangeFrom(REMOTE_ROWS[0])} · bình lưu điện báo giá theo loại`,
     zaloLabel: "Nhắn Zalo — gửi ảnh remote",
     hero: jobImage(
@@ -964,13 +996,13 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
+    lead: "prices",
     slug: "sua-motor-cua-cuon-can-tho",
     keyword: "Sửa Motor Cửa Cuốn Cần Thơ",
-    promise: "Thợ Đến Tận Nơi, Báo Giá Trước",
+    promise: "Thợ Đến Trong Ngày, Báo Giá Trước",
     description:
       "Motor cháy, yếu, kêu to hoặc cửa chạy khựng — kỹ thuật viên đến tận nơi trong ngày, kiểm tra cuộn dây, tụ, bo mạch và báo giá trước khi sửa. Sửa xong mới thanh toán.",
-    intro:
-      "Motor cháy, nóng bất thường, kêu to, cửa chạy chậm hoặc khựng giữa chừng — kỹ thuật viên Hưng Thành Phát đến tận nơi trong ngày, kiểm tra cuộn dây, tụ điện, bo mạch và báo giá trước khi sửa.",
+    sub: "Motor cháy, nóng, kêu to, cửa chạy chậm hoặc khựng: kiểm tra cuộn dây, tụ điện, bo mạch ngay tại chỗ.",
     priceTeaser: `Sửa motor từ ${rangeFrom(MOTOR_REPAIR_ROWS[0])} · thay motor mới từ ${rangeFrom(MOTOR_REPAIR_ROWS[1])}`,
     zaloLabel: "Nhắn Zalo — gửi video cửa",
     hero: jobImage(
@@ -1013,10 +1045,10 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
   {
     slug: "cua-cuon-can-tho",
     keyword: "Cửa Cuốn Cần Thơ",
-    promise: "Đặt Cọc 30%, Lắp Xong Mới Thanh Toán",
+    //  : the outcome breaks at the comma on a 360px phone, never inside "Lắp Tại Nhà".
+    promise: "Biết Giá Trước, Lắp Tại Nhà 3–5 Giờ",
     description: `Đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ, từ 2005. Giá niêm yết từ ${perM2(CUON.daiLoan)}, báo giá rõ từng mục trước khi làm. Đặt cọc 30%, lắp xong mới thanh toán.`,
-    intro:
-      "Đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ, từ 2005. Cửa cắt đúng kích thước tại xưởng Bình Thủy; thợ đến đo tận nơi, báo giá rõ từng mục — chốt giá rồi không phát sinh.",
+    sub: "Đơn vị đầu tiên làm cửa cuốn tại Cần Thơ, từ 2005. Cửa cắt tại xưởng Bình Thủy, nên giá báo trước là giá chốt.",
     priceTeaser: `Giá niêm yết từ ${perM2(CUON.daiLoan)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     // 1108×1477 and sharp; the old p07 cover was soft at hero size (Hughie, 12/11/2026).
@@ -1026,9 +1058,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       "Cửa cuốn kem mặt tiền",
       "Cửa cuốn màu kem lắp cho mặt tiền nhà phố"
     ),
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: [review("Cương Trương Kim"), review("Nhiên Nguyễn"), review("Thắng Võ Minh")],
+    ...INSTALL,
     photos: {
       title: "Cửa cuốn bên em đã lắp",
       items: [
@@ -1044,8 +1074,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       tables: [CUON_TABLE],
       note: "Motor và bình tích điện tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
     faq: [
       FAQ_CUON_PRICE,
@@ -1067,16 +1096,13 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
   {
     slug: "cua-keo-can-tho",
     keyword: "Cửa Kéo Cần Thơ",
-    promise: "Đặt Cọc 30%, Lắp Xong Mới Thanh Toán",
+    promise: "Biết Giá Trước, Lắp Tại Nhà 3–5 Giờ",
     description: `Cửa kéo thép, nhôm, inox làm tại xưởng Bình Thủy từ 2005. Giá niêm yết từ ${perM2(KEO_TU)}, lắp tiêu chuẩn 3–5 giờ. Đặt cọc 30%, lắp xong mới thanh toán.`,
-    intro:
-      "Cửa kéo thép, nhôm, inox cho mặt tiền nhà phố và cửa hàng — làm tại xưởng Hưng Thành Phát ở Bình Thủy từ 2005. Thợ đo tận nơi, báo giá rõ từng mục; lắp tiêu chuẩn mất 3–5 giờ.",
+    sub: "Cửa kéo thép, nhôm, inox làm tại xưởng Bình Thủy từ 2005, nên giá báo trước là giá chốt.",
     priceTeaser: `Giá niêm yết từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: [review("Nhiên Nguyễn"), review("Thắng Võ Minh"), review("Tien My Vo")],
+    ...INSTALL,
     photos: {
       title: "Cửa kéo bên em đã lắp",
       items: [
@@ -1092,8 +1118,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       tables: [KEO_TABLE],
       note: KEO_NOTE,
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn thép, nhôm hay inox hợp ngân sách."),
     faq: [
       FAQ_KEO_PRICE,
@@ -1112,16 +1137,13 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
   {
     slug: "cua-nhom-kinh-can-tho",
     keyword: "Cửa Nhôm Kính Cần Thơ",
-    promise: "Đặt Cọc 30%, Lắp Xong Mới Thanh Toán",
+    promise: "Biết Giá Trước, Lắp Trong 1–2 Ngày",
     description: `Cửa đi, cửa sổ, vách kính, lan can — đo tận nơi, gia công tại xưởng Bình Thủy. Vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}. Đặt cọc 30%, lắp xong mới thanh toán.`,
-    intro:
-      "Cửa đi, cửa sổ, vách kính, lan can — Hưng Thành Phát đo tận nơi, gia công tại xưởng Bình Thủy và lắp hoàn thiện. Chạy thử, ký nghiệm thu rồi anh/chị mới thanh toán phần còn lại.",
+    sub: "Cửa đi, cửa sổ, vách kính, lan can: đo tận nơi, gia công tại xưởng Bình Thủy, nên giá báo trước là giá chốt.",
     priceTeaser: `Vách kính từ ${perM2(NK.vach)} · cửa sổ từ ${perM2(NK.so)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước",
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
-    promises: THREE_DUNG,
-    proof: INSTALL_PROOF,
-    reviews: [review("Thắng Võ Minh"), review("Nhiên Nguyễn"), review("Tien My Vo")],
+    ...INSTALL,
     photos: {
       title: "Cửa nhôm kính bên em đã lắp",
       items: [
@@ -1137,8 +1159,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       tables: NK_TABLES,
       note: "Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
-    form: INSTALL_FORM,
-    stepsTitle: INSTALL_STEPS_TITLE,
+    form: LP_FORM,
     steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
     faq: [
       FAQ_NK_PRICE,
@@ -1154,17 +1175,14 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
   {
     slug: "sua-cua-cuon-can-tho",
     keyword: "Sửa Cửa Cuốn Cần Thơ",
-    promise: "Báo Giá Trước, Sửa Xong Mới Thanh Toán",
+    promise: "Có Mặt Trong Ngày, Báo Giá Trước",
     description:
       "Motor cháy, cửa kẹt, remote không ăn — kỹ thuật viên có mặt trong ngày, báo giá trước khi sửa, sửa xong mới thanh toán. Không tính phí đi lại trong Cần Thơ.",
-    intro:
-      "Motor cháy, cửa kẹt giữa chừng, remote không ăn, lò xo yếu — kỹ thuật viên Hưng Thành Phát có mặt trong ngày, kiểm tra và báo giá trước khi sửa. Sửa cả cửa không do bên em lắp.",
+    sub: "Motor cháy, cửa kẹt giữa chừng, remote không ăn, lò xo yếu: sửa tại chỗ, cả cửa không do bên em lắp.",
     priceTeaser: `Sửa remote từ ${SUA_CUON[0][1].split(" – ")[0]}đ · sửa motor từ ${SUA_CUON[3][1].split(" – ")[0]}đ`,
     zaloLabel: "Nhắn Zalo — gửi video cửa đang lỗi",
     hero: job("p19-cc-trang-san-da", "Cửa cuốn trắng — thợ đang hoàn thiện", "Thợ đứng thang hoàn thiện cửa cuốn trắng trong nhà"),
-    promises: REPAIR_PROMISES,
-    proof: REPAIR_PROOF,
-    reviews: [review("Tien My Vo"), review("Thắng Võ Minh"), review("Cương Trương Kim")],
+    ...REPAIR,
     photos: {
       title: "Thợ và công trình của Hưng Thành Phát",
       items: [
@@ -1185,8 +1203,6 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       note: REPAIR_PRICE_NOTE,
     },
     // No form: someone whose door is stuck calls. The page is one big call button.
-    stepsTitle: REPAIR_STEPS_TITLE,
-    steps: REPAIR_STEPS,
     faq: [FAQ_MOTOR_REPAIR, FAQ_WONT_OPEN, ...REPAIR_FAQ],
     closing: "Cửa hỏng không chờ được — gọi ngay",
   },

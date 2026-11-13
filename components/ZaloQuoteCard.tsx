@@ -1,5 +1,5 @@
 import { LeadForm } from "@/components/LeadForm";
-import { ProofLine } from "@/components/lp/Proof";
+import { Checks, ProofLine } from "@/components/lp/Proof";
 import { ZaloStickyBar } from "@/components/ZaloStickyBar";
 import { INSTALL_FORM, INSTALL_PROOF, type LpForm, type LpProof } from "@/lib/lp-data";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,7 @@ export function ZaloQuoteCard({
   track = "hero_form",
   proof = INSTALL_PROOF,
   form = INSTALL_FORM,
+  checks,
   sticky = true,
   className,
 }: {
@@ -30,6 +31,8 @@ export function ZaloQuoteCard({
   proof?: LpProof;
   /** Title and button label. The price ad pages say "bảng giá" instead of "báo giá". */
   form?: LpForm;
+  /** Risk reversals ticked directly under the button (the ad pages). */
+  checks?: string[];
   /** Also pin the field to the bottom of the screen once this card scrolls away. */
   sticky?: boolean;
   className?: string;
@@ -51,6 +54,7 @@ export function ZaloQuoteCard({
           {form.title}
         </h2>
         <LeadForm source={source} tone="light" submitLabel={form.submitLabel} className="mt-3" />
+        {checks && <Checks items={checks} tone="light" className="mt-3" />}
         <ProofLine proof={proof} tone="light" className="mt-4 border-t border-brand/10 pt-3" />
       </section>
       {sticky && (
