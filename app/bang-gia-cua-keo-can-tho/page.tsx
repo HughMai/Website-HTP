@@ -237,9 +237,6 @@ export default function BangGiaCuaKeoCanTho() {
 
             <div className="mt-12 max-w-[72ch] space-y-1.5 text-sm leading-relaxed text-slate-600" data-rise>
               <p>Đơn giá đã gồm vật tư và công lắp đặt, chưa gồm VAT 10%. {WARRANTY}.</p>
-              {CUA_KEO.some((r) => r.coLa === null || r.khongLa === null) && (
-                <p>Dòng ghi “Liên hệ” là hàng đặt riêng: nhắn Zalo hoặc gọi để báo giá theo đơn.</p>
-              )}
             </div>
             <PriceGate source="Bảng giá cửa kéo · dưới bảng" className="mt-10 max-w-3xl" />
           </div>

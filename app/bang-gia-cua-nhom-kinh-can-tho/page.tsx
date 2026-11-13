@@ -17,11 +17,10 @@ import {
   SlatHeading,
   WARRANTY,
   minGia,
-  RowPrice,
   type MenuGroup,
   type MenuRow,
 } from "@/components/bang-gia/parts";
-import { PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { APPLIED_FROM, NHOM_KINH, type Gia } from "@/lib/bang-gia-data";
 import { KINH_CUONG_LUC, KINH_GOI_Y, NHOM_DAY_GOI_Y } from "@/lib/bang-gia-specs";
 import { SITE } from "@/lib/site-data";
@@ -285,11 +284,9 @@ export default function BangGiaCuaNhomKinhCanTho() {
                 </p>
                 <ul className="mt-8 space-y-5">
                   {LAN_CAN.map((r) => (
-                    <li key={r.name} className="flex items-baseline justify-between gap-4">
+                    <li key={r.name} className="flex items-center justify-between gap-4">
                       <span className="text-base font-semibold text-brand">{r.name}</span>
-                      <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">
-                        <RowPrice gia={r.gia} />
-                      </span>
+                      <CallForPrice className="shrink-0" />
                     </li>
                   ))}
                 </ul>

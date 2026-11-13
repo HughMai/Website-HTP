@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, Construction, Lock, MapPin, Phone, ShieldCheck, Sparkles, Thermometer, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
@@ -90,12 +90,12 @@ const advantages = [
 ];
 
 const pricing = [
-  { system: "Cửa đi nhôm kính 1 cánh (0.8×2.1m)", range: "3.500.000 – 6.000.000 đ" },
-  { system: "Cửa đi nhôm kính 2 cánh (1.6×2.1m)", range: "6.000.000 – 11.000.000 đ" },
-  { system: "Cửa sổ nhôm kính (1.2×1.2m)", range: "2.200.000 – 4.500.000 đ" },
-  { system: "Lan can nhôm kính (theo m dài)", range: "1.800.000 – 3.500.000 đ/m" },
-  { system: "Mặt dựng nhôm kính (theo m²)", range: "1.200.000 – 2.500.000 đ/m²" },
-  { system: "Kích thước đặc biệt / công trình lớn", range: "Liên hệ báo giá" },
+  { system: "Cửa đi nhôm kính 1 cánh (0.8×2.1m)" },
+  { system: "Cửa đi nhôm kính 2 cánh (1.6×2.1m)" },
+  { system: "Cửa sổ nhôm kính (1.2×1.2m)" },
+  { system: "Lan can nhôm kính (theo m dài)" },
+  { system: "Mặt dựng nhôm kính (theo m²)" },
+  { system: "Kích thước đặc biệt / công trình lớn" },
 ];
 
 const districts = [
@@ -280,7 +280,7 @@ export default function CuaNhomKinhCanTho() {
                     <tr key={row.system}>
                       <td className="px-4 py-3">{row.system}</td>
                       <td className="px-4 py-3 text-right text-muted-foreground">
-                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                        <CallForPrice />
                       </td>
                     </tr>
                   ))}

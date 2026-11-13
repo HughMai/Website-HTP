@@ -157,7 +157,7 @@ const faqItems = [
   {
     tab: "Giá từng mẫu",
     question: "Sao web không ghi giá từng mẫu?",
-    answer: `Web ghi giá khởi điểm của từng dòng; giá từng mẫu nằm trong bảng giá gửi qua Zalo. Ghi số Zalo, bảng giá đầy đủ đến trong 1–2 phút, hoặc gọi ${SITE.hotlines[0]}. Mẫu thật có ở showroom ${SHOWROOM} để xem trước.`,
+    answer: `Web ghi giá khởi điểm của từng dòng; giá từng mẫu nằm trong bảng giá gửi qua Zalo. Ghi số Zalo, bảng giá đầy đủ đến trong 1–2 phút, hoặc bấm “Liên hệ” để gọi ${SITE.hotlines[0]}. Mẫu thật có ở showroom ${SHOWROOM} để xem trước.`,
   },
   {
     tab: "Bảo hành",
@@ -234,9 +234,6 @@ export default function BaoGiaCuaCuonCanTho() {
             </p>
             <NanCatalogue models={NAN_DUC.map(toNanCardModel)} specs={NAN_SPECS} needs={NHU_CAU} />
             <div className="mt-12 max-w-[72ch] space-y-1.5 text-sm leading-relaxed text-slate-600" data-rise>
-              {NAN_DUC.some((m) => m.gia === null) && (
-                <p>Mẫu ghi “Liên hệ báo giá” là hàng đặt riêng: nhắn Zalo hoặc gọi để báo giá theo đơn.</p>
-              )}
               <p>
                 Kovidoor là dòng cửa cuốn công nghệ Đức của Mitadoor. Thông số theo công bố của nhà sản xuất và chữ in
                 trên nan; độ dày có dung sai khoảng ±8%.

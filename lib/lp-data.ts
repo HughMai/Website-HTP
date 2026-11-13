@@ -9,7 +9,7 @@ import {
   TOLE_THEM,
   type Gia,
 } from "@/lib/bang-gia-data";
-import { KEO_NHOM_DAY, NAN_SPECS, PHU_KIEN_DUNG_CHO, TAM_LIEN_SPECS, formatGia } from "@/lib/bang-gia-specs";
+import { KEO_NHOM_DAY, NAN_SPECS, PHU_KIEN_DUNG_CHO, formatGia } from "@/lib/bang-gia-specs";
 import { CONG_TRINH } from "@/lib/cong-trinh-data";
 import { REVIEWS, type Review } from "@/lib/reviews";
 
@@ -56,9 +56,6 @@ export type LpSlug =
 
 export type LpPhoto = { src: string; alt: string; caption: string };
 
-/** First column is the row label; the rest are right-aligned prices. */
-export type LpPriceTable = { head: string[]; rows: string[][]; collapsed?: boolean };
-
 export type LpForm = { title: string; submitLabel: string };
 
 /** One sentence from a real Google review, shown right under the ask. */
@@ -86,14 +83,9 @@ export type AdLandingPage = {
   reviews: Review[];
   /** `title` labels the job photos (the proof wall's eyebrow). */
   photos: { title: string; items: LpPhoto[] };
-  prices: { title: string; lead: string; tables: LpPriceTable[]; note: string };
   /** The Zalo-number form, top of the page and again at the end. Left off the repair
    *  page: a broken door is an emergency, and an emergency calls. */
   form?: LpForm;
-  /** The section the sitelink promised, rendered directly under the hero. "prices" also
-   *  hides the hero photo on phones, so the table is what the first scroll shows;
-   *  "photos" pulls the prices up behind the photos. Unset: the default order. */
-  lead?: "prices" | "photos";
   stepsTitle: string;
   /** Three steps: past four, the job starts to look like work. */
   steps: { title: string; body: string }[];
@@ -106,7 +98,6 @@ export type AdLandingPage = {
 // ── helpers ──────────────────────────────────────────────────────────────────
 
 const perM2 = (n: number) => `${formatGia(n)}đ/m²`;
-const cell = (g: Gia) => (g === null ? "Liên hệ" : formatGia(g));
 
 /** Lowest listed price. Throws at build time if a group lost all its prices. */
 function lowest(xs: Gia[], what: string): number {
@@ -349,9 +340,6 @@ const REPAIR_STEPS = [
 
 const REPAIR_PROOF = quote("Tien My Vo", "Nhân viên hỗ trợ nhiệt tình, cần sửa chữa cũng nhanh chóng.");
 
-const REPAIR_PRICE_LEAD =
-  "Giá tại Cần Thơ. Kỹ thuật viên kiểm tra và báo giá chính xác trước khi sửa — không phát sinh thêm.";
-const REPAIR_PRICE_NOTE = "Không tính phí đi lại trong Cần Thơ.";
 
 const FAQ_MOTOR_REPAIR = {
   q: "Sửa motor cửa cuốn hết bao nhiêu?",
@@ -406,8 +394,8 @@ const NK = {
   di: nhomKinh("Nhôm Việt", "Cửa đi"),
 };
 
-// Mirror of the price tables on /sua-chua-cua-cuon-can-tho. e2e/ads-landing.spec.ts fails
-// if a row here stops matching that page, so change both together.
+// The repair rows of /sua-chua-cua-cuon-can-tho. Only their lower bounds are printed (the
+// repair pages' "từ" teaser); keep them in step with that page.
 const SUA_CUON: string[][] = [
   ["Sửa / lập trình lại remote", "100.000 – 300.000 đ"],
   ["Chỉnh ray, con lăn lệch", "200.000 – 500.000 đ"],
@@ -424,63 +412,22 @@ const SUA_KEO: string[][] = [
   ["Hàn / gia cố khung kéo", "300.000 – 800.000 đ"],
   ["Thay phụ kiện rỉ sét", "200.000 – 600.000 đ"],
 ];
-const SUA_NHOM_KINH: string[][] = [
-  ["Thay kính vỡ (kính đơn, cắt theo kích thước)", "300.000 – 1.200.000 đ/tấm"],
-  ["Sửa / thay bản lề lỏng", "150.000 – 400.000 đ"],
-  ["Thay gioăng cao su toàn bộ cửa", "200.000 – 500.000 đ"],
-  ["Sửa / thay khóa cửa nhôm", "200.000 – 600.000 đ"],
-  ["Bơm lại ron silicone chống thấm", "150.000 – 450.000 đ"],
-  ["Thay tay nắm / tay gạt", "100.000 – 350.000 đ"],
-];
 
-// ── price tables and FAQ shared by more than one page ────────────────────────
-
-const CUON_TABLE: LpPriceTable = {
-  head: ["Loại cửa cuốn", "Giá từ (đ/m²)"],
-  rows: [
-    ["Tole Đài Loan (tấm liền)", formatGia(CUON.daiLoan)],
-    ["Cửa cuốn công nghệ Úc", formatGia(CUON.uc)],
-    ["Tole siêu trường", formatGia(CUON.sieuTruong)],
-    ["Song ngang, mắc võng thép", formatGia(CUON.songNgang)],
-    ["Nhôm công nghệ Đức", formatGia(CUON.nhomDuc)],
-    ["Inox SUS 304", formatGia(CUON.inox)],
-  ],
-};
+// ── starting prices and FAQ shared by more than one page ─────────────────────
 
 const MOTOR_FROM = Math.min(...MOTOR.map((m) => m.gia));
-
-/** "300kg · cửa dưới 12m²", "Cửa Úc · cửa cuốn công nghệ Úc, mọi kích thước". */
-const MOTOR_TABLE: LpPriceTable = {
-  head: ["Motor + remote", "đ/bộ"],
-  rows: MOTOR.map((m) => [
-    `${m.sucNang ?? "Cửa Úc"} · ${m.dienTich.charAt(0).toLowerCase()}${m.dienTich.slice(1)}`,
-    formatGia(m.gia),
-  ]),
-};
 
 /** "cửa dưới 12m² dùng motor 300kg, …" — the CRM's rule, as on /phu-kien-cua-cuon-can-tho. */
 const MOTOR_TIERS = MOTOR.filter((m) => m.sucNang !== null)
   .map((m) => `${m.dienTich.charAt(0).toLowerCase()}${m.dienTich.slice(1)} dùng motor ${m.sucNang}`)
   .join(", ");
 
-const KEO_TABLE: LpPriceTable = {
-  head: ["Độ dày thép", "Không lá", "Có lá"],
-  rows: CUA_KEO.map((r) => [`${r.label} (${r.mm})`, cell(r.khongLa), cell(r.coLa)]),
-};
-const KEO_NOTE =
-  "Cửa từ 5 đến dưới 8 m² cộng 20.000đ/m²; dưới 5 m² cộng 40.000đ/m². Cửa kéo nhôm và inox báo giá theo mẫu.";
+const KEO_NOTE = "Cửa nhỏ dưới 8 m² có phụ phí theo m², ghi rõ trên báo giá. Cửa kéo nhôm và inox báo giá theo mẫu.";
 
-const NK_TABLES: LpPriceTable[] = NHOM_KINH.map((g, i) => ({
-  head: [g.group, "đ/m²"],
-  rows: g.rows.map((r) => [r.mau, cell(r.gia)]),
-  collapsed: i >= 2,
-}));
-
-/** Lan can rows of the catalog, named as on /bang-gia-cua-nhom-kinh-can-tho ("Tay nhôm 3D 2 × 2"). */
-const LAN_CAN = (NHOM_KINH.find((g) => g.group === "Lan can cầu thang")?.rows ?? []).map((r) => [
-  r.mau.replace(/\*/g, " × "),
-  cell(r.gia),
-]);
+/** Lan can styles of the catalog, named as on /bang-gia-cua-nhom-kinh-can-tho ("Tay nhôm 3D 2 × 2"). */
+const LAN_CAN = (NHOM_KINH.find((g) => g.group === "Lan can cầu thang")?.rows ?? []).map((r) =>
+  r.mau.replace(/\*/g, " × ")
+);
 const LAN_CAN_TU = lowest(
   NHOM_KINH.find((g) => g.group === "Lan can cầu thang")?.rows.map((r) => r.gia) ?? [],
   "lan can cầu thang"
@@ -494,13 +441,6 @@ const KHE_THOANG = NAN_DUC.filter((n) => {
   return !/kín/i.test(s.kieu);
 });
 const KHE_THOANG_TU = lowest(KHE_THOANG.map((n) => n.gia), "nan khe thoáng");
-const KHE_THOANG_TABLES: LpPriceTable[] = ["Kovidoor", "Mitadoor", "Alumdoor", "OneDoor"].map((brand, i) => ({
-  head: [`Nan ${brand}`, "đ/m²"],
-  rows: KHE_THOANG.filter((n) => n.brand === brand)
-    .sort((a, b) => (a.gia ?? Infinity) - (b.gia ?? Infinity))
-    .map((n) => [`${n.code} · ${NAN_SPECS[n.code].kieu.toLowerCase()}`, cell(n.gia)]),
-  collapsed: i > 0,
-}));
 
 const FAQ_CUON_PRICE = {
   q: "Cửa cuốn giá bao nhiêu một mét vuông?",
@@ -557,30 +497,12 @@ const FAQ_KEO_CALC = {
   a: `Giá tính theo m² diện tích cửa (chiều rộng × chiều cao), đã gồm vật tư và công lắp đặt, chưa VAT 10%. ${KEO_NOTE}`,
 };
 
-const keoPrices = (title: string) => ({
-  title,
-  lead: `Giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-  tables: [KEO_TABLE],
-  note: `${KEO_NOTE} Dòng ghi “Liên hệ” là hàng đặt riêng.`,
-});
-
-/** "1.0mm (1 ly)" → "1 ly · 1.0mm", the order the CRM rows use. */
-const doDay = (mau: string) => mau.replace(/^([\d.]+mm)\s*\((.+)\)$/, "$2 · $1");
-const SIEU_TRUONG = TOLE_THEM.find((x) => x.key === "tole_sieu_truong")?.rows ?? [];
-const DAI_LOAN = TAM_LIEN.find((x) => x.key === "dai_loan")?.rows ?? [];
 const MOTOR_500 = MOTOR.find((m) => m.sucNang === "500kg");
 if (!MOTOR_500) throw new Error("lp-data: no 500kg motor");
 
 const REMOTE_ROWS = pick(SUA_CUON, "Sửa / lập trình lại remote", "Thay bình lưu điện");
 const MOTOR_REPAIR_ROWS = pick(SUA_CUON, "Sửa motor (cuộn dây, tụ, bo mạch)", "Thay motor mới (kèm remote)");
 const KEO_REPAIR_ROWS = pick(SUA_KEO, "Chỉnh / nắn ray lệch", "Thay con lăn (1 bộ)");
-
-/** The rest of the cửa cuốn repair list, folded, under a repair page's own rows. */
-const otherCuonRepairs = (shown: string[][]): LpPriceTable => ({
-  head: ["Sửa cửa cuốn khác", "Giá tham khảo"],
-  rows: SUA_CUON.filter((r) => !shown.includes(r)),
-  collapsed: true,
-});
 
 /** What every repair page shares: one call button, the repair promises, proof and steps. */
 const REPAIR = {
@@ -595,7 +517,8 @@ const REPAIR = {
 };
 
 // ── the ten sitelink pages ───────────────────────────────────────────────────
-// H1 = the sitelink text + its description line. First section = what the sitelink promised.
+// H1 = the sitelink text + its description line. No price table (13/11): the hero's "từ"
+// price and the form ("nhận bảng giá đầy đủ") answer a "Bảng giá" sitelink.
 
 const SITELINK_PAGES: AdLandingPage[] = [
   {
@@ -612,7 +535,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
       "Cửa cuốn kem mặt tiền",
       "Cửa cuốn màu kem lắp cho mặt tiền nhà phố"
     ),
-    lead: "prices",
     ...INSTALL,
     photos: {
       title: "Cửa cuốn bên em đã lắp",
@@ -622,12 +544,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p59-service-cc-xanh", "Cửa cuốn tấm liền xanh"),
         job("p31-xuong-cc-xanh", "Cửa cuốn nhà xưởng khổ lớn"),
       ],
-    },
-    prices: {
-      title: "Bảng giá cửa cuốn",
-      lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT 10%. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [CUON_TABLE, MOTOR_TABLE],
-      note: "Motor + remote tính theo bộ, chưa VAT. Bình tích điện và khóa ngang tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
@@ -643,7 +559,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     priceTeaser: `${KHE_THOANG.length} mẫu nan khe thoáng · từ ${perM2(KHE_THOANG_TU)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
-    lead: "photos",
     ...INSTALL,
     photos: {
       title: "Cửa cuốn khe thoáng bên em đã lắp",
@@ -653,12 +568,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p60-garage-cc-tan", "Cửa garage — thợ đang lắp"),
         job("p02-cc-kem-tiled", "Shophouse — thợ đang lắp"),
       ],
-    },
-    prices: {
-      title: "Giá cửa cuốn nhôm khe thoáng",
-      lead: `Giá theo m² từng mẫu nan, đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: KHE_THOANG_TABLES,
-      note: `Motor + remote tính riêng, từ ${formatGia(MOTOR_FROM)}đ/bộ. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
     form: LP_FORM,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn mẫu nan hợp ngân sách."),
@@ -688,7 +597,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     priceTeaser: `Tole siêu trường từ ${perM2(CUON.sieuTruong)} · tole Đài Loan từ ${perM2(CUON.daiLoan)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước cửa",
     hero: job("p31-xuong-cc-xanh", "Cửa cuốn xanh nhà xưởng", "Cửa cuốn tole xanh khổ lớn lắp cho nhà xưởng"),
-    lead: "photos",
     ...INSTALL,
     photos: {
       title: "Cửa cuốn nhà xưởng bên em đã lắp",
@@ -698,16 +606,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         jobImage("p14-xuong-cc-trang-xe452", "02.jpg", "Nhà xưởng — thợ đang lắp"),
         job("p40-xuong-cc-xanh-toys", "Nhà xưởng cửa cuốn xanh"),
       ],
-    },
-    prices: {
-      title: "Giá cửa cuốn nhà xưởng",
-      lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [
-        { head: ["Tole siêu trường", "đ/m²"], rows: SIEU_TRUONG.map((r) => [doDay(r.mau), cell(r.gia)]) },
-        { head: ["Tole Đài Loan", "đ/m²"], rows: DAI_LOAN.map((r) => [`${r.label} · ${r.mm}`, cell(r.gia)]) },
-        { ...MOTOR_TABLE, collapsed: true },
-      ],
-      note: `Tole Đài Loan 8 zem dùng cho ${TAM_LIEN_SPECS.dai_loan.goiY["8zem"].toLowerCase().replace(": ", ", hợp ")}. Motor và bình tích điện tính riêng. Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.`,
     },
     form: LP_FORM,
     steps: [
@@ -746,7 +644,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
-    lead: "prices",
     ...INSTALL,
     photos: {
       title: "Cửa kéo bên em đã lắp",
@@ -757,7 +654,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p50-vinh-long-binh-minh-keo-vang", "Cửa kéo vàng — Bình Minh, Vĩnh Long"),
       ],
     },
-    prices: keoPrices("Bảng giá cửa kéo thép"),
     form: PRICE_FORM,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
     faq: [FAQ_KEO_CALC, FAQ_KEO_LA, FAQ_KEO_DAY, FAQ_KEO_TIME, FAQ_DEPOSIT, FAQ_LATE, faqWarranty("cửa kéo")],
@@ -774,7 +670,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     priceTeaser: `Từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p56-keo-xanh-via-he", "Cửa kéo thép mặt tiền", "Hai bộ cửa kéo thép lắp cho mặt tiền nhà phố"),
-    lead: "photos",
     ...INSTALL,
     photos: {
       title: "Cửa kéo thép bên em đã lắp",
@@ -785,7 +680,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ đang lắp"),
       ],
     },
-    prices: keoPrices("Giá cửa kéo thép"),
     form: LP_FORM,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn có lá hay không lá, độ dày nào hợp."),
     faq: [
@@ -817,7 +711,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
       "Cầu thang kính cong — An Hòa, Ninh Kiều · 29/11/2024",
       "Cầu thang xoắn lan can kính tay vịn gỗ do Hưng Thành Phát lắp"
     ),
-    lead: "photos",
     ...INSTALL,
     photos: {
       title: "Lan can kính bên em đã lắp",
@@ -828,12 +721,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("nk36-lan-can-ban-cong-go", "Lan can kính ban công"),
       ],
     },
-    prices: {
-      title: "Giá lan can kính cầu thang",
-      lead: `Giá theo m² mặt lan can, đã gồm công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [{ head: ["Kiểu tay vịn", "đ/m²"], rows: LAN_CAN }],
-      note: "Giá đúng kích thước: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
-    },
     form: LP_FORM,
     steps: [
       stepOne("Gửi thêm ảnh cầu thang hoặc ban công nếu có."),
@@ -843,7 +730,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     faq: [
       {
         q: "Lan can kính giá bao nhiêu?",
-        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can, từ ${formatGia(LAN_CAN_TU)}đ/m² tùy kiểu tay vịn (${LAN_CAN.map(([k]) => `${k.charAt(0).toLowerCase()}${k.slice(1)}`).join(", ")}); giá từng kiểu trong bảng giá gửi qua Zalo. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, lan can cầu thang tính theo m² mặt lan can, từ ${formatGia(LAN_CAN_TU)}đ/m² tùy kiểu tay vịn (${LAN_CAN.map((k) => `${k.charAt(0).toLowerCase()}${k.slice(1)}`).join(", ")}); giá từng kiểu trong bảng giá gửi qua Zalo. Đã gồm công lắp đặt, chưa VAT. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
       },
       {
         q: "Kính lan can có an toàn không?",
@@ -873,7 +760,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
     priceTeaser: `Vách kính từ ${perM2(NK.vach)} · cửa sổ từ ${perM2(NK.so)}`,
     zaloLabel: "Nhắn Zalo — gửi ảnh, kích thước",
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
-    lead: "prices",
     ...INSTALL,
     photos: {
       title: "Cửa nhôm kính bên em đã lắp",
@@ -883,12 +769,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("nk18-shopfront-kinh-ladder", "Vách kính mặt tiền cửa hàng"),
         job("nk13-lap-cua-nha-gach", "Thợ đang lắp cửa nhôm kính"),
       ],
-    },
-    prices: {
-      title: "Bảng giá nhôm kính",
-      lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
-      tables: NK_TABLES,
-      note: "Nhôm Việt: kính mờ cộng 70.000đ/m². Cửa nhôm kính không cộng phụ phí cửa nhỏ. Thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
     },
     form: PRICE_FORM,
     steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
@@ -909,7 +789,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
-    lead: "prices",
     slug: "sua-cua-keo-can-tho",
     keyword: "Sửa Cửa Kéo Cần Thơ",
     promise: "Chỉnh Ray, Thay Bánh Xe Tại Chỗ",
@@ -928,12 +807,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p53-keo-xanh-kinh", "Cửa kéo xanh cạnh cửa kính"),
       ],
     },
-    prices: {
-      title: "Giá sửa cửa kéo",
-      lead: REPAIR_PRICE_LEAD,
-      tables: [{ head: ["Sửa cửa kéo", "Giá tham khảo"], rows: SUA_KEO }],
-      note: REPAIR_PRICE_NOTE,
-    },
     faq: [
       {
         q: "Sửa cửa kéo kẹt ray mất bao lâu?",
@@ -949,7 +822,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
-    lead: "prices",
     slug: "remote-binh-luu-dien-cua-cuon-can-tho",
     keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ",
     promise: "Cài Lại Remote Tận Nhà, Thay Bình Bị Chai",
@@ -973,12 +845,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p28-cc-kem-duc-lo-nt", "Cửa cuốn khe thoáng kem"),
       ],
     },
-    prices: {
-      title: "Giá cài remote, thay bình lưu điện",
-      lead: REPAIR_PRICE_LEAD,
-      tables: [{ head: ["Remote, bình lưu điện", "Giá tham khảo"], rows: REMOTE_ROWS }, otherCuonRepairs(REMOTE_ROWS)],
-      note: REPAIR_PRICE_NOTE,
-    },
     faq: [
       {
         q: "Mất remote cửa cuốn thì làm sao?",
@@ -995,7 +861,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
   },
   {
     ...REPAIR,
-    lead: "prices",
     slug: "sua-motor-cua-cuon-can-tho",
     keyword: "Sửa Motor Cửa Cuốn Cần Thơ",
     promise: "Thợ Đến Trong Ngày, Báo Giá Trước",
@@ -1018,12 +883,6 @@ const SITELINK_PAGES: AdLandingPage[] = [
         jobImage("p14-xuong-cc-trang-xe452", "02.jpg", "Nhà xưởng — thợ đang lắp"),
         job("p01-cc-nan-bac", "Cửa cuốn nan nhôm bạc"),
       ],
-    },
-    prices: {
-      title: "Giá sửa, thay motor cửa cuốn",
-      lead: REPAIR_PRICE_LEAD,
-      tables: [{ head: ["Sửa, thay motor", "Giá tham khảo"], rows: MOTOR_REPAIR_ROWS }, otherCuonRepairs(MOTOR_REPAIR_ROWS)],
-      note: REPAIR_PRICE_NOTE,
     },
     faq: [
       FAQ_MOTOR_REPAIR,
@@ -1067,12 +926,6 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p31-xuong-cc-xanh", "Cửa cuốn nhà xưởng khổ lớn"),
       ],
     },
-    prices: {
-      title: "Giá cửa cuốn niêm yết",
-      lead: `Giá theo m², đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [CUON_TABLE],
-      note: "Motor và bình tích điện tính riêng. Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
-    },
     form: LP_FORM,
     steps: cuonSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn loại cửa hợp ngân sách."),
     faq: [
@@ -1111,12 +964,6 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p50-vinh-long-binh-minh-keo-vang", "Cửa kéo vàng — Bình Minh, Vĩnh Long"),
       ],
     },
-    prices: {
-      title: "Giá cửa kéo thép niêm yết",
-      lead: `Giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Áp dụng từ ${APPLIED_FROM}.`,
-      tables: [KEO_TABLE],
-      note: KEO_NOTE,
-    },
     form: LP_FORM,
     steps: keoSteps("Gửi thêm ảnh mặt tiền nếu có, bên em tư vấn thép, nhôm hay inox hợp ngân sách."),
     faq: [
@@ -1152,12 +999,6 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("nk38-cua-nhom-4-canh-xam", "Cửa đi nhôm kính 4 cánh"),
       ],
     },
-    prices: {
-      title: "Giá nhôm kính niêm yết",
-      lead: `Giá theo m², đã gồm công lắp đặt; cửa nhôm đã gồm kính trắng 8 ly. Chưa VAT, áp dụng từ ${APPLIED_FROM}.`,
-      tables: NK_TABLES,
-      note: "Giá đúng kích thước nhà anh/chị: thợ đo tận nơi và báo giá miễn phí nội thành Cần Thơ.",
-    },
     form: LP_FORM,
     steps: nkSteps("Gửi thêm ảnh và kích thước ô cửa nếu có, bên em tư vấn nhôm Việt hay nhôm nhập hợp ngân sách."),
     faq: [
@@ -1190,16 +1031,6 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p01-cc-nan-bac", "Cửa cuốn nan nhôm bạc"),
         job("p24-cc-xam-duc-lo", "Cửa cuốn khe thoáng xám"),
       ],
-    },
-    prices: {
-      title: "Giá sửa tham khảo",
-      lead: REPAIR_PRICE_LEAD,
-      tables: [
-        { head: ["Sửa cửa cuốn", "Giá tham khảo"], rows: SUA_CUON },
-        { head: ["Sửa cửa kéo", "Giá tham khảo"], rows: SUA_KEO, collapsed: true },
-        { head: ["Sửa cửa nhôm kính", "Giá tham khảo"], rows: SUA_NHOM_KINH, collapsed: true },
-      ],
-      note: REPAIR_PRICE_NOTE,
     },
     // No form: someone whose door is stuck calls. The page is one big call button.
     faq: [FAQ_MOTOR_REPAIR, FAQ_WONT_OPEN, ...REPAIR_FAQ],

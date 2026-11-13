@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AlertTriangle, AppWindow, ArrowRight, BatteryCharging, Bolt, CheckCircle2, Clock, Droplet, KeyRound, Link2, Lock, MapPin, MessageCircle, Phone, RadioTower, RefreshCw, Rows3, Ruler, Settings, Waves, Wind, Wrench, Zap } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { SITE, ZALO_URL } from "@/lib/site-data";
@@ -171,34 +171,34 @@ const pricingGroups = [
   {
     label: "Cửa Cuốn",
     rows: [
-      { item: "Sửa / lập trình lại remote", range: "100.000 – 300.000 đ" },
-      { item: "Chỉnh ray, con lăn lệch", range: "200.000 – 500.000 đ" },
-      { item: "Thay lò xo cân bằng", range: "300.000 – 700.000 đ" },
-      { item: "Sửa motor (cuộn dây, tụ, bo mạch)", range: "300.000 – 1.500.000 đ" },
-      { item: "Thay motor mới (kèm remote)", range: "3.300.000 – 5.500.000 đ" },
-      { item: "Thay bình lưu điện", range: "Liên hệ" },
-      { item: "Thay dây cuốn", range: "200.000 – 600.000 đ" },
+      { item: "Sửa / lập trình lại remote" },
+      { item: "Chỉnh ray, con lăn lệch" },
+      { item: "Thay lò xo cân bằng" },
+      { item: "Sửa motor (cuộn dây, tụ, bo mạch)" },
+      { item: "Thay motor mới (kèm remote)" },
+      { item: "Thay bình lưu điện" },
+      { item: "Thay dây cuốn" },
     ],
   },
   {
     label: "Cửa Kéo",
     rows: [
-      { item: "Chỉnh / nắn ray lệch", range: "150.000 – 400.000 đ" },
-      { item: "Thay con lăn (1 bộ)", range: "100.000 – 300.000 đ" },
-      { item: "Sửa / thay khóa ngang", range: "200.000 – 500.000 đ" },
-      { item: "Hàn / gia cố khung kéo", range: "300.000 – 800.000 đ" },
-      { item: "Thay phụ kiện rỉ sét", range: "200.000 – 600.000 đ" },
+      { item: "Chỉnh / nắn ray lệch" },
+      { item: "Thay con lăn (1 bộ)" },
+      { item: "Sửa / thay khóa ngang" },
+      { item: "Hàn / gia cố khung kéo" },
+      { item: "Thay phụ kiện rỉ sét" },
     ],
   },
   {
     label: "Cửa Nhôm Kính",
     rows: [
-      { item: "Thay kính vỡ (kính đơn, cắt theo kích thước)", range: "300.000 – 1.200.000 đ/tấm" },
-      { item: "Sửa / thay bản lề lỏng", range: "150.000 – 400.000 đ" },
-      { item: "Thay gioăng cao su toàn bộ cửa", range: "200.000 – 500.000 đ" },
-      { item: "Sửa / thay khóa cửa nhôm", range: "200.000 – 600.000 đ" },
-      { item: "Bơm lại ron silicone chống thấm", range: "150.000 – 450.000 đ" },
-      { item: "Thay tay nắm / tay gạt", range: "100.000 – 350.000 đ" },
+      { item: "Thay kính vỡ (kính đơn, cắt theo kích thước)" },
+      { item: "Sửa / thay bản lề lỏng" },
+      { item: "Thay gioăng cao su toàn bộ cửa" },
+      { item: "Sửa / thay khóa cửa nhôm" },
+      { item: "Bơm lại ron silicone chống thấm" },
+      { item: "Thay tay nắm / tay gạt" },
     ],
   },
 ];
@@ -481,7 +481,7 @@ export default function SuaChuaCuaCanTho() {
                         <tr key={row.item}>
                           <td className="px-4 py-3">{row.item}</td>
                           <td className="px-4 py-3 text-right text-muted-foreground">
-                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                        <CallForPrice />
                       </td>
                         </tr>
                       ))}

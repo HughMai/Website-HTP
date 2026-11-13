@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Sparkles, Waves, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -85,11 +85,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { item: "Lan can cầu thang nhôm kính (m dài)", range: "1.800.000 – 3.500.000 đ/m" },
-  { item: "Lan can ban công nhôm kính (m dài)", range: "1.500.000 – 2.800.000 đ/m" },
-  { item: "Lan can sân thượng (m dài)", range: "1.600.000 – 3.000.000 đ/m" },
-  { item: "Vách kính phân cách nội thất (m²)", range: "1.200.000 – 2.200.000 đ/m²" },
-  { item: "Tay vịn nhôm đơn (không kính)", range: "600.000 – 1.200.000 đ/m" },
+  { item: "Lan can cầu thang nhôm kính (m dài)" },
+  { item: "Lan can ban công nhôm kính (m dài)" },
+  { item: "Lan can sân thượng (m dài)" },
+  { item: "Vách kính phân cách nội thất (m²)" },
+  { item: "Tay vịn nhôm đơn (không kính)" },
 ];
 
 const districts = [
@@ -261,7 +261,7 @@ export default function LanCanNhomKinhCanTho() {
                     <tr key={row.item}>
                       <td className="px-4 py-3">{row.item}</td>
                       <td className="px-4 py-3 text-right text-muted-foreground">
-                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                        <CallForPrice />
                       </td>
                     </tr>
                   ))}

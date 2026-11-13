@@ -5,27 +5,36 @@ import { cn } from "@/lib/utils";
 
 /*
  * Prices are gated (Hughie, 13/11/2026; Enki/htp/ads/price-gate-2026-11-13.md): each
- * product family keeps one "từ X" starting price, and every row's own price goes out
- * by Zalo instead, in the catalog the CRM bot sends to the number left in the form
- * (it carries the full retail list). The visitor still sees whether HTP is in range;
- * to compare row by row, they leave a number or call.
+ * product family keeps one "từ X" starting price; every row's own price reads "Liên hệ"
+ * and calls the hotline, and the full list goes out by Zalo, in the catalog the CRM bot
+ * sends to the number left in the form (it carries the full retail list). The visitor
+ * still sees whether HTP is in range; to compare row by row, they call or leave a number.
+ * The /lp ad pages have no price table at all.
  */
 
 const HOTLINE = SITE.hotlines[0];
 const TEL = `tel:${HOTLINE.replace(/\s/g, "")}`;
 
 /**
- * Where a row's price used to be: a lock and a blurred shape of a number. The shape is
- * CSS-generated, so no real or fake figure is in the HTML for a scraper or a search
- * snippet to pick up. The PriceGate under the table says how to get the real one.
+ * Where a row's price used to be: "Liên hệ" as a call button (Hughie, 13/11), so the
+ * moment a visitor wants that price is one tap from the hotline. No figure is in the
+ * HTML. The PriceGate under the table offers the full list by Zalo instead.
  */
-export function HiddenPrice({ className }: { className?: string }) {
+export function CallForPrice({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1.5 whitespace-nowrap", className)} data-hidden-price="">
-      <Lock className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
-      <span aria-hidden className="select-none opacity-60 blur-[5px] before:content-['000.000']" />
-      <span className="sr-only">Giá gửi qua Zalo</span>
-    </span>
+    <a
+      href={TEL}
+      aria-label={`Liên hệ: gọi ${HOTLINE} để hỏi giá`}
+      className={cn(
+        "inline-flex h-11 items-center gap-1.5 whitespace-nowrap rounded-full border border-amber-400 bg-amber-50 px-3 text-sm font-semibold text-brand transition-colors hover:bg-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400",
+        className
+      )}
+      data-price-call=""
+      data-track="price_call"
+    >
+      <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+      Liên hệ
+    </a>
   );
 }
 

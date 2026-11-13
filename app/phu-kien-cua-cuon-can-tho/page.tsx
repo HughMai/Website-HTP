@@ -15,7 +15,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { Button } from "@/components/ui/button";
 import { BINH_TICH_DIEN, MOTOR, PHU_KIEN } from "@/lib/bang-gia-data";
 import { formatGia } from "@/lib/bang-gia-specs";
@@ -48,17 +48,12 @@ export const metadata: Metadata = {
 
 // Rows come from the CRM export (lib/bang-gia-data.ts) — the same rows as the price page
 // /bang-gia-phu-kien-can-tho, so the two pages cannot drift apart. Each row's price is gated
-// (components/PriceGate.tsx); only the "từ" price in the FAQ is printed.
+// (components/PriceGate.tsx: "Liên hệ" calls); only the "từ" price in the FAQ is printed.
 const motorTable = MOTOR.map((m) => ({ spec: m.name, use: m.dienTich }));
 
 const accessoryTable = [
-  // Bình tích điện YH / SH: the print catalog leaves their price blank, so the web says "Liên hệ".
-  ...BINH_TICH_DIEN.map((b) => ({ spec: `Bình tích điện ${b.loai}`, unit: "đ/bộ", priced: b.gia !== null })),
-  ...PHU_KIEN.map((p) => ({
-    spec: `${p.name} ${p.key === "khoa_uc" ? "cửa cuốn Úc" : "cửa cuốn tole"}`,
-    unit: `đ/${p.donVi}`,
-    priced: true,
-  })),
+  ...BINH_TICH_DIEN.map((b) => `Bình tích điện ${b.loai}`),
+  ...PHU_KIEN.map((p) => `${p.name} ${p.key === "khoa_uc" ? "cửa cuốn Úc" : "cửa cuốn tole"}`),
 ];
 
 /** "cửa dưới 12m² dùng motor 300kg, cửa 12m² đến dưới 14,5m² dùng motor 400kg, …" */
@@ -301,7 +296,7 @@ export default function PhuKienCuaCuonCanTho() {
                         <td className="px-4 py-3 font-medium text-brand">{row.spec}</td>
                         <td className="px-4 py-3 text-brand/70">{row.use}</td>
                         <td className="px-4 py-3 text-right font-medium">
-                          <HiddenPrice />
+                          <CallForPrice />
                         </td>
                       </tr>
                     ))}
@@ -321,17 +316,11 @@ export default function PhuKienCuaCuonCanTho() {
                     </tr>
                   </thead>
                   <tbody className="divide-y bg-white">
-                    {accessoryTable.map((row) => (
-                      <tr key={row.spec}>
-                        <td className="px-4 py-3 font-medium text-brand">{row.spec}</td>
+                    {accessoryTable.map((spec) => (
+                      <tr key={spec}>
+                        <td className="px-4 py-3 font-medium text-brand">{spec}</td>
                         <td className="px-4 py-3 text-right font-medium">
-                          {row.priced ? (
-                            <>
-                              <HiddenPrice /> <span className="font-normal text-brand/60">{row.unit}</span>
-                            </>
-                          ) : (
-                            "Liên hệ"
-                          )}
+                          <CallForPrice />
                         </td>
                       </tr>
                     ))}

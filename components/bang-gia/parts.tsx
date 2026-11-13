@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { MessageCircle, Phone } from "lucide-react";
-import { HiddenPrice } from "@/components/PriceGate";
+import { CallForPrice } from "@/components/PriceGate";
 import type { Gia } from "@/lib/bang-gia-data";
 import { formatGia } from "@/lib/bang-gia-specs";
 import { SITE, ZALO_URL } from "@/lib/site-data";
@@ -89,11 +89,6 @@ export const FIELD: Record<string, string> = {
   OneDoor: "bg-[#EEF1F4]",
 };
 
-/** A row's own price: gated (components/PriceGate.tsx). The family's "từ" price in the
- *  hero (HeroIndex) is the one figure left on the page. */
-export function RowPrice({ gia }: { gia: Gia }) {
-  return gia !== null ? <HiddenPrice /> : <>Liên hệ</>;
-}
 
 /**
  * The printed catalog opens every section with a navy slat that has an amber edge. The web
@@ -315,11 +310,10 @@ export function PriceMenu({
             <ul className="mt-5 space-y-4">
               {g.rows.map((r) => (
                 <li key={r.name}>
-                  <div className="flex items-baseline justify-between gap-4">
+                  <div className="flex items-center justify-between gap-4">
                     <span className="text-base font-semibold text-brand">{r.name}</span>
-                    <span className="whitespace-nowrap text-xl font-semibold tabular-nums text-brand">
-                      <RowPrice gia={r.gia} />
-                    </span>
+                    {/* The row's own price is gated: "Liên hệ" calls (components/PriceGate.tsx). */}
+                    <CallForPrice className="shrink-0" />
                   </div>
                   {r.sub && <p className="mt-0.5 max-w-[40ch] text-base leading-snug text-slate-600">{r.sub}</p>}
                 </li>

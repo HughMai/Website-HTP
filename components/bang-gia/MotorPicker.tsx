@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { HiddenPrice } from "@/components/PriceGate";
+import { CallForPrice } from "@/components/PriceGate";
 import type { Motor } from "@/lib/bang-gia-data";
 
 const vn = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",");
@@ -106,8 +106,9 @@ export function MotorPicker({ motors }: { motors: MotorTier[] }) {
       {tier && (
         <div className="mt-5 bg-brand-50 p-5" aria-live="polite">
           <p className="text-xl font-semibold">{tier.name}</p>
-          <p className="mt-1 text-base text-slate-600">
-            <HiddenPrice className="text-brand" /> đ/bộ · giá trong bảng giá gửi qua Zalo
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600">
+            <CallForPrice />
+            Giá theo bộ, gọi để hỏi.
           </p>
           <p className="mt-3 text-base">
             Cửa {vn(w)} × {vn(h)} m = <span className="font-semibold tabular-nums">{vn(area)} m²</span>.{" "}

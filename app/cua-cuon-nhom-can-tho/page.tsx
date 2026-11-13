@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, CloudRain, Lock, MapPin, Palette, Phone, Scale, ShieldCheck, VolumeX } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -93,11 +93,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { size: "Rộng 2.5m × Cao 2.5m", range: "3.800.000 – 5.500.000 đ" },
-  { size: "Rộng 3.0m × Cao 2.8m", range: "4.500.000 – 6.500.000 đ" },
-  { size: "Rộng 4.0m × Cao 3.0m", range: "6.000.000 – 9.000.000 đ" },
-  { size: "Rộng 5.0m × Cao 3.5m", range: "8.500.000 – 13.000.000 đ" },
-  { size: "Rộng 6.0m trở lên", range: "Liên hệ báo giá" },
+  { size: "Rộng 2.5m × Cao 2.5m" },
+  { size: "Rộng 3.0m × Cao 2.8m" },
+  { size: "Rộng 4.0m × Cao 3.0m" },
+  { size: "Rộng 5.0m × Cao 3.5m" },
+  { size: "Rộng 6.0m trở lên" },
 ];
 
 const districts = [
@@ -287,7 +287,7 @@ export default function CuaCuonNhomCanTho() {
                     <tr key={row.size}>
                       <td className="px-4 py-3">{row.size}</td>
                       <td className="px-4 py-3 text-right text-muted-foreground">
-                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                        <CallForPrice />
                       </td>
                     </tr>
                   ))}

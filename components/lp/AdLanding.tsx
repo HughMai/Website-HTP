@@ -4,11 +4,10 @@ import { H2 } from "@/components/bang-gia/parts";
 import { LeadForm } from "@/components/LeadForm";
 import { Logo } from "@/components/Logo";
 import { LpStickyBar } from "@/components/lp/LpStickyBar";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Checks, ProofLine, Stars } from "@/components/lp/Proof";
 import { QuoteButton } from "@/components/lp/QuoteSheet";
-import type { AdLandingPage, LpPhoto, LpPriceTable } from "@/lib/lp-data";
+import type { AdLandingPage, LpPhoto } from "@/lib/lp-data";
 import type { Review } from "@/lib/reviews";
 import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "@/lib/reviews";
 import { SITE, STATS, ZALO_URL } from "@/lib/site-data";
@@ -36,12 +35,11 @@ import { cn } from "@/lib/utils";
  * once among the real job photos (a "wall", never a carousel). Section headings carry
  * the point on their own, for the visitor who reads only headings.
  *
- * Prices are gated (13/11): the hero's teaser keeps one "từ" price; the tables keep their
- * rows with each price hidden, and a PriceGate under them sends the full list by Zalo
- * (repairs: call). The header, with its call button, is sticky.
+ * No price table (Hughie, 13/11): the hero's teaser keeps one "từ" price and the full list
+ * goes out by Zalo from the form. The header, with its call button, is sticky.
  *
- * Order: sticky logo + call header → hero → [what the sitelink promised] → proof wall → 3 ĐÚNG →
- * 3 steps → prices → FAQ → final ask + showroom → NAP. No site menu, no footer link farm,
+ * Order: sticky logo + call header → hero → proof wall → 3 ĐÚNG → 3 steps → FAQ → final
+ * ask + showroom → NAP. No site menu, no footer link farm,
  * no map iframe, no floating rail: every link that isn't a way to reach the shop is a
  * paid click leaving.
  *
@@ -261,21 +259,18 @@ function Hero({ page }: { page: AdLandingPage }) {
             </>
           )}
         </div>
-        {/* Price-led pages hide the photo below lg:, so the first scroll on a phone lands on
-            the price table the visitor tapped for. */}
-        <figure className={cn("mt-8 lg:mt-0", page.lead === "prices" && "hidden lg:block")}>
+        <figure className="mt-8 lg:mt-0">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5 lg:aspect-[4/5]">
             {/* Install pages: lazy, because on phones the form fills the first screen and this
                 photo sits below it, so it must not take bandwidth from the page's JS on slow
                 4G (on desktop it is in view at first layout, so lazy still starts at once).
                 Repair pages: eager, because their shorter hero puts the photo near the first
-                phone screen. Price-led pages: lazy, so phones, where it is hidden, never
-                download it. */}
+                phone screen. */}
             <Image
               src={page.hero.src}
               alt={page.hero.alt}
               fill
-              loading={page.form || page.lead === "prices" ? "lazy" : "eager"}
+              loading={page.form ? "lazy" : "eager"}
               sizes="(min-width: 1024px) 40vw, 100vw"
               quality={85}
               className="object-cover"
@@ -398,79 +393,6 @@ function ProofWall({ page }: { page: AdLandingPage }) {
           Xem cả {GOOGLE_RATING.count} đánh giá trên Google Maps
         </a>
         <CtaRow page={page} track="lp_photos" />
-      </div>
-    </section>
-  );
-}
-
-function PriceTable({ table }: { table: LpPriceTable }) {
-  const grid = (
-    <div className="overflow-hidden rounded-xl border border-brand/10 bg-white">
-      <table className="w-full text-left text-sm">
-        <thead className="bg-brand text-white">
-          <tr>
-            {table.head.map((h, i) => (
-              <th key={h} scope="col" className={cn("px-4 py-3 font-semibold", i > 0 && "text-right")}>
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {table.rows.map((row) => (
-            <tr key={row[0]} className="border-t border-brand/10 even:bg-brand-50/40">
-              {row.map((c, i) =>
-                i === 0 ? (
-                  <th key={i} scope="row" className="px-4 py-3 font-medium text-brand">
-                    {c}
-                  </th>
-                ) : (
-                  // Every column after the name is a price: gated (components/PriceGate.tsx).
-                  <td key={i} className="whitespace-nowrap px-4 py-3 text-right font-semibold text-brand">
-                    <HiddenPrice />
-                  </td>
-                )
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-
-  if (!table.collapsed) return <div className="mt-4">{grid}</div>;
-
-  // Secondary price groups stay one tap away instead of lengthening the page.
-  return (
-    <details className="group mt-3 rounded-xl border border-brand/10 bg-white">
-      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-sm font-semibold text-brand [&::-webkit-details-marker]:hidden">
-        Xem các dòng {table.head[0].charAt(0).toLowerCase() + table.head[0].slice(1)}
-        <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
-      </summary>
-      <div className="px-2 pb-2">{grid}</div>
-    </details>
-  );
-}
-
-function Prices({ page }: { page: AdLandingPage }) {
-  return (
-    <section className="bg-white py-12 md:py-16" aria-labelledby="lp-bang-gia">
-      <div className="container max-w-3xl">
-        <h2 id="lp-bang-gia" className={cn(H2, "text-brand")}>
-          {page.prices.title}
-        </h2>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">{page.prices.lead}</p>
-        {page.prices.tables.map((t) => (
-          <PriceTable key={t.head[0]} table={t} />
-        ))}
-        <p className="mt-4 text-sm leading-relaxed text-slate-600">{page.prices.note}</p>
-        {/* The hero keeps the one "từ" price; each row's price is behind this ask, on every
-            width (it replaces the desktop-only CtaRow here). */}
-        <PriceGate
-          source={`lp_${page.slug} · bảng giá`}
-          kind={page.form ? "install" : "repair"}
-          className="mt-6"
-        />
       </div>
     </section>
   );
@@ -610,26 +532,17 @@ function MiniFooter() {
   );
 }
 
-/** Body sections in page order. `lead` moves the section the sitelink promised to the top;
- *  a photo-led page brings its prices up right behind the photos. Otherwise proof comes
- *  first: it is what makes every promise below believable. */
-function bodySections(page: AdLandingPage) {
-  const wall = <ProofWall key="wall" page={page} />;
-  const promises = <Promises key="promises" page={page} />;
-  const steps = <Steps key="steps" page={page} />;
-  const prices = <Prices key="prices" page={page} />;
-  if (page.lead === "prices") return [prices, wall, promises, steps];
-  if (page.lead === "photos") return [wall, prices, promises, steps];
-  return [wall, promises, steps, prices];
-}
-
 export function AdLanding({ page }: { page: AdLandingPage }) {
   return (
     <div className="bg-white text-brand">
       <TopBar />
       <main id="main">
         <Hero page={page} />
-        {bodySections(page)}
+        {/* Proof first: it is what makes every promise below believable. No price table
+            (Hughie, 13/11): the hero's "từ" price is the only figure on the page. */}
+        <ProofWall page={page} />
+        <Promises page={page} />
+        <Steps page={page} />
         <Faq page={page} />
         <Closing page={page} />
       </main>

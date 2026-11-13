@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { HiddenPrice, PriceGate } from "@/components/PriceGate";
+import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
@@ -83,11 +83,11 @@ const advantages = [
 ];
 
 const pricing = [
-  { size: "2.5m × 2.5m", range: "2.800.000 – 4.500.000 đ" },
-  { size: "3.0m × 2.8m", range: "3.200.000 – 5.200.000 đ" },
-  { size: "4.0m × 3.0m", range: "4.500.000 – 7.000.000 đ" },
-  { size: "5.0m × 3.5m", range: "6.000.000 – 9.500.000 đ" },
-  { size: "Kích thước đặc biệt", range: "Liên hệ báo giá" },
+  { size: "2.5m × 2.5m" },
+  { size: "3.0m × 2.8m" },
+  { size: "4.0m × 3.0m" },
+  { size: "5.0m × 3.5m" },
+  { size: "Kích thước đặc biệt" },
 ];
 
 const districts = [
@@ -267,7 +267,7 @@ export default function CuaKeoThepCanTho() {
                     <tr key={row.size}>
                       <td className="px-4 py-3">{row.size}</td>
                       <td className="px-4 py-3 text-right text-muted-foreground">
-                        {/\d/.test(row.range) ? <HiddenPrice /> : row.range}
+                        <CallForPrice />
                       </td>
                     </tr>
                   ))}

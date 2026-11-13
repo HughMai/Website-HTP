@@ -1,8 +1,7 @@
 import Image from "next/image";
 import type { MauNan } from "@/lib/bang-gia-data";
-import { HiddenPrice } from "@/components/PriceGate";
+import { CallForPrice } from "@/components/PriceGate";
 import { nanAnchor, type NanSpec } from "@/lib/bang-gia-specs";
-import { ZALO_URL } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { FIELD } from "./parts";
 
@@ -24,11 +23,11 @@ import { FIELD } from "./parts";
  */
 /** A slat model without its price: the card renders inside a client component, whose props
  *  are written into the page's HTML, so the figure is dropped before it gets there. */
-export type NanCardModel = Omit<MauNan, "gia"> & { priced: boolean };
+export type NanCardModel = Omit<MauNan, "gia">;
 
-export function toNanCardModel(m: MauNan): NanCardModel {
-  const { gia, ...rest } = m;
-  return { ...rest, priced: gia !== null };
+/** Drops the price (destructured out on purpose). */
+export function toNanCardModel({ gia, ...rest }: MauNan): NanCardModel {
+  return rest;
 }
 
 export function NanCard({ mau, spec }: { mau: NanCardModel; spec?: NanSpec }) {
@@ -81,23 +80,11 @@ export function NanCard({ mau, spec }: { mau: NanCardModel; spec?: NanSpec }) {
             {mau.line && ` · ${mau.line}`}
           </p>
         </div>
-        {/* The rule under the price closes the heading block; the specs below it read as one list. */}
-        {mau.priced ? (
-          <p className="mt-1 border-b border-brand-100 pb-3 text-xl font-semibold tabular-nums text-brand">
-            <HiddenPrice /> <span className="text-base font-normal text-slate-600">đ/m²</span>
-          </p>
-        ) : (
-          <div className="mt-0.5 border-b border-brand-100 pb-1.5">
-            <a
-              href={ZALO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center text-base font-semibold text-brand underline decoration-amber-400 decoration-2 underline-offset-4 transition-[text-decoration-thickness] hover:decoration-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400"
-            >
-              Liên hệ báo giá
-            </a>
-          </div>
-        )}
+        {/* The rule under the price closes the heading block; the specs below it read as one list.
+            The price itself is gated: "Liên hệ" calls (components/PriceGate.tsx). */}
+        <div className="mt-2 border-b border-brand-100 pb-3">
+          <CallForPrice />
+        </div>
         {/* Label above value on a phone (the text column is ~190px); a fixed label column from sm up. */}
         <dl className="mt-3 space-y-2.5 leading-snug sm:space-y-2">
           {rows.map(([k, v]) => (

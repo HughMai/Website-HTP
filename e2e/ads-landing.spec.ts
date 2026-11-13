@@ -17,20 +17,19 @@ const PAGES = [
 ];
 
 // The ten sitelink pages (Enki/htp/ads/sitelink-landing-plan-2026-11-12.md). `first` is the
-// section the sitelink promised, which must sit directly under the hero; `mirror` lists the
-// site pages whose prices each table row must match (`labels`: hand-mirrored tables, where
-// the row label must match too).
+// section that must sit directly under the hero (the job photos: there is no price table
+// on the ad pages since 13/11).
 const SITELINK_PAGES = [
-  { path: "/lp/bang-gia-cua-cuon-can-tho", keyword: "Bảng Giá Cửa Cuốn Cần Thơ", price: "500.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bao-gia-cua-cuon-can-tho", "/bang-gia-phu-kien-can-tho"] },
-  { path: "/lp/cua-cuon-nhom-khe-thoang-can-tho", keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ", price: "1.450.000", form: true, first: "lp-cong-trinh", mirror: ["/bao-gia-cua-cuon-can-tho"] },
-  { path: "/lp/cua-cuon-nha-xuong-can-tho", keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ", price: "800.000", form: true, first: "lp-cong-trinh", mirror: ["/bao-gia-cua-cuon-can-tho", "/bang-gia-phu-kien-can-tho"] },
-  { path: "/lp/bang-gia-cua-keo-can-tho", keyword: "Bảng Giá Cửa Kéo Cần Thơ", price: "540.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bang-gia-cua-keo-can-tho"] },
-  { path: "/lp/cua-keo-thep-can-tho", keyword: "Cửa Kéo Thép Cần Thơ", price: "540.000", form: true, first: "lp-cong-trinh", mirror: ["/bang-gia-cua-keo-can-tho"] },
-  { path: "/lp/lan-can-cau-thang-kinh-can-tho", keyword: "Lan Can, Cầu Thang Kính Cần Thơ", price: "1.950.000", form: true, first: "lp-cong-trinh", mirror: ["/bang-gia-cua-nhom-kinh-can-tho"], labels: true },
-  { path: "/lp/bang-gia-nhom-kinh-can-tho", keyword: "Bảng Giá Nhôm Kính Cần Thơ", price: "1.200.000", form: true, first: "lp-bang-gia", priceForm: true, mirror: ["/bang-gia-cua-nhom-kinh-can-tho"] },
-  { path: "/lp/sua-cua-keo-can-tho", keyword: "Sửa Cửa Kéo Cần Thơ", price: "150.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
-  { path: "/lp/remote-binh-luu-dien-cua-cuon-can-tho", keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ", price: "100.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
-  { path: "/lp/sua-motor-cua-cuon-can-tho", keyword: "Sửa Motor Cửa Cuốn Cần Thơ", price: "300.000", form: false, first: "lp-bang-gia", mirror: ["/sua-chua-cua-cuon-can-tho"], labels: true },
+  { path: "/lp/bang-gia-cua-cuon-can-tho", keyword: "Bảng Giá Cửa Cuốn Cần Thơ", price: "500.000", form: true, first: "lp-cong-trinh", priceForm: true },
+  { path: "/lp/cua-cuon-nhom-khe-thoang-can-tho", keyword: "Cửa Cuốn Nhôm Khe Thoáng Cần Thơ", price: "1.450.000", form: true, first: "lp-cong-trinh" },
+  { path: "/lp/cua-cuon-nha-xuong-can-tho", keyword: "Cửa Cuốn Nhà Xưởng Cần Thơ", price: "800.000", form: true, first: "lp-cong-trinh" },
+  { path: "/lp/bang-gia-cua-keo-can-tho", keyword: "Bảng Giá Cửa Kéo Cần Thơ", price: "540.000", form: true, first: "lp-cong-trinh", priceForm: true },
+  { path: "/lp/cua-keo-thep-can-tho", keyword: "Cửa Kéo Thép Cần Thơ", price: "540.000", form: true, first: "lp-cong-trinh" },
+  { path: "/lp/lan-can-cau-thang-kinh-can-tho", keyword: "Lan Can, Cầu Thang Kính Cần Thơ", price: "1.950.000", form: true, first: "lp-cong-trinh" },
+  { path: "/lp/bang-gia-nhom-kinh-can-tho", keyword: "Bảng Giá Nhôm Kính Cần Thơ", price: "1.200.000", form: true, first: "lp-cong-trinh", priceForm: true },
+  { path: "/lp/sua-cua-keo-can-tho", keyword: "Sửa Cửa Kéo Cần Thơ", price: "150.000", form: false, first: "lp-cong-trinh" },
+  { path: "/lp/remote-binh-luu-dien-cua-cuon-can-tho", keyword: "Remote, Bình Lưu Điện Cửa Cuốn Cần Thơ", price: "100.000", form: false, first: "lp-cong-trinh" },
+  { path: "/lp/sua-motor-cua-cuon-can-tho", keyword: "Sửa Motor Cửa Cuốn Cần Thơ", price: "300.000", form: false, first: "lp-cong-trinh" },
 ];
 
 const ALL_AD_PAGES = [...PAGES, ...SITELINK_PAGES];
@@ -147,7 +146,7 @@ test.describe("Google Ads landing pages", () => {
 
       // Scrolled past the hero, the bottom bar slides in with the page's one ask plus a
       // call button, and no map button sending the paid visitor off the page.
-      await page.locator("#lp-bang-gia").scrollIntoViewIfNeeded();
+      await page.locator("#lp-quy-trinh").scrollIntoViewIfNeeded();
       await expect(sticky).not.toHaveAttribute("aria-hidden", "true");
       await expect(sticky.locator('a[href^="tel:"]')).toBeInViewport();
       if (p.form) {
@@ -163,7 +162,7 @@ test.describe("Google Ads landing pages", () => {
   test("the bottom Zalo bar steps aside while another form is on screen", async ({ page }) => {
     await page.goto("/lp/cua-keo-can-tho");
     const bar = page.locator('[data-track="sticky_zalo"]');
-    await page.locator("#lp-bang-gia").scrollIntoViewIfNeeded();
+    await page.locator("#lp-quy-trinh").scrollIntoViewIfNeeded();
     await expect(bar).not.toHaveAttribute("aria-hidden", "true");
     // The closing section has the same form: one field on screen, not two.
     await page.locator("#lp-goi-ngay").scrollIntoViewIfNeeded();
@@ -177,7 +176,7 @@ test.describe("Google Ads landing pages", () => {
     await page.setExtraHTTPHeaders({ "x-forwarded-for": `10.201.${run % 250}.${(run >> 8) % 250}` });
 
     await page.goto("/lp/cua-keo-can-tho?utm_source=google&utm_medium=cpc&utm_campaign=cua-keo");
-    await page.locator("#lp-bang-gia").scrollIntoViewIfNeeded();
+    await page.locator("#lp-quy-trinh").scrollIntoViewIfNeeded();
     const bar = page.locator('[data-track="sticky_zalo"]');
     await expect(bar).not.toHaveAttribute("aria-hidden", "true");
     await bar.getByPlaceholder("Số Zalo anh/chị").fill(phone);
@@ -209,21 +208,6 @@ test.describe("Google Ads landing pages", () => {
       await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
       const text = await page.locator("main").innerText();
       expect(text).not.toMatch(/b[ảa]o h[àa]nh[^.\n]{0,120}?\b\d{1,2}\s*n[ăa]m/iu);
-    }
-  });
-
-  test("repair prices on the ad page match /sua-chua-cua-cuon-can-tho", async ({ page }) => {
-    await page.goto("/lp/sua-cua-cuon-can-tho");
-    await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
-    const rows = await page.locator("table tbody tr").allInnerTexts();
-    expect(rows.length).toBeGreaterThan(10);
-
-    await page.goto("/sua-chua-cua-cuon-can-tho");
-    const seo = await page.locator("body").innerText();
-    for (const row of rows) {
-      const [item, range] = row.split("\t").map((s) => s.trim());
-      expect(seo, `"${item}" is missing from the repair page`).toContain(item);
-      expect(seo, `"${item}: ${range}" no longer matches the repair page`).toContain(range);
     }
   });
 
@@ -321,10 +305,6 @@ test.describe("Google Ads sitelink pages", () => {
       const sections = page.locator("main > section");
       await expect(sections.nth(0)).toHaveAttribute("aria-labelledby", "lp-title");
       await expect(sections.nth(1)).toHaveAttribute("aria-labelledby", p.first);
-      // Price-led pages hide the hero photo on phones, so the table is the first scroll.
-      if (p.first === "lp-bang-gia") {
-        await expect(page.locator('section[aria-labelledby="lp-title"] figure')).toBeHidden();
-      }
       await expect(page.locator("main")).toContainText(p.price);
 
       // The price pages promise the full price list, because the catalog the bot sends has it.
@@ -345,27 +325,6 @@ test.describe("Google Ads sitelink pages", () => {
       await expect(page.locator('#lp-cong-trinh').locator("xpath=..").locator('img[src*="cong-trinh"]')).toHaveCount(4);
     });
 
-    // Since 13/11 the prices themselves are gated on both sides, so what is left to keep in
-    // step is the rows: each hand-mirrored label must still exist on the site page, and
-    // every price cell must be hidden ("Liên hệ" rows excepted).
-    test(`${p.path}: every price row matches ${p.mirror.join(" + ")}`, async ({ page }) => {
-      await page.goto(p.path);
-      await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
-      const rows = await page.locator("#lp-bang-gia ~ * table tbody tr").evaluateAll((trs) =>
-        trs.map((tr) => [...tr.children].map((c) => (c.textContent ?? "").trim()))
-      );
-      expect(rows.length).toBeGreaterThan(1);
-
-      let site = "";
-      for (const path of p.mirror) {
-        await page.goto(path);
-        site += (await page.locator("body").textContent()) ?? "";
-      }
-      for (const [label, ...prices] of rows) {
-        if (p.labels) expect(site, `"${label}" is missing from ${p.mirror}`).toContain(label);
-        for (const price of prices) expect(["Liên hệ", "Giá gửi qua Zalo"], `"${label}: ${price}"`).toContain(price);
-      }
-    });
   }
 
   test("sitelink pages stay out of the sitemap", async ({ request }) => {
@@ -389,23 +348,24 @@ test.describe("Google Ads sitelink pages — desktop", () => {
 });
 
 // Prices are gated (13/11/2026): one "từ" price per family stays; every row's own price
-// is hidden and goes out by Zalo (install) or on the phone (repair). The number must not
-// be anywhere in the HTML, not just invisible.
+// reads "Liên hệ" and calls the hotline, and the full list goes out by Zalo. The ad pages
+// have no price table at all. The number must not be anywhere in the HTML.
 const VND = /\d{1,3}(?:\.\d{3}){1,2}/;
 
 test.describe("Gated prices", () => {
   test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
 
   for (const p of ALL_AD_PAGES) {
-    test(`${p.path}: the price table hides every row's price and asks under it`, async ({ page }) => {
+    test(`${p.path}: no price table, the hero's "từ" price is the only figure`, async ({ page }) => {
       await page.goto(p.path);
-      const prices = page.locator('section[aria-labelledby="lp-bang-gia"]');
-      await expect(prices.locator("tbody [data-hidden-price]").first()).toBeAttached();
-      for (const cell of await prices.locator("tbody td").allTextContents()) expect(cell).not.toMatch(VND);
-      const gate = prices.locator("[data-price-gate]");
-      await expect(gate).toBeVisible();
-      if (p.form) await expect(gate.getByRole("button", { name: "Nhận bảng giá" })).toBeVisible();
-      else await expect(gate.getByRole("link", { name: /^Gọi / })).toBeVisible();
+      await expect(page.locator("main table, #lp-bang-gia, [data-price-gate]")).toHaveCount(0);
+      await expect(page.locator('section[aria-labelledby="lp-title"]')).toContainText(p.price);
+      const body = await page
+        .locator("main > section")
+        .evaluateAll((els) => els.slice(1).map((e) => (e as HTMLElement).innerText).join("\n"));
+      for (const m of body.matchAll(new RegExp(VND.source, "g"))) {
+        expect(body.slice(Math.max(0, m.index! - 4), m.index), `"${m[0]}" on ${p.path}`).toMatch(/từ\s$/i);
+      }
     });
   }
 
@@ -431,9 +391,12 @@ test.describe("Gated prices", () => {
     "/sua-chua-cua-cuon-can-tho",
   ];
   for (const path of SITE_PRICE_PAGES) {
-    test(`${path}: rows show no price, a gate sits under the prices`, async ({ page }) => {
+    test(`${path}: rows say "Liên hệ" and call, a gate sits under the prices`, async ({ page }) => {
       await page.goto(path);
-      await expect(page.locator("[data-hidden-price]").first()).toBeAttached();
+      const call = page.locator("[data-price-call]").first();
+      await expect(call).toBeVisible();
+      await expect(call).toHaveText("Liên hệ");
+      await expect(call).toHaveAttribute("href", /^tel:/);
       await expect(page.locator("[data-price-gate]").first()).toBeVisible();
       // Below the hero, a figure may only appear as a "từ" starting price.
       const body = await page
@@ -449,7 +412,6 @@ test.describe("Gated prices", () => {
     const res = await page.goto("/bao-gia-cua-cuon-can-tho");
     const html = await res!.text();
     expect(html).not.toMatch(/\\?"gia\\?":\s*\d/);
-    expect(html).not.toMatch(/\\?"priced\\?":\s*(?!true|false)/);
   });
 });
 
