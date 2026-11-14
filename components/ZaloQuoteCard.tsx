@@ -53,8 +53,14 @@ export function ZaloQuoteCard({
         <h2 id={titleId} className="text-balance text-xl font-semibold leading-snug tracking-tight">
           {form.title}
         </h2>
-        <LeadForm source={source} tone="light" submitLabel={form.submitLabel} className="mt-3" />
-        {checks && <Checks items={checks} tone="light" className="mt-3" />}
+        {form.note && <p className="mt-1 text-sm text-slate-600">{form.note}</p>}
+        <LeadForm
+          source={source}
+          tone="light"
+          submitLabel={form.submitLabel}
+          className="mt-3"
+          belowButton={checks && <Checks items={checks} tone="light" className="mt-3" />}
+        />
         <ProofLine proof={proof} tone="light" className="mt-4 border-t border-brand/10 pt-3" />
       </section>
       {sticky && (

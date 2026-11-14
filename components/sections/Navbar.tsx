@@ -61,14 +61,40 @@ function NavIcon({
   return <Icon className={className} aria-hidden />;
 }
 
-export function Navbar() {
-  const [scrolled, setScrolled] = React.useState(false);
+/**
+ * `overBrandBand`: the page opens on a white brand band ([data-brand-bar], the homepage's
+ * HomeBrandBand, Hughie 14/11/2026). While the band is on screen the bar is clear, uses its
+ * light-page colours, and hides its own small logo, so the page never shows two logos at once;
+ * once the band scrolls away it is the usual white bar with the logo, like the ad pages'
+ * CompactBar.
+ */
+export function Navbar({ overBrandBand = false }: { overBrandBand?: boolean } = {}) {
+  const [pastTop, setScrolled] = React.useState(false);
+  // Starts true so the first paint already matches the band.
+  const [bandInView, setBandInView] = React.useState(overBrandBand);
+  const scrolled = pastTop || bandInView;
   const [open, setOpen] = React.useState(false);
   const [openMenu, setOpenMenu] = React.useState<string | null>(null);
   const pathname = usePathname();
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
+
+  React.useEffect(() => {
+    if (!overBrandBand) return;
+    // Watch the band's logo, not the whole band, so the bar's own logo takes over the moment
+    // the big one slides under the bar's 80px row.
+    const band = document.querySelector("[data-brand-bar] img") ?? document.querySelector("[data-brand-bar]");
+    if (!band) {
+      setBandInView(false);
+      return;
+    }
+    const io = new IntersectionObserver(([entry]) => setBandInView(entry.isIntersecting), {
+      rootMargin: "-80px 0px 0px 0px",
+    });
+    io.observe(band);
+    return () => io.disconnect();
+  }, [overBrandBand]);
 
   // Close any open dropdown when the route changes
   React.useEffect(() => {
@@ -87,10 +113,15 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300 backdrop-blur-md",
-        scrolled
-          ? "glass border-b border-brand/10 shadow-[0_6px_24px_-12px_rgba(10,37,64,0.18)]"
-          : "bg-brand/35 border-b border-white/10"
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        // Phones: clear, so the band's logo can sit beside the menu button. md and up the bar
+        // carries the links, so it is solid white over the band (its content starts below the
+        // bar's row) and the band never scrolls underneath readable text.
+        bandInView
+          ? "border-b border-transparent bg-transparent md:bg-white"
+          : scrolled
+          ? "glass border-b border-brand/10 shadow-[0_6px_24px_-12px_rgba(10,37,64,0.18)] backdrop-blur-md"
+          : "bg-brand/35 border-b border-white/10 backdrop-blur-md"
       )}
       aria-label="Thanh điều hướng chính"
       onMouseLeave={() => setOpenMenu(null)}
@@ -103,7 +134,9 @@ export function Navbar() {
             "flex shrink-0 items-center gap-3 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
             scrolled
               ? "focus-visible:ring-brand"
-              : "focus-visible:ring-white focus-visible:ring-offset-brand"
+              : "focus-visible:ring-white focus-visible:ring-offset-brand",
+            // The brand band's big logo is on screen; `invisible` also drops it from the tab order.
+            bandInView && "invisible"
           )}
           aria-label="Về trang chủ"
         >

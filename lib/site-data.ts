@@ -14,6 +14,16 @@ export const SITE = {
   mapDirectionsUrl:
     "https://www.google.com/maps/place/H%C6%B0ng+Th%C3%A0nh+Ph%C3%A1t+Door/@10.0484783,105.7548398,17z/data=!3m1!4b1!4m6!3m5!1s0x31a08946f6a96a07:0xb1d3630ae8534a1b!8m2!3d10.048473!4d105.7574147!16s%2Fg%2F11lwgjdghy",
   workingHours: "08:00 - 17:30 (Thứ 2 - Thứ 7)",
+  // When someone answers the phones (Hughie, 14/11/2026). The shop's opening hours,
+  // which also feed the JSON-LD, stay in workingHours until they change too.
+  phoneHours: "7:30–17:30 mỗi ngày",
+  // The line under the logo on the ad pages (Hughie, 14/11/2026); 2005 → 2026 is 21 năm.
+  // Non-breaking spaces keep "20 năm", "tin tưởng" and "miền Tây" on one line.
+  trustLine: "Hơn 20 năm được tin tưởng khắp miền Tây",
+  // Where HTP installs (Hughie, 14/11/2026), written to follow a verb ("Nhận lắp …",
+  // "Phục vụ …"). Free measuring and free travel stay inside Cần Thơ; elsewhere the
+  // trip is quoted.
+  serviceArea: "toàn miền Tây – Đồng bằng sông Cửu Long",
   foundedYear: 2005,
 } as const;
 

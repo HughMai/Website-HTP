@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { BadgeCheck, Hammer, Phone, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/LeadForm";
+import { HomeBrandBand } from "@/components/sections/HomeBrandBand";
 import { SITE, ZALO_URL } from "@/lib/site-data";
 
 const fadeUp = {
@@ -43,10 +44,14 @@ const heroShots = [
 export function Hero() {
   const primaryHotline = SITE.hotlines[0];
 
+  // The brand band opens the page (Hughie, 14/11/2026), so the hero no longer sits under the
+  // fixed navbar and needs no room for it.
   return (
+    <>
+    <HomeBrandBand />
     <section
       id="trang-chu"
-      className="relative overflow-hidden bg-brand pt-24 pb-16 md:pt-32 md:pb-24"
+      className="relative overflow-hidden bg-brand pt-8 pb-16 md:pt-12 md:pb-24"
       aria-labelledby="hero-heading"
     >
       {/* Decorative grid */}
@@ -74,10 +79,12 @@ export function Hero() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-14">
           {/* ── Copy + capture ── */}
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+            {/* md and up only: on a phone the brand band's trust line says it, and its room
+                keeps the form on the first screen. */}
             <motion.span
               variants={fadeUp}
               custom={0}
-              className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-amber-200 backdrop-blur"
+              className="hidden items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-amber-200 backdrop-blur md:inline-flex"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
               Xưởng sản xuất tại Cần Thơ từ {SITE.foundedYear}
@@ -87,7 +94,7 @@ export function Hero() {
               variants={fadeUp}
               custom={1}
               id="hero-heading"
-              className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl md:leading-[1.05]"
+              className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mt-6 md:text-5xl md:leading-[1.05]"
             >
               Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
@@ -105,12 +112,15 @@ export function Hero() {
 
             {/* Primary capture — above the fold, two fields */}
             <motion.div variants={fadeUp} custom={3} className="mt-7">
+              {/* The ad pages' offer (Hughie, 14/11/2026): the catalog arrives at once, and
+                  Hughie sends the total for their door himself within 30 minutes in working
+                  hours. */}
               <p className="mb-2 text-sm font-semibold text-white">
-                Ghi số Zalo để nhận báo giá ngay lập tức:
+                Ghi số Zalo, 30 phút có giá trọn gói cho cửa nhà mình:
               </p>
-              <LeadForm source="Hero trang chủ" tone="dark" />
+              <LeadForm source="Hero trang chủ" tone="dark" submitLabel="Nhận giá trọn gói" />
               <p className="mt-2 text-sm text-white/55">
-                Hoặc gọi thẳng {primaryHotline} — miễn phí tư vấn, không ép chốt.
+                Nghe máy {SITE.phoneHours}. Hoặc gọi thẳng {primaryHotline} — miễn phí tư vấn, không ép chốt.
               </p>
             </motion.div>
 
@@ -221,5 +231,6 @@ export function Hero() {
         </motion.nav>
       </div>
     </section>
+    </>
   );
 }

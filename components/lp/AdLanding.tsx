@@ -2,12 +2,13 @@ import Image from "next/image";
 import { ChevronDown, Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import { H2 } from "@/components/bang-gia/parts";
 import { LeadForm } from "@/components/LeadForm";
-import { Logo } from "@/components/Logo";
+import { BrandBar } from "@/components/lp/BrandBar";
 import { LpStickyBar } from "@/components/lp/LpStickyBar";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Checks, ProofLine, Stars } from "@/components/lp/Proof";
 import { QuoteButton } from "@/components/lp/QuoteSheet";
-import type { AdLandingPage, LpPhoto } from "@/lib/lp-data";
+import { ShopStory } from "@/components/lp/ShopStory";
+import { type AdLandingPage, type LpPhoto } from "@/lib/lp-data";
 import type { Review } from "@/lib/reviews";
 import { GOOGLE_RATING, GOOGLE_REVIEWS_URL } from "@/lib/reviews";
 import { SITE, STATS, ZALO_URL } from "@/lib/site-data";
@@ -20,11 +21,13 @@ import { cn } from "@/lib/utils";
  *
  * Most of the effort goes above the fold, because that is the only part every visitor
  * sees. It carries Hormozi's Value Equation, one element per lever:
- *  - perceived likelihood: the Google rating and the job count before the headline;
- *  - dream outcome + time delay: the H1 is the search term, then the result and how long
- *    it takes ("Biết Giá Trước, Lắp Tại Nhà 3–5 Giờ");
- *  - effort: one sentence on what the visitor no longer has to do, and a one-field form
- *    that names the wait ("nhận báo giá trong 1–2 phút");
+ *  - perceived likelihood: the brand bar above the hero (BrandBar: the logo at a readable size,
+ *    "Hơn 20 năm được tin tưởng khắp miền Tây", the Google rating);
+ *  - dream outcome + risk: the H1 is the search term, then the page's promise (14/11/2026,
+ *    Enki/htp/ads/lp-offer-2026-11-14.md §3: "Lắp Xong, Chạy Thử Mới Trả Tiền" on the core
+ *    install pages, "Thợ Đến Trong Ngày, Sửa Xong Mới Trả Tiền" on sửa cửa cuốn);
+ *  - effort + time delay: one sentence on what the visitor no longer has to do, and a
+ *    one-field form that names the wait ("30 phút có giá trọn gói cho cửa nhà mình");
  *  - risk: the guarantees ticked directly under the button, every time it appears.
  *
  * One ask, repeated. Install pages: the Zalo-number form (hero card, bottom bar once it
@@ -36,10 +39,12 @@ import { cn } from "@/lib/utils";
  * the point on their own, for the visitor who reads only headings.
  *
  * No price table (Hughie, 13/11): the hero's teaser keeps one "từ" price and the full list
- * goes out by Zalo from the form. The header, with its call button, is sticky.
+ * goes out by Zalo from the form. A call button is on screen the whole way down: in the
+ * brand bar, then in CompactBar once the brand bar scrolls away.
  *
- * Order: sticky logo + call header → hero → proof wall → 3 ĐÚNG → 3 steps → FAQ → final
- * ask + showroom → NAP. No site menu, no footer link farm,
+ * Order: brand bar (logo, trust line, Google score, call) → hero → proof wall → the shop
+ * and its sign → 3 ĐÚNG →
+ * 3 steps → FAQ → final ask + showroom → NAP. No site menu, no footer link farm,
  * no map iframe, no floating rail: every link that isn't a way to reach the shop is a
  * paid click leaving.
  *
@@ -125,58 +130,11 @@ function CtaRow({ page, track }: { page: AdLandingPage; track: string }) {
   );
 }
 
-function TopBar() {
-  // Logo and phone, nothing else: the logo links nowhere. White, because the logo is
-  // drawn on white (brown and gold) and turns muddy on the navy. Sticky (Hughie, 13/11):
-  // the call button stays on screen the whole way down, on every page and every width,
-  // whatever the bottom bar is doing.
-  return (
-    <header
-      className="sticky top-0 z-30 border-b border-brand/10 bg-white/95 backdrop-blur"
-      data-track="lp_topbar"
-    >
-      <div className="container flex h-16 items-center justify-between gap-3">
-        <Logo height={52} />
-        <a
-          href={TEL}
-          className="inline-flex h-11 shrink-0 items-center gap-2 rounded-full bg-amber-400 px-4 text-sm font-bold text-brand transition-colors hover:bg-amber-300"
-          aria-label={`Gọi ${HOTLINE}`}
-        >
-          <Phone className="h-4 w-4" aria-hidden />
-          {HOTLINE}
-        </a>
-      </div>
-    </header>
-  );
-}
-
 function HoursLine({ className }: { className?: string }) {
   return (
     <p className={cn("inline-flex items-center gap-1.5 text-sm text-white/60", className)}>
       <Clock className="h-4 w-4 shrink-0" aria-hidden />
-      Nghe máy {SITE.workingHours}
-    </p>
-  );
-}
-
-/**
- * Third-party proof before the headline: the visitor's first glance lands on a Google
- * score and a job count, not on a claim. Plain text, not a link, so it never sends the
- * paid click off to Maps.
- */
-function ProofChip() {
-  return (
-    <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/75">
-      <span className="inline-flex items-center gap-2">
-        <Stars className="h-3.5 w-3.5" />
-        <span>
-          <strong className="font-semibold text-white">{GOOGLE_RATING.score}</strong> · {GOOGLE_RATING.count} đánh giá
-          Google
-        </span>
-      </span>
-      <span>
-        {JOBS} công trình từ {SITE.foundedYear}
-      </span>
+      Nghe máy {SITE.phoneHours}
     </p>
   );
 }
@@ -211,15 +169,15 @@ function Hero({ page }: { page: AdLandingPage }) {
       {/* Phones: proof, headline, price, the ask with its guarantees, then the photo, so a
           real door is the first thing the first scroll shows. Desktop: the text column on
           the left, the photo on the right. */}
-      <div className="container grid pb-10 pt-4 md:pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-x-14 lg:pb-16">
+      <div className="container grid pb-10 pt-5 md:pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-x-14 lg:pb-16">
         <div>
-          <ProofChip />
-          {/* Keyword on its own line (message match with the search, the ad and the
-              sitelink), then the outcome and how long it takes. "Cần Thơ" never splits.
-              30px on phones keeps the outcome to two lines, so the ask fits the first screen. */}
+          {/* Who the shop is sits in the brand bar above, so the hero opens on the headline.
+              Keyword on its own line (message match with the search, the ad and the
+              sitelink), then the promise. "Cần Thơ" never splits. 30px on phones keeps the
+              promise to two lines, so the ask fits the first screen. */}
           <h1
             id="lp-title"
-            className="mt-3 text-balance text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
+            className="text-balance text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
           >
             {/* Plain wrapping here, not balance: "Sửa Cửa Cuốn / Cần Thơ", not "Sửa Cửa / Cuốn Cần Thơ". */}
             <span className="block text-wrap">
@@ -462,8 +420,12 @@ function Closing({ page }: { page: AdLandingPage }) {
           {page.form ? (
             // The same ask as the top of the page, so nobody scrolls 6,000px back up for it.
             <div className="mt-6 sm:max-w-md" data-track="lp_closing">
-              <LeadForm source={`lp_${page.slug}`} tone="dark" submitLabel={page.form.submitLabel} />
-              <Checks items={page.checks} tone="dark" className="mt-4" />
+              <LeadForm
+                source={`lp_${page.slug}`}
+                tone="dark"
+                submitLabel={page.form.submitLabel}
+                belowButton={<Checks items={page.checks} tone="dark" className="mt-4" />}
+              />
               <ProofLine proof={page.proof} tone="dark" className="mt-5 border-t border-white/10 pt-4" />
               <HoursLine className="mt-3" />
             </div>
@@ -515,7 +477,7 @@ function MiniFooter() {
     <footer className="border-t border-white/10 bg-brand-800 py-6 text-xs text-white/60">
       <div className="container flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          {SITE.legalName} · {ADDRESS}
+          {SITE.legalName} · {ADDRESS} · Phục vụ {SITE.serviceArea}
         </p>
         <p className="flex flex-wrap gap-x-3 gap-y-1">
           {SITE.hotlines.map((h) => (
@@ -535,12 +497,13 @@ function MiniFooter() {
 export function AdLanding({ page }: { page: AdLandingPage }) {
   return (
     <div className="bg-white text-brand">
-      <TopBar />
+      <BrandBar />
       <main id="main">
         <Hero page={page} />
         {/* Proof first: it is what makes every promise below believable. No price table
             (Hughie, 13/11): the hero's "từ" price is the only figure on the page. */}
         <ProofWall page={page} />
+        <ShopStory />
         <Promises page={page} />
         <Steps page={page} />
         <Faq page={page} />

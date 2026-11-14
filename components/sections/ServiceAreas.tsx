@@ -35,11 +35,12 @@ export function ServiceAreas() {
             id="khu-vuc-heading"
             className="mt-4 text-balance text-3xl font-semibold tracking-tight text-brand md:text-4xl"
           >
-            Thợ Cần Thơ, làm cho người Cần Thơ
+            Xưởng ở Cần Thơ, lắp khắp miền Tây
           </h2>
+          {/* Service area set by Hughie, 14/11/2026. Measuring and travel are free in Cần Thơ only. */}
           <p className="mt-4 text-base text-brand/70">
-            Xưởng đặt tại {SITE.address.split(",").slice(1).join(",").trim()} —
-            đi tới công trình nào trong thành phố cũng nhanh.
+            Xưởng đặt tại {SITE.address.split(",").slice(1, 3).join(",").trim()}. Nhận lắp{" "}
+            {SITE.serviceArea}; trong Cần Thơ đo và báo giá miễn phí.
           </p>
         </div>
 

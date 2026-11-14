@@ -44,17 +44,20 @@ const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  */
 async function expectValueEquation(page: Page, form: boolean) {
   const hero = page.locator('section[aria-labelledby="lp-title"]');
-  // Perceived likelihood above the fold: the Google score and the job count before the H1.
-  const chip = hero.locator("p").first();
-  await expect(chip).toContainText("đánh giá Google");
-  await expect(chip).toContainText("500+ công trình");
-  const chipBox = (await chip.boundingBox())!;
+  // Perceived likelihood before the H1 (14/11/2026): the brand band, with the logo at a size
+  // where the name reads, the trust line and the Google score.
+  const brand = page.locator("[data-brand-bar]");
+  await expect(brand.locator('img[src*="logo-htp-door"]')).toBeVisible();
+  await expect(brand).toContainText("Hơn 20 năm được tin tưởng khắp miền Tây");
+  await expect(brand).toContainText("đánh giá Google");
+  const brandBox = (await brand.boundingBox())!;
   const h1Box = (await page.locator("h1").boundingBox())!;
-  expect(chipBox.y, "the proof line sits above the headline").toBeLessThan(h1Box.y);
+  expect(brandBox.y + brandBox.height, "the brand band sits above the headline").toBeLessThanOrEqual(h1Box.y);
 
-  // Risk reversal directly under the ask, starting on the first screen.
+  // Risk reversal directly under the ask, starting on the first screen. Install pages: 3 ĐÚNG
+  // (pay-after-install is in the H1 or the sub-line). Repair pages: the quote before any work.
   const checks = form ? page.locator("#nhan-bao-gia [data-checks]") : hero.locator("[data-checks]");
-  await expect(checks).toContainText(form ? "lắp xong mới thanh toán" : "Sửa xong mới thanh toán");
+  await expect(checks).toContainText(form ? "Giá chốt không phát sinh" : "Báo giá trước khi sửa");
   const checksBox = (await checks.boundingBox())!;
   expect(checksBox.y, "the guarantees start on the first screen").toBeLessThan(PHONE.height);
 
@@ -68,6 +71,14 @@ async function expectValueEquation(page: Page, form: boolean) {
   await expect(page.locator("#lp-cong-trinh")).toHaveText(/^“.+”$/);
   await expect(page.locator("main")).not.toContainText("Khách ở Cần Thơ nói gì");
   await expect(page.locator("main")).not.toContainText("Câu hỏi khách hay hỏi");
+
+  // Who is behind the page, straight after the proof wall: the shop since 2005, where it
+  // started, and a customer's word that it is known in Cần Thơ.
+  await expect(page.locator("main > section").nth(2)).toHaveAttribute("aria-labelledby", "lp-cua-hang");
+  const shop = page.locator('section[aria-labelledby="lp-cua-hang"]');
+  await expect(shop.locator("h2")).toContainText("từ 2005");
+  await expect(shop).toContainText("105 Đường 3/2");
+  await expect(shop.locator("blockquote")).toContainText("có tiếng ở Cần Thơ");
 }
 
 test.describe("Google Ads landing pages", () => {
@@ -91,8 +102,8 @@ test.describe("Google Ads landing pages", () => {
       // (checked below) and the hero's call/Zalo row may sit just under it. The sticky bar
       // stays out of the way while the hero's ask is visible.
       const firstScreen = p.form
-        ? ['[data-track="lp_topbar"] a[href^="tel:"]']
-        : ['[data-track="lp_topbar"] a[href^="tel:"]', '[data-track="lp_hero"] a[href^="tel:"]', '[data-track="lp_hero"] a[href*="zalo.me"]'];
+        ? ['[data-brand-bar] a[href^="tel:"]']
+        : ['[data-brand-bar] a[href^="tel:"]', '[data-track="lp_hero"] a[href^="tel:"]', '[data-track="lp_hero"] a[href*="zalo.me"]'];
       for (const selector of firstScreen) {
         const box = await page.locator(selector).boundingBox();
         expect(box, selector).not.toBeNull();
@@ -129,8 +140,12 @@ test.describe("Google Ads landing pages", () => {
       }
       await expect(page.locator("main")).toContainText(p.price);
 
-      // Form copy is title + field + button only (Hughie, 12/11/2026).
-      await expect(page.locator("main")).not.toContainText("Gửi số là đồng ý");
+      // Form copy is title + field + button (Hughie, 12/11/2026), plus, since 14/11/2026, the
+      // one-line privacy notice under the button (Hughie). Nothing else.
+      if (p.form) {
+        await expect(page.locator("#nhan-bao-gia")).toContainText("Gửi số là đồng ý nhận báo giá qua Zalo");
+        await expect(page.locator('#nhan-bao-gia a[href="/chinh-sach-bao-mat"]')).toHaveCount(1);
+      }
       await expect(page.locator("main")).not.toContainText("Catalog và bảng giá gửi thẳng vào Zalo");
 
       // Logo-only header with the HTP Door logo (12/11/2026), and no floating rail.
@@ -201,13 +216,17 @@ test.describe("Google Ads landing pages", () => {
     }
   });
 
-  test("no warranty year counts on ad pages (CLAUDE.md hard rule)", async ({ page }) => {
+  // CLAUDE.md hard rule, as Hughie changed it on 14/11/2026: the only year counts allowed are
+  // his cửa cuốn terms, and only on cửa cuốn pages.
+  const CUON_TERMS = "Nan cửa bảo hành 5 năm; motor và phụ kiện bảo hành 1 năm";
+  test("warranty year counts only as Hughie set them, only on cửa cuốn pages (CLAUDE.md hard rule)", async ({ page }) => {
     for (const p of ALL_AD_PAGES) {
       await page.goto(p.path);
       // Open every FAQ so collapsed answers are in innerText too.
       await page.locator("details").evaluateAll((els) => els.forEach((d) => d.setAttribute("open", "")));
       const text = await page.locator("main").innerText();
-      expect(text).not.toMatch(/b[ảa]o h[àa]nh[^.\n]{0,120}?\b\d{1,2}\s*n[ăa]m/iu);
+      if (!p.path.includes("cua-cuon")) expect(text, p.path).not.toContain(CUON_TERMS);
+      expect(text.split(CUON_TERMS).join(""), p.path).not.toMatch(/b[ảa]o h[àa]nh[^.\n]{0,120}?\b\d{1,2}\s*n[ăa]m/iu);
     }
   });
 
@@ -220,7 +239,7 @@ test.describe("Google Ads landing pages", () => {
 
     await page.goto("/lp/cua-cuon-can-tho?utm_source=google&utm_medium=cpc&utm_campaign=cua-cuon");
     const block = page.locator("#nhan-bao-gia");
-    await expect(block).toContainText("Ghi số Zalo, nhận báo giá trong 1–2 phút");
+    await expect(block).toContainText("Ghi số Zalo, 30 phút có giá trọn gói cho cửa nhà mình");
     await block.getByPlaceholder("Số Zalo của anh/chị").fill(phone);
     // The server drops submissions made faster than a human could type.
     await page.waitForTimeout(3200);
@@ -254,19 +273,19 @@ test.describe("Google Ads landing pages — desktop", () => {
   test("no floating rail, and the mid-page rows repeat the page's ask", async ({ page }) => {
     await page.goto("/lp/cua-cuon-can-tho");
     await expect(page.locator('[data-track="floating_rail"]')).toHaveCount(0);
-    await expect(page.locator('[data-track="lp_steps"]').getByRole("button", { name: "Nhận báo giá ngay" })).toBeVisible();
+    await expect(page.locator('[data-track="lp_steps"]').getByRole("button", { name: "Nhận giá trọn gói" })).toBeVisible();
     await page.goto("/lp/sua-cua-cuon-can-tho");
     await expect(page.locator('[data-track="lp_steps"] a[href^="tel:"]')).toBeVisible();
     await expect(page.locator('[data-track="lp_steps"] button')).toHaveCount(0);
   });
 
-  test("'Nhận báo giá ngay' mid-page opens the Zalo form in place, field focused", async ({ page }) => {
+  test("'Nhận giá trọn gói' mid-page opens the Zalo form in place, field focused", async ({ page }) => {
     await page.goto("/lp/cua-keo-can-tho");
-    await page.locator('[data-track="lp_steps"]').getByRole("button", { name: "Nhận báo giá ngay" }).click();
+    await page.locator('[data-track="lp_steps"]').getByRole("button", { name: "Nhận giá trọn gói" }).click();
     const sheet = page.getByRole("dialog");
     await expect(sheet).toBeVisible();
-    await expect(sheet).toContainText("Ghi số Zalo, nhận báo giá trong 1–2 phút");
-    await expect(sheet).toContainText("lắp xong mới thanh toán");
+    await expect(sheet).toContainText("Ghi số Zalo, 30 phút có giá trọn gói cho cửa nhà mình");
+    await expect(sheet).toContainText("Giá chốt không phát sinh");
     await expect(sheet).toContainText("đánh giá Google");
     await expect(sheet.getByPlaceholder("Số Zalo của anh/chị")).toBeFocused();
     await expect(sheet).toBeInViewport({ ratio: 1 });
@@ -372,7 +391,7 @@ test.describe("Gated prices", () => {
   test("the ad page header, with its call button, stays on screen to the bottom", async ({ page }) => {
     await page.goto("/lp/cua-cuon-can-tho");
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    const call = page.locator('[data-track="lp_topbar"] a[href^="tel:"]');
+    const call = page.locator('[data-compact-bar] a[href^="tel:"]');
     await expect(call).toBeInViewport();
     expect((await call.boundingBox())!.y).toBeLessThan(80);
   });
@@ -438,7 +457,8 @@ test.describe("Site landing pages", () => {
       await expect(hero.locator('[data-track="hero_form"] form')).toHaveCount(1);
       await expect(hero).toContainText("Ghi số Zalo để nhận báo giá ngay lập tức");
       await expect(page.locator('img[src*="logo-htp-door"]').first()).toBeVisible();
-      await expect(page.locator("body")).not.toContainText("Gửi số là đồng ý");
+      // The one-line privacy notice is back under every Zalo form (Hughie, 14/11/2026).
+      await expect(hero).toContainText("Gửi số là đồng ý nhận báo giá qua Zalo");
     });
   }
 
@@ -469,5 +489,34 @@ test.describe("Site landing pages", () => {
     const hero = page.locator("section", { has: page.locator("h1") }).first();
     await expect(hero.locator("form")).toHaveCount(0);
     await expect(hero.locator('a[href^="tel:"]').first()).toBeVisible();
+  });
+});
+
+// The homepage got the ad pages' brand band and shop section (Hughie, 14/11/2026).
+test.describe("Homepage brand band", () => {
+  test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
+
+  test("the big logo and trust line open the page; the navbar's own logo waits until they scroll away", async ({ page }) => {
+    await page.goto("/");
+    const brand = page.locator("[data-brand-bar]");
+    await expect(brand.locator('img[src*="logo-htp-door"]')).toBeVisible();
+    await expect(brand).toContainText("Hơn 20 năm được tin tưởng khắp miền Tây");
+    await expect(brand).toContainText("đánh giá Google");
+    const navLogo = page.getByRole("link", { name: "Về trang chủ" });
+    await expect(navLogo).toBeHidden();
+
+    // The hero's Zalo field still starts on the first screen, with the 30-minute promise.
+    await expect(page.locator("#trang-chu")).toContainText("30 phút có giá trọn gói");
+    const field = (await page.locator('#trang-chu input[type="tel"]').boundingBox())!;
+    expect(field.y + field.height, "the Zalo field is on the first screen").toBeLessThanOrEqual(PHONE.height);
+
+    await page.locator("#gioi-thieu").scrollIntoViewIfNeeded();
+    await expect(navLogo).toBeVisible();
+
+    // The storefront sign, without repeating About's 2005 story.
+    const shop = page.locator('section[aria-labelledby="lp-cua-hang"]');
+    await expect(shop.locator('img[src*="cua-hang-bang-hieu"]')).toHaveCount(1);
+    await expect(shop).toContainText("miền Tây");
+    await expect(shop).not.toContainText("105 Đường 3/2");
   });
 });

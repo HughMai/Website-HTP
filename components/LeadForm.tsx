@@ -49,11 +49,15 @@ export function LeadForm({
   tone = "dark",
   className,
   submitLabel = "Nhận báo giá",
+  belowButton,
 }: {
   source: string;
   tone?: "dark" | "light";
   className?: string;
   submitLabel?: string;
+  /** Directly under the button, before the consent line: the guarantee ticks on the ad
+   *  pages, so the risk reversal sits next to the ask and the small print comes last. */
+  belowButton?: React.ReactNode;
 }) {
   const { status, errorMessage, isSubmitting, submit, dismissError, honeypotRef, turnstile } =
     useLeadSubmit(source);
@@ -133,8 +137,22 @@ export function LeadForm({
           {submitLabel}
         </Button>
       </div>
-      {/* The consent sentence under the button was removed at Hughie's request
-          (12/11/2026); the privacy policy stays linked from every footer. */}
+      {belowButton}
+      {/* Consent and the privacy policy, back in one short line (Hughie, 14/11/2026; the
+          longer sentence was removed on 12/11). A phone number is personal data, so the form
+          says what it is for. New tab, so an ad page stays open. 14px like all running copy on a
+          phone (e2e/mobile.spec.ts). */}
+      <p className={cn("mt-2 text-sm leading-snug", dark ? "text-white/60" : "text-slate-500")}>
+        Gửi số là đồng ý nhận báo giá qua Zalo ·{" "}
+        <a
+          href="/chinh-sach-bao-mat"
+          target="_blank"
+          rel="noopener"
+          className={cn("underline underline-offset-2", dark ? "hover:text-white" : "hover:text-brand")}
+        >
+          Chính sách bảo mật
+        </a>
+      </p>
       <LeadTurnstile turnstile={turnstile} className="mt-2" />
     </form>
   );

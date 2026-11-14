@@ -36,7 +36,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 | Experience | **21+ năm** (as of 2026) |
 | Projects | 500+ công trình |
 | Customers | 1000+ khách hàng |
-| Warranty | **Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất** (ONLY phrasing — never quote year counts) |
+| Warranty | **Nan cửa (cửa cuốn) 5 năm · motor 1 năm · phụ kiện 1 năm**, from handover (Hughie, 14/11/2026). Everything else: **Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất** — see locked decision #1 |
 | Hotlines | 0963 021 639 (chính, từ 11/11/2026) · 0913 574 077 |
 | Email | hungthanhphatdoor@gmail.com |
 
@@ -46,7 +46,7 @@ Staging uses `https://website-htp.vercel.app` — set per-environment in Vercel 
 
 ## Locked Decisions (do not change without user approval)
 
-1. **Warranty phrasing (HARD RULE — NEVER VIOLATE)**: the ONLY allowed phrase is `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. **NEVER** write "5–10 năm", "5-10 năm", "10 năm", "5 năm", "trọn đời", or any other specific year count. **NEVER** invent a number. If a year is required (e.g., schema fields), ask the user — do not guess. Applies to: website copy, JSON-LD schema, GBP descriptions, ads, social posts, emails — everywhere.
+1. **Warranty terms (HARD RULE — NEVER VIOLATE)**: the only numbers allowed are the ones Hughie set on 14/11/2026: **nan cửa (cửa cuốn) 5 năm, motor 1 năm, phụ kiện 1 năm**, counted from handover. For every other part (khung nhôm, kính, thân cửa kéo…) the ONLY allowed phrase is still `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. **NEVER** write "5–10 năm", "10 năm", "trọn đời" or any other count, never stretch these terms to another part, and **NEVER** invent a number. If a term is needed that isn't listed here (e.g., a schema field), ask the user — do not guess. Applies to: website copy, JSON-LD schema, GBP descriptions, ads, social posts, emails — everywhere.
 2. **Founding year**: `2005` everywhere — never 2008, never 2017.
 3. **Experience count**: `21+ năm` (2026) — update annually.
 4. **Roman numeral**: `Est. MMV` (= 2005) if ever used again — the intro animation that carried it is deleted.
@@ -183,7 +183,7 @@ it puts a fixed time cost in front of the only section every visitor sees.
 | nên chọn cửa cuốn nhôm hay thép | `/blog/nhom-duc-vs-thep-tinh-dien` ✓ |
 | cách bảo trì cửa cuốn | `/blog/cach-bao-tri-cua-cuon` ✓ |
 | motor cửa cuốn nào tốt | `/blog/motor-cua-cuon-tot-nhat` ✓ |
-| bảo hành cửa cuốn bao lâu | FAQ on product pages — answer with manufacturer-standard phrasing (NEVER year counts) |
+| bảo hành cửa cuốn bao lâu | FAQ on product pages — answer with the 14/11/2026 terms only (nan cửa 5 năm, motor 1 năm, phụ kiện 1 năm; everything else manufacturer-standard phrasing), per Locked Decision #1 |
 | cửa cuốn tấm liền là gì | Definition block needed |
 
 ---
@@ -237,7 +237,7 @@ Always check **390×844** alongside desktop — mobile is the majority of this s
 
 ### Skill guardrails for this repo
 
-- **Warranty phrasing is a HARD RULE** (Locked Decisions #1). Any skill that writes or rewrites copy — `/design-review` fix loops, `/design-html`, content skills — must never emit a year count. If a fix would touch warranty text, stop and ask.
+- **Warranty phrasing is a HARD RULE** (Locked Decisions #1). Any skill that writes or rewrites copy — `/design-review` fix loops, `/design-html`, content skills — must never emit a year count other than the three Hughie set on 14/11/2026 (nan cửa 5 năm, motor 1 năm, phụ kiện 1 năm, cửa cuốn only). If a fix would touch warranty text, stop and ask.
 - **Brand constants come from `lib/site-data.ts`.** Skills that patch components must read from `SITE.*`, never hardcode.
 - `/design-review` operates on the rendered site, not source. Calibrate findings against `DESIGN.md` in this repo root.
 - `/ship` pushes `main`, which auto-deploys to Vercel production. There is no manual gate — treat every ship as a live deploy.

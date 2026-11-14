@@ -108,7 +108,7 @@ Motion is restrained and functional. No decorative parallax, no scroll-jacking.
 
 ## Hard constraints (from `CLAUDE.md` — these outrank taste)
 
-1. **Warranty phrasing.** Only `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. Never a year count, anywhere — including any copy a design fix touches. If a fix needs warranty text, stop and ask.
+1. **Warranty terms.** Only the terms in CLAUDE.md locked decision #1 (nan cửa cuốn 5 năm, motor 1 năm, phụ kiện 1 năm; set 14/11/2026) or the phrase `"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất"`. Never any other count, anywhere — including any copy a design fix touches. If a fix needs warranty text beyond that, stop and ask.
 2. **Brand constants** come from `lib/site-data.ts` (`SITE.*`). Never hardcode brand, hotlines, address, email, founding year in a component.
 2a. **Logo** (from 12/11/2026): the HTP DOOR wordmark (master copy: `Enki/htp/brand/logo-htp-door.png`). Render it with `components/Logo.tsx`, never `next/image`: it serves pre-sized WebP files (`public/logo-htp-door-{160,320,480}.webp`, Lanczos + light sharpen, q92), because the optimizer's re-encode made it blurry. It is drawn on white in brown and gold, so it sits on a white surface or a white tile, never directly on the navy. Used in the Navbar, Footer, `/lp/*` header and the JSON-LD logo (`public/logo-htp-door.png`). Still the old mark: the favicon (`logo.svg`, `favicon-*.png`), which needs a square crop of the door glyph.
 3. **`id="page-root"`** is now an inert wrapper on the homepage root. Nothing reads it — never gate its opacity or visibility.

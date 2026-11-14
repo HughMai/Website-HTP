@@ -53,8 +53,14 @@ export function QuoteButton({
         aria-describedby={undefined}
       >
         <SheetTitle className="pr-10 text-xl leading-snug tracking-tight">{form.title}</SheetTitle>
-        <LeadForm source={`lp_${slug}`} tone="light" submitLabel={form.submitLabel} className="mt-3" />
-        {checks && <Checks items={checks} tone="light" className="mt-3" />}
+        {form.note && <p className="mt-1 text-sm text-slate-600">{form.note}</p>}
+        <LeadForm
+          source={`lp_${slug}`}
+          tone="light"
+          submitLabel={form.submitLabel}
+          className="mt-3"
+          belowButton={checks && <Checks items={checks} tone="light" className="mt-3" />}
+        />
         <ProofLine proof={proof} tone="light" className="mt-4 border-t border-brand/10 pt-3" />
       </SheetContent>
     </Sheet>

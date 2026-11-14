@@ -28,12 +28,14 @@ const QuoteAndContact = dynamic(() =>
   import("@/components/sections/QuoteAndContact").then((m) => m.QuoteAndContact)
 );
 const Footer = dynamic(() => import("@/components/sections/Footer").then((m) => m.Footer));
+// The ad pages' shop section with the storefront sign (Hughie, 14/11/2026).
+const ShopStory = dynamic(() => import("@/components/lp/ShopStory").then((m) => m.ShopStory));
 
 export default function HomePage() {
   return (
     <>
       <div id="page-root">
-      <Navbar />
+      <Navbar overBrandBand />
       <main id="main">
         <Hero />
         <About />
@@ -42,6 +44,7 @@ export default function HomePage() {
         <Process />
         <Gallery projectCount={CONG_TRINH.length} />
         <Testimonials />
+        <ShopStory story={false} />
         <CtaBand
           title="Xem xong rồi — giờ cần con số cụ thể?"
           subtitle="Để lại số điện thoại — thợ khảo sát gọi lại và báo giá chính xác theo công trình của bạn."
