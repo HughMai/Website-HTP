@@ -293,7 +293,7 @@ export default function BaoGiaCuaCuonCanTho() {
           source="Báo giá cửa cuốn"
           photos={[
             { src: "/cong-trinh/p22-cc-kem-xe-hong/01.jpg", alt: "Cửa cuốn màu kem Hưng Thành Phát lắp cho nhà phố" },
-            { src: "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg", alt: "Cửa cuốn khổ lớn Hưng Thành Phát lắp cho nhà xưởng" },
+            { src: "/cong-trinh/p40-xuong-cc-xanh-toys/02.jpg", alt: "Hai cửa cuốn xanh Hưng Thành Phát lắp cho nhà xưởng" },
             { src: "/cong-trinh/p24-cc-xam-duc-lo/01.jpg", alt: "Cửa cuốn nan xám có lỗ thoáng do Hưng Thành Phát lắp" },
           ]}
         />

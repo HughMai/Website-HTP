@@ -98,7 +98,7 @@ export function Hero() {
             >
               Cửa Cuốn, Nhôm Kính, Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
-                Trả Đủ Vào Ngày Lắp Đặt
+                Uy Tín, Chất Lượng Hàng Đầu
               </span>
             </motion.h1>
 

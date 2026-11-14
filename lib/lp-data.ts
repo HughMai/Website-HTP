@@ -585,7 +585,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     ),
     ...INSTALL,
     photos: {
-      title: "Cửa cuốn bên em đã lắp",
+      title: "Cửa cuốn bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p29-shop-vang-khai-truong-28-1", "Cửa cuốn shop — ngày khai trương 28/1/2026"),
         job("p01-cc-nan-bac", "Cửa cuốn nan nhôm bạc"),
@@ -609,7 +609,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
     ...INSTALL,
     photos: {
-      title: "Cửa cuốn khe thoáng bên em đã lắp",
+      title: "Cửa cuốn khe thoáng bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p24-cc-xam-duc-lo", "Nan khe thoáng màu xám"),
         job("p28-cc-kem-duc-lo-nt", "Nan khe thoáng màu kem"),
@@ -648,9 +648,9 @@ const SITELINK_PAGES: AdLandingPage[] = [
     hero: job("p31-xuong-cc-xanh", "Cửa cuốn xanh nhà xưởng", "Cửa cuốn tole xanh khổ lớn lắp cho nhà xưởng"),
     ...INSTALL,
     photos: {
-      title: "Cửa cuốn nhà xưởng bên em đã lắp",
+      title: "Cửa cuốn nhà xưởng bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
-        job("p67-xuong-cc-xanh-lon", "Hai cửa cuốn xanh khổ lớn"),
+        jobImage("p31-xuong-cc-xanh", "03.jpg", "Cửa cuốn nhà xưởng khổ lớn — nhìn từ trong"),
         job("p12-xuong-cc-trang-gach", "Nhà xưởng cửa cuốn trắng"),
         jobImage("p14-xuong-cc-trang-xe452", "02.jpg", "Nhà xưởng — thợ đang lắp"),
         job("p40-xuong-cc-xanh-toys", "Nhà xưởng cửa cuốn xanh"),
@@ -696,7 +696,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
     ...INSTALL,
     photos: {
-      title: "Cửa kéo bên em đã lắp",
+      title: "Cửa kéo bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p55-keo-trang-chau-cay", "Cửa kéo trắng nhà phố"),
         job("p39-shop-keo-kem-oto", "Cửa kéo kem mặt tiền shop"),
@@ -722,7 +722,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     hero: job("p56-keo-xanh-via-he", "Cửa kéo thép mặt tiền", "Hai bộ cửa kéo thép lắp cho mặt tiền nhà phố"),
     ...INSTALL,
     photos: {
-      title: "Cửa kéo thép bên em đã lắp",
+      title: "Cửa kéo thép bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p06-shop-vang-0966653334", "Cửa kéo vàng — mặt tiền tiệm"),
         job("p54-nha-xanh-keo-xanh", "Cửa kéo xanh — nhà phố"),
@@ -764,7 +764,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     ),
     ...INSTALL,
     photos: {
-      title: "Lan can kính bên em đã lắp",
+      title: "Lan can kính bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         jobImage("nk03-lan-can-cmt8-binh-thuy", "02.jpg", "Cầu thang kính — Bùi Hữu Nghĩa, Bình Thủy · 13/01/2026"),
         job("nk47-lan-can-thang-kinh", "Lan can kính cầu thang, tay vịn gỗ"),
@@ -814,7 +814,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
     ...INSTALL,
     photos: {
-      title: "Cửa nhôm kính bên em đã lắp",
+      title: "Cửa nhôm kính bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("nk30-cua-4-canh-kinh", "Cửa đi nhôm kính 4 cánh"),
         job("nk42-cua-so-nhom-can", "Cửa sổ nhôm kính"),
@@ -976,7 +976,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     ),
     ...INSTALL,
     photos: {
-      title: "Cửa cuốn bên em đã lắp",
+      title: "Cửa cuốn bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p29-shop-vang-khai-truong-28-1", "Cửa cuốn shop — ngày khai trương 28/1/2026"),
         job("p24-cc-xam-duc-lo", "Cửa cuốn khe thoáng xám"),
@@ -1011,7 +1011,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
     ...INSTALL,
     photos: {
-      title: "Cửa kéo bên em đã lắp",
+      title: "Cửa kéo bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("p55-keo-trang-chau-cay", "Cửa kéo trắng nhà phố"),
         job("p39-shop-keo-kem-oto", "Cửa kéo kem mặt tiền shop"),
@@ -1047,7 +1047,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     hero: job("nk23-cua-nhom-kinh-doi-xam", "Cửa đi nhôm kính 2 cánh", "Cửa đi nhôm kính 2 cánh khung xám, tay nắm vàng"),
     ...INSTALL,
     photos: {
-      title: "Cửa nhôm kính bên em đã lắp",
+      title: "Cửa nhôm kính bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
       items: [
         job("nk05-nguyen-thi-tao-binh-thuy", "Cửa nhôm — Long Hòa, Bình Thủy · 28/10/2025"),
         job("nk06-duong-1b-cai-rang", "Cửa sổ nhôm — Hưng Thạnh, Cái Răng · 28/10/2025"),

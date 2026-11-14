@@ -700,12 +700,12 @@ export const CONG_TRINH: CongTrinh[] = [
   },
   {
     "slug": "p67-xuong-cc-xanh-lon",
-    "title": "Nhà xưởng cửa cuốn xanh lớn",
-    "category": "cua_cuon",
-    "categoryLabel": "Cửa cuốn",
+    "title": "Nhà xưởng cửa kéo xanh lớn",
+    "category": "cua_keo",
+    "categoryLabel": "Cửa kéo",
     "location": "",
     "date": "",
-    "description": "Công trình cửa cuốn do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0963 021 639 để được tư vấn và báo giá cho công trình của bạn.",
+    "description": "Công trình cửa kéo do Hưng Thành Phát thi công. Toàn bộ hình bên dưới được chụp thực tế tại công trình, không phải ảnh mẫu. Sản phẩm dùng vật tư chính hãng, lắp đặt và bảo hành tận nơi. Gọi 0963 021 639 để được tư vấn và báo giá cho công trình của bạn.",
     "cover": "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg",
     "images": [
       "/cong-trinh/p67-xuong-cc-xanh-lon/01.jpg"

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SITE } from "@/lib/site-data";
@@ -43,7 +44,9 @@ export function CompactBar() {
     >
       <div className="container flex h-16 items-center justify-between gap-3">
         <span className="flex min-w-0 items-center gap-4">
-          <Logo height={48} className="shrink-0" />
+          <Link href="/" aria-label="Về trang chủ Hưng Thành Phát Door" className="shrink-0">
+            <Logo height={48} />
+          </Link>
           <span className="hidden truncate text-base font-semibold text-brand md:block">{SITE.trustLine}</span>
         </span>
         <a

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { CompactBar } from "@/components/lp/CompactBar";
@@ -26,11 +27,14 @@ export function BrandBar() {
         <div className="container grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 py-3 md:flex md:gap-x-6 md:py-4">
           {/* 116px tall on a phone (~256px wide): the smallest size where the name line
               under "HT DOOR" stays legible. */}
-          <Logo
-            height={116}
-            sizes="(min-width: 1024px) 229px, (min-width: 768px) 194px, 256px"
-            className="h-[116px] w-auto md:h-[88px] lg:h-[104px]"
-          />
+          {/* The logo opens the main site (Hughie, 14/11/2026). */}
+          <Link href="/" aria-label="Về trang chủ Hưng Thành Phát Door" className="self-start rounded-md">
+            <Logo
+              height={116}
+              sizes="(min-width: 1024px) 229px, (min-width: 768px) 194px, 256px"
+              className="h-[116px] w-auto md:h-[88px] lg:h-[104px]"
+            />
+          </Link>
           <a
             href={TEL}
             aria-label={`Gọi ${HOTLINE}`}

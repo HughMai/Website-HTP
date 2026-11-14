@@ -116,7 +116,10 @@ test.describe("Google Ads landing pages", () => {
 
       // No site menu, no footer link groups, no map iframe — the only ways out are
       // calling, Zalo, the form, the Google reviews and directions.
-      await expect(page.locator('a[href="/san-pham"], a[href="/cong-trinh"], a[href="/"]')).toHaveCount(0);
+      await expect(page.locator('a[href="/san-pham"], a[href="/cong-trinh"]')).toHaveCount(0);
+      // The only way to the main site is the logo (Hughie, 14/11/2026).
+      await expect(page.locator('a[href="/"]:not([data-brand-bar] a):not([data-compact-bar] a)')).toHaveCount(0);
+      await expect(page.locator('[data-brand-bar] a[href="/"]')).toHaveCount(1);
       await expect(page.locator('iframe[src*="maps.google"]')).toHaveCount(0);
 
       if (p.form) {
@@ -333,7 +336,10 @@ test.describe("Google Ads sitelink pages", () => {
 
       // No site menu and no footer link groups: the footer's only links are the hotlines and
       // the privacy policy.
-      await expect(page.locator('a[href="/san-pham"], a[href="/cong-trinh"], a[href="/"]')).toHaveCount(0);
+      await expect(page.locator('a[href="/san-pham"], a[href="/cong-trinh"]')).toHaveCount(0);
+      // The only way to the main site is the logo (Hughie, 14/11/2026).
+      await expect(page.locator('a[href="/"]:not([data-brand-bar] a):not([data-compact-bar] a)')).toHaveCount(0);
+      await expect(page.locator('[data-brand-bar] a[href="/"]')).toHaveCount(1);
       await expect(page.locator("nav")).toHaveCount(0);
       const footerLinks = await page.locator("footer a").evaluateAll((as) => as.map((a) => a.getAttribute("href") ?? ""));
       expect(footerLinks.length).toBeGreaterThan(0);
