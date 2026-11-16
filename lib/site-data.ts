@@ -249,6 +249,9 @@ export const PRODUCT_CATEGORIES = [
       { name: "Cửa Cuốn Song Ngang, Mắt Võng", image: "" },
       { name: "Cửa Cuốn Inox SUS 304", image: "" },
       { name: "Cửa Cuốn Tole Công Nghệ Đài Loan", image: "" },
+      // Both priced in the 10/11/2026 catalog (p.3) and on /bao-gia-cua-cuon-can-tho.
+      { name: "Cửa Cuốn Công Nghệ Úc", image: "" },
+      { name: "Cửa Cuốn Tole Siêu Trường", image: "" },
       { name: "Cửa Trượt Trần", image: "" },
       { name: "Cửa Cuốn Đóng Đặc Biệt", image: "" },
     ],

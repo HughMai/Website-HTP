@@ -5,14 +5,21 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ProductCategoryRow } from "@/components/ProductCategoryRow";
+import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
+import { LP_FORM } from "@/lib/lp-data";
 import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
+// The lowest "từ" anchor on the page, read from the row itself so the snippet can't drift.
+const CUA_CUON = PRODUCT_CATEGORIES.find((c) => c.id === "cua-cuon")!;
+
 export const metadata: Metadata = {
   title: "Sản Phẩm Cửa",
-  description: `Toàn bộ dòng cửa Hưng Thành Phát thi công tại Cần Thơ: cửa cuốn, cửa nhôm kính, cửa kéo, motor & phụ kiện. Giá tham khảo theo m² — gọi ${SITE.hotlines[0]} để được khảo sát miễn phí.`,
+  // Since 13–14/11/2026: rows show only a "từ" price (the full list goes out by Zalo), HTP
+  // installs across miền Tây, and free measuring is Cần Thơ only, so no "khảo sát miễn phí".
+  description: `Cửa cuốn, cửa kéo, nhôm kính, lan can kính, motor & phụ kiện từ xưởng ở Cần Thơ, lắp khắp miền Tây. Cửa cuốn ${CUA_CUON.priceFrom}, chỉ cọc 30%, lắp xong mới trả tiền.`,
   alternates: { canonical: `${siteUrl}/san-pham` },
   openGraph: {
     type: "website",
@@ -20,7 +27,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/san-pham`,
     title: "Sản Phẩm Cửa — Hưng Thành Phát Door",
     description:
-      "Cửa cuốn, cửa nhôm kính, cửa kéo, motor & phụ kiện — thi công tại Cần Thơ.",
+      "Cửa cuốn, cửa kéo, nhôm kính, lan can kính, motor & phụ kiện — xưởng ở Cần Thơ, lắp khắp miền Tây.",
     siteName: "Hưng Thành Phát Door",
     images: [
       {
@@ -38,12 +45,12 @@ const SERVICES = [
   {
     href: "/lap-dat-cua-cuon-can-tho",
     label: "Lắp đặt cửa cuốn",
-    body: "Khảo sát, sản xuất theo số đo, lắp trọn gói.",
+    body: "Cắt theo số đo tại xưởng, lắp xong chạy thử mới thanh toán.",
   },
   {
     href: "/sua-chua-cua-cuon-can-tho",
     label: "Sửa chữa cửa cuốn",
-    body: "Cửa kẹt, motor lỗi, thay lá — thợ tới tận nơi.",
+    body: "Cửa kẹt, motor lỗi, thay lá — thợ đến tận nơi trong ngày ở Cần Thơ.",
   },
   {
     href: "/cua-cuon-nha-xuong-can-tho",
@@ -64,38 +71,39 @@ export default function SanPhamPage() {
     <>
       <Navbar />
       <main id="main">
-        {/* Hero */}
+        {/* Hero — the product pages' pattern (Zalo card under the intro), with the
+            14/11/2026 offer: the 30-minute total, cọc 30%, pay after the install. */}
         <section className="relative overflow-hidden bg-brand pt-28 pb-16 text-white md:pt-36 md:pb-20">
-          <div className="container">
+          <div className="container text-center">
             <span className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200">
               Dòng Sản Phẩm
             </span>
-            <h1 className="mt-4 max-w-3xl text-balance text-3xl font-semibold tracking-tight md:text-5xl">
+            <h1 className="mx-auto mt-4 max-w-3xl text-balance text-3xl font-semibold tracking-tight md:text-5xl">
               Sản phẩm cửa Hưng Thành Phát
             </h1>
-            <p className="mt-4 max-w-2xl text-base text-white/75 md:text-lg">
-              {PRODUCT_CATEGORIES.length} dòng chính, sản xuất và lắp đặt tại
-              Cần Thơ từ {SITE.foundedYear}. Giá bên dưới là giá tham khảo theo
-              m² — số cuối cùng phụ thuộc khổ cửa và vật tư bạn chọn, luôn báo
-              trước khi làm.
+            {/* Rows show a starting price only; the full list goes out by Zalo (13/11/2026). */}
+            <p className="mx-auto mt-4 max-w-2xl text-balance text-base text-white/75 md:text-lg">
+              {PRODUCT_CATEGORIES.length} dòng chính, làm tại xưởng Bình Thủy từ{" "}
+              {SITE.foundedYear}, nhận lắp {SITE.serviceArea}. Mỗi dòng bên dưới
+              ghi giá khởi điểm; bảng giá đầy đủ gửi qua Zalo trong 1–2 phút.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <p className="mx-auto mt-3 max-w-2xl text-balance text-sm font-semibold text-amber-200 md:text-base">
+              Chỉ cọc 30%, lắp xong nghiệm thu mới trả phần còn lại.
+            </p>
+            <ZaloQuoteCard
+              source="Trang sản phẩm · đầu trang"
+              form={LP_FORM}
+              className="mx-auto mt-8 max-w-md"
+            />
+            <div className="mt-5 flex justify-center">
               <Button
                 asChild
                 size="lg"
-                className="bg-amber-400 text-brand hover:bg-amber-300"
+                className="bg-white text-brand hover:bg-white/90"
               >
                 <a href={`tel:${primary.replace(/\s/g, "")}`}>
                   <Phone className="h-4 w-4" aria-hidden /> Gọi {primary}
                 </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/40 text-white hover:bg-white hover:text-brand"
-              >
-                <Link href="/#lien-he">Nhận báo giá miễn phí</Link>
               </Button>
             </div>
           </div>
@@ -110,7 +118,12 @@ export default function SanPhamPage() {
           </div>
         </section>
 
-        <CtaBand source="Trang sản phẩm" />
+        {/* The default subtitle ("gửi số điện thoại, thợ gọi lại") predates the Zalo flow. */}
+        <CtaBand
+          source="Trang sản phẩm"
+          title="Chưa biết chọn dòng cửa nào?"
+          subtitle="Gọi hoặc nhắn Zalo, bên em tư vấn dòng hợp công trình và ngân sách — miễn phí, không ép chốt."
+        />
 
         {/* Services */}
         <section className="bg-gray-50 py-14 md:py-20">

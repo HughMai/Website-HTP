@@ -226,7 +226,8 @@ export const SHOP_QUOTE = quote(
 // 14/11/2026: the form promises a price for the visitor's own door, not the catalog. Hughie
 // sends that total himself within 30 minutes in working hours (his sign-off, 14/11). The
 // catalog still arrives in 1–2 minutes; the 3 steps say so.
-const LP_FORM: LpForm = {
+// Exported for the /san-pham hero (16/11/2026), which uses this exact wording.
+export const LP_FORM: LpForm = {
   title: "Ghi số Zalo, 30 phút có giá trọn gói cho cửa nhà mình",
   submitLabel: "Nhận giá trọn gói",
   note: `Trong giờ làm việc, ${SITE.phoneHours}`,
