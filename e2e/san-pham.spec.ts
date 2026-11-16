@@ -86,11 +86,12 @@ test.describe("Sản Phẩm pages", () => {
     test(`${p.path}: phone hours, service area and warranty follow the 14/11 decisions`, async ({ page }) => {
       await page.goto(p.path);
       const hero = page.locator("section", { has: page.locator("h1") }).first();
-      // The hours under the call button are when the phones are answered, not the shop's.
-      await expect(hero).toContainText(`Nghe máy ${SITE.phoneHours}`);
-      await expect(hero).not.toContainText(SITE.workingHours);
-
       const main = page.locator("main");
+      // Hours beside a call button are when the phones are answered; the shop's opening
+      // hours (SITE.workingHours) stay in the footer, outside <main>.
+      await expect(hero).toContainText(`Nghe máy ${SITE.phoneHours}`);
+      await expect(main).not.toContainText(SITE.workingHours);
+
       if (p.mienTay) await expect(main).toContainText(SITE.serviceArea);
       // "Miễn phí" measuring is only ever promised inside Cần Thơ.
       await expect(main).not.toContainText(/khảo sát miễn phí(?!.{0,40}cần thơ)/i);

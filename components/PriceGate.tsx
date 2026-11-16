@@ -82,7 +82,8 @@ export function PriceGate({
             <a href={TEL} className={cn("font-semibold underline underline-offset-4", dark ? "text-white" : "text-brand")}>
               {HOTLINE}
             </a>
-            , {SITE.workingHours}.
+            {/* When the phones are answered (14/11/2026); the shop's opening hours stay in the footer. */}
+            , nghe máy {SITE.phoneHours}.
           </p>
         </>
       ) : (
