@@ -7,22 +7,27 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site-data";
+import { FAQ_CUON_PRICE, LP_FORM } from "@/lib/lp-data";
+import { PRODUCT_CATEGORIES, SITE, WARRANTY_TERMS } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
+// The family's "từ" price, as on /san-pham and in the menu.
+const PRICE_FROM = PRODUCT_CATEGORIES.find((c) => c.id === "cua-cuon")!.priceFrom;
+
+// Aligned 16/11/2026 with the 10/11 catalog, the 13/11 price gate and the 14/11 offer: the
+// 30-minute form, cọc 30% + pay after the test run, miền Tây, free measuring in Cần Thơ only,
+// and the cửa cuốn warranty terms.
 export const metadata: Metadata = {
   title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
-  description:
-    "Cửa cuốn Cần Thơ — xưởng sản xuất và lắp đặt tại Bình Thủy từ 2005, hơn 500 công trình. Đủ loại: nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, inox. Khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0963 021 639.",
+  description: `Cửa cuốn Cần Thơ — xưởng sản xuất tại Bình Thủy từ 2005, hơn 500 công trình, lắp khắp miền Tây. Nhôm công nghệ Đức, công nghệ Úc, tấm liền, song ngang, inox. Chỉ cọc 30%, lắp xong chạy thử mới trả tiền. Gọi: ${SITE.hotlines[0]}.`,
   alternates: { canonical: `${siteUrl}/cua-cuon-can-tho` },
   openGraph: {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-cuon-can-tho`,
     title: "Cửa Cuốn Cần Thơ — Xưởng Sản Xuất Từ 2005",
-    description:
-      "Xưởng cửa cuốn tại Cần Thơ từ 2005. Đủ loại cửa cuốn, khảo sát miễn phí, trả đủ vào ngày lắp đặt. Gọi: 0963 021 639.",
+    description: `Xưởng cửa cuốn tại Cần Thơ từ 2005, lắp khắp miền Tây. Chỉ cọc 30%, lắp xong chạy thử mới trả tiền. Gọi: ${SITE.hotlines[0]}.`,
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -45,7 +50,7 @@ const types = [
   },
   {
     name: "Cửa Cuốn Tấm Liền",
-    desc: "Bề mặt liền khối, không khe hở — chống bụi, chống nước tạt và bảo mật cao nhất trong các dòng cửa cuốn.",
+    desc: "Bề mặt liền khối, không khe hở — chống bụi, chống nước tạt, bảo mật cao. Có tole Đài Loan, tole công nghệ Úc 5.2 zem và inox SUS 304.",
     best: "Mặt tiền cần kín, chống bụi",
     highlight: "Bảo mật cao",
     href: null,
@@ -66,7 +71,7 @@ const types = [
   },
   {
     name: "Cửa Cuốn Khổ Lớn Nhà Xưởng",
-    desc: "Khẩu độ rộng, motor công suất lớn, kết cấu gia cường — thiết kế riêng theo kích thước công trình.",
+    desc: "Khổ 3–12m với tole siêu trường, motor công suất lớn, kết cấu gia cường — làm riêng theo kích thước công trình.",
     best: "Nhà xưởng, kho bãi",
     highlight: "Khổ lớn",
     href: "/cua-cuon-nha-xuong-can-tho",
@@ -91,8 +96,8 @@ const reasons = [
   },
   {
     icon: HandCoins,
-    title: "Đặt cọc 30%, lắp đặt xong mới thanh toán",
-    desc: "Đặt cọc 30% khi chốt hợp đồng, lắp đặt xong nghiệm thu hài lòng mới thanh toán. Khảo sát và báo giá miễn phí tận nơi trước khi bạn quyết định.",
+    title: "Chỉ cọc 30%, lắp xong chạy thử mới trả tiền",
+    desc: "Đặt cọc 30% khi chốt hợp đồng; lắp xong, chạy thử, nghiệm thu hài lòng mới thanh toán phần còn lại. Trong nội thành Cần Thơ, đo và báo giá tận nơi miễn phí trước khi bạn quyết định.",
   },
 ];
 
@@ -107,17 +112,17 @@ const districtLinks = [
 const otherDistricts = ["Vĩnh Thạnh", "Cờ Đỏ", "Phong Điền", "Thới Lai"];
 
 const steps = [
-  { n: "01", title: "Gọi hoặc nhắn Zalo", desc: "Mô tả sơ bộ mặt tiền và nhu cầu. Chúng tôi tư vấn loại cửa phù hợp trước khi tới." },
-  { n: "02", title: "Khảo sát & báo giá miễn phí", desc: "Đo đạc tận nơi, chốt kích thước và vật tư. Báo giá rõ ràng trước khi làm — không phát sinh." },
+  { n: "01", title: "Gọi hoặc nhắn Zalo", desc: "Gửi ảnh mặt tiền qua Zalo: trong 30 phút (giờ làm việc) có giá trọn gói, kèm tư vấn loại cửa phù hợp." },
+  { n: "02", title: "Khảo sát & báo giá", desc: "Đo tận nơi, chốt kích thước và vật tư, báo giá rõ từng mục — miễn phí nội thành Cần Thơ. Giá đã chốt không phát sinh." },
   { n: "03", title: "Sản xuất tại xưởng", desc: "Cắt và gia công đúng kích thước công trình tại xưởng Bình Thủy." },
-  { n: "04", title: "Lắp đặt & bàn giao", desc: "Đội thợ lắp đặt, chạy thử, hướng dẫn sử dụng. Trả đủ vào ngày lắp đặt." },
+  { n: "04", title: "Lắp xong mới trả tiền", desc: "Lắp tại nhà khoảng 3–5 giờ, chạy thử, hướng dẫn sử dụng. Nghiệm thu xong mới thanh toán phần còn lại." },
 ];
 
 const faqItems = [
   {
     question: "Cửa cuốn Cần Thơ giá bao nhiêu một mét vuông?",
-    answer:
-      "Giá cửa cuốn tại Cần Thơ phụ thuộc vào loại nan (nhôm, thép, tấm liền, song ngang), kích thước mặt tiền và loại motor đi kèm. Vì mỗi công trình một kích thước nên chúng tôi khảo sát và báo giá miễn phí tận nơi, chốt giá trước khi làm. Gọi 0963 021 639 để nhận báo giá trong ngày.",
+    // Computed from the catalog data, the same answer as the ad pages.
+    answer: `${FAQ_CUON_PRICE.a} Ghi số Zalo để nhận bảng giá đầy đủ, hoặc gọi ${SITE.hotlines[0]}.`,
   },
   {
     question: "Nên chọn cửa cuốn nhôm hay cửa cuốn thép?",
@@ -126,13 +131,12 @@ const faqItems = [
   },
   {
     question: "Lắp cửa cuốn ở Cần Thơ mất bao lâu?",
-    answer:
-      "Với kích thước tiêu chuẩn, thời gian lắp đặt tại chỗ khoảng 3–5 giờ. Vì cửa được sản xuất ngay tại xưởng ở Bình Thủy nên không phải chờ hàng chuyển từ TP.HCM. Chúng tôi nhận lắp tại tất cả quận huyện Cần Thơ.",
+    answer: `Với kích thước tiêu chuẩn, thời gian lắp đặt tại chỗ khoảng 3–5 giờ. Vì cửa được sản xuất ngay tại xưởng ở Bình Thủy nên không phải chờ hàng chuyển từ TP.HCM. Chúng tôi nhận lắp ${SITE.serviceArea}; trong nội thành Cần Thơ đo và báo giá miễn phí.`,
   },
   {
     question: "Cửa cuốn có bảo hành không?",
-    answer:
-      "Có. Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất cho cả cửa và motor. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+    // Hughie's terms of 14/11/2026 (CLAUDE.md locked decision #1).
+    answer: `Có. ${WARRANTY_TERMS.cuaCuon}. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.`,
   },
   {
     question: "Cửa cuốn tấm liền là gì?",
@@ -155,7 +159,7 @@ const jsonLd = {
       name: "Cửa Cuốn Cần Thơ",
       serviceType: "Sản xuất và lắp đặt cửa cuốn",
       description:
-        "Sản xuất, cung cấp và lắp đặt cửa cuốn tại Cần Thơ — cửa cuốn nhôm công nghệ Đức, thép sơn tĩnh điện, tấm liền, song ngang, khe thoáng và khổ lớn nhà xưởng. Xưởng tại Bình Thủy từ 2005.",
+        "Sản xuất, cung cấp và lắp đặt cửa cuốn tại Cần Thơ — cửa cuốn nhôm công nghệ Đức, công nghệ Úc, thép sơn tĩnh điện, tấm liền, song ngang, khe thoáng và khổ lớn nhà xưởng. Xưởng tại Bình Thủy từ 2005, lắp khắp miền Tây.",
       provider: {
         "@type": "HomeAndConstructionBusiness",
         "@id": siteUrl,
@@ -164,6 +168,8 @@ const jsonLd = {
       },
       areaServed: [
         { "@type": "City", name: "Cần Thơ" },
+        // The service area since 14/11/2026, as in the site-wide schema (app/layout.tsx).
+        { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
         ...[...districtLinks.map((d) => d.name), ...otherDistricts].map((d) => ({
           "@type": "AdministrativeArea",
           name: `${d}, Cần Thơ`,
@@ -198,11 +204,12 @@ export default function CuaCuonCanTho() {
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+            {/* md and up only: on a phone its room keeps the Zalo button above the bottom bar (as on the homepage). */}
+            <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur md:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Xưởng sản xuất tại Bình Thủy — từ 2005
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mt-6 md:text-5xl">
               Cửa Cuốn Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
                 Xưởng Thật, Giá Báo Trước, Trả Đủ Vào Ngày Lắp Đặt
@@ -212,7 +219,10 @@ export default function CuaCuonCanTho() {
               Đơn vị đầu tiên sản xuất và lắp đặt cửa cuốn tại Cần Thơ. 21+ năm, hơn 500 công trình.
               Cửa cắt đúng kích thước ngay tại xưởng Bình Thủy — không chờ hàng chuyển từ TP.HCM.
             </p>
-            <ZaloQuoteCard source="Cửa cuốn Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <p className="mx-auto mt-3 max-w-2xl text-balance text-sm font-semibold text-amber-200 md:text-base">
+              Chỉ cọc 30%, lắp xong chạy thử mới trả phần còn lại.
+            </p>
+            <ZaloQuoteCard source="Cửa cuốn Cần Thơ · đầu trang" form={LP_FORM} className="mx-auto mt-8 max-w-md" />
             <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
@@ -221,12 +231,13 @@ export default function CuaCuonCanTho() {
               </a>
               <Link href="/bao-gia-cua-cuon-can-tho">
                 <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  Nhận báo giá miễn phí
+                  Xem bảng giá cửa cuốn
                 </Button>
               </Link>
             </div>
+            {/* When the phones are answered (14/11/2026), not the shop's opening hours. */}
             <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
-              <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}
+              <Clock className="h-3.5 w-3.5" /> Nghe máy {SITE.phoneHours}
             </p>
           </div>
         </section>
@@ -297,9 +308,9 @@ export default function CuaCuonCanTho() {
           <div className="container max-w-2xl text-center">
             <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Giá Cửa Cuốn Cần Thơ</h2>
             <p className="mt-4 text-muted-foreground">
-              Giá cửa cuốn phụ thuộc vào loại nan, kích thước mặt tiền và loại motor. Vì mỗi công trình
-              một kích thước, chúng tôi khảo sát và báo giá miễn phí tận nơi — và chốt giá trước khi làm,
-              không phát sinh giữa chừng.
+              Cửa cuốn {PRICE_FROM} (tole Đài Loan); giá cuối phụ thuộc loại nan, kích thước mặt tiền
+              và motor. Bảng giá đầy đủ gửi qua Zalo trong 1–2 phút. Trong nội thành Cần Thơ, chúng tôi
+              đo và báo giá tận nơi miễn phí — và chốt giá trước khi làm, không phát sinh giữa chừng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link href="/bao-gia-cua-cuon-can-tho">
@@ -339,7 +350,8 @@ export default function CuaCuonCanTho() {
               Lắp Cửa Cuốn Toàn Cần Thơ
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Đội thợ có mặt tại tất cả quận huyện. Chọn khu vực của bạn để xem chi tiết.
+              Xưởng ở Cần Thơ, nhận lắp {SITE.serviceArea}. Trong Cần Thơ, đội thợ có mặt tại tất
+              cả quận huyện — chọn khu vực để xem chi tiết.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {districtLinks.map((d) => (
@@ -425,11 +437,12 @@ export default function CuaCuonCanTho() {
         <section className="bg-brand py-16 md:py-20">
           <div className="container text-center">
             <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Khảo Sát Và Báo Giá Miễn Phí — Gọi Ngay
+              Giá Báo Trước, Lắp Xong Mới Trả Tiền — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Giá báo trước khi làm, không phát sinh. Đặt cọc 30%, lắp đặt xong mới thanh toán.
-              Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
+              Giá báo trước khi làm, không phát sinh; đo và báo giá miễn phí nội thành Cần Thơ.
+              Chỉ cọc 30%, lắp xong chạy thử mới trả phần còn lại. Sai vật tư đã cam kết, HTP
+              bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               {SITE.hotlines.map((h, i) => (

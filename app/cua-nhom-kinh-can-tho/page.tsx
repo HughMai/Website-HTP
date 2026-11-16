@@ -8,22 +8,27 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site-data";
+import { APPLIED_FROM } from "@/lib/bang-gia-data";
+import { FAQ_NK_PRICE, FAQ_NK_VIET_NHAP, LP_FORM } from "@/lib/lp-data";
+import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
+// The family's "từ" price (vách kính nhôm Việt in the catalog), as on /san-pham and in the menu.
+const PRICE_FROM = PRODUCT_CATEGORIES.find((c) => c.id === "cua-nhom-kinh")!.priceFrom;
+
+// Aligned 16/11/2026 with the 10/11 catalog, the 13/11 price gate and the 14/11 offer. The
+// warranty keeps the standard phrase: Hughie has set terms for cửa cuốn only.
 export const metadata: Metadata = {
   title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành Chính Hãng",
-  description:
-    "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang. Nhôm cao cấp, kính cách âm cách nhiệt. Lắp đặt trọn gói, bảo hành chính hãng. Gọi: 0963 021 639.",
+  description: `Cửa nhôm kính Cần Thơ — cửa đi, cửa sổ, vách kính, mặt dựng, lan can, ${PRICE_FROM}. Lắp trọn gói khắp miền Tây, bảo hành chính hãng. Chỉ cọc 30%, lắp xong mới trả tiền. Gọi: ${SITE.hotlines[0]}.`,
   alternates: { canonical: `${siteUrl}/cua-nhom-kinh-can-tho` },
   openGraph: {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-nhom-kinh-can-tho`,
     title: "Cửa Nhôm Kính Cần Thơ — Bảo Hành Chính Hãng",
-    description:
-      "Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can. Bảo hành chính hãng. Gọi: 0963 021 639.",
+    description: `Cửa nhôm kính Cần Thơ — hệ cửa đi, cửa sổ, mặt dựng, lan can. Lắp khắp miền Tây, bảo hành chính hãng. Gọi: ${SITE.hotlines[0]}.`,
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -93,7 +98,8 @@ const pricing = [
   { system: "Cửa đi nhôm kính 1 cánh (0.8×2.1m)" },
   { system: "Cửa đi nhôm kính 2 cánh (1.6×2.1m)" },
   { system: "Cửa sổ nhôm kính (1.2×1.2m)" },
-  { system: "Lan can nhôm kính (theo m dài)" },
+  // The catalog prices lan can per m² of panel, not per mét dài (10/11/2026).
+  { system: "Lan can nhôm kính (theo m²)" },
   { system: "Mặt dựng nhôm kính (theo m²)" },
   { system: "Kích thước đặc biệt / công trình lớn" },
 ];
@@ -106,8 +112,9 @@ const districts = [
 const faqItems = [
   {
     question: "Cửa nhôm kính Cần Thơ giá bao nhiêu?",
-    answer:
-      "Giá cửa nhôm kính phụ thuộc vào loại hệ và kích thước. Cửa đi 1 cánh từ 3.500.000đ; mặt dựng và lan can tính theo m². Giá từng hệ trong bảng giá gửi qua Zalo. Liên hệ 0963 021 639 để được báo giá chính xác sau khảo sát.",
+    // Computed from the catalog data, the same answer as the ad pages. The old "cửa đi 1 cánh
+    // từ 3.500.000đ" was not a catalog figure; the catalog prices nhôm kính per m².
+    answer: `${FAQ_NK_PRICE.a} Mặt dựng và lan can cũng tính theo m².`,
   },
   {
     question: "Cửa nhôm kính có chống nóng không?",
@@ -116,8 +123,10 @@ const faqItems = [
   },
   {
     question: "Nhôm Việt và nhôm nhập khẩu khác nhau như thế nào?",
-    answer:
-      "Nhôm nhập khẩu (Xingfa, Maxpro, Eurowindow) có độ dày thành ống cao hơn (1.4–2.0mm), bề mặt xử lý tốt hơn, ít bị cong vênh hơn. Nhôm Việt giá thấp hơn 20–30% nhưng phù hợp công trình không yêu cầu cao. Tư vấn viên sẽ giúp bạn chọn phù hợp ngân sách.",
+    // The ad pages' answer. The old one said nhôm Việt is 20–30% cheaper and only nhôm nhập
+    // comes in 1.4–2.0 ly; in the 11/11 catalog both come in those thicknesses, and cửa đi
+    // 1.4 ly differs by about 8%.
+    answer: FAQ_NK_VIET_NHAP.a,
   },
   {
     question: "Lắp cửa nhôm kính mất bao lâu?",
@@ -144,7 +153,7 @@ const jsonLd = {
       "@id": `${siteUrl}/cua-nhom-kinh-can-tho#service`,
       name: "Cửa Nhôm Kính Cần Thơ",
       description:
-        "Thi công cửa nhôm kính — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang tại Cần Thơ. Bảo hành chính hãng.",
+        "Thi công cửa nhôm kính — hệ cửa đi, cửa sổ, mặt dựng, lan can cầu thang tại Cần Thơ và miền Tây. Bảo hành chính hãng.",
       provider: {
         "@type": "HomeAndConstructionBusiness",
         "@id": siteUrl,
@@ -153,6 +162,8 @@ const jsonLd = {
       },
       areaServed: [
         { "@type": "City", name: "Cần Thơ" },
+        // The service area since 14/11/2026, as in the site-wide schema (app/layout.tsx).
+        { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
         ...districts.map((d) => ({ "@type": "AdministrativeArea", name: `${d}, Cần Thơ` })),
       ],
     },
@@ -184,11 +195,12 @@ export default function CuaNhomKinhCanTho() {
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+            {/* md and up only: on a phone its room keeps the Zalo button above the bottom bar (as on the homepage). */}
+            <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur md:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Nhôm kính — Cách âm, cách nhiệt, bền 20 năm không gỉ
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mt-6 md:text-5xl">
               Nhà Phố Của Bạn Nhìn Khác Hẳn Sau Khi Lắp Nhôm Kính —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
                 Cách Âm, Cách Nhiệt, Bền 20 Năm Không Lo Gỉ
@@ -196,9 +208,12 @@ export default function CuaNhomKinhCanTho() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
               Đường phố ồn ào bên ngoài trở thành tiếng thì thầm khi đóng cửa nhôm kính. Kính
-              Low-E giảm nhiệt 40–60%, profile nhôm bền 20+ năm không gỉ. Thi công trọn gói tại Cần Thơ.
+              Low-E giảm nhiệt 40–60%, profile nhôm bền 20+ năm không gỉ. Thi công trọn gói, lắp khắp miền Tây.
             </p>
-            <ZaloQuoteCard source="Cửa nhôm kính · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <p className="mx-auto mt-3 max-w-2xl text-balance text-sm font-semibold text-amber-200 md:text-base">
+              Chỉ cọc 30%, lắp xong chạy thử mới trả phần còn lại.
+            </p>
+            <ZaloQuoteCard source="Cửa nhôm kính · đầu trang" form={LP_FORM} className="mx-auto mt-8 max-w-md" />
             <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
@@ -206,8 +221,9 @@ export default function CuaNhomKinhCanTho() {
                 </Button>
               </a>
             </div>
+            {/* When the phones are answered (14/11/2026), not the shop's opening hours. */}
             <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
-              <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}
+              <Clock className="h-3.5 w-3.5" /> Nghe máy {SITE.phoneHours}
             </p>
           </div>
         </section>
@@ -265,7 +281,9 @@ export default function CuaNhomKinhCanTho() {
               <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                 Giá Cửa Nhôm Kính Tham Khảo
               </h2>
-              <p className="mt-3 text-muted-foreground">Giá tham khảo — báo giá chính xác sau khảo sát thực tế</p>
+              <p className="mt-3 text-muted-foreground">
+                Vách kính nhôm Việt {PRICE_FROM}; giá trọn gói báo sau khi đo, miễn phí nội thành Cần Thơ
+              </p>
             </div>
             <div className="overflow-hidden rounded-xl border">
               <table className="w-full text-sm">
@@ -300,6 +318,9 @@ export default function CuaNhomKinhCanTho() {
             <h2 className="text-2xl font-semibold tracking-tight">
               Thi Công Cửa Nhôm Kính Toàn Cần Thơ
             </h2>
+            <p className="mt-3 text-muted-foreground">
+              Xưởng ở Cần Thơ, nhận lắp {SITE.serviceArea}.
+            </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {districts.map((d) => (
                 <span key={d} className="rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-medium text-brand">
@@ -347,7 +368,7 @@ export default function CuaNhomKinhCanTho() {
             <Link href="/bang-gia-cua-nhom-kinh-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
               <div>
                 <p className="font-semibold text-brand">Bảng Giá Nhôm Kính</p>
-                <p className="text-sm text-muted-foreground">Giá chính thức 2025</p>
+                <p className="text-sm text-muted-foreground">Áp dụng từ {APPLIED_FROM}</p>
               </div>
               <ArrowRight className="h-4 w-4 text-brand" />
             </Link>
@@ -368,7 +389,7 @@ export default function CuaNhomKinhCanTho() {
               Nhà Phố Của Bạn Xứng Đáng Được Bảo Vệ Tốt Hơn
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí — báo giá tận nơi — thi công trọn gói. Đặt cọc 30%, lắp đặt xong mới thanh toán. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
+              Đo và báo giá tận nơi, miễn phí nội thành Cần Thơ — thi công trọn gói. Chỉ cọc 30%, lắp xong chạy thử mới trả phần còn lại. Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>

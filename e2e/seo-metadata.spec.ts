@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
+import { WARRANTY_TERMS } from "../lib/site-data";
 
 /**
  * Titles are asserted against the RENDERED <title>, not the source string,
@@ -78,9 +79,12 @@ test.describe("SEO metadata", () => {
 test.describe("Locked copy rules", () => {
   // Source-level, not rendered: this must also catch year counts hiding inside
   // FAQPage JSON-LD strings, which is where six of them were living.
-  test("no warranty claim quotes a specific year count", () => {
+  // Since 14/11/2026 (CLAUDE.md locked decision #1) the only year counts allowed are
+  // Hughie's cửa cuốn terms, word for word from WARRANTY_TERMS in lib/site-data.ts.
+  // Everything else keeps "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất".
+  test("no warranty claim quotes a year count other than the 14/11/2026 terms", () => {
     const files: string[] = [];
-    (function walk(dir: string) {
+    function walk(dir: string) {
       for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         const p = path.join(dir, entry.name);
         if (entry.isDirectory()) {
@@ -91,8 +95,11 @@ test.describe("Locked copy rules", () => {
           files.push(p);
         }
       }
-    })("app");
+    }
+    for (const dir of ["app", "components", "lib"]) walk(dir);
 
+    // Longest first: motorPhuKien is the tail of cuaCuon.
+    const allowed = [WARRANTY_TERMS.cuaCuon, WARRANTY_TERMS.motorPhuKien].map((s) => s.toLowerCase());
     const offenders: string[] = [];
     // "bảo hành ... <n> năm" within one sentence.
     const re = /b[ảa]o h[àa]nh[^.\n]{0,120}?\b\d{1,2}\s*n[ăa]m/giu;
@@ -100,15 +107,18 @@ test.describe("Locked copy rules", () => {
     for (const file of files) {
       const lines = fs.readFileSync(file, "utf8").split(/\r?\n/);
       lines.forEach((line, i) => {
+        let rest = line.toLowerCase();
+        for (const a of allowed) rest = rest.split(a).join(" ");
         re.lastIndex = 0;
-        if (re.test(line)) offenders.push(`${file}:${i + 1}  ${line.trim().slice(0, 120)}`);
+        if (re.test(rest)) offenders.push(`${file}:${i + 1}  ${line.trim().slice(0, 120)}`);
       });
     }
 
     expect(
       offenders,
-      "CLAUDE.md hard rule: the only permitted warranty phrasing is " +
-        '"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất" — never a year count.\n' +
+      "CLAUDE.md locked decision #1: a warranty year count may only be one of the " +
+        "WARRANTY_TERMS sentences (lib/site-data.ts), word for word; everything else says " +
+        '"Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất".\n' +
         offenders.join("\n")
     ).toEqual([]);
   });

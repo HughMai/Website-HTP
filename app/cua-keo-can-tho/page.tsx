@@ -8,22 +8,27 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { ProductPhotos } from "@/components/sections/ProductPhotos";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/site-data";
+import { APPLIED_FROM } from "@/lib/bang-gia-data";
+import { FAQ_KEO_PRICE, LP_FORM } from "@/lib/lp-data";
+import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
+// The family's "từ" price, as on /san-pham and in the menu.
+const PRICE_FROM = PRODUCT_CATEGORIES.find((c) => c.id === "cua-keo")!.priceFrom;
+
+// Aligned 16/11/2026 with the 10/11 catalog, the 13/11 price gate and the 14/11 offer. The
+// warranty keeps the standard phrase: Hughie has set terms for cửa cuốn only.
 export const metadata: Metadata = {
   title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
-  description:
-    "Cửa kéo Cần Thơ — thép công nghệ Đức, nhôm cao cấp, inox SUS 304. Phù hợp mặt tiền kinh doanh, chống đột nhập hiệu quả. Lắp đặt trong ngày, bảo hành chính hãng. Gọi: 0963 021 639.",
+  description: `Cửa kéo Cần Thơ — thép ${PRICE_FROM}, nhôm, inox SUS 304. Chống đột nhập, hợp mặt tiền kinh doanh, lắp 3–5 giờ, nhận lắp khắp miền Tây. Chỉ cọc 30%, lắp xong mới trả tiền. Gọi: ${SITE.hotlines[0]}.`,
   alternates: { canonical: `${siteUrl}/cua-keo-can-tho` },
   openGraph: {
     type: "website",
     locale: "vi_VN",
     url: `${siteUrl}/cua-keo-can-tho`,
     title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
-    description:
-      "Cửa kéo thép, nhôm, inox tại Cần Thơ. Chống đột nhập, bền bỉ. Gọi: 0963 021 639.",
+    description: `Cửa kéo thép, nhôm, inox tại Cần Thơ, lắp khắp miền Tây. Chống đột nhập, bền bỉ. Gọi: ${SITE.hotlines[0]}.`,
     siteName: "Hưng Thành Phát Door",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Hưng Thành Phát Door" }],
   },
@@ -32,7 +37,8 @@ export const metadata: Metadata = {
 const types = [
   {
     name: "Cửa Kéo Thép Công Nghệ Đức",
-    desc: "Nan thép hộp mạ kẽm, ray dưới chịu lực — cứng chắc, khó phá, chi phí hợp lý. Lựa chọn số 1 cho mặt tiền kinh doanh.",
+    // The catalog's cửa kéo: thanh U thép by thickness, có lá or không lá (10/11/2026).
+    desc: "Thanh U thép dày 6 zem đến 1.6 ly, loại có lá hoặc không lá — cứng chắc, khó phá, chi phí hợp lý. Lựa chọn số 1 cho mặt tiền kinh doanh.",
     best: "Cửa hàng, nhà kinh doanh",
     highlight: "Phổ biến nhất",
   },
@@ -106,8 +112,8 @@ const districts = [
 const faqItems = [
   {
     question: "Cửa kéo Cần Thơ giá bao nhiêu?",
-    answer:
-      "Cửa kéo tính giá theo m² diện tích cửa (rộng × cao), đã gồm vật tư và công lắp đặt, chưa VAT. Cửa kéo thép có bảng giá theo độ dày (U 6 zem đến 1.6 ly), loại có lá hoặc không lá — xem bảng giá cửa kéo Cần Thơ. Cửa kéo nhôm và inox báo giá theo mẫu. Cửa nhỏ dưới 8m² có phụ phí theo m², ghi rõ trên báo giá. Ghi số Zalo để nhận bảng giá đầy đủ, hoặc gọi 0963 021 639 để được báo giá chính xác.",
+    // Computed from the catalog data, the same answer as the ad pages.
+    answer: `${FAQ_KEO_PRICE.a} Cửa nhỏ dưới 8 m² có phụ phí theo m², ghi rõ trên báo giá.`,
   },
   {
     question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào phù hợp hơn?",
@@ -121,8 +127,7 @@ const faqItems = [
   },
   {
     question: "Lắp cửa kéo mất bao lâu?",
-    answer:
-      "Lắp đặt cửa kéo tiêu chuẩn mất 3–5 giờ. Đội kỹ thuật có mặt trong ngày tại tất cả quận huyện Cần Thơ.",
+    answer: `Lắp đặt cửa kéo tiêu chuẩn mất 3–5 giờ. Đội kỹ thuật có mặt trong ngày tại tất cả quận huyện Cần Thơ, và nhận lắp ${SITE.serviceArea}.`,
   },
   {
     question: "Cửa kéo có bảo hành không?",
@@ -139,7 +144,7 @@ const jsonLd = {
       "@id": `${siteUrl}/cua-keo-can-tho#service`,
       name: "Cửa Kéo Cần Thơ",
       description:
-        "Cung cấp và lắp đặt cửa kéo thép, nhôm, inox tại Cần Thơ — bền bỉ, chống đột nhập, bảo hành chính hãng.",
+        "Cung cấp và lắp đặt cửa kéo thép, nhôm, inox tại Cần Thơ và miền Tây — bền bỉ, chống đột nhập, bảo hành chính hãng.",
       provider: {
         "@type": "HomeAndConstructionBusiness",
         "@id": siteUrl,
@@ -148,6 +153,8 @@ const jsonLd = {
       },
       areaServed: [
         { "@type": "City", name: "Cần Thơ" },
+        // The service area since 14/11/2026, as in the site-wide schema (app/layout.tsx).
+        { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
         ...districts.map((d) => ({ "@type": "AdministrativeArea", name: `${d}, Cần Thơ` })),
       ],
     },
@@ -179,11 +186,12 @@ export default function CuaKeoCanTho() {
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+            {/* md and up only: on a phone its room keeps the Zalo button above the bottom bar (as on the homepage). */}
+            <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur md:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Cửa kéo — Tư vấn đúng loại, không upsell
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mt-6 md:text-5xl">
               Cửa Kéo Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-white via-white to-sky-200 bg-clip-text text-transparent">
                 Chọn Đúng Chất Liệu Theo Ngân Sách — Lắp Trong Ngày, Bồi Thường 100% Nếu Sai Vật Tư
@@ -193,7 +201,10 @@ export default function CuaKeoCanTho() {
               Thép hộp mạ kẽm giá thấp hơn 20–30% so với nhôm, bảo mật tương đương — phần lớn
               chủ kinh doanh Cần Thơ chọn thép. Tư vấn thật, không upsell loại đắt hơn nếu không cần thiết.
             </p>
-            <ZaloQuoteCard source="Cửa kéo Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            <p className="mx-auto mt-3 max-w-2xl text-balance text-sm font-semibold text-amber-200 md:text-base">
+              Chỉ cọc 30%, lắp xong chạy thử mới trả phần còn lại.
+            </p>
+            <ZaloQuoteCard source="Cửa kéo Cần Thơ · đầu trang" form={LP_FORM} className="mx-auto mt-8 max-w-md" />
             <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
                 <Button size="lg" className="bg-white text-brand hover:bg-white/90">
@@ -206,8 +217,9 @@ export default function CuaKeoCanTho() {
                 </Button>
               </Link>
             </div>
+            {/* When the phones are answered (14/11/2026), not the shop's opening hours. */}
             <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-white/60">
-              <Clock className="h-3.5 w-3.5" /> {SITE.workingHours}
+              <Clock className="h-3.5 w-3.5" /> Nghe máy {SITE.phoneHours}
             </p>
           </div>
         </section>
@@ -264,7 +276,9 @@ export default function CuaKeoCanTho() {
               <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                 Giá Cửa Kéo Tham Khảo
               </h2>
-              <p className="mt-3 text-muted-foreground">Giá trọn gói bao gồm vật tư và nhân công lắp đặt</p>
+              <p className="mt-3 text-muted-foreground">
+                Cửa kéo thép {PRICE_FROM}, đã gồm vật tư và nhân công lắp đặt
+              </p>
             </div>
             <div className="overflow-hidden rounded-xl border">
               <table className="w-full text-sm">
@@ -297,6 +311,9 @@ export default function CuaKeoCanTho() {
         <section className="bg-muted/30 py-14">
           <div className="container max-w-3xl text-center">
             <h2 className="text-2xl font-semibold tracking-tight">Lắp Cửa Kéo Toàn Cần Thơ</h2>
+            <p className="mt-3 text-muted-foreground">
+              Xưởng ở Cần Thơ, nhận lắp {SITE.serviceArea}.
+            </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {districts.map((d) => (
                 <span key={d} className="rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-medium text-brand">
@@ -344,7 +361,7 @@ export default function CuaKeoCanTho() {
             <Link href="/bang-gia-cua-keo-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
               <div>
                 <p className="font-semibold text-brand">Bảng Giá Cửa Kéo</p>
-                <p className="text-sm text-muted-foreground">Giá chính thức 2025</p>
+                <p className="text-sm text-muted-foreground">Áp dụng từ {APPLIED_FROM}</p>
               </div>
               <ArrowRight className="h-4 w-4 text-brand" />
             </Link>
@@ -365,7 +382,8 @@ export default function CuaKeoCanTho() {
               Lắp Đúng Loại, Đúng Vật Liệu — Gọi Ngay
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Khảo sát miễn phí, báo giá tận nơi. Đặt cọc 30%, lắp đặt xong mới thanh toán.
+              Đo và báo giá tận nơi, miễn phí nội thành Cần Thơ. Chỉ cọc 30%, lắp xong chạy thử mới
+              trả phần còn lại.
               Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

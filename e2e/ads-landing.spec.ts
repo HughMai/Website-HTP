@@ -446,22 +446,27 @@ test.describe("Gated prices", () => {
 test.describe("Site landing pages", () => {
   test.use({ viewport: PHONE, isMobile: true, hasTouch: true });
 
-  const WITH_CARD = [
-    "/cua-cuon-can-tho",
-    "/cua-keo-can-tho",
-    "/cua-nhom-kinh-can-tho",
-    "/cua-cuon-ninh-kieu",
-    "/lap-dat-cua-cuon-can-tho",
-    "/phu-kien-cua-cuon-can-tho",
-    "/bang-gia-cua-keo-can-tho",
-    "/bao-gia-cua-cuon-can-tho",
+  // The card's title per page. Since 16/11/2026 the product pages carry the 14/11 offer: the
+  // 30-minute total on the install pages, the price list on phụ kiện (a motor is priced after
+  // the door is weighed). The other pages keep the site-wide form (lib/lp-data.ts INSTALL_FORM).
+  const IN_30 = "Ghi số Zalo, 30 phút có giá trọn gói cho cửa nhà mình";
+  const SITE_WIDE = "Ghi số Zalo để nhận báo giá ngay lập tức";
+  const WITH_CARD: [string, string][] = [
+    ["/cua-cuon-can-tho", IN_30],
+    ["/cua-keo-can-tho", IN_30],
+    ["/cua-nhom-kinh-can-tho", IN_30],
+    ["/cua-cuon-ninh-kieu", SITE_WIDE],
+    ["/lap-dat-cua-cuon-can-tho", SITE_WIDE],
+    ["/phu-kien-cua-cuon-can-tho", "Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút"],
+    ["/bang-gia-cua-keo-can-tho", SITE_WIDE],
+    ["/bao-gia-cua-cuon-can-tho", SITE_WIDE],
   ];
-  for (const path of WITH_CARD) {
+  for (const [path, title] of WITH_CARD) {
     test(`${path}: the Zalo card is in the hero, and the new logo is in the navbar`, async ({ page }) => {
       await page.goto(path);
       const hero = page.locator("section", { has: page.locator("h1") }).first();
       await expect(hero.locator('[data-track="hero_form"] form')).toHaveCount(1);
-      await expect(hero).toContainText("Ghi số Zalo để nhận báo giá ngay lập tức");
+      await expect(hero).toContainText(title);
       await expect(page.locator('img[src*="logo-htp-door"]').first()).toBeVisible();
       // The one-line privacy notice is back under every Zalo form (Hughie, 14/11/2026).
       await expect(hero).toContainText("Gửi số là đồng ý nhận báo giá qua Zalo");

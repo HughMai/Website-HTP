@@ -12,7 +12,7 @@ import {
 import { KEO_NHOM_DAY, NAN_SPECS, PHU_KIEN_DUNG_CHO, formatGia } from "@/lib/bang-gia-specs";
 import { CONG_TRINH } from "@/lib/cong-trinh-data";
 import { REVIEWS, type Review } from "@/lib/reviews";
-import { SITE } from "@/lib/site-data";
+import { SITE, WARRANTY_TERMS } from "@/lib/site-data";
 
 /*
  * Google Ads landing pages: one per ad group, served at /lp/<slug>, noindex (the SEO
@@ -289,7 +289,7 @@ const faqWarranty = (what: string) => ({
 // Cửa kéo and nhôm kính keep faqWarranty() until their own terms are confirmed.
 const FAQ_WARRANTY_CUON = {
   q: "Bảo hành thế nào?",
-  a: "Nan cửa bảo hành 5 năm; motor và phụ kiện bảo hành 1 năm, tính từ ngày bàn giao. Trong thời gian bảo hành, bên em sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
+  a: `${WARRANTY_TERMS.cuaCuon}. Trong thời gian bảo hành, bên em sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.`,
 };
 
 // Where HTP installs (Hughie, 14/11/2026), on every install page. Measuring and travel are
@@ -309,7 +309,9 @@ const in30 = (what: string) => `Gửi thêm ${what}: trong 30 phút (giờ làm 
 // đầy đủ" is what arrives. The button is "Nhận bảng giá", not the plan's "Nhận bảng giá qua
 // Zalo": the longer label squeezed the field on desktop until its placeholder was cut off,
 // and the title above it already says Zalo.
-const PRICE_FORM: LpForm = {
+// Also the /phu-kien-cua-cuon-can-tho hero (16/11/2026): a motor is priced after the door is
+// weighed, so that page promises the price list, not a 30-minute total.
+export const PRICE_FORM: LpForm = {
   title: "Ghi số Zalo, nhận bảng giá đầy đủ trong 1–2 phút",
   submitLabel: "Nhận bảng giá",
   // No second line for the 30-minute total here: it pushed the button off a 360×740 screen.
@@ -491,7 +493,9 @@ const KHE_THOANG = NAN_DUC.filter((n) => {
 });
 const KHE_THOANG_TU = lowest(KHE_THOANG.map((n) => n.gia), "nan khe thoáng");
 
-const FAQ_CUON_PRICE = {
+// The price answers below are computed from the catalog data, so the product pages
+// (/cua-cuon-can-tho, /cua-keo-can-tho, /cua-nhom-kinh-can-tho) reuse them too (16/11/2026).
+export const FAQ_CUON_PRICE = {
   q: "Cửa cuốn giá bao nhiêu một mét vuông?",
   a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: tole Đài Loan từ ${perM2(CUON.daiLoan)}, nhôm công nghệ Đức từ ${perM2(CUON.nhomDuc)}, inox SUS 304 từ ${perM2(CUON.inox)}. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
 };
@@ -501,7 +505,7 @@ const FAQ_MOTOR_TIER = {
   a: `Tải motor chọn theo diện tích cửa, vì cửa càng rộng, càng cao thì cánh càng nặng: ${MOTOR_TIERS}. Cửa cuốn công nghệ Úc dùng motor riêng. Motor kèm remote, tính theo bộ, chưa VAT.`,
 };
 
-const FAQ_KEO_PRICE = {
+export const FAQ_KEO_PRICE = {
   q: "Cửa kéo giá bao nhiêu?",
   a: `Cửa kéo thép tính theo m² diện tích cửa (rộng × cao), từ ${perM2(KEO_TU)}; giá tăng theo độ dày và loại có lá hay không lá, đã gồm vật tư và công lắp đặt, chưa VAT. Bảng giá từng độ dày gửi qua Zalo. Cửa kéo nhôm và inox báo giá theo mẫu.`,
 };
@@ -521,12 +525,12 @@ const FAQ_KEO_DAY = {
   a: KEO_NHOM_DAY.map((b) => `${b.tieuDe}: ${b.goiY.charAt(0).toLowerCase()}${b.goiY.slice(1)}.`).join(" "),
 };
 
-const FAQ_NK_PRICE = {
+export const FAQ_NK_PRICE = {
   q: "Cửa nhôm kính giá bao nhiêu?",
   a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}, nhôm Việt: vách kính từ ${perM2(NK.vach)}, cửa sổ từ ${perM2(NK.so)}, cửa đi từ ${perM2(NK.di)}. Nhôm nhập và Maxpro cao hơn; bảng giá đầy đủ gửi qua Zalo. Giá đã gồm công lắp đặt, cửa nhôm đã gồm kính trắng 8 ly, chưa VAT.`,
 };
 
-const FAQ_NK_VIET_NHAP = {
+export const FAQ_NK_VIET_NHAP = {
   q: "Nhôm Việt và nhôm nhập khác nhau thế nào?",
   a: "Nhôm nhập có bề mặt xử lý tốt hơn, ít cong vênh hơn. Nhôm Việt giá thấp hơn, hợp công trình không đòi hỏi cao. Cả hai đều có nhiều độ dày; thợ tư vấn loại hợp ngân sách khi đến đo.",
 };

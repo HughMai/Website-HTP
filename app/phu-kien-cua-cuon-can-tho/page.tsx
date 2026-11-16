@@ -19,13 +19,14 @@ import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { Button } from "@/components/ui/button";
 import { BINH_TICH_DIEN, MOTOR, PHU_KIEN } from "@/lib/bang-gia-data";
 import { formatGia } from "@/lib/bang-gia-specs";
-import { SITE } from "@/lib/site-data";
+import { PRICE_FORM } from "@/lib/lp-data";
+import { SITE, WARRANTY_TERMS } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
-// CLAUDE.md hard rule: this is the ONLY permitted warranty phrasing. Never a
-// year count, anywhere, including inside JSON-LD strings.
-const WARRANTY = "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất";
+// CLAUDE.md locked decision #1: motor and phụ kiện cửa cuốn are under warranty for 1 năm
+// (Hughie, 14/11/2026). Use the constant, word for word; never write another year count.
+const WARRANTY = WARRANTY_TERMS.motorPhuKien;
 
 export const metadata: Metadata = {
   title: "Phụ Kiện Cửa Cuốn Cần Thơ — Motor, Remote",
@@ -114,7 +115,7 @@ const faqItems = [
     question: "Motor cửa cuốn loại nào phù hợp với nhà tôi?",
     // Same rule the CRM uses to pick the tier (pricing.resolve_motor_label) — by area, because a
     // bigger door is a heavier door. The old copy said "not by area", contradicting the price page.
-    answer: `Tải motor chọn theo diện tích cửa, vì cửa càng rộng, càng cao thì cánh càng nặng: ${motorTiers}. Cửa nan dày hoặc tấm liền nặng hơn thường thì chúng tôi kiểm tra trọng lượng thực tế trước khi chốt. Lắp motor thiếu tải là nguyên nhân phổ biến nhất khiến cửa hỏng sớm.`,
+    answer: `Tải motor chọn theo diện tích cửa, vì cửa càng rộng, càng cao thì cánh càng nặng: ${motorTiers}. Cửa cuốn công nghệ Úc dùng motor riêng. Cửa nan dày hoặc tấm liền nặng hơn thường thì chúng tôi kiểm tra trọng lượng thực tế trước khi chốt. Lắp motor thiếu tải là nguyên nhân phổ biến nhất khiến cửa hỏng sớm.`,
   },
   {
     question: "Cửa cuốn không phải do Hưng Thành Phát lắp có thay phụ kiện được không?",
@@ -133,7 +134,7 @@ const faqItems = [
   },
   {
     question: "Phụ kiện cửa cuốn có bảo hành không?",
-    answer: `${WARRANTY} cho motor và phụ kiện chính hãng. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế tại nơi lắp đặt.`,
+    answer: `Có. ${WARRANTY}. Trong thời gian bảo hành, chúng tôi sửa chữa hoặc thay thế tại nơi lắp đặt.`,
   },
 ];
 
@@ -198,21 +199,27 @@ export default function PhuKienCuaCuonCanTho() {
         {/* Hero */}
         <section className="bg-brand pt-28 pb-16 md:pt-36 md:pb-20">
           <div className="container text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+            {/* md and up only: on a phone its room keeps the Zalo button above the bottom bar (as on the homepage). */}
+            <span className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur md:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Thay tận nơi — kể cả cửa không do bên mình lắp
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white md:mt-6 md:text-5xl">
               Phụ Kiện Cửa Cuốn Cần Thơ —{" "}
               <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 bg-clip-text text-transparent">
                 Motor, Bình Lưu Điện, Remote, Khóa
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/80 md:text-lg">
-              Hàng chính hãng, chọn đúng tải trọng cửa, lắp và thay tận nơi trong
-              ngày. Khảo sát miễn phí trước khi báo giá.
+              Hàng chính hãng, chọn đúng tải trọng cửa, thợ đến thay tận nơi trong
+              ngày ở Cần Thơ. {WARRANTY}.
             </p>
-            <ZaloQuoteCard source="Phụ kiện cửa cuốn Cần Thơ · đầu trang" className="mx-auto mt-8 max-w-md" />
+            {/* The price list, not the 30-minute total: a motor is priced after the door is weighed. */}
+            <ZaloQuoteCard
+              source="Phụ kiện cửa cuốn Cần Thơ · đầu trang"
+              form={PRICE_FORM}
+              className="mx-auto mt-8 max-w-md"
+            />
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button asChild size="lg" className="bg-white text-brand hover:bg-white/90">
                 <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
@@ -232,9 +239,10 @@ export default function PhuKienCuaCuonCanTho() {
                 </Link>
               </Button>
             </div>
+            {/* When the phones are answered (14/11/2026), not the shop's opening hours. */}
             <p className="mt-4 flex items-center justify-center gap-2 text-sm text-white/60">
               <Clock className="h-4 w-4" aria-hidden />
-              {SITE.workingHours}
+              Nghe máy {SITE.phoneHours}
             </p>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { PRODUCT_CATEGORIES, SITE } from "../lib/site-data";
+import { CUA_KEO, MOTOR, NAN_DUC, NHOM_KINH, SONG_NGANG, TAM_LIEN, TOLE_THEM } from "../lib/bang-gia-data";
+import { PRODUCT_CATEGORIES, SITE, WARRANTY_TERMS } from "../lib/site-data";
 
 /**
  * /san-pham after the 10–14/11/2026 changes: one "từ" price per product family (row prices
@@ -43,5 +44,72 @@ test.describe("/san-pham", () => {
     const description = await page.locator('meta[name="description"]').getAttribute("content");
     expect(description).toContain("miền Tây");
     expect(description).not.toMatch(/khảo sát miễn phí|giá tham khảo/i);
+  });
+});
+
+// The "từ" prices in site-data.ts are typed by hand (site-data reaches client bundles, so it
+// must not import the price data). Check them against the catalog export instead.
+test("each family's 'từ' price is the catalog's lowest price", () => {
+  const low = (xs: (number | null)[]) => Math.min(...xs.filter((x): x is number => x !== null));
+  const fmt = (n: number) => n.toLocaleString("de-DE");
+  const nhomKinh = NHOM_KINH.filter((g) => g.group !== "Lan can cầu thang");
+  const lanCan = NHOM_KINH.filter((g) => g.group === "Lan can cầu thang");
+  const floors: Record<string, string> = {
+    "cua-cuon": `từ ${fmt(
+      low([
+        ...NAN_DUC.map((n) => n.gia),
+        ...TAM_LIEN.flatMap((g) => g.rows.map((r) => r.gia)),
+        ...TOLE_THEM.flatMap((g) => g.rows.map((r) => r.gia)),
+        ...SONG_NGANG.flatMap((g) => g.rows.map((r) => r.gia)),
+      ])
+    )}đ/m²`,
+    "cua-keo": `từ ${fmt(low(CUA_KEO.flatMap((r) => [r.coLa, r.khongLa])))}đ/m²`,
+    "cua-nhom-kinh": `từ ${fmt(low(nhomKinh.flatMap((g) => g.rows.map((r) => r.gia))))}đ/m²`,
+    "lan-can-cau-thang": `từ ${fmt(low(lanCan.flatMap((g) => g.rows.map((r) => r.gia))))}đ/m²`,
+    "motor-binh-luu-dien": `từ ${fmt(low(MOTOR.map((m) => m.gia)))}đ/bộ`,
+  };
+  for (const cat of PRODUCT_CATEGORIES) {
+    expect(cat.priceFrom, cat.id).toBe(floors[cat.id]);
+  }
+});
+
+// The four pages under Sản Phẩm, brought in line on 16/11/2026.
+test.describe("Sản Phẩm pages", () => {
+  const PAGES = [
+    { path: "/cua-cuon-can-tho", mienTay: true, warranty: WARRANTY_TERMS.cuaCuon },
+    { path: "/cua-keo-can-tho", mienTay: true, warranty: null },
+    { path: "/cua-nhom-kinh-can-tho", mienTay: true, warranty: null },
+    // Phụ kiện is fitted on site, same day, in Cần Thơ: no miền Tây promise there.
+    { path: "/phu-kien-cua-cuon-can-tho", mienTay: false, warranty: WARRANTY_TERMS.motorPhuKien },
+  ];
+  for (const p of PAGES) {
+    test(`${p.path}: phone hours, service area and warranty follow the 14/11 decisions`, async ({ page }) => {
+      await page.goto(p.path);
+      const hero = page.locator("section", { has: page.locator("h1") }).first();
+      // The hours under the call button are when the phones are answered, not the shop's.
+      await expect(hero).toContainText(`Nghe máy ${SITE.phoneHours}`);
+      await expect(hero).not.toContainText(SITE.workingHours);
+
+      const main = page.locator("main");
+      if (p.mienTay) await expect(main).toContainText(SITE.serviceArea);
+      // "Miễn phí" measuring is only ever promised inside Cần Thơ.
+      await expect(main).not.toContainText(/khảo sát miễn phí(?!.{0,40}cần thơ)/i);
+      if (p.warranty) await expect(main).toContainText(p.warranty);
+      else await expect(main).toContainText("theo kỳ hạn tiêu chuẩn của nhà sản xuất");
+    });
+  }
+
+  // The offer line and the form's hours note made the hero taller; on a phone the Zalo button
+  // must still end above the fixed call / Zalo / map bar (390×844, CLAUDE.md's phone check).
+  test.describe("on a phone", () => {
+    test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    for (const path of ["/san-pham", ...PAGES.map((p) => p.path)]) {
+      test(`${path}: the Zalo button is on the first screen, above the bottom bar`, async ({ page }) => {
+        await page.goto(path);
+        const button = (await page.locator("[data-zalo-card] button[type=submit]").first().boundingBox())!;
+        const bar = (await page.locator('[data-track="sticky_bar"]').boundingBox())!;
+        expect(button.y + button.height).toBeLessThanOrEqual(bar.y);
+      });
+    }
   });
 });

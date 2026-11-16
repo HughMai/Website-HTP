@@ -215,6 +215,15 @@ export const STATS = [
   },
 ] as const;
 
+// Warranty terms Hughie set on 14/11/2026 (CLAUDE.md locked decision #1), for cửa cuốn and
+// its motor and phụ kiện only. Every other part (khung nhôm, kính, thân cửa kéo…) keeps
+// "Bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất". These two sentences, word for word,
+// are the only year counts e2e/seo-metadata.spec.ts allows in app/, components/ or lib/.
+export const WARRANTY_TERMS = {
+  cuaCuon: "Nan cửa bảo hành 5 năm; motor và phụ kiện bảo hành 1 năm, tính từ ngày bàn giao",
+  motorPhuKien: "Motor và phụ kiện bảo hành 1 năm, tính từ ngày bàn giao",
+} as const;
+
 // Product categories with subtypes — each subtype has its own photo + label.
 // pageLink: the pillar page this category links to from the homepage — a body-level
 // keyword-anchored link from the homepage to each money page (SEO Rules: topic clusters).
