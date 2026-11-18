@@ -13,7 +13,7 @@ import { SITE } from "@/lib/site-data";
  * changes, change this page the same day.
  *
  * Recipients listed are the real ones in app/api/contact/route.ts (Telegram,
- * Resend email, the CRM) plus the tags in components/Analytics.tsx.
+ * the CRM) plus the tags in components/Analytics.tsx.
  */
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
@@ -61,7 +61,7 @@ const sections: { h: string; p: (string | string[])[] }[] = [
       [
         "Google (Google Analytics, Google Ads): số liệu truy cập và chuyển đổi, không gồm họ tên hay số điện thoại của bạn.",
         "Vercel: máy chủ lưu trữ website.",
-        "Telegram và Resend: chuyển thông báo yêu cầu báo giá đến điện thoại và email của gia đình chủ cửa hàng.",
+        "Telegram: chuyển thông báo yêu cầu báo giá đến điện thoại của gia đình chủ cửa hàng.",
         "Hệ thống quản lý khách hàng nội bộ của Hưng Thành Phát.",
         "Zalo (VNG): khi bạn nhắn tin qua Zalo, và khi chúng tôi gửi catalog, báo giá qua Zalo tới số bạn ghi trên form.",
       ],

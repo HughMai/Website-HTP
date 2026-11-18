@@ -4,10 +4,9 @@ import type { AddressInfo } from "node:net";
 /**
  * Stand-in for crm.hungthanhphat.vn.
  *
- * The whole point: no test may ever send a real Telegram message, a real
- * Resend email, or a real CRM webhook. Telegram and Resend are handled by
- * leaving their env vars unset (each channel then reports "not-configured"),
- * and the CRM is pointed here instead.
+ * The whole point: no test may ever send a real Telegram message or a real
+ * CRM webhook. Telegram is handled by leaving its env vars unset
+ * (reporting "not-configured"), and the CRM is pointed here instead.
  *
  *   POST /crm         → records the payload, answers per `mode`
  *   GET  /__received  → everything recorded so far

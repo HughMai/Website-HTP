@@ -84,7 +84,7 @@ type Lead = {
   message?: string;
   source?: string;
   catalog?: boolean;
-  // Ad attribution. Only the CRM consumes these — Telegram and email are read
+  // Ad attribution. Only the CRM consumes these — Telegram is read
   // by people, and a utm string in a phone notification is noise.
   utm_source?: string;
   utm_medium?: string;
@@ -223,68 +223,6 @@ async function notifyViaTelegram(lead: Lead): Promise<Delivery> {
   }
 }
 
-async function notifyViaEmail(lead: Lead): Promise<Delivery> {
-  const channel = "email";
-  const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.NOTIFY_EMAIL;
-
-  if (!apiKey || !toEmail) return { channel, ok: false, reason: "not-configured" };
-
-  const now = new Date().toLocaleString("vi-VN", {
-    timeZone: "Asia/Ho_Chi_Minh",
-    dateStyle: "long",
-    timeStyle: "short",
-  });
-
-  const row = (label: string, value: string, strong = false) => `
-    <tr style="border-top:1px solid #f3f4f6">
-      <td style="padding:10px 0;color:#6b7280;width:130px">${label}</td>
-      <td style="padding:10px 0;${strong ? "font-weight:600;" : ""}color:#111827">${value}</td>
-    </tr>`;
-
-  const html = `
-    <div style="font-family:sans-serif;max-width:520px;margin:0 auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">
-      <div style="background:#1d4ed8;padding:24px 28px">
-        <h2 style="margin:0;color:#fff;font-size:18px">Yêu cầu báo giá mới</h2>
-        <p style="margin:4px 0 0;color:#bfdbfe;font-size:13px">Hưng Thành Phát — ${now}</p>
-      </div>
-      <div style="padding:24px 28px;background:#fff">
-        ${lead.flags.length ? `<div style="margin-bottom:16px;padding:12px 14px;background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;color:#92400e;font-size:14px;font-weight:600">${lead.flags.join("<br/>")}</div>` : ""}
-        <table style="width:100%;border-collapse:collapse;font-size:15px">
-          ${row("Khách hàng", lead.name, true)}
-          ${row("Điện thoại", lead.phone, true)}
-          ${lead.email   ? row("Email", lead.email)     : ""}
-          ${lead.message ? row("Nhu cầu", lead.message) : ""}
-          ${lead.source  ? row("Từ trang", lead.source) : ""}
-        </table>
-      </div>
-      <div style="padding:14px 28px;background:#f9fafb;font-size:12px;color:#9ca3af">
-        Email này được gửi tự động từ website hungthanhphat.vn
-      </div>
-    </div>
-  `;
-
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: "Hưng Thành Phát <onboarding@resend.dev>",
-        to: [toEmail],
-        subject: `[Báo giá] ${lead.name} — ${lead.phone}`,
-        html,
-      }),
-    });
-    if (!res.ok) return { channel, ok: false, reason: `HTTP ${res.status}` };
-    return { channel, ok: true };
-  } catch (err) {
-    return { channel, ok: false, reason: err instanceof Error ? err.message : String(err) };
-  }
-}
-
 async function notifyViaCRM(lead: Lead): Promise<Delivery> {
   const channel = "crm";
   const token = process.env.CRM_WEBHOOK_TOKEN;
@@ -399,7 +337,6 @@ export async function POST(req: NextRequest) {
 
   const results = await Promise.all([
     notifyViaTelegram(lead),
-    notifyViaEmail(lead),
     notifyViaCRM(lead),
   ]);
 

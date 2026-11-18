@@ -7,18 +7,17 @@
  *
  *   next build ──► layout.tsx module eval ──► assertContactEnv()
  *                                              │
- *                    all three channels unset ─┴─► throw (production build fails)
- *                    some channels unset ────────► console.warn, build continues
+ *                    both channels unset ──────┴─► throw (production build fails)
+ *                    one channel unset ──────────► console.warn, build continues
  *
  * The asymmetry is deliberate. Losing one channel is a degraded pipeline and
  * `/api/contact` still answers 200 because another channel took the lead.
- * Losing all three means every submitted phone number goes nowhere, which is
+ * Losing both means every submitted phone number goes nowhere, which is
  * never a state worth deploying.
  */
 
 const CHANNELS = [
   { name: "Telegram", vars: ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"] },
-  { name: "Email (Resend)", vars: ["RESEND_API_KEY", "NOTIFY_EMAIL"] },
   { name: "CRM webhook", vars: ["CRM_WEBHOOK_TOKEN"] },
 ] as const;
 

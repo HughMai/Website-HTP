@@ -94,7 +94,7 @@ test.describe("POST /api/contact — server behaviour", () => {
   });
 
   test("answers 502 when every channel fails", async ({ request }) => {
-    // Telegram and Resend are unconfigured by the test env, so making the CRM
+    // Telegram is unconfigured by the test env, so making the CRM
     // fail leaves nothing that could have received the lead.
     await resetCrm("fail");
     const v = visitor();
