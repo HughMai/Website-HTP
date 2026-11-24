@@ -50,11 +50,14 @@ export function LeadForm({
   className,
   submitLabel = "Nhận báo giá",
   belowButton,
+  message = "Nhận catalog & báo giá qua Zalo",
 }: {
   source: string;
   tone?: "dark" | "light";
   className?: string;
   submitLabel?: string;
+  /** The CRM's "need": what the customer asked for. The nhôm kính gallery names the photo. */
+  message?: string;
   /** Directly under the button, before the consent line: the guarantee ticks on the ad
    *  pages, so the risk reversal sits next to the ask and the small print comes last. */
   belowButton?: React.ReactNode;
@@ -83,7 +86,7 @@ export function LeadForm({
 
   const onSubmit = (values: LeadValues) => {
     setSentTo(values.phone);
-    return submit({ phone: values.phone, message: "Nhận catalog & báo giá qua Zalo", catalog: true });
+    return submit({ phone: values.phone, message, catalog: true });
   };
 
   return (

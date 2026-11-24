@@ -6,10 +6,11 @@ import { Footer } from "@/components/sections/Footer";
 import { CallForPrice, PriceGate } from "@/components/PriceGate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
-import { ProductPhotos } from "@/components/sections/ProductPhotos";
+import { ProductGallery } from "@/components/ProductGallery";
 import { Button } from "@/components/ui/button";
 import { APPLIED_FROM } from "@/lib/bang-gia-data";
 import { FAQ_NK_PRICE, FAQ_NK_VIET_NHAP, LP_FORM } from "@/lib/lp-data";
+import { NK_FILTERS, NK_GALLERY } from "@/lib/nhom-kinh-gallery";
 import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
@@ -228,6 +229,37 @@ export default function CuaNhomKinhCanTho() {
           </div>
         </section>
 
+        {/* The gallery, straight under the hero (Hughie, 24/11/2026): his old site's Xingfa and lan
+            can pages plus HTP's own jobs, filtered by where the door goes. Each photo asks for its
+            own price, and the lead tells the family which one. Content: lib/nhom-kinh-gallery.ts. */}
+        <section id="thu-vien-mau" className="bg-white py-16 md:py-20" aria-labelledby="thu-vien-mau-title">
+          <div className="container">
+            <div className="mb-6 max-w-2xl">
+              <h2 id="thu-vien-mau-title" className="text-balance text-2xl font-semibold tracking-tight text-brand md:text-3xl">
+                Mẫu cửa nhôm Xingfa, lan can kính bên em làm
+              </h2>
+              <p className="mt-3 text-base text-brand/70">
+                Chọn theo chỗ lắp, bấm vào ảnh để xem lớn và hỏi giá đúng mẫu đó qua Zalo. Bên em nhận được mã
+                ảnh nên biết ngay anh/chị hỏi mẫu nào. Nhãn &ldquo;Công trình thật&rdquo; là ảnh chụp tại công
+                trình bên em đã lắp; nhãn &ldquo;Mẫu&rdquo; là ảnh minh họa kiểu cửa nhôm hệ Xingfa.
+              </p>
+            </div>
+            <ProductGallery
+              items={NK_GALLERY}
+              filters={NK_FILTERS}
+              ask={{ source: "Cửa nhôm kính · thư viện mẫu" }}
+              square
+            />
+            <p className="mt-8 text-sm text-brand/60">
+              Xem thêm{" "}
+              <Link href="/cong-trinh" className="font-semibold text-brand underline underline-offset-4">
+                toàn bộ công trình đã thi công
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+
         {/* Systems */}
         <section className="py-16 md:py-24">
           <div className="container">
@@ -330,11 +362,6 @@ export default function CuaNhomKinhCanTho() {
             </div>
           </div>
         </section>
-
-        <ProductPhotos
-          categoryId="cua-nhom-kinh"
-          heading="Ảnh cửa nhôm kính Hưng Thành Phát đã lắp tại Cần Thơ"
-        />
 
         <CtaBand id="nhan-bao-gia" source="Cửa nhôm kính" />
 
