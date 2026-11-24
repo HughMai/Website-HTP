@@ -14,6 +14,8 @@ const PAGES = [
   { path: "/lp/cua-keo-can-tho", keyword: "Cửa Kéo Cần Thơ", price: "540.000", form: true },
   { path: "/lp/cua-nhom-kinh-can-tho", keyword: "Cửa Nhôm Kính Cần Thơ", price: "1.200.000", form: true },
   { path: "/lp/sua-cua-cuon-can-tho", keyword: "Sửa Cửa Cuốn Cần Thơ", price: "300.000", form: false },
+  // Keyword page: "cửa cuốn mitadoor" in Werich › Cua cuon (24/11/2026).
+  { path: "/lp/cua-cuon-mitadoor-can-tho", keyword: "Cửa Cuốn Mitadoor Cần Thơ", price: "1.050.000", form: true },
 ];
 
 // The ten sitelink pages (Enki/htp/ads/sitelink-landing-plan-2026-11-12.md). `first` is the

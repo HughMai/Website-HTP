@@ -45,6 +45,8 @@ export type LpSlug =
   | "cua-keo-can-tho"
   | "cua-nhom-kinh-can-tho"
   | "sua-cua-cuon-can-tho"
+  // Keyword pages (a keyword's own final URL inside an ad group)
+  | "cua-cuon-mitadoor-can-tho"
   // Sitelink pages
   | "bang-gia-cua-cuon-can-tho"
   | "cua-cuon-nhom-khe-thoang-can-tho"
@@ -493,6 +495,21 @@ const KHE_THOANG = NAN_DUC.filter((n) => {
 });
 const KHE_THOANG_TU = lowest(KHE_THOANG.map((n) => n.gia), "nan khe thoáng");
 
+const FAQ_NAN_DAY = {
+  q: "Nên chọn nan dày bao nhiêu?",
+  a: "Nhà ở, garage: nan dày 1.0–1.5mm là đủ cho cửa đến khoảng 16m² (rộng 4m × cao 4m). Nhà sát đường lớn chọn mẫu có lông nheo hoặc gioong chống ồn. Cửa rộng trên 6m chọn nan dày, chân dày để thân cửa không võng.",
+};
+
+// Cửa cuốn Mitadoor: the catalog's Mitadoor nan, plus Kovidoor, which the site already names as
+// Mitadoor's công nghệ Đức line (/bao-gia-cua-cuon-can-tho). "MT5222R (High class)": the line
+// name is the one printed on the nan, where it has one.
+const nanOf = (brand: string) => NAN_DUC.filter((n) => n.brand === brand);
+const mauList = (brand: string) => nanOf(brand).map((n) => (n.line ? `${n.code} (${n.line})` : n.code)).join(", ");
+const MITA = [...nanOf("Mitadoor"), ...nanOf("Kovidoor")];
+const MITA_TU = lowest(nanOf("Mitadoor").map((n) => n.gia), "nan Mitadoor");
+const KOVI_TU = lowest(nanOf("Kovidoor").map((n) => n.gia), "nan Kovidoor");
+const MITA_ALL_TU = Math.min(MITA_TU, KOVI_TU);
+
 // The price answers below are computed from the catalog data, so the product pages
 // (/cua-cuon-can-tho, /cua-keo-can-tho, /cua-nhom-kinh-can-tho) reuse them too (16/11/2026).
 export const FAQ_CUON_PRICE = {
@@ -629,10 +646,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         q: "Khe thoáng, gioong, lông nheo là gì?",
         a: "Khe thoáng là lỗ dập trên nan để gió và ánh sáng vào khi cửa đóng; mẫu kín không có lỗ nên riêng tư hơn. Gioong (ron) và lông nheo là dải cao su hoặc lông nằm giữa các nan, giúp cửa chạy êm và bớt ồn; mẫu có chữ R cuối mã thường có.",
       },
-      {
-        q: "Nên chọn nan dày bao nhiêu?",
-        a: "Nhà ở, garage: nan dày 1.0–1.5mm là đủ cho cửa đến khoảng 16m² (rộng 4m × cao 4m). Nhà sát đường lớn chọn mẫu có lông nheo hoặc gioong chống ồn. Cửa rộng trên 6m chọn nan dày, chân dày để thân cửa không võng.",
-      },
+      FAQ_NAN_DAY,
       FAQ_DEPOSIT,
       FAQ_MATERIALS,
       FAQ_LATE,
@@ -1004,6 +1018,49 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
       FAQ_MIEN_TAY,
     ],
     closing: "Cửa cuốn Cần Thơ — biết giá trước khi làm",
+  },
+  {
+    // Brand searches ("cửa cuốn mitadoor"), the keyword's own final URL in Werich › Cua cuon
+    // (Hughie, 24/11/2026). The dealer line is the shop sign's wording, live in ShopStory and
+    // confirmed by Hughie. No job record names a nan's brand, so the photo captions never say
+    // Mitadoor; the sub uses only lines the site already states (mẫu thật, báo giá, CO/CQ).
+    slug: "cua-cuon-mitadoor-can-tho",
+    keyword: "Cửa Cuốn Mitadoor Cần Thơ",
+    promise: "Đại Lý Ủy Quyền, Sai Nan Đền 100%",
+    description: `Đại lý phân phối ủy quyền Mitadoor tại Cần Thơ: ${MITA.length} mẫu nan Mitadoor và Kovidoor, giá từ ${perM2(MITA_ALL_TU)}, đã gồm vật tư và công lắp. Mỗi bộ cửa có CO/CQ; sai vật tư, đền 100% giá trị hợp đồng.`,
+    sub: "Mẫu nan thật có ở cửa hàng để xem trước khi chọn. Báo giá rõ từng mục, cửa có CO/CQ chứng nhận xuất xứ để anh/chị đối chiếu.",
+    priceTeaser: `${MITA.length} mẫu nan Mitadoor, Kovidoor · từ ${perM2(MITA_ALL_TU)}`,
+    zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
+    hero: job("p01-cc-nan-bac", "Cửa cuốn nan nhôm khe thoáng", "Cửa cuốn nan nhôm màu bạc có khe thoáng oval"),
+    ...INSTALL,
+    photos: {
+      title: "Cửa cuốn nan nhôm bên em đã giao và lắp đặt khắp các tỉnh miền Tây",
+      items: [
+        job("p24-cc-xam-duc-lo", "Nan khe thoáng màu xám"),
+        job("p28-cc-kem-duc-lo-nt", "Nan khe thoáng màu kem"),
+        job("p60-garage-cc-tan", "Cửa garage — thợ đang lắp"),
+        job("p02-cc-kem-tiled", "Shophouse — thợ đang lắp"),
+      ],
+    },
+    form: LP_FORM,
+    steps: cuonSteps(in30("ảnh mặt tiền và kích thước")),
+    faq: [
+      {
+        q: "Bên em có những mẫu Mitadoor nào?",
+        a: `Mitadoor: ${mauList("Mitadoor")}. Kovidoor, dòng cửa cuốn công nghệ Đức của Mitadoor: ${mauList("Kovidoor")}. Mẫu nan thật có ở cửa hàng để xem trước khi chọn; giá từng mẫu trong bảng giá gửi qua Zalo.`,
+      },
+      {
+        q: "Cửa cuốn Mitadoor giá bao nhiêu?",
+        a: `Theo bảng giá áp dụng từ ${APPLIED_FROM}: nan Mitadoor từ ${perM2(MITA_TU)}, Kovidoor từ ${perM2(KOVI_TU)}, tùy mẫu nan. Giá đã gồm vật tư và công lắp đặt, chưa VAT; motor và bình tích điện tính riêng. Thợ đo tận nơi và báo giá đúng kích thước, miễn phí nội thành Cần Thơ.`,
+      },
+      FAQ_MATERIALS,
+      FAQ_NAN_DAY,
+      FAQ_DEPOSIT,
+      FAQ_LATE,
+      FAQ_WARRANTY_CUON,
+      FAQ_MIEN_TAY,
+    ],
+    closing: "Cửa cuốn Mitadoor Cần Thơ — biết giá trước khi làm",
   },
   {
     slug: "cua-keo-can-tho",
