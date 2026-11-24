@@ -216,7 +216,7 @@ export function Hero() {
             { href: "/cua-cuon-can-tho", label: "Cửa cuốn" },
             { href: "/cua-nhom-kinh-can-tho", label: "Cửa nhôm kính" },
             { href: "/cua-keo-can-tho", label: "Cửa kéo" },
-            { href: "/lan-can-nhom-kinh-can-tho", label: "Lan can kính" },
+            { href: "/san-pham#lan-can-cau-thang", label: "Lan can kính" },
             { href: "/sua-chua-cua-cuon-can-tho", label: "Sửa cửa cuốn" },
             { href: "/cong-trinh", label: "Công trình đã làm" },
           ].map((l) => (

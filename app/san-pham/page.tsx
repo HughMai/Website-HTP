@@ -19,6 +19,9 @@ const CUA_CUON = PRODUCT_CATEGORIES.find((c) => c.id === "cua-cuon")!;
 
 // Lines shown as the old site's product grids below, so not as category rows too.
 const KINH_IDS = new Set(SAN_PHAM_KINH.map((l) => l.id));
+const ROWS = PRODUCT_CATEGORIES.filter((c) => !KINH_IDS.has(c.id));
+// The nine blocks in page order, for the jump list at the foot of the hero.
+const LINES = [...ROWS, ...SAN_PHAM_KINH];
 
 export const metadata: Metadata = {
   title: "Sản Phẩm Cửa",
@@ -111,6 +114,22 @@ export default function SanPhamPage() {
                 </a>
               </Button>
             </div>
+            {/* One tap to any of the nine lines; one swipe row on a phone, like the homepage
+                hero's quick links. */}
+            <nav
+              aria-label="Các dòng sản phẩm"
+              className="-mx-4 mt-10 flex snap-x scroll-px-4 gap-2 overflow-x-auto border-t border-white/10 px-4 pt-6 md:mx-0 md:flex-wrap md:justify-center md:px-0"
+            >
+              {LINES.map((l) => (
+                <a
+                  key={l.id}
+                  href={`#${l.id}`}
+                  className="inline-flex min-h-[44px] shrink-0 snap-start items-center rounded-full border border-white/15 bg-white/5 px-4 text-sm text-white/80 transition hover:border-amber-400/50 hover:bg-amber-400/10 hover:text-white"
+                >
+                  {l.name}
+                </a>
+              ))}
+            </nav>
           </div>
         </section>
 
@@ -120,11 +139,15 @@ export default function SanPhamPage() {
             A card asks that product's price by Zalo. Content: lib/nhom-kinh-gallery.ts. */}
         <section className="bg-white py-14 md:py-20">
           <div className="container space-y-14">
-            {PRODUCT_CATEGORIES.filter((c) => !KINH_IDS.has(c.id)).map((cat) => (
-              <ProductCategoryRow key={cat.id} category={cat} headingLevel="h2" />
+            {ROWS.map((cat) => (
+              <div key={cat.id} id={cat.id} className="scroll-mt-24">
+                <ProductCategoryRow category={cat} headingLevel="h2" />
+              </div>
             ))}
             {SAN_PHAM_KINH.map((line) => {
               const cat = PRODUCT_CATEGORIES.find((c) => c.id === line.id);
+              // Lan can's page is this block (24/11/2026): no button linking to itself.
+              const pageLink = cat && cat.pageLink.href !== `/san-pham#${line.id}` ? cat.pageLink : null;
               return (
                 <div key={line.id} id={line.id} className="scroll-mt-24">
                   <div className="flex flex-wrap items-end justify-between gap-3 border-b border-brand/15 pb-3">
@@ -135,12 +158,12 @@ export default function SanPhamPage() {
                       </h2>
                       {cat && <p className="mt-1 text-sm font-bold text-amber-600">{cat.priceFrom}</p>}
                     </div>
-                    {cat && (
+                    {pageLink && (
                       <Link
-                        href={cat.pageLink.href}
+                        href={pageLink.href}
                         className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-600"
                       >
-                        {cat.pageLink.label}
+                        {pageLink.label}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Link>
                     )}
@@ -149,6 +172,7 @@ export default function SanPhamPage() {
                     items={line.items}
                     ask={{ source: `Trang sản phẩm · ${line.name}` }}
                     cards
+                    strip
                     className="mt-5"
                   />
                 </div>

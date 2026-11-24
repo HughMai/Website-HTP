@@ -102,7 +102,7 @@ export function ProductCategoryRow({
 
       {/* Cards — horizontal scroll on mobile, grid from lg */}
       {cards.length > 0 && (
-      <ul className="mt-5 -mx-4 flex gap-3 overflow-x-auto px-4 pb-3 snap-x snap-mandatory lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0">
+      <ul className="mt-5 -mx-4 flex gap-3 overflow-x-auto px-4 pb-3 snap-x snap-mandatory scroll-px-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0">
         {cards.map((card) => (
           <li
             key={card.key}
@@ -158,9 +158,10 @@ export function ProductCategoryRow({
           renders as tiles rather than a thin strip of chips. */}
       {cards.length > 0 ? (
         showSubtypes && (
-        <ul className="mt-4 flex flex-wrap gap-2">
+        // One swipe line on a phone: wrapped, cửa cuốn's ten chips stood seven rows tall.
+        <ul className="-mx-4 mt-4 flex snap-x scroll-px-4 gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
           {category.subtypes.map((s) => (
-            <li key={s.name}>
+            <li key={s.name} className="shrink-0 snap-start">
               <Link
                 href={category.pageLink.href}
                 className="inline-flex min-h-[44px] items-center rounded-full border border-brand/15 bg-white px-3 text-xs font-medium text-brand/75 transition hover:border-amber-400 hover:bg-amber-50 hover:text-brand"

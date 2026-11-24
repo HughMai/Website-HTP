@@ -327,9 +327,11 @@ export const PRODUCT_CATEGORIES = [
     name: "Lan Can – Cầu Thang Kính",
     tagline: "Kính cường lực – Tay vịn gỗ hoặc nhôm – Thoáng và an toàn",
     priceFrom: "từ 1.950.000đ/m²",
+    // Hughie, 24/11/2026: a lan can click opens the old site's lan can photos on /san-pham, as
+    // the Sản Phẩm menu does. /lan-can-nhom-kinh-can-tho stays live, linked from the footer.
     pageLink: {
-      href: "/lan-can-nhom-kinh-can-tho",
-      label: "Xem Lan Can Nhôm Kính Cần Thơ",
+      href: "/san-pham#lan-can-cau-thang",
+      label: "Xem Lan Can – Cầu Thang Kính",
     },
     showcase: [
       { slug: "nk36-lan-can-ban-cong-go", label: "Lan can kính ban công" },

@@ -49,11 +49,16 @@ test.describe("/san-pham", () => {
   });
 
   // The old site's six glass category pages (24/11/2026): a heading and the products, no copy.
-  test("shows the old site's glass lines as product grids with clean names", async ({ page }) => {
+  // On a computer each line is one row of four; "Xem thêm" brings the rest.
+  test("shows the old site's glass lines as product rows with clean names", async ({ page }) => {
     for (const line of SAN_PHAM_KINH) {
       const block = page.locator(`[id="${line.id}"]`);
+      const cards = block.getByRole("button", { name: /^Xem ảnh lớn:/ });
       await expect(block.getByRole("heading", { level: 2 })).toHaveText(line.name);
-      await expect(block.getByRole("button", { name: /^Xem ảnh lớn:/ })).toHaveCount(line.items.length);
+      await expect(cards).toHaveCount(4);
+      await block.getByRole("button", { name: `Xem thêm ${line.items.length - 4} mẫu` }).click();
+      await expect(cards).toHaveCount(line.items.length);
+      await expect(cards.nth(4)).toBeFocused();
     }
     // The old names' SEO add-ons stay off: "Thi công … tại <quận>", Cần Thơ, districts.
     for (const { label } of SAN_PHAM_KINH.flatMap((l) => l.items)) {
@@ -62,6 +67,38 @@ test.describe("/san-pham", () => {
       );
     }
   });
+});
+
+// 24/11/2026 (Hughie: "too large and mobile unfriendly"): the glass lines were full 2-across
+// grids, 18 screens on a phone. Now every line is one swipe row, and the hero lists all nine.
+test.describe("/san-pham on a phone", () => {
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+
+  test("each line is one swipe row, and the hero's jump list reaches all nine", async ({ page }) => {
+    await page.goto("/san-pham");
+    for (const line of SAN_PHAM_KINH) {
+      const block = page.locator(`[id="${line.id}"]`);
+      const tops = await block.locator("li").evaluateAll((lis) => lis.map((li) => Math.round(li.getBoundingClientRect().top)));
+      expect(tops, line.id).toHaveLength(line.items.length);
+      expect(new Set(tops).size, `${line.id}: one row`).toBe(1);
+      await expect(block.getByRole("button", { name: /^Xem thêm/ })).toBeHidden();
+    }
+    const jumps = page.getByRole("navigation", { name: "Các dòng sản phẩm" }).getByRole("link");
+    await expect(jumps).toHaveCount(9); // cửa cuốn, cửa kéo, motor + the six glass lines
+    for (const href of await jumps.evaluateAll((as) => as.map((a) => a.getAttribute("href")!))) {
+      await expect(page.locator(`[id="${href.slice(1)}"]`), href).toHaveCount(1);
+    }
+  });
+});
+
+// The Sản Phẩm menu sends lan can to its photos on /san-pham; the homepage must too (24/11/2026).
+test("the homepage's lan can links open the lan can photos on /san-pham", async ({ page }) => {
+  await page.goto("/");
+  const main = page.locator("main");
+  for (const name of ["Lan can kính", "Xem Lan Can – Cầu Thang Kính"]) {
+    await expect(main.getByRole("link", { name, exact: true })).toHaveAttribute("href", "/san-pham#lan-can-cau-thang");
+  }
+  await expect(main.locator('a[href="/lan-can-nhom-kinh-can-tho"]')).toHaveCount(0);
 });
 
 test("a glass product on /san-pham asks its price, and the lead names it", async ({ page }) => {

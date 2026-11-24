@@ -3,9 +3,12 @@
 import * as React from "react";
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
 import { cn } from "@/lib/utils";
+
+/** `strip` from lg: one row of the 4-across grid, the rest behind "Xem thêm". */
+const STRIP_ROW = 4;
 
 export type GalleryItem = {
   src: string;
@@ -35,6 +38,7 @@ export function ProductGallery({
   className,
   ask,
   cards = false,
+  strip = false,
 }: {
   items: GalleryItem[];
   className?: string;
@@ -42,8 +46,16 @@ export function ProductGallery({
   ask?: { source: string };
   /** Design cards: square photo, the name centred under it, and "Hỏi giá qua Zalo". */
   cards?: boolean;
+  /**
+   * /san-pham, nine lines on one page (24/11/2026: 18 screens on a phone as full grids): a swipe
+   * row on a phone, the site's product-row pattern (ProductCategoryRow), and from lg one row of
+   * the grid with a "Xem thêm" button. The lightbox still walks every photo.
+   */
+  strip?: boolean;
 }) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  const [more, setMore] = React.useState(false);
+  const listRef = React.useRef<HTMLUListElement>(null);
   const open = openIndex !== null;
   const current = open ? items[openIndex] : null;
 
@@ -71,14 +83,22 @@ export function ProductGallery({
   return (
     <>
       <ul
+        ref={listRef}
         className={cn(
-          "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4",
-          cards ? "gap-x-3 gap-y-7 md:gap-x-5" : "gap-3",
+          strip
+            ? "-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-3 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-5 lg:gap-y-7 lg:overflow-visible lg:px-0 lg:pb-0"
+            : cn("grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4", cards ? "gap-x-3 gap-y-7 md:gap-x-5" : "gap-3"),
           className
         )}
       >
         {items.map((item, i) => (
-          <li key={item.src}>
+          <li
+            key={item.src}
+            className={cn(
+              strip && "w-[40vw] max-w-[200px] shrink-0 snap-start lg:w-auto lg:max-w-none",
+              strip && !more && i >= STRIP_ROW && "lg:hidden"
+            )}
+          >
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
@@ -128,6 +148,23 @@ export function ProductGallery({
           </li>
         ))}
       </ul>
+
+      {strip && !more && items.length > STRIP_ROW && (
+        <button
+          type="button"
+          onClick={() => {
+            setMore(true);
+            // The button goes away; focus lands on the first photo it revealed.
+            requestAnimationFrame(() =>
+              listRef.current?.querySelectorAll<HTMLButtonElement>(":scope > li > button")[STRIP_ROW]?.focus()
+            );
+          }}
+          className="mx-auto mt-6 hidden min-h-[44px] w-fit items-center gap-1.5 rounded-full border border-brand/15 bg-white px-5 text-sm font-semibold text-brand transition hover:border-amber-400 hover:bg-amber-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 lg:flex"
+        >
+          Xem thêm {items.length - STRIP_ROW} mẫu
+          <ChevronDown className="h-4 w-4" aria-hidden />
+        </button>
+      )}
 
       <Dialog.Root open={open} onOpenChange={(o) => !o && setOpenIndex(null)}>
         <Dialog.Portal>
