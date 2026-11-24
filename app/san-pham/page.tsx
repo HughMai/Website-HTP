@@ -5,15 +5,20 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ProductCategoryRow } from "@/components/ProductCategoryRow";
+import { ProductGallery } from "@/components/ProductGallery";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
 import { Button } from "@/components/ui/button";
 import { LP_FORM } from "@/lib/lp-data";
+import { SAN_PHAM_KINH } from "@/lib/nhom-kinh-gallery";
 import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 
 // The lowest "từ" anchor on the page, read from the row itself so the snippet can't drift.
 const CUA_CUON = PRODUCT_CATEGORIES.find((c) => c.id === "cua-cuon")!;
+
+// Lines shown as the old site's product grids below, so not as category rows too.
+const KINH_IDS = new Set(SAN_PHAM_KINH.map((l) => l.id));
 
 export const metadata: Metadata = {
   title: "Sản Phẩm Cửa",
@@ -84,7 +89,7 @@ export default function SanPhamPage() {
             {/* Rows show a starting price only; the full list goes out by Zalo (13/11/2026). */}
             <p className="mx-auto mt-4 max-w-2xl text-balance text-base text-white/75 md:text-lg">
               {PRODUCT_CATEGORIES.length} dòng chính, làm tại xưởng Bình Thủy từ{" "}
-              {SITE.foundedYear}, nhận lắp {SITE.serviceArea}. Mỗi dòng bên dưới
+              {SITE.foundedYear}, nhận lắp {SITE.serviceArea}. Mỗi dòng chính
               ghi giá khởi điểm; bảng giá đầy đủ gửi qua Zalo trong 1–2 phút.
             </p>
             <p className="mx-auto mt-3 max-w-2xl text-balance text-sm font-semibold text-amber-200 md:text-base">
@@ -109,12 +114,46 @@ export default function SanPhamPage() {
           </div>
         </section>
 
-        {/* Category blocks */}
+        {/* Category blocks: cửa cuốn, cửa kéo, motor, then the old site's six glass lines as
+            product grids (Hughie, 24/11/2026: "keep mục sản phẩm clean, no need added words"):
+            the name, the "từ" price and page link where the line has them, and the products.
+            A card asks that product's price by Zalo. Content: lib/nhom-kinh-gallery.ts. */}
         <section className="bg-white py-14 md:py-20">
           <div className="container space-y-14">
-            {PRODUCT_CATEGORIES.map((cat) => (
+            {PRODUCT_CATEGORIES.filter((c) => !KINH_IDS.has(c.id)).map((cat) => (
               <ProductCategoryRow key={cat.id} category={cat} headingLevel="h2" />
             ))}
+            {SAN_PHAM_KINH.map((line) => {
+              const cat = PRODUCT_CATEGORIES.find((c) => c.id === line.id);
+              return (
+                <div key={line.id} id={line.id} className="scroll-mt-24">
+                  <div className="flex flex-wrap items-end justify-between gap-3 border-b border-brand/15 pb-3">
+                    <div>
+                      <div className="h-0.5 w-12 rounded-full bg-amber-400" />
+                      <h2 className="mt-2 text-lg font-extrabold uppercase tracking-wider text-brand md:text-xl">
+                        {line.name}
+                      </h2>
+                      {cat && <p className="mt-1 text-sm font-bold text-amber-600">{cat.priceFrom}</p>}
+                    </div>
+                    {cat && (
+                      <Link
+                        href={cat.pageLink.href}
+                        className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-600"
+                      >
+                        {cat.pageLink.label}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </Link>
+                    )}
+                  </div>
+                  <ProductGallery
+                    items={line.items}
+                    ask={{ source: `Trang sản phẩm · ${line.name}` }}
+                    cards
+                    className="mt-5"
+                  />
+                </div>
+              );
+            })}
           </div>
         </section>
 

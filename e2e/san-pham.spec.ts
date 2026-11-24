@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { crmReceived, resetCrm } from "./crm-mock";
 import { CUA_KEO, MOTOR, NAN_DUC, NHOM_KINH, SONG_NGANG, TAM_LIEN, TOLE_THEM } from "../lib/bang-gia-data";
+import { SAN_PHAM_KINH } from "../lib/nhom-kinh-gallery";
 import { PRODUCT_CATEGORIES, SITE, WARRANTY_TERMS } from "../lib/site-data";
 
 /**
@@ -45,6 +47,44 @@ test.describe("/san-pham", () => {
     expect(description).toContain("miền Tây");
     expect(description).not.toMatch(/khảo sát miễn phí|giá tham khảo/i);
   });
+
+  // The old site's six glass category pages (24/11/2026): a heading and the products, no copy.
+  test("shows the old site's glass lines as product grids with clean names", async ({ page }) => {
+    for (const line of SAN_PHAM_KINH) {
+      const block = page.locator(`[id="${line.id}"]`);
+      await expect(block.getByRole("heading", { level: 2 })).toHaveText(line.name);
+      await expect(block.getByRole("button", { name: /^Xem ảnh lớn:/ })).toHaveCount(line.items.length);
+    }
+    // The old names' SEO add-ons stay off: "Thi công … tại <quận>", Cần Thơ, districts.
+    for (const { label } of SAN_PHAM_KINH.flatMap((l) => l.items)) {
+      expect(label).not.toMatch(
+        /thi công| tại |cần thơ|cái răng|bình thủy|ninh kiều|ô môn|phong điền|vĩnh thạnh|thốt nốt|cờ đỏ|hiện đại|cao cấp/i
+      );
+    }
+  });
+});
+
+test("a glass product on /san-pham asks its price, and the lead names it", async ({ page }) => {
+  await resetCrm("ok");
+  const run = (Date.now() + 29) % 100000;
+  const phone = `097${String(run).padStart(7, "0")}`;
+  await page.setExtraHTTPHeaders({ "x-forwarded-for": `10.204.${run % 250}.${(run >> 8) % 250}` });
+  await page.goto("/san-pham");
+
+  const line = SAN_PHAM_KINH.find((l) => l.id === "phong-tam-kinh")!;
+  const item = line.items[2];
+  await page.locator(`[id="${line.id}"]`).getByRole("button", { name: `Xem ảnh lớn: ${item.label}` }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toContainText(item.label);
+  await dialog.getByPlaceholder("Số Zalo của anh/chị").fill(phone);
+  // The server drops submissions made faster than a human could type.
+  await page.waitForTimeout(3200);
+  await dialog.getByRole("button", { name: "Hỏi giá mẫu này" }).click();
+  await expect.poll(async () => (await crmReceived()).length).toBe(1);
+  const [lead] = await crmReceived<{ phone: string; need: string; sourcePage: string }>();
+  expect(lead.phone).toBe(phone);
+  expect(lead.need).toContain(`Hỏi giá mẫu: ${item.label} · ảnh ${item.src}`);
+  expect(lead.sourcePage).toBe(`Trang sản phẩm · ${line.name}`);
 });
 
 // The "từ" prices in site-data.ts are typed by hand (site-data reaches client bundles, so it
