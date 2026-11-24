@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ChevronLeft, ChevronRight, MapPin, X, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
 import { cn } from "@/lib/utils";
 
@@ -12,60 +12,44 @@ export type GalleryItem = {
   label: string;
   /** Link to the full công trình page, shown under the enlarged photo. */
   href?: string;
-  // The fields below serve a gallery that asks for a price per photo (nhôm kính, 24/11/2026).
-  /** Short reference a customer can say on the phone, e.g. "X03" or "NK06". */
-  code?: string;
-  /** The filter pill the photo sits under. */
-  kind?: string;
-  /** "mau": a photo of a door type, not an HTP job. "cong-trinh": a real HTP job. */
-  badge?: "mau" | "cong-trinh";
-  /** Where and when, only where the job's record or stamp says so. */
-  place?: string;
-  chips?: string[];
 };
-
-const BADGE = { mau: "Mẫu", "cong-trinh": "Công trình thật" } as const;
 
 /**
  * Product photo grid with click-to-enlarge.
  *
- *   [filter pills] ──► grid tile (button) ──click──► Radix Dialog
- *                                                     ├── ← / → or arrow keys walk the shown set
- *                                                     ├── Esc or the X closes
- *                                                     ├── caption + "xem công trình" link
- *                                                     └── with `ask`: the Zalo form, the lead naming the code
+ *   grid tile (button) ──click──► Radix Dialog
+ *                                   ├── ← / → or arrow keys walk the set
+ *                                   ├── Esc or the X closes
+ *                                   ├── caption + "xem công trình" link
+ *                                   └── with `ask`: the Zalo form, the lead naming the photo
  *
- * Without `filters`, `ask` or `badge` it is the plain gallery of real HTP installs the product
- * pages use. The parent resolves photos server-side, which keeps the 95KB công trình library
- * out of this client bundle.
+ * Plain, it is the gallery of real HTP installs the product pages use. With `cards` it is a
+ * design grid like the old site's category page (nhôm kính, 24/11/2026): square photos with the
+ * design's name under each and a line saying a tap asks its price. The parent resolves photos
+ * server-side, which keeps the 95KB công trình library out of this client bundle.
  */
 export function ProductGallery({
   items,
   className,
-  filters,
   ask,
-  square = false,
+  cards = false,
 }: {
   items: GalleryItem[];
   className?: string;
-  /** Filter pills by `kind`, after "Tất cả". */
-  filters?: readonly string[];
-  /** Puts the one-field Zalo form in the lightbox; the lead's need names the photo's code. */
+  /** Puts the one-field Zalo form in the lightbox; the lead's need names the photo. */
   ask?: { source: string };
-  /** Square tiles, for square photos a 4:3 crop would cut into. */
-  square?: boolean;
+  /** Design cards: square photo, the name centred under it, and "Hỏi giá qua Zalo". */
+  cards?: boolean;
 }) {
-  const [filter, setFilter] = React.useState<string | null>(null);
-  const shown = React.useMemo(() => (filter ? items.filter((i) => i.kind === filter) : items), [items, filter]);
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const open = openIndex !== null;
-  const current = open ? shown[openIndex] : null;
+  const current = open ? items[openIndex] : null;
 
   const go = React.useCallback(
     (delta: number) => {
-      setOpenIndex((i) => (i === null ? i : (i + delta + shown.length) % shown.length));
+      setOpenIndex((i) => (i === null ? i : (i + delta + items.length) % items.length));
     },
-    [shown.length]
+    [items.length]
   );
 
   React.useEffect(() => {
@@ -84,47 +68,32 @@ export function ProductGallery({
 
   return (
     <>
-      {filters && (
-        // Phones: one scrolling row of pills; wider screens: they wrap.
-        <div
-          role="group"
-          aria-label="Lọc theo loại cửa"
-          className="-mx-4 mb-5 flex snap-x gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0"
-        >
-          {[null, ...filters].map((f) => (
-            <button
-              key={f ?? "tat-ca"}
-              type="button"
-              aria-pressed={filter === f}
-              onClick={() => setFilter(f)}
-              className={cn(
-                "h-11 shrink-0 snap-start whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors",
-                filter === f ? "border-brand bg-brand text-white" : "border-brand/20 bg-white text-brand hover:bg-brand-50"
-              )}
-            >
-              {f ?? "Tất cả"}
-            </button>
-          ))}
-        </div>
-      )}
-
       <ul
         className={cn(
-          "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4",
+          "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4",
+          cards ? "gap-x-3 gap-y-7 md:gap-x-5" : "gap-3",
           className
         )}
       >
-        {shown.map((item, i) => (
+        {items.map((item, i) => (
           <li key={item.src}>
             <button
               type="button"
               onClick={() => setOpenIndex(i)}
               // 44px floor is inherited from the aspect-ratio tile, which is
               // always far taller than that at every breakpoint.
-              className="group relative block w-full overflow-hidden rounded-xl border border-brand/10 bg-brand-50 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
-              aria-label={`Xem ảnh lớn: ${item.code ? `${item.code} · ` : ""}${item.label}`}
+              className={cn(
+                "group relative block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2",
+                cards ? "rounded-xl" : "overflow-hidden rounded-xl border border-brand/10 bg-brand-50"
+              )}
+              aria-label={`Xem ảnh lớn: ${item.label}`}
             >
-              <span className={cn("relative block", square ? "aspect-square" : "aspect-[4/3]")}>
+              <span
+                className={cn(
+                  "relative block",
+                  cards ? "aspect-square overflow-hidden rounded-xl border border-brand/10 bg-brand-50" : "aspect-[4/3]"
+                )}
+              >
                 <Image
                   src={item.src}
                   alt={item.label}
@@ -136,22 +105,19 @@ export function ProductGallery({
                 <span className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/85 opacity-0 transition-opacity group-hover:opacity-100">
                   <ZoomIn className="h-4 w-4 text-brand" aria-hidden />
                 </span>
-                {item.badge && (
-                  <span
-                    className={cn(
-                      "absolute left-2 top-2 rounded-full px-2 py-0.5 text-[11px] font-semibold shadow-sm",
-                      item.badge === "cong-trinh" ? "bg-amber-400 text-brand" : "bg-white/90 text-brand"
-                    )}
-                  >
-                    {BADGE[item.badge]}
+              </span>
+              {cards ? (
+                <span className="block px-1 pt-3 text-center">
+                  <span className="block text-xs font-semibold uppercase leading-snug text-brand sm:text-sm">
+                    {item.label}
                   </span>
-                )}
-              </span>
-              <span className="block px-3 py-2 text-xs font-medium leading-snug text-brand/75">
-                {item.code && <span className="mr-1 font-bold text-brand">{item.code}</span>}
-                {item.label}
-                {item.place && <span className="mt-0.5 block font-normal text-brand/60">{item.place}</span>}
-              </span>
+                  <span className="mt-1.5 block text-xs font-semibold text-amber-700 group-hover:underline sm:text-sm">
+                    Hỏi giá qua Zalo
+                  </span>
+                </span>
+              ) : (
+                <span className="block px-3 py-2 text-xs font-medium leading-snug text-brand/75">{item.label}</span>
+              )}
             </button>
           </li>
         ))}
@@ -178,7 +144,7 @@ export function ProductGallery({
                       className="object-contain"
                       priority
                     />
-                    {shown.length > 1 && (
+                    {items.length > 1 && (
                       <>
                         <button
                           type="button"
@@ -202,10 +168,9 @@ export function ProductGallery({
 
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                     <p className="text-sm font-medium text-white">
-                      {current.code && <span className="mr-1.5 font-bold text-amber-300">{current.code}</span>}
                       {current.label}
                       <span className="ml-2 text-white/55">
-                        {(openIndex ?? 0) + 1}/{shown.length}
+                        {(openIndex ?? 0) + 1}/{items.length}
                       </span>
                     </p>
                     {current.href && (
@@ -218,32 +183,15 @@ export function ProductGallery({
                     )}
                   </div>
 
-                  {(current.badge || current.place || current.chips?.length) && (
-                    <ul className="mt-2 flex flex-wrap gap-1.5 text-xs text-white/85">
-                      {current.badge && <li className="rounded-full bg-white/10 px-2.5 py-1">{BADGE[current.badge]}</li>}
-                      {current.place && (
-                        <li className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1">
-                          <MapPin className="h-3 w-3" aria-hidden />
-                          {current.place}
-                        </li>
-                      )}
-                      {current.chips?.map((c) => (
-                        <li key={c} className="rounded-full bg-white/10 px-2.5 py-1">
-                          {c}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {ask && current.code && (
+                  {ask && (
                     <div className="mt-4 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10" data-track="nk_gallery">
-                      <p className="text-base font-semibold text-white">Hỏi giá mẫu {current.code} qua Zalo</p>
+                      <p className="text-base font-semibold text-white">Hỏi giá mẫu này qua Zalo</p>
                       <LeadForm
                         source={ask.source}
                         tone="dark"
                         submitLabel="Hỏi giá mẫu này"
                         className="mt-3"
-                        message={`Hỏi giá mẫu ${current.code}: ${current.label}${current.place ? ` (${current.place})` : ""} · ảnh ${current.src}`}
+                        message={`Hỏi giá mẫu: ${current.label} · ảnh ${current.src}`}
                       />
                     </div>
                   )}
