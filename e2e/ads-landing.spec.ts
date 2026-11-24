@@ -410,7 +410,7 @@ test.describe("Gated prices", () => {
     "/bang-gia-cua-nhom-kinh-can-tho",
     "/bang-gia-phu-kien-can-tho",
     "/phu-kien-cua-cuon-can-tho",
-    "/cua-keo-can-tho",
+    // /cua-keo-can-tho left on 24/11/2026: its price table went with the page clean-up.
     "/cua-keo-thep-can-tho",
     "/cua-cuon-nhom-can-tho",
     "/cua-nhom-kinh-can-tho",

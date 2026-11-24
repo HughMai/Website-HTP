@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Banknote, Clock, MapPin, Phone, Ruler, ShieldCheck, Store, Wind, Wrench } from "lucide-react";
+import { Clock, Phone } from "lucide-react";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { CallForPrice, PriceGate } from "@/components/PriceGate";
-import { CtaBand } from "@/components/sections/CtaBand";
 import { ZaloQuoteCard } from "@/components/ZaloQuoteCard";
-import { ProductPhotos } from "@/components/sections/ProductPhotos";
+import { ProductGallery } from "@/components/ProductGallery";
 import { Button } from "@/components/ui/button";
-import { APPLIED_FROM } from "@/lib/bang-gia-data";
-import { FAQ_KEO_PRICE, LP_FORM } from "@/lib/lp-data";
+import { CUA_KEO_GALLERY } from "@/lib/cua-cuon-keo-gallery";
+import { LP_FORM } from "@/lib/lp-data";
 import { PRODUCT_CATEGORIES, SITE } from "@/lib/site-data";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
@@ -17,8 +15,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hungthanhphat.vn";
 // The family's "từ" price, as on /san-pham and in the menu.
 const PRICE_FROM = PRODUCT_CATEGORIES.find((c) => c.id === "cua-keo")!.priceFrom;
 
-// Aligned 16/11/2026 with the 10/11 catalog, the 13/11 price gate and the 14/11 offer. The
-// warranty keeps the standard phrase: Hughie has set terms for cửa cuốn only.
+// Aligned 16/11/2026 with the 10/11 catalog, the 13/11 price gate and the 14/11 offer. Since
+// 24/11/2026 the page is the hero, the product grid, then the footer, like /cua-cuon-can-tho
+// (Hughie: "keep the sản phẩm page clean"): the types, advantages, price table, district and
+// FAQ sections are gone.
 export const metadata: Metadata = {
   title: "Cửa Kéo Cần Thơ — Thép, Nhôm, Inox",
   description: `Cửa kéo Cần Thơ — thép ${PRICE_FROM}, nhôm, inox SUS 304. Chống đột nhập, hợp mặt tiền kinh doanh, lắp 3–5 giờ, nhận lắp khắp miền Tây. Chỉ cọc 30%, lắp xong mới trả tiền. Gọi: ${SITE.hotlines[0]}.`,
@@ -34,106 +34,9 @@ export const metadata: Metadata = {
   },
 };
 
-const types = [
-  {
-    name: "Cửa Kéo Thép Công Nghệ Đức",
-    // The catalog's cửa kéo: thanh U thép by thickness, có lá or không lá (10/11/2026).
-    desc: "Thanh U thép dày 6 zem đến 1.6 ly, loại có lá hoặc không lá — cứng chắc, khó phá, chi phí hợp lý. Lựa chọn số 1 cho mặt tiền kinh doanh.",
-    best: "Cửa hàng, nhà kinh doanh",
-    highlight: "Phổ biến nhất",
-  },
-  {
-    name: "Cửa Kéo Nhôm Công Nghệ Đức",
-    desc: "Profile nhôm định hình cao cấp — nhẹ hơn thép, không gỉ sét, thẩm mỹ hiện đại, vận hành êm hơn.",
-    best: "Nhà phố hiện đại, showroom",
-    highlight: "Nhẹ — Không gỉ",
-  },
-  {
-    name: "Cửa Kéo Hoa Văn Cổ S9",
-    desc: "Nan thép uốn hoa văn cổ điển — kết hợp bảo mật và trang trí, phù hợp nhà phố truyền thống và quán ăn.",
-    best: "Nhà phố, nhà ở kết hợp kinh doanh",
-    highlight: "Thẩm mỹ cao",
-  },
-  {
-    name: "Cửa Kéo Inox SUS 304",
-    desc: "Khung và nan inox cao cấp — không gỉ, sáng bóng lâu dài, chịu ẩm và hoá chất, phù hợp môi trường ẩm ven sông.",
-    best: "Nhà hàng, quán ăn, ven sông",
-    highlight: "Bền nhất",
-  },
-];
-
-const advantages = [
-  {
-    icon: ShieldCheck,
-    title: "Bảo mật cao hơn cửa cuốn",
-    desc: "Cấu trúc nan kéo đan chéo chắc chắn, khóa ngang đa điểm — khó phá hơn cửa cuốn thông thường.",
-  },
-  {
-    icon: Wind,
-    title: "Thông thoáng khi đóng",
-    desc: "Khe hở giữa các nan cho phép thông gió và quan sát từ bên ngoài — lý tưởng cho cửa hàng vừa đóng vừa trưng hàng.",
-  },
-  {
-    icon: Ruler,
-    title: "Tiết kiệm không gian",
-    desc: "Cửa kéo gom sang một bên thay vì cuộn lên — phù hợp mặt tiền có trần thấp hoặc máy lạnh gần cửa.",
-  },
-  {
-    icon: Wrench,
-    title: "Bảo trì đơn giản, chi phí thấp",
-    desc: "Cơ học đơn giản — không cần motor, ít hỏng hóc, phụ kiện thay thế phổ biến, dễ tìm trên toàn quốc.",
-  },
-  {
-    icon: Banknote,
-    title: "Giá thấp hơn 20–30% so với cửa cuốn",
-    desc: "Chi phí đầu tư thấp với độ bảo mật tương đương — lựa chọn tối ưu cho chủ kinh doanh muốn tiết kiệm.",
-  },
-  {
-    icon: Store,
-    title: "Phù hợp mọi loại mặt tiền",
-    desc: "Từ nhà phố 3m đến shophouse 6m — cửa kéo linh hoạt về kích thước và kiểu dáng.",
-  },
-];
-
-const pricing = [
-  { size: "2.0m × 2.5m" },
-  { size: "2.5m × 2.5m" },
-  { size: "3.0m × 2.8m" },
-  { size: "4.0m × 3.0m" },
-  { size: "5.0m × 3.5m" },
-  { size: "Kích thước đặc biệt" },
-];
-
 const districts = [
   "Ninh Kiều", "Bình Thủy", "Cái Răng", "Ô Môn",
   "Thốt Nốt", "Vĩnh Thạnh", "Cờ Đỏ", "Phong Điền",
-];
-
-const faqItems = [
-  {
-    question: "Cửa kéo Cần Thơ giá bao nhiêu?",
-    // Computed from the catalog data, the same answer as the ad pages.
-    answer: `${FAQ_KEO_PRICE.a} Cửa nhỏ dưới 8 m² có phụ phí theo m², ghi rõ trên báo giá.`,
-  },
-  {
-    question: "Cửa kéo thép hay cửa cuốn nhôm — loại nào phù hợp hơn?",
-    answer:
-      "Cửa kéo thép phù hợp mặt tiền kinh doanh cần bảo mật cao, thông gió tốt và chi phí thấp. Cửa cuốn nhôm phù hợp garage, nhà phố cần thẩm mỹ cao và vận hành tự động tiện lợi hơn. Nên chọn theo mục đích sử dụng.",
-  },
-  {
-    question: "Cửa kéo nhôm và cửa kéo thép khác nhau như thế nào?",
-    answer:
-      "Cửa kéo nhôm nhẹ hơn, không gỉ sét, thẩm mỹ hiện đại hơn nhưng giá cao hơn 20–30%. Cửa kéo thép bền hơn về cơ học, giá thấp hơn, phụ kiện phổ biến dễ thay thế. Cả hai đều phù hợp mặt tiền kinh doanh.",
-  },
-  {
-    question: "Lắp cửa kéo mất bao lâu?",
-    answer: `Lắp đặt cửa kéo tiêu chuẩn mất 3–5 giờ. Đội kỹ thuật có mặt trong ngày tại tất cả quận huyện Cần Thơ, và nhận lắp ${SITE.serviceArea}.`,
-  },
-  {
-    question: "Cửa kéo có bảo hành không?",
-    answer:
-      "Có. Hưng Thành Phát Door bảo hành theo kỳ hạn tiêu chuẩn của nhà sản xuất. Trong thời gian bảo hành, sửa chữa hoặc thay thế miễn phí tại nơi lắp đặt.",
-  },
 ];
 
 const jsonLd = {
@@ -157,15 +60,6 @@ const jsonLd = {
         { "@type": "AdministrativeArea", name: "Đồng bằng sông Cửu Long" },
         ...districts.map((d) => ({ "@type": "AdministrativeArea", name: `${d}, Cần Thơ` })),
       ],
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/cua-keo-can-tho#faq`,
-      mainEntity: faqItems.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: { "@type": "Answer", text: item.answer },
-      })),
     },
     {
       "@type": "BreadcrumbList",
@@ -224,183 +118,18 @@ export default function CuaKeoCanTho() {
           </div>
         </section>
 
-        {/* Types */}
-        <section className="py-16 md:py-24">
+        {/* The product grid, laid out like his old site's category page (Hughie, 24/11/2026): the
+            old hungthanhphatdoor.com/cua-keo page. A tap asks that product's price by Zalo.
+            Content: lib/cua-cuon-keo-gallery.ts. */}
+        <section id="mau-cua-keo" className="bg-white py-14 md:py-20" aria-labelledby="mau-cua-keo-title">
           <div className="container">
-            <div className="mb-12 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-                Các Loại Cửa Kéo Tại Cần Thơ
-              </h2>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {types.map((t) => (
-                <div key={t.name} className="rounded-xl border bg-card p-6">
-                  <span className="inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
-                    {t.highlight}
-                  </span>
-                  <h3 className="mt-3 font-semibold">{t.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-                  <p className="mt-3 flex items-center gap-1.5 text-sm font-medium text-brand/70">
-                    <ShieldCheck className="h-3.5 w-3.5" /> {t.best}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Advantages */}
-        <section className="bg-muted/30 py-16 md:py-24">
-          <div className="container">
-            <div className="mb-12 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-                Ưu Điểm Của Cửa Kéo
-              </h2>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {advantages.map((a) => (
-                <div key={a.title} className="rounded-xl border bg-background p-6">
-                  <div className="mb-3 text-3xl"><a.icon className="h-7 w-7" aria-hidden /></div>
-                  <h3 className="mb-2 font-semibold">{a.title}</h3>
-                  <p className="text-sm text-muted-foreground">{a.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-2xl">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-                Giá Cửa Kéo Tham Khảo
-              </h2>
-              <p className="mt-3 text-muted-foreground">
-                Cửa kéo thép {PRICE_FROM}, đã gồm vật tư và nhân công lắp đặt
-              </p>
-            </div>
-            <div className="overflow-hidden rounded-xl border">
-              <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-4 py-3 text-left font-semibold">Kích thước</th>
-                    <th className="px-4 py-3 text-right font-semibold">Chi phí tham khảo</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {pricing.map((row) => (
-                    <tr key={row.size}>
-                      <td className="px-4 py-3">{row.size}</td>
-                      <td className="px-4 py-3 text-right text-muted-foreground">
-                        <CallForPrice />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-4 text-center text-xs text-muted-foreground">
-              * Giá tham khảo cửa kéo thép tiêu chuẩn, chưa bao gồm VAT.
-            </p>
-            <PriceGate source="Cửa kéo Cần Thơ · bảng giá" className="mt-8" />
-          </div>
-        </section>
-
-        {/* Districts */}
-        <section className="bg-muted/30 py-14">
-          <div className="container max-w-3xl text-center">
-            <h2 className="text-2xl font-semibold tracking-tight">Lắp Cửa Kéo Toàn Cần Thơ</h2>
-            <p className="mt-3 text-muted-foreground">
-              Xưởng ở Cần Thơ, nhận lắp {SITE.serviceArea}.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {districts.map((d) => (
-                <span key={d} className="rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-medium text-brand">
-                  Cửa kéo {d}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <ProductPhotos
-          categoryId="cua-keo"
-          heading="Ảnh cửa kéo Hưng Thành Phát đã lắp tại Cần Thơ"
-        />
-
-        <CtaBand source="Cửa kéo Cần Thơ" />
-
-        {/* FAQ */}
-        <section className="py-16 md:py-24">
-          <div className="container max-w-3xl">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Câu Hỏi Thường Gặp</h2>
-            </div>
-            <div className="space-y-4">
-              {faqItems.map((item) => (
-                <div key={item.question} className="rounded-xl border bg-card p-6">
-                  <h3 className="mb-2 font-semibold">{item.question}</h3>
-                  <p className="text-sm text-muted-foreground">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Cross-links */}
-        <section className="py-10">
-          <div className="container max-w-3xl grid gap-4 sm:grid-cols-3">
-            <Link href="/cua-keo-thep-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
-              <div>
-                <p className="font-semibold text-brand">Cửa Kéo Thép</p>
-                <p className="text-sm text-muted-foreground">Chi tiết & so sánh</p>
-              </div>
-              <ArrowRight className="h-4 w-4 text-brand" />
-            </Link>
-            <Link href="/bang-gia-cua-keo-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
-              <div>
-                <p className="font-semibold text-brand">Bảng Giá Cửa Kéo</p>
-                <p className="text-sm text-muted-foreground">Áp dụng từ {APPLIED_FROM}</p>
-              </div>
-              <ArrowRight className="h-4 w-4 text-brand" />
-            </Link>
-            <Link href="/cua-cuon-nhom-can-tho" className="flex items-center justify-between rounded-xl border bg-card p-5 hover:bg-brand/5">
-              <div>
-                <p className="font-semibold text-brand">Cửa Cuốn Nhôm</p>
-                <p className="text-sm text-muted-foreground">Tự động, êm, hiện đại</p>
-              </div>
-              <ArrowRight className="h-4 w-4 text-brand" />
-            </Link>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="bg-brand py-16 md:py-20">
-          <div className="container text-center">
-            <h2 className="text-2xl font-semibold text-white md:text-3xl">
-              Lắp Đúng Loại, Đúng Vật Liệu — Gọi Ngay
+            <h2
+              id="mau-cua-keo-title"
+              className="mb-8 text-center text-2xl font-extrabold uppercase tracking-wider text-brand md:mb-10 md:text-3xl"
+            >
+              Cửa kéo
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/80">
-              Đo và báo giá tận nơi, miễn phí nội thành Cần Thơ. Chỉ cọc 30%, lắp xong chạy thử mới
-              trả phần còn lại.
-              Sai vật tư đã cam kết, HTP bồi thường 100% giá trị hợp đồng.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a href={`tel:${SITE.hotlines[0].replace(/\s/g, "")}`}>
-                <Button size="lg" className="bg-white text-brand hover:bg-white/90">
-                  <Phone className="h-4 w-4" /> {SITE.hotlines[0]}
-                </Button>
-              </a>
-              <a href={`tel:${SITE.hotlines[1].replace(/\s/g, "")}`}>
-                <Button size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white hover:text-brand">
-                  <Phone className="h-4 w-4" /> {SITE.hotlines[1]}
-                </Button>
-              </a>
-            </div>
-            <p className="mt-6 flex items-center justify-center gap-2 text-sm text-white/70">
-              <MapPin className="h-4 w-4 shrink-0" />{SITE.address}
-            </p>
+            <ProductGallery items={CUA_KEO_GALLERY} ask={{ source: "Cửa kéo Cần Thơ · thư viện mẫu" }} cards />
           </div>
         </section>
       </main>

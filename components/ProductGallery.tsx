@@ -12,6 +12,8 @@ export type GalleryItem = {
   label: string;
   /** Link to the full công trình page, shown under the enlarged photo. */
   href?: string;
+  /** Show the whole photo on white instead of filling the tile: the catalog's tall slat cutouts. */
+  contain?: boolean;
 };
 
 /**
@@ -91,7 +93,8 @@ export function ProductGallery({
               <span
                 className={cn(
                   "relative block",
-                  cards ? "aspect-square overflow-hidden rounded-xl border border-brand/10 bg-brand-50" : "aspect-[4/3]"
+                  cards ? "aspect-square overflow-hidden rounded-xl border border-brand/10" : "aspect-[4/3]",
+                  cards && (item.contain ? "bg-white" : "bg-brand-50")
                 )}
               >
                 <Image
@@ -99,7 +102,10 @@ export function ProductGallery({
                   alt={item.label}
                   fill
                   sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={cn(
+                    "transition-transform duration-500 group-hover:scale-105",
+                    item.contain ? "object-contain p-3" : "object-cover"
+                  )}
                 />
                 <span className="absolute inset-0 bg-brand/0 transition-colors group-hover:bg-brand/20" />
                 <span className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/85 opacity-0 transition-opacity group-hover:opacity-100">

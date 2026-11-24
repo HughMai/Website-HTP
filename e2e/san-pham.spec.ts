@@ -115,9 +115,12 @@ test("each family's 'từ' price is the catalog's lowest price", () => {
 
 // The four pages under Sản Phẩm, brought in line on 16/11/2026.
 test.describe("Sản Phẩm pages", () => {
+  // warranty: the terms the page must state; null = the manufacturer phrase; false = no warranty
+  // text at all. Since 24/11/2026 cửa cuốn and cửa kéo are the hero + product grid only (Hughie):
+  // the district block that named the service area and the FAQ that gave the warranty are gone.
   const PAGES = [
-    { path: "/cua-cuon-can-tho", mienTay: true, warranty: WARRANTY_TERMS.cuaCuon },
-    { path: "/cua-keo-can-tho", mienTay: true, warranty: null },
+    { path: "/cua-cuon-can-tho", mienTay: false, warranty: false as const },
+    { path: "/cua-keo-can-tho", mienTay: false, warranty: false as const },
     { path: "/cua-nhom-kinh-can-tho", mienTay: true, warranty: null },
     // Phụ kiện is fitted on site, same day, in Cần Thơ: no miền Tây promise there.
     { path: "/phu-kien-cua-cuon-can-tho", mienTay: false, warranty: WARRANTY_TERMS.motorPhuKien },
@@ -136,7 +139,8 @@ test.describe("Sản Phẩm pages", () => {
       // "Miễn phí" measuring is only ever promised inside Cần Thơ.
       await expect(main).not.toContainText(/khảo sát miễn phí(?!.{0,40}cần thơ)/i);
       if (p.warranty) await expect(main).toContainText(p.warranty);
-      else await expect(main).toContainText("theo kỳ hạn tiêu chuẩn của nhà sản xuất");
+      else if (p.warranty === null) await expect(main).toContainText("theo kỳ hạn tiêu chuẩn của nhà sản xuất");
+      else await expect(main).not.toContainText(/bảo hành/i);
     });
   }
 

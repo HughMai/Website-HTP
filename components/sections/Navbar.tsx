@@ -8,10 +8,15 @@ import {
   AppWindow,
   Blinds,
   ChevronDown,
+  Columns2,
   Columns3,
+  DoorOpen,
+  Fence,
   Menu,
   Phone,
+  Refrigerator,
   Settings,
+  ShowerHead,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
@@ -34,19 +39,26 @@ function hasChildren(item: NavItem): item is NavItemWithChildren {
 
 /**
  * Only the Sản Phẩm menu carries icons and descriptions, so it renders as a
- * two-column card menu. Bảng Giá and Dịch Vụ stay plain text lists.
+ * card grid (3×3 on desktop, two-up in the phone sheet). Bảng Giá and Dịch Vụ
+ * stay plain text lists.
  */
 function hasThumbnails(item: NavItemWithChildren) {
   return item.children.some((c) => c.icon || c.desc);
 }
 
 // Blinds reads as a roller shutter, Columns3 as the vertical slats of a cửa
-// kéo, AppWindow as a glazed frame. Icons, not photos: a 64px crop of a whole
-// shopfront has no legible subject and just looks blurry.
+// kéo, AppWindow as a glazed frame; for the glass lines, a two-door cabinet,
+// a railing, two panes, a door and a shower. Icons, not photos: a 64px crop of
+// a whole shopfront has no legible subject and just looks blurry.
 const NAV_ICONS = {
   "cua-cuon": Blinds,
   "cua-keo": Columns3,
   "nhom-kinh": AppWindow,
+  "tu-kinh": Refrigerator,
+  "lan-can": Fence,
+  "vach-kinh": Columns2,
+  "cua-kinh": DoorOpen,
+  "phong-tam": ShowerHead,
   "phu-kien": Settings,
 } as const;
 
@@ -227,20 +239,23 @@ export function Navbar({ overBrandBand = false }: { overBrandBand?: boolean } = 
                     transition={{ duration: 0.16 }}
                     className={cn(
                       "absolute left-0 top-full pt-2",
-                      hasThumbnails(item) ? "w-[560px]" : "min-w-[248px]"
+                      // 680px still ends inside a 1024px window from where Sản Phẩm sits.
+                      hasThumbnails(item) ? "w-[680px]" : "min-w-[248px]"
                     )}
                   >
                     <ul
                       className={cn(
                         "overflow-hidden rounded-xl border border-brand/10 bg-white p-1.5 shadow-[0_18px_40px_-16px_rgba(10,37,64,0.35)]",
-                        // Photo menus go two-up; plain text menus stay a list.
-                        hasThumbnails(item) && "grid grid-cols-2 gap-1.5 p-2"
+                        // Icon menus go three-up; plain text menus stay a list.
+                        hasThumbnails(item) && "grid grid-cols-3 gap-1.5 p-2"
                       )}
                     >
                       {item.children.map((child) => (
                         <li key={child.href}>
                           <Link
                             href={child.href}
+                            // A /san-pham#… link on /san-pham itself keeps the route, so close here.
+                            onClick={() => setOpenMenu(null)}
                             className={cn(
                               "group/mi rounded-lg transition-colors hover:bg-brand-50",
                               hasThumbnails(item)

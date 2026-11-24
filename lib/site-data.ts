@@ -64,7 +64,16 @@ export type NavChild = {
    * Full-size install photos still do their job on the product pages, where
    * they are large enough to actually show the door.
    */
-  icon?: "cua-cuon" | "cua-keo" | "nhom-kinh" | "phu-kien";
+  icon?:
+    | "cua-cuon"
+    | "cua-keo"
+    | "nhom-kinh"
+    | "tu-kinh"
+    | "lan-can"
+    | "vach-kinh"
+    | "cua-kinh"
+    | "phong-tam"
+    | "phu-kien";
   desc?: string;
 };
 
@@ -79,10 +88,10 @@ export const MAIN_NAV: NavItem[] = [
   {
     href: "/san-pham",
     label: "Sản Phẩm",
-    // Four categories, one per thing the xưởng actually makes. The variant
-    // pages (cửa cuốn nhôm, cửa kéo thép, lan can, nhà xưởng) were pulled out
-    // of the nav to stop it reading as a keyword list; each is still linked
-    // in-body from its parent pillar page, so none of them is orphaned.
+    // One entry per product line, a 3×3 grid. The five glass lines (Hughie, 24/11/2026) open
+    // their product grid on /san-pham (lib/nhom-kinh-gallery.ts, ids = SAN_PHAM_KINH). The
+    // variant pages (cửa cuốn nhôm, cửa kéo thép, nhà xưởng, the districts) stay out of the nav;
+    // the footer's link groups keep them crawlable.
     children: [
       {
         href: "/cua-cuon-can-tho",
@@ -101,6 +110,36 @@ export const MAIN_NAV: NavItem[] = [
         label: "Nhôm Kính",
         icon: "nhom-kinh",
         desc: "Cửa đi, cửa sổ, lan can, mặt dựng — từ 1.200.000đ/m²",
+      },
+      {
+        href: "/san-pham#tu-nhom-canh-kinh",
+        label: "Tủ Nhôm Kính",
+        icon: "tu-kinh",
+        desc: "Tủ bếp, tủ trưng bày, tủ đựng đồ",
+      },
+      {
+        href: "/san-pham#lan-can-cau-thang",
+        label: "Lan Can Cầu Thang Kính",
+        icon: "lan-can",
+        desc: "Cầu thang, lan can kính cường lực",
+      },
+      {
+        href: "/san-pham#vach-kinh-cuong-luc",
+        label: "Vách Kính",
+        icon: "vach-kinh",
+        desc: "Vách kính cường lực, vách văn phòng",
+      },
+      {
+        href: "/san-pham#cua-kinh-cuong-luc",
+        label: "Cửa Kính Cường Lực",
+        icon: "cua-kinh",
+        desc: "Cửa lùa, cửa mở quay, kính 10 ly",
+      },
+      {
+        href: "/san-pham#phong-tam-kinh",
+        label: "Phòng Tắm Kính",
+        icon: "phong-tam",
+        desc: "Cửa lùa, cửa quay 90 độ, góc vuông",
       },
       {
         href: "/phu-kien-cua-cuon-can-tho",
