@@ -4,7 +4,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { AlertTriangle, CheckCircle2, Loader2, MessageCircle, Send } from "lucide-react";
+import { CheckCircle2, Loader2, MessageCircle, Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -162,10 +162,11 @@ export function LeadForm({
 }
 
 /**
- * What happens next, and the one setting that can stop it: a Zalo account that
- * blocks messages from strangers never receives the catalog. The CRM retries
- * once ~90s later, so turning the setting on now still gets it there; if that
- * fails too, the family is told to call.
+ * What happens next. The bot finds the customer's Zalo by phone number, and about
+ * half of the numbers can't be found (the account is hidden from phone search;
+ * 3 of the first 6 ad leads, 11/2026). So the main action is the customer opening
+ * the chat themselves, which always works. The CRM still retries once ~90s later
+ * and tells the family to call when the bot fails.
  */
 function ZaloCatalogSent({
   phone,
@@ -195,37 +196,29 @@ function ZaloCatalogSent({
           aria-hidden
         />
         <span>
-          Đang gửi catalog và báo giá qua Zalo tới số <span className="whitespace-nowrap">{shown}</span>
+          Đã nhận số <span className="whitespace-nowrap">{shown}</span>. Catalog và bảng giá đến Zalo trong
+          1–2 phút.
         </span>
       </p>
-      <div
-        className={cn(
-          "mt-3 rounded-lg border p-3",
-          dark ? "border-amber-300/50 bg-brand/40" : "border-amber-500/40 bg-amber-50"
-        )}
+      <a
+        href={ZALO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#0068FF] px-5 py-2 text-base font-bold text-white transition-colors hover:bg-[#0057D6]"
       >
-        <p className="flex items-start gap-2 text-sm font-semibold">
-          <AlertTriangle
-            className={cn("mt-0.5 h-4 w-4 shrink-0", dark ? "text-amber-300" : "text-amber-600")}
-            aria-hidden
-          />
-          Đảm bảo Zalo của anh/chị đang ở chế độ nhận tin nhắn từ người lạ.
-        </p>
-        <p className={cn("mt-1 pl-6 text-sm", dark ? "text-white/80" : "text-slate-700")}>
-          Tin nhắn đến từ tài khoản Zalo của Hưng Thành Phát trong 1–2 phút. Nếu Zalo đang chặn người
-          lạ, vào Zalo → Cài đặt → Quyền riêng tư để bật lại.
-        </p>
-      </div>
+        <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+        Nhắn Zalo cho bên em
+      </a>
+      <p className={cn("mt-2 text-center text-sm", dark ? "text-white/80" : "text-slate-700")}>
+        Gửi kèm ảnh mặt tiền và kích thước cửa: trong giờ làm việc có giá trong 30 phút.
+      </p>
       <p className={cn("mt-3 text-sm", dark ? "text-white/80" : "text-slate-600")}>
-        Chưa thấy tin nhắn?{" "}
-        <a href={ZALO_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
-          Nhắn Zalo cho bên em
-        </a>{" "}
-        hoặc gọi{" "}
+        Sau 2 phút chưa thấy tin nhắn? Có thể Zalo của anh/chị đang tắt tìm kiếm qua số điện thoại. Bấm
+        nút trên để nhắn trước, hoặc gọi{" "}
         <a href={`tel:${hotline.replace(/\s/g, "")}`} className="font-semibold underline">
           {hotline}
         </a>
-        . Bên em cũng sẽ gọi lại tư vấn.
+        .
       </p>
     </div>
   );

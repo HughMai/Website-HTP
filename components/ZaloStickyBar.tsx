@@ -4,13 +4,13 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2, Phone, Send, X } from "lucide-react";
+import { CheckCircle2, Loader2, MessageCircle, Phone, Send, X } from "lucide-react";
 
 import { leadSchema, type LeadInput, type LeadValues } from "@/components/LeadForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LEAD_SENT_EVENT, LeadHoneypot, LeadTurnstile, useLeadSubmit } from "@/hooks/useLeadSubmit";
-import { SITE } from "@/lib/site-data";
+import { SITE, ZALO_URL } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 /**
@@ -145,17 +145,29 @@ export function ZaloStickyBar({ source, watch }: { source: string; watch: string
       {done ? (
         <div role="status" className="flex items-start gap-2 text-sm">
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-600" aria-hidden />
-          <p className="flex-1 leading-snug text-slate-700">
-            <span className="font-semibold text-brand">
-              Đang gửi báo giá qua Zalo tới{" "}
-              <span className="whitespace-nowrap">{sentTo.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3")}</span>.
-            </span>{" "}
-            Chưa thấy tin nhắn? Bật nhận tin nhắn từ người lạ trong Zalo, hoặc gọi{" "}
-            <a href={tel} className="font-semibold underline">
-              {hotline}
+          <div className="flex-1">
+            <p className="leading-snug text-slate-700">
+              <span className="font-semibold text-brand">
+                Đã nhận số{" "}
+                <span className="whitespace-nowrap">{sentTo.replace(/^(\d{4})(\d{3})(\d{3})$/, "$1 $2 $3")}</span>.
+              </span>{" "}
+              Catalog đến Zalo trong 1–2 phút. Chưa thấy thì nhắn trước cho bên em, hoặc gọi{" "}
+              <a href={tel} className="font-semibold underline">
+                {hotline}
+              </a>
+              .
+            </p>
+            {/* The bot can't find about half of the numbers on Zalo; the customer opening the chat always works. */}
+            <a
+              href={ZALO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0068FF] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#0057D6]"
+            >
+              <MessageCircle className="h-4 w-4 shrink-0" aria-hidden />
+              Nhắn Zalo cho bên em
             </a>
-            .
-          </p>
+          </div>
           <button
             type="button"
             onClick={() => setDismissed(true)}
