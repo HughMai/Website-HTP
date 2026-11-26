@@ -204,8 +204,9 @@ test.describe("Google Ads landing pages", () => {
     await page.waitForTimeout(3200);
     await bar.getByRole("button", { name: "Nhận giá" }).click();
 
-    await expect(bar.getByRole("status")).toContainText("Đang gửi báo giá qua Zalo", { timeout: 15_000 });
-    await expect(bar.getByRole("status")).toContainText("nhận tin nhắn từ người lạ");
+    await expect(bar.getByRole("status")).toContainText("Đã nhận số", { timeout: 15_000 });
+    // The customer opening the chat is the fallback when the bot can't find their Zalo (4bebc2a).
+    await expect(bar.getByRole("status")).toContainText("Nhắn Zalo cho bên em");
     await expect.poll(async () => (await crmReceived()).length).toBe(1);
     const got = await crmReceived<{ phone: string; sourcePage: string; catalog: boolean; utm_campaign: string }>();
     expect(got[0].phone).toBe(phone);
@@ -251,8 +252,8 @@ test.describe("Google Ads landing pages", () => {
     await block.locator('button[type="submit"]').click();
 
     // Catalog on its way, plus the one setting that can stop it arriving.
-    await expect(block.getByRole("status")).toContainText("Đang gửi catalog và báo giá qua Zalo", { timeout: 15_000 });
-    await expect(block.getByRole("status")).toContainText("nhận tin nhắn từ người lạ");
+    await expect(block.getByRole("status")).toContainText("Catalog và bảng giá đến Zalo trong 1–2 phút", { timeout: 15_000 });
+    await expect(block.getByRole("status")).toContainText("tìm kiếm qua số điện thoại");
     await expect.poll(async () => (await crmReceived()).length).toBe(1);
     const got = await crmReceived<{
       phone: string; sourcePage: string; utm_source: string; utm_campaign: string; catalog: boolean;

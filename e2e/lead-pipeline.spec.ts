@@ -207,7 +207,7 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
    */
   // LeadForm is the one-field "Ghi số Zalo để nhận báo giá ngay" form.
   const ZALO_FIELD = "Số Zalo của anh/chị";
-  const SENT = "Đang gửi catalog và báo giá qua Zalo";
+  const SENT = "Catalog và bảng giá đến Zalo trong 1–2 phút";
 
   async function fillAndSubmit(section: Locator) {
     const form = section.locator("form").first();
@@ -314,7 +314,7 @@ test.describe("Lead forms — every form on the site behaves the same", () => {
     const confirmation = hero.getByText(SENT);
     await expect(confirmation).toBeVisible();
     // The one setting that can stop the catalog arriving, said up front.
-    await expect(hero.getByRole("status")).toContainText("nhận tin nhắn từ người lạ");
+    await expect(hero.getByRole("status")).toContainText("tìm kiếm qua số điện thoại");
 
     // The old behaviour was a toast plus a blanked form, which invited the
     // same customer to submit twice. The hero's fields must be gone entirely.
