@@ -25,14 +25,15 @@ export function BrandBar() {
     <>
       <header data-brand-bar="" data-track="lp_topbar" className="border-b border-brand/10 bg-white">
         <div className="container grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 py-3 md:flex md:gap-x-6 md:py-4">
-          {/* 116px tall on a phone (~256px wide): the smallest size where the name line
-              under "HT DOOR" stays legible. */}
+          {/* 88px tall on a phone too (was 116px), with the trust line on one line: the form's
+              button then fits an iPhone's first screen (Safari ~664px), and "Hưng Thành Phát"
+              still reads (Hughie, 26/11/2026; Enki/htp/ads/lp-cro-2026-11-26.md). */}
           {/* The logo opens the main site (Hughie, 14/11/2026). */}
           <Link href="/" aria-label="Về trang chủ Hưng Thành Phát Door" className="self-start rounded-md">
             <Logo
-              height={116}
-              sizes="(min-width: 1024px) 229px, (min-width: 768px) 194px, 256px"
-              className="h-[116px] w-auto md:h-[88px] lg:h-[104px]"
+              height={88}
+              sizes="(min-width: 1024px) 229px, 194px"
+              className="h-[88px] w-auto lg:h-[104px]"
             />
           </Link>
           <a
@@ -44,7 +45,7 @@ export function BrandBar() {
             <span className="hidden text-base font-bold md:inline">{HOTLINE}</span>
           </a>
           <div className="col-span-2 md:border-l md:border-brand/15 md:pl-6">
-            <p className="text-balance text-xl font-semibold leading-tight tracking-tight text-brand lg:text-4xl">
+            <p className="text-balance text-base font-semibold leading-tight tracking-tight text-brand md:text-xl lg:text-4xl">
               {SITE.trustLine}
             </p>
             <p className="mt-1.5 flex items-center gap-2 text-sm text-slate-600">

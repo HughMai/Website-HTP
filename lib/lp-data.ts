@@ -235,6 +235,12 @@ export const LP_FORM: LpForm = {
   note: `Trong giờ làm việc, ${SITE.phoneHours}`,
 };
 
+// The ad pages only (Hughie, 26/11/2026): an evening visitor learns when the price comes, not
+// just that it's after hours; 2 of the first 6 ad form leads came after 17:30. The organic
+// pages and /san-pham keep LP_FORM's working-hours line.
+// shortcut: "17:30" repeats the end of SITE.phoneHours by hand; change both if the hours change.
+const AD_FORM: LpForm = { ...LP_FORM, note: "Gửi sau 17:30, 9 giờ sáng mai có giá" };
+
 // Risk reversal directly under every ask ("put the guarantee under the button"): the three
 // ĐÚNG, each a promise the site already makes. "Cọc 30%, lắp xong mới trả" moved up into
 // the H1 and the sub-line; "đo miễn phí" (the weakest lane) moved down into the steps.
@@ -639,7 +645,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p02-cc-kem-tiled", "Shophouse — thợ đang lắp"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: cuonSteps(in30("ảnh mặt tiền và kích thước")),
     faq: [
       {
@@ -675,7 +681,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p40-xuong-cc-xanh-toys", "Nhà xưởng cửa cuốn xanh"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: [
       stepOne(in30("ảnh và kích thước ô cửa")),
       STEP_QUOTE,
@@ -749,7 +755,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("p57-keo-kem-cong-do", "Cửa kéo kem — thợ đang lắp"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: keoSteps(in30("ảnh mặt tiền và kích thước")),
     faq: [
       {
@@ -791,7 +797,7 @@ const SITELINK_PAGES: AdLandingPage[] = [
         job("nk36-lan-can-ban-cong-go", "Lan can kính ban công"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: [
       stepOne(in30("ảnh cầu thang hoặc ban công và kích thước")),
       STEP_QUOTE,
@@ -1003,10 +1009,16 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p31-xuong-cc-xanh", "Cửa cuốn nhà xưởng khổ lớn"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: cuonSteps(in30("ảnh mặt tiền và kích thước")),
     faq: [
       FAQ_CUON_PRICE,
+      // 6 of 40 cửa cuốn search terms ask for "kéo tay"; facts from /bang-gia-phu-kien-can-tho
+      // ("Không lắp motor được không?") and FAQ_CUON_EXTRA (khóa ngang is extra).
+      {
+        q: "Có làm cửa cuốn kéo tay không?",
+        a: `Có. Cửa cuốn không gắn motor vẫn kéo tay được, khóa bằng khóa ngang. Tole Đài Loan từ ${perM2(CUON.daiLoan)}, đã gồm vật tư và công lắp, chưa VAT; khóa ngang tính riêng. Phần lớn khách chọn lắp motor cho tiện sử dụng.`,
+      },
       FAQ_DEPOSIT,
       FAQ_MATERIALS,
       FAQ_LATE,
@@ -1042,7 +1054,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p02-cc-kem-tiled", "Shophouse — thợ đang lắp"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: cuonSteps(in30("ảnh mặt tiền và kích thước")),
     faq: [
       {
@@ -1067,7 +1079,9 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
     keyword: "Cửa Kéo Cần Thơ",
     promise: "Lắp Xong, Chạy Thử Mới Trả Tiền",
     description: `Cửa kéo thép, nhôm, inox làm tại xưởng Bình Thủy từ 2005. Giá niêm yết từ ${perM2(KEO_TU)}, lắp tiêu chuẩn 3–5 giờ. Đặt cọc 30%, lắp xong mới thanh toán.`,
-    sub: "Chỉ cọc 30%. Thép, nhôm, inox làm tại xưởng Bình Thủy, thợ của xưởng mang đến lắp. Báo giá bao nhiêu, lắp xong trả đúng bấy nhiêu.",
+    // "Sắt", not "thép": the searchers' word (11 of 33 cửa kéo search terms say sắt, none say
+    // thép; Enki/htp/ads/lp-cro-2026-11-26.md).
+    sub: "Chỉ cọc 30%. Cửa kéo sắt, nhôm, inox làm tại xưởng Bình Thủy, thợ của xưởng mang đến lắp. Báo giá bao nhiêu, lắp xong trả đúng bấy nhiêu.",
     priceTeaser: `Giá niêm yết từ ${perM2(KEO_TU)} — đã gồm vật tư và công lắp`,
     zaloLabel: "Nhắn Zalo — gửi ảnh mặt tiền",
     hero: job("p23-keo-xanh-vlxd-linh", "Cửa kéo xanh mặt tiền", "Cửa kéo thép màu xanh lắp cho mặt tiền cửa hàng"),
@@ -1081,14 +1095,14 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("p50-vinh-long-binh-minh-keo-vang", "Cửa kéo vàng — Bình Minh, Vĩnh Long"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: keoSteps(in30("ảnh mặt tiền và kích thước")),
     faq: [
       FAQ_KEO_PRICE,
       FAQ_DEPOSIT,
       {
-        q: "Cửa kéo thép hay cửa kéo nhôm?",
-        a: "Cửa kéo nhôm nhẹ hơn, không gỉ sét nhưng giá cao hơn 20–30%. Cửa kéo thép bền hơn về cơ học, giá thấp hơn, phụ kiện phổ biến dễ thay. Cả hai đều hợp mặt tiền kinh doanh.",
+        q: "Cửa kéo sắt hay cửa kéo nhôm?",
+        a: "Cửa kéo nhôm nhẹ hơn, không gỉ sét nhưng giá cao hơn 20–30%. Cửa kéo sắt bền hơn về cơ học, giá thấp hơn, phụ kiện phổ biến dễ thay. Cả hai đều hợp mặt tiền kinh doanh.",
       },
       FAQ_KEO_TIME,
       FAQ_MATERIALS,
@@ -1117,7 +1131,7 @@ export const AD_LANDING_PAGES: AdLandingPage[] = [
         job("nk38-cua-nhom-4-canh-xam", "Cửa đi nhôm kính 4 cánh"),
       ],
     },
-    form: LP_FORM,
+    form: AD_FORM,
     steps: nkSteps(in30("ảnh và kích thước ô cửa")),
     faq: [
       FAQ_NK_PRICE,
